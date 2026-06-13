@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
-"""Tune Chernarus event counts for a richer PvE economy."""
+"""Tune active-map event counts for a richer PvE economy."""
 from __future__ import annotations
 
+import argparse
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 SERVER = Path(__file__).resolve().parent.parent
-EVENTS = SERVER / "mpmissions" / "dayzOffline.chernarusplus" / "db" / "events.xml"
+
+MISSIONS = {
+    "chernarus": "dayzOffline.chernarusplus",
+    "enoch": "dayzOffline.enoch",
+    "sakhal": "dayzOffline.sakhal",
+    "namalsk": "regular.namalsk",
+    "takistan": "dayzOffline.TakistanPlus",
+}
 
 # Higher huntable wildlife without turning Chernarus into a constant wolf/bear fight.
 EVENT_COUNTS = {
@@ -43,8 +51,12 @@ def set_text(event: ET.Element, tag: str, value: int) -> bool:
     return True
 
 
-def main() -> int:
-    tree = ET.parse(EVENTS)
+def tune_mission(map_key: str, mission: str) -> tuple[int, list[str]]:
+    events = SERVER / "mpmissions" / mission / "db" / "events.xml"
+    if not events.exists():
+        raise FileNotFoundError(events)
+
+    tree = ET.parse(events)
     root = tree.getroot()
     updated: list[str] = []
     seen: set[str] = set()
@@ -61,14 +73,26 @@ def main() -> int:
         if changed:
             updated.append(name)
 
-    missing = sorted(set(EVENT_COUNTS) - seen)
-    if missing:
-        raise RuntimeError(f"Missing events in {EVENTS}: {', '.join(missing)}")
+    tree.write(events, encoding="UTF-8", xml_declaration=True)
+    return len(seen), updated
 
-    tree.write(EVENTS, encoding="UTF-8", xml_declaration=True)
-    print(f"Tuned {len(EVENT_COUNTS)} Chernarus events ({len(updated)} changed).")
-    for name in updated:
-        print(f"  {name}")
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Tune wildlife and vehicle event counts.")
+    parser.add_argument(
+        "maps",
+        nargs="*",
+        choices=sorted(MISSIONS),
+        help="Map keys to tune. Defaults to all active maps.",
+    )
+    args = parser.parse_args()
+
+    maps = args.maps or list(MISSIONS)
+    for map_key in maps:
+        count, updated = tune_mission(map_key, MISSIONS[map_key])
+        print(f"{map_key}: checked {count} supported events ({len(updated)} changed).")
+        for name in updated:
+            print(f"  {name}")
     return 0
 
 
