@@ -142,6 +142,20 @@ python admin\apply_loot.py status
 
 ## Typical workflows
 
+### Full active-map refresh
+
+```powershell
+python admin\build_map_expansion.py --all
+python admin\apply_ai_ammo.py
+python admin\apply_loot.py all --preset arcade
+python admin\tune_chernarus_spawn_economy.py
+python admin\install_money_quests.py
+python admin\standardize_world_events.py
+python admin\validate_public_repo.py
+```
+
+Restart each affected map server after the refresh.
+
 ### â€œLoot feels too lowâ€
 
 1. `loot.cmd -Action status`

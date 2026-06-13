@@ -34,6 +34,24 @@ The `.gitignore` intentionally excludes:
 - More heli crashes, convoys, police situations, and train events
 - Rare Expansion airdrops: roughly every 6 hours, limited to a few locations
 - Repeatable contract-board quests at Kamenka that pay `ExpansionBanknoteHryvnia`
+- Arcade loot economy is active and replicated to Chernarus, Livonia, Sakhal, Namalsk, and Takistan
+- Wildlife and usable vehicle events are boosted across active maps where those events exist
+
+## Daily Ops
+
+From the server root, the normal full refresh flow is:
+
+```powershell
+python admin\build_map_expansion.py --all
+python admin\apply_ai_ammo.py
+python admin\apply_loot.py all --preset arcade
+python admin\tune_chernarus_spawn_economy.py
+python admin\install_money_quests.py
+python admin\standardize_world_events.py
+python admin\validate_public_repo.py
+```
+
+After config changes, restart the affected DayZ server so Central Economy, Expansion missions, AI, and event settings reload.
 
 ## Before Using
 
