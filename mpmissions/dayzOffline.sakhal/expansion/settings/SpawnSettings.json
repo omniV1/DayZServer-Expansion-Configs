@@ -1,0 +1,520 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Petropavlovsk-Sakhalinsky",
+            "Positions": [
+                [
+                    6594.963379,
+                    0.0,
+                    12733.705078
+                ],
+                [
+                    6610.970215,
+                    0.0,
+                    12935.047852
+                ],
+                [
+                    6667.267578,
+                    0.0,
+                    13127.990234
+                ],
+                [
+                    6637.166992,
+                    0.0,
+                    13410.698242
+                ],
+                [
+                    6975.134766,
+                    0.0,
+                    13279.275391
+                ],
+                [
+                    7146.789063,
+                    0.0,
+                    13358.914063
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Aniva",
+            "Positions": [
+                [
+                    12755.78418,
+                    0.0,
+                    7064.543945
+                ],
+                [
+                    13084.819336,
+                    0.0,
+                    7530.130371
+                ],
+                [
+                    12860.291992,
+                    0.0,
+                    7702.170898
+                ],
+                [
+                    13428.8125,
+                    0.0,
+                    7629.255859
+                ],
+                [
+                    13530.728516,
+                    0.0,
+                    7458.29248
+                ],
+                [
+                    13702.34668,
+                    0.0,
+                    7900.063477
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Burukan",
+            "Positions": [
+                [
+                    6594.963379,
+                    0.0,
+                    12733.705078
+                ],
+                [
+                    6610.970215,
+                    0.0,
+                    12935.047852
+                ],
+                [
+                    6667.267578,
+                    0.0,
+                    13127.990234
+                ],
+                [
+                    6637.166992,
+                    0.0,
+                    13410.698242
+                ],
+                [
+                    6975.134766,
+                    0.0,
+                    13279.275391
+                ],
+                [
+                    7146.789063,
+                    0.0,
+                    13358.914063
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Nogovo",
+            "Positions": [
+                [
+                    6594.963379,
+                    0.0,
+                    12733.705078
+                ],
+                [
+                    12755.78418,
+                    0.0,
+                    7064.543945
+                ],
+                [
+                    12860.291992,
+                    0.0,
+                    7702.170898
+                ],
+                [
+                    6610.970215,
+                    0.0,
+                    12935.047852
+                ],
+                [
+                    13084.819336,
+                    0.0,
+                    7530.130371
+                ],
+                [
+                    6667.267578,
+                    0.0,
+                    13127.990234
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rudnogorsk",
+            "Positions": [
+                [
+                    13239.754883,
+                    0.0,
+                    11867.707031
+                ],
+                [
+                    13132.085938,
+                    0.0,
+                    12122.124023
+                ],
+                [
+                    14053.529297,
+                    0.0,
+                    11872.839844
+                ],
+                [
+                    13053.700195,
+                    0.0,
+                    12414.456055
+                ],
+                [
+                    14055.693359,
+                    0.0,
+                    11583.552734
+                ],
+                [
+                    14215.698242,
+                    0.0,
+                    11453.613281
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Severomorsk",
+            "Positions": [
+                [
+                    9338.84375,
+                    0.0,
+                    13356.694336
+                ],
+                [
+                    9900.897461,
+                    0.0,
+                    13416.589844
+                ],
+                [
+                    10193.813477,
+                    0.0,
+                    13449.232422
+                ],
+                [
+                    8737.237305,
+                    0.0,
+                    13614.225586
+                ],
+                [
+                    8594.275391,
+                    0.0,
+                    13653.040039
+                ],
+                [
+                    10482.049805,
+                    0.0,
+                    13460.642578
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Baykovo",
+            "Positions": [
+                [
+                    14637.454102,
+                    0.0,
+                    9853.299805
+                ],
+                [
+                    14593.762695,
+                    0.0,
+                    9320.987305
+                ],
+                [
+                    14454.533203,
+                    0.0,
+                    9156.223633
+                ],
+                [
+                    14709.013672,
+                    0.0,
+                    10496.27832
+                ],
+                [
+                    14230.625977,
+                    0.0,
+                    9040.563477
+                ],
+                [
+                    14278.936523,
+                    0.0,
+                    8777.439453
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Bolotnoye",
+            "Positions": [
+                [
+                    6594.963379,
+                    0.0,
+                    12733.705078
+                ],
+                [
+                    6610.970215,
+                    0.0,
+                    12935.047852
+                ],
+                [
+                    6667.267578,
+                    0.0,
+                    13127.990234
+                ],
+                [
+                    6975.134766,
+                    0.0,
+                    13279.275391
+                ],
+                [
+                    6637.166992,
+                    0.0,
+                    13410.698242
+                ],
+                [
+                    7146.789063,
+                    0.0,
+                    13358.914063
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Dudino",
+            "Positions": [
+                [
+                    6594.963379,
+                    0.0,
+                    12733.705078
+                ],
+                [
+                    6610.970215,
+                    0.0,
+                    12935.047852
+                ],
+                [
+                    6667.267578,
+                    0.0,
+                    13127.990234
+                ],
+                [
+                    6975.134766,
+                    0.0,
+                    13279.275391
+                ],
+                [
+                    6637.166992,
+                    0.0,
+                    13410.698242
+                ],
+                [
+                    7146.789063,
+                    0.0,
+                    13358.914063
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Evai",
+            "Positions": [
+                [
+                    7781.99707,
+                    0.0,
+                    13476.615234
+                ],
+                [
+                    8134.938965,
+                    0.0,
+                    13609.508789
+                ],
+                [
+                    8473.584961,
+                    0.0,
+                    13533.678711
+                ],
+                [
+                    8594.275391,
+                    0.0,
+                    13653.040039
+                ],
+                [
+                    8737.237305,
+                    0.0,
+                    13614.225586
+                ],
+                [
+                    7146.789063,
+                    0.0,
+                    13358.914063
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "Ushanka_Black",
+            "Ushanka_Blue",
+            "BeanieHat_Black"
+        ],
+        "Glasses": [],
+        "Masks": [
+            "Balaclava3Holes_Black",
+            "Balaclava3Holes_Green"
+        ],
+        "Tops": [
+            "GorkaEJacket_Winter",
+            "GorkaEJacket_Autumn"
+        ],
+        "Vests": [],
+        "Gloves": [
+            "WoolGloves_Black",
+            "WoolGloves_Green",
+            "WorkingGloves_Black"
+        ],
+        "Pants": [
+            "GorkaPants_Winter",
+            "GorkaPants_Autumn",
+            "CargoPants_Black"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Black",
+            "CombatBoots_Brown",
+            "MilitaryBoots_Black"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TaloonBag_Green",
+            "TaloonBag_Blue",
+            "DryBag_Green"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "RoadFlare",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "RoadFlare",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Heatpack",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Heatpack",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TacticalBaconCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

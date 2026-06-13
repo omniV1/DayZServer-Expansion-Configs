@@ -1,0 +1,1935 @@
+{
+    "Version": 20,
+    "Spatial_MinTimer": 30,
+    "Spatial_MaxTimer": 45,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "HuntMode": 6,
+    "Points_Enabled": 0,
+    "Locations_Enabled": 2,
+    "Audio_Enabled": 2,
+    "EngageTimer": 8,
+    "CleanupTimer": 10,
+    "PlayerChecks": -2,
+    "MaxAI": 60,
+    "GroupDifficulty": 1,
+    "MinimumPlayerDistance": 80,
+    "MaxSoloPlayers": 4,
+    "MinimumAge": 45,
+    "ActiveHoursEnabled": 0,
+    "ActiveStartTime": 6.0,
+    "ActiveStopTime": 22.0,
+    "TargetBone": "Neck",
+    "MessageType": 5,
+    "MessageTitle": "Spatial AI",
+    "MessageText": "AI Spotted in the Area. Be Careful.",
+    "LootWhitelist": [],
+    "Spatial_InVehicle": 0,
+    "Spatial_IsBleeding": 0,
+    "Spatial_IsRestrained": 0,
+    "Spatial_IsUnconscious": 0,
+    "Spatial_IsInSafeZone": 0,
+    "Spatial_TPSafeZone": 0,
+    "Spatial_InOwnTerritory": 0,
+    "Group": [
+        {
+            "Spatial_MinCount": 1,
+            "Spatial_MaxCount": 2,
+            "Spatial_Weight": 300.0,
+            "Spatial_Loadout": "HumanLoadout.json",
+            "Spatial_Faction": "Mercenaries",
+            "Spatial_Name": "Mercenaries",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.25,
+            "Spatial_MinAccuracy": 0.45,
+            "Spatial_MaxAccuracy": 0.7,
+            "Spatial_UnlimitedReload": 1
+        }
+    ],
+    "Point": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Ad_Dawi",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3238.29,
+                115.0,
+                3636.3
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3253.29,
+                    115.0,
+                    3651.3
+                ],
+                [
+                    3226.29,
+                    115.0,
+                    3626.3
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Adinaqla",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7392.67,
+                115.0,
+                1701.77
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7407.67,
+                    115.0,
+                    1716.77
+                ],
+                [
+                    7380.67,
+                    115.0,
+                    1691.77
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Babair",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10477.13,
+                55.0,
+                11086.94
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10492.13,
+                    55.0,
+                    11101.94
+                ],
+                [
+                    10465.13,
+                    55.0,
+                    11076.94
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Bahludiyah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7427.33,
+                115.0,
+                9352.71
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7442.33,
+                    115.0,
+                    9367.71
+                ],
+                [
+                    7415.33,
+                    115.0,
+                    9342.71
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Falludiyah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1496.45,
+                385.0,
+                3602.79
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1511.45,
+                    385.0,
+                    3617.79
+                ],
+                [
+                    1484.45,
+                    385.0,
+                    3592.79
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Falqas",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4217.27,
+                55.0,
+                10747.8
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4232.27,
+                    55.0,
+                    10762.8
+                ],
+                [
+                    4205.27,
+                    55.0,
+                    10737.8
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Hajasra",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11152.05,
+                55.0,
+                7636.76
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11167.05,
+                    55.0,
+                    7651.76
+                ],
+                [
+                    11140.05,
+                    55.0,
+                    7626.76
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Hamiqqah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1563.4,
+                115.0,
+                5721.32
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1578.4,
+                    115.0,
+                    5736.32
+                ],
+                [
+                    1551.4,
+                    115.0,
+                    5711.32
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Al_Nadaya",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6742.99,
+                115.0,
+                4855.07
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6757.99,
+                    115.0,
+                    4870.07
+                ],
+                [
+                    6730.99,
+                    115.0,
+                    4845.07
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Anar",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6030.72,
+                115.0,
+                5659.43
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6045.72,
+                    115.0,
+                    5674.43
+                ],
+                [
+                    6018.72,
+                    115.0,
+                    5649.43
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_AzZablah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11856.08,
+                55.0,
+                2612.1
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11871.08,
+                    55.0,
+                    2627.1
+                ],
+                [
+                    11844.08,
+                    55.0,
+                    2602.1
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_AzZablah_Outpost",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11874.14,
+                55.0,
+                2543.67
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11889.14,
+                    55.0,
+                    2558.67
+                ],
+                [
+                    11862.14,
+                    55.0,
+                    2533.67
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Bastam",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5622.66,
+                115.0,
+                8899.43
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5637.66,
+                    115.0,
+                    8914.43
+                ],
+                [
+                    5610.66,
+                    115.0,
+                    8889.43
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Behbaman",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6082.98,
+                115.0,
+                1144.36
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6097.98,
+                    115.0,
+                    1159.36
+                ],
+                [
+                    6070.98,
+                    115.0,
+                    1134.36
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_ChakChak",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4375.92,
+                115.0,
+                754.72
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4390.92,
+                    115.0,
+                    769.72
+                ],
+                [
+                    4363.92,
+                    115.0,
+                    744.72
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Chaman",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                876.04,
+                385.0,
+                3099.05
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    891.04,
+                    385.0,
+                    3114.05
+                ],
+                [
+                    864.04,
+                    385.0,
+                    3089.05
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Dhimran",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3606.67,
+                115.0,
+                8544.91
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3621.67,
+                    115.0,
+                    8559.91
+                ],
+                [
+                    3594.67,
+                    115.0,
+                    8534.91
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Dodr",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5035.86,
+                115.0,
+                5428.01
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5050.86,
+                    115.0,
+                    5443.01
+                ],
+                [
+                    5023.86,
+                    115.0,
+                    5418.01
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_El_Thoubaroh",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2039.67,
+                115.0,
+                7659.63
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2054.67,
+                    115.0,
+                    7674.63
+                ],
+                [
+                    2027.67,
+                    115.0,
+                    7649.63
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Falar",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6063.8,
+                115.0,
+                7256.97
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6078.8,
+                    115.0,
+                    7271.97
+                ],
+                [
+                    6051.8,
+                    115.0,
+                    7246.97
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Farakkah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8861.27,
+                115.0,
+                5271.47
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8876.27,
+                    115.0,
+                    5286.47
+                ],
+                [
+                    8849.27,
+                    115.0,
+                    5261.47
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_FeeruzAbad",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5364.53,
+                115.0,
+                6197.93
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5379.53,
+                    115.0,
+                    6212.93
+                ],
+                [
+                    5352.53,
+                    115.0,
+                    6187.93
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_FeeruzAbad_FOB",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5247.09,
+                115.0,
+                5796.93
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5262.09,
+                    115.0,
+                    5811.93
+                ],
+                [
+                    5235.09,
+                    115.0,
+                    5786.93
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_FeeruzAbad_MilitaryBase",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5151.2,
+                115.0,
+                6076.96
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5166.2,
+                    115.0,
+                    6091.96
+                ],
+                [
+                    5139.2,
+                    115.0,
+                    6066.96
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_FeeruzAbad_RadioTower",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4116.05,
+                115.0,
+                6754.08
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4131.05,
+                    115.0,
+                    6769.08
+                ],
+                [
+                    4104.05,
+                    115.0,
+                    6744.08
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Garmarud",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9149.89,
+                55.0,
+                6716.39
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9164.89,
+                    55.0,
+                    6731.39
+                ],
+                [
+                    9137.89,
+                    55.0,
+                    6706.39
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Garmsar",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10794.67,
+                55.0,
+                6345.34
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10809.67,
+                    55.0,
+                    6360.34
+                ],
+                [
+                    10782.67,
+                    55.0,
+                    6335.34
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Garmsar_Military_Base",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10422.45,
+                55.0,
+                6434.39
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10437.45,
+                    55.0,
+                    6449.39
+                ],
+                [
+                    10410.45,
+                    55.0,
+                    6424.39
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Gospandi",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3933.13,
+                115.0,
+                9373.13
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3948.13,
+                    115.0,
+                    9388.13
+                ],
+                [
+                    3921.13,
+                    115.0,
+                    9363.13
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Hachaman",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9152.49,
+                55.0,
+                9741.92
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9167.49,
+                    55.0,
+                    9756.92
+                ],
+                [
+                    9140.49,
+                    55.0,
+                    9731.92
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Hammaqiyah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11502.87,
+                55.0,
+                8238.27
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11517.87,
+                    55.0,
+                    8253.27
+                ],
+                [
+                    11490.87,
+                    55.0,
+                    8228.27
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Imarat",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8238.39,
+                115.0,
+                7847.22
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8253.39,
+                    115.0,
+                    7862.22
+                ],
+                [
+                    8226.39,
+                    115.0,
+                    7837.22
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Jaglangir",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4891.35,
+                55.0,
+                10594.51
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4906.35,
+                    55.0,
+                    10609.51
+                ],
+                [
+                    4879.35,
+                    55.0,
+                    10584.51
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Jalelam",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6832.69,
+                55.0,
+                12294.08
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6847.69,
+                    55.0,
+                    12309.08
+                ],
+                [
+                    6820.69,
+                    55.0,
+                    12284.08
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Jilavur",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2537.21,
+                115.0,
+                5026.47
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2552.21,
+                    115.0,
+                    5041.47
+                ],
+                [
+                    2525.21,
+                    115.0,
+                    5016.47
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Kakaru",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5313.46,
+                115.0,
+                4740.72
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5328.46,
+                    115.0,
+                    4755.72
+                ],
+                [
+                    5301.46,
+                    115.0,
+                    4730.72
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Karachinar",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                12333.8,
+                55.0,
+                11110.64
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    12348.8,
+                    55.0,
+                    11125.64
+                ],
+                [
+                    12321.8,
+                    55.0,
+                    11100.64
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Landay",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1950.86,
+                385.0,
+                349.72
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1965.86,
+                    385.0,
+                    364.72
+                ],
+                [
+                    1938.86,
+                    385.0,
+                    339.72
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Laschkar_Radarbase",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11243.09,
+                55.0,
+                9108.92
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11258.09,
+                    55.0,
+                    9123.92
+                ],
+                [
+                    11231.09,
+                    55.0,
+                    9098.92
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_LoyManara",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8622.05,
+                95.0,
+                2454.22
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8637.05,
+                    95.0,
+                    2469.22
+                ],
+                [
+                    8610.05,
+                    95.0,
+                    2444.22
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_LoyManara_AirBase",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8059.4,
+                95.0,
+                1856.03
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8074.4,
+                    95.0,
+                    1871.03
+                ],
+                [
+                    8047.4,
+                    95.0,
+                    1846.03
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Mahahwit",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5670.26,
+                55.0,
+                9935.64
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5685.26,
+                    55.0,
+                    9950.64
+                ],
+                [
+                    5658.26,
+                    55.0,
+                    9925.64
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Mahjur",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9602.25,
+                55.0,
+                5664.2
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9617.25,
+                    55.0,
+                    5679.2
+                ],
+                [
+                    9590.25,
+                    55.0,
+                    5654.2
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Marastar",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4146.03,
+                55.0,
+                11758.76
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4161.03,
+                    55.0,
+                    11773.76
+                ],
+                [
+                    4134.03,
+                    55.0,
+                    11748.76
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Marmamsiyah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                12328.32,
+                55.0,
+                10408.79
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    12343.32,
+                    55.0,
+                    10423.79
+                ],
+                [
+                    12316.32,
+                    55.0,
+                    10398.79
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Nagara",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3057.0,
+                55.0,
+                9808.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3072.0,
+                    55.0,
+                    9823.0
+                ],
+                [
+                    3045.0,
+                    55.0,
+                    9798.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Nur",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1824.58,
+                55.0,
+                11879.66
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1839.58,
+                    55.0,
+                    11894.66
+                ],
+                [
+                    1812.58,
+                    55.0,
+                    11869.66
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Qaikkah",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10200.38,
+                55.0,
+                2350.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10215.38,
+                    55.0,
+                    2365.73
+                ],
+                [
+                    10188.38,
+                    55.0,
+                    2340.73
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Qarma",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6792.44,
+                115.0,
+                6089.24
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6807.44,
+                    115.0,
+                    6104.24
+                ],
+                [
+                    6780.44,
+                    115.0,
+                    6079.24
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rasman",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6244.28,
+                55.0,
+                11217.34
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6259.28,
+                    55.0,
+                    11232.34
+                ],
+                [
+                    6232.28,
+                    55.0,
+                    11207.34
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rasman_Airbase",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5754.95,
+                55.0,
+                11372.86
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5769.95,
+                    55.0,
+                    11387.86
+                ],
+                [
+                    5742.95,
+                    55.0,
+                    11362.86
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rustaq_Military_Base",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2632.2,
+                115.0,
+                5100.09
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2647.2,
+                    115.0,
+                    5115.09
+                ],
+                [
+                    2620.2,
+                    115.0,
+                    5090.09
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Sakhee",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3588.99,
+                115.0,
+                4284.47
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3603.99,
+                    115.0,
+                    4299.47
+                ],
+                [
+                    3576.99,
+                    115.0,
+                    4274.47
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Sultansafee",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6578.67,
+                115.0,
+                1955.22
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6593.67,
+                    115.0,
+                    1970.22
+                ],
+                [
+                    6566.67,
+                    115.0,
+                    1945.22
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Zarandaj",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8541.8,
+                115.0,
+                3816.93
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8556.8,
+                    115.0,
+                    3831.93
+                ],
+                [
+                    8529.8,
+                    115.0,
+                    3806.93
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Zavarak",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9857.88,
+                55.0,
+                11491.74
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9872.88,
+                    55.0,
+                    11506.74
+                ],
+                [
+                    9845.88,
+                    55.0,
+                    11481.74
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Zayda",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                141.58,
+                385.0,
+                2795.6
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    156.58,
+                    385.0,
+                    2810.6
+                ],
+                [
+                    129.58,
+                    385.0,
+                    2785.6
+                ]
+            ]
+        }
+    ],
+    "Spatial_MinAccuracy": 0.58,
+    "Spatial_MaxAccuracy": 0.88
+}

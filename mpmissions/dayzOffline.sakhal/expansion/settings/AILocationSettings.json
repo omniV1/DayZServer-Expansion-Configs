@@ -1,0 +1,665 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Aniva",
+            "Position": [
+                12895.0,
+                0.0,
+                7273.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Ayan",
+            "Position": [
+                1243.0,
+                0.0,
+                3022.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Baykovo",
+            "Position": [
+                14571.0,
+                0.0,
+                9794.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Black_Cape",
+            "Position": [
+                5084.0,
+                0.0,
+                3592.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Blunt",
+            "Position": [
+                11898.0,
+                0.0,
+                11267.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Bolotnoye",
+            "Position": [
+                5040.0,
+                0.0,
+                8667.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Broken",
+            "Position": [
+                6313.0,
+                0.0,
+                6454.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Burukan",
+            "Position": [
+                2706.0,
+                0.0,
+                6540.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Cliff",
+            "Position": [
+                5453.0,
+                0.0,
+                14535.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Darkness",
+            "Position": [
+                8443.0,
+                0.0,
+                1328.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dolinovka",
+            "Position": [
+                9831.0,
+                0.0,
+                9835.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Duck_Island",
+            "Position": [
+                8628.0,
+                0.0,
+                5146.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dudino",
+            "Position": [
+                6233.0,
+                0.0,
+                7245.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Eastern_Peak",
+            "Position": [
+                12835.0,
+                0.0,
+                9418.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Elizarovo",
+            "Position": [
+                13492.0,
+                0.0,
+                5178.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Evai",
+            "Position": [
+                7954.0,
+                0.0,
+                13512.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Goryachevo",
+            "Position": [
+                8774.0,
+                0.0,
+                10059.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Icy_Ridge",
+            "Position": [
+                10756.0,
+                0.0,
+                8669.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iturup",
+            "Position": [
+                10371.0,
+                0.0,
+                10700.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kekra",
+            "Position": [
+                7188.0,
+                0.0,
+                4235.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Ketoy",
+            "Position": [
+                5755.0,
+                0.0,
+                2066.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lesogorovka",
+            "Position": [
+                10969.0,
+                0.0,
+                9695.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lonely_Volcano",
+            "Position": [
+                10029.0,
+                0.0,
+                12087.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Matrosovo",
+            "Position": [
+                14233.0,
+                0.0,
+                11586.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Neran",
+            "Position": [
+                2666.0,
+                0.0,
+                9297.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Nogovo",
+            "Position": [
+                7814.0,
+                0.0,
+                7949.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Orlovo",
+            "Position": [
+                10373.0,
+                0.0,
+                13348.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Petropavlovsk_Sakhalinsky",
+            "Position": [
+                4749.0,
+                0.0,
+                10695.0
+            ],
+            "Radius": 800.0,
+            "Type": "Capital",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Podgornoye",
+            "Position": [
+                10985.0,
+                0.0,
+                13209.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Point",
+            "Position": [
+                3755.0,
+                0.0,
+                14402.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rocket_Bay",
+            "Position": [
+                4396.0,
+                0.0,
+                7269.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rudnogorsk",
+            "Position": [
+                13587.0,
+                0.0,
+                12152.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rybnoye",
+            "Position": [
+                12471.0,
+                0.0,
+                12667.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sakhalag",
+            "Position": [
+                12163.0,
+                0.0,
+                9698.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sakhalin_Geo_Power_Plant",
+            "Position": [
+                8407.0,
+                0.0,
+                10204.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Severomorsk",
+            "Position": [
+                9544.0,
+                0.0,
+                13656.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Shantar",
+            "Position": [
+                2278.0,
+                0.0,
+                3413.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sharp",
+            "Position": [
+                11546.0,
+                0.0,
+                11669.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Shumnoye",
+            "Position": [
+                14383.0,
+                0.0,
+                8842.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Solisko",
+            "Position": [
+                12653.0,
+                0.0,
+                2121.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sovetskoye",
+            "Position": [
+                6413.0,
+                0.0,
+                12783.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sputnik",
+            "Position": [
+                7786.0,
+                0.0,
+                14802.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Star_Nickel",
+            "Position": [
+                12033.0,
+                0.0,
+                10323.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Strozh",
+            "Position": [
+                8776.0,
+                0.0,
+                12791.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Taranai",
+            "Position": [
+                9706.0,
+                0.0,
+                6584.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tikhoye",
+            "Position": [
+                6260.0,
+                0.0,
+                8669.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Troika",
+            "Position": [
+                9016.0,
+                0.0,
+                9268.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tugur",
+            "Position": [
+                1738.0,
+                0.0,
+                6131.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tumanovo",
+            "Position": [
+                8417.0,
+                0.0,
+                13646.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tungar",
+            "Position": [
+                12630.0,
+                0.0,
+                14135.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Turtle",
+            "Position": [
+                835.0,
+                0.0,
+                11285.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Urip",
+            "Position": [
+                1537.0,
+                0.0,
+                891.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Ushki",
+            "Position": [
+                10817.0,
+                0.0,
+                14631.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Vostok",
+            "Position": [
+                13910.0,
+                0.0,
+                8337.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Vysokoye",
+            "Position": [
+                11186.201171875,
+                0.0,
+                7965.83837890625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Wolf_Peak",
+            "Position": [
+                8196.0,
+                0.0,
+                11668.0
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Yasnaya_Polyana",
+            "Position": [
+                8116.0,
+                0.0,
+                9191.0
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Yasnomorsk",
+            "Position": [
+                6951.0,
+                0.0,
+                13331.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Yuzhnoye",
+            "Position": [
+                10972.0,
+                0.0,
+                6323.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zhuvanovo",
+            "Position": [
+                5741.0,
+                0.0,
+                12516.0
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

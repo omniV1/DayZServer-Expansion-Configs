@@ -1,0 +1,252 @@
+{
+    "Version": 20,
+    "Spatial_MinTimer": 30,
+    "Spatial_MaxTimer": 45,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "HuntMode": 6,
+    "Points_Enabled": 0,
+    "Locations_Enabled": 2,
+    "Audio_Enabled": 2,
+    "EngageTimer": 8,
+    "CleanupTimer": 10,
+    "PlayerChecks": -2,
+    "MaxAI": 30,
+    "GroupDifficulty": 1,
+    "MinimumPlayerDistance": 80,
+    "MaxSoloPlayers": 4,
+    "MinimumAge": 45,
+    "ActiveHoursEnabled": 0,
+    "ActiveStartTime": 6.0,
+    "ActiveStopTime": 22.0,
+    "TargetBone": "Neck",
+    "MessageType": 5,
+    "MessageTitle": "Spatial AI",
+    "MessageText": "AI Spotted in the Area. Be Careful.",
+    "LootWhitelist": [],
+    "Spatial_InVehicle": 0,
+    "Spatial_IsBleeding": 0,
+    "Spatial_IsRestrained": 0,
+    "Spatial_IsUnconscious": 0,
+    "Spatial_IsInSafeZone": 0,
+    "Spatial_TPSafeZone": 0,
+    "Spatial_InOwnTerritory": 0,
+    "Group": [
+        {
+            "Spatial_MinCount": 1,
+            "Spatial_MaxCount": 2,
+            "Spatial_Weight": 300.0,
+            "Spatial_Loadout": "HumanLoadout.json",
+            "Spatial_Faction": "Mercenaries",
+            "Spatial_Name": "Mercenaries",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.25,
+            "Spatial_MinAccuracy": 0.45,
+            "Spatial_MaxAccuracy": 0.7,
+            "Spatial_UnlimitedReload": 1
+        }
+    ],
+    "Point": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Aniva",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                12895.0,
+                45.0,
+                7273.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    12910.0,
+                    45.0,
+                    7288.0
+                ],
+                [
+                    12883.0,
+                    45.0,
+                    7263.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Burukan",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2706.0,
+                45.0,
+                6540.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2721.0,
+                    45.0,
+                    6555.0
+                ],
+                [
+                    2694.0,
+                    45.0,
+                    6530.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Nogovo",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7814.0,
+                45.0,
+                7949.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7829.0,
+                    45.0,
+                    7964.0
+                ],
+                [
+                    7802.0,
+                    45.0,
+                    7939.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Petropavlovsk_Sakhalinsky",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4749.0,
+                25.0,
+                10695.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4764.0,
+                    25.0,
+                    10710.0
+                ],
+                [
+                    4737.0,
+                    25.0,
+                    10685.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rudnogorsk",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                13587.0,
+                25.0,
+                12152.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    13602.0,
+                    25.0,
+                    12167.0
+                ],
+                [
+                    13575.0,
+                    25.0,
+                    12142.0
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Severomorsk",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9544.0,
+                25.0,
+                13656.0
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9559.0,
+                    25.0,
+                    13671.0
+                ],
+                [
+                    9532.0,
+                    25.0,
+                    13646.0
+                ]
+            ]
+        }
+    ],
+    "Spatial_MinAccuracy": 0.58,
+    "Spatial_MaxAccuracy": 0.88
+}

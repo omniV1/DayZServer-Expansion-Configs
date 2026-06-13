@@ -1,0 +1,665 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Adam\u00f3w",
+            "Position": [
+                3076.31005859375,
+                0.0,
+                6851.259765625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Bagno",
+            "Position": [
+                11822.8095703125,
+                0.0,
+                11134.509765625
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Bielawa",
+            "Position": [
+                1573.449951171875,
+                0.0,
+                9677.4501953125
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Borek",
+            "Position": [
+                9807.490234375,
+                0.0,
+                8495.0703125
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Branz\u00f3w_Castle",
+            "Position": [
+                1072.5400390625,
+                0.0,
+                11418.7802734375
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Brena",
+            "Position": [
+                6617.6298828125,
+                0.0,
+                11211.0302734375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dambog",
+            "Position": [
+                577.260009765625,
+                0.0,
+                1124.68994140625
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dolnik",
+            "Position": [
+                11312.3896484375,
+                0.0,
+                655.72998046875
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Drewniki",
+            "Position": [
+                5834.72021484375,
+                0.0,
+                5092.89013671875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Gieralt\u00f3w",
+            "Position": [
+                11240.01953125,
+                0.0,
+                4380.3701171875
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Gliniska",
+            "Position": [
+                4992.6201171875,
+                0.0,
+                9921.740234375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Grabin",
+            "Position": [
+                10666.2197265625,
+                0.0,
+                11025.5703125
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Grabinskie",
+            "Position": [
+                11249.240234375,
+                0.0,
+                10993.2099609375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Hedryk\u00f3w",
+            "Position": [
+                4512.97998046875,
+                0.0,
+                4795.509765625
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Hrud",
+            "Position": [
+                6452.5,
+                0.0,
+                9371.1298828125
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Huta",
+            "Position": [
+                5141.47021484375,
+                0.0,
+                5472.77978515625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Jantar",
+            "Position": [
+                3532.35009765625,
+                0.0,
+                8955.1396484375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Jezur\u00f3w",
+            "Position": [
+                2097.760009765625,
+                0.0,
+                2355.8701171875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kamienio\u0142om_Maksymilian",
+            "Position": [
+                6512.25,
+                0.0,
+                4847.85986328125
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Karlin",
+            "Position": [
+                10072.740234375,
+                0.0,
+                6956.9599609375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kolembrody",
+            "Position": [
+                8416.9501953125,
+                0.0,
+                11981.9296875
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Konopki",
+            "Position": [
+                11489.5703125,
+                0.0,
+                2897.929931640625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kopa",
+            "Position": [
+                5518.81005859375,
+                0.0,
+                8767.6103515625
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Krsnik",
+            "Position": [
+                7874.93017578125,
+                0.0,
+                10081.25
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kulno",
+            "Position": [
+                11150.01953125,
+                0.0,
+                2391.5
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lawenda",
+            "Position": [
+                813.6500244140625,
+                0.0,
+                8606.33984375
+            ],
+            "Radius": 280.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lembork",
+            "Position": [
+                8680.4697265625,
+                0.0,
+                6635.7001953125
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lipina",
+            "Position": [
+                5941.8701171875,
+                0.0,
+                6820.009765625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lukow",
+            "Position": [
+                3529.64990234375,
+                0.0,
+                11966.5302734375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Muratyn",
+            "Position": [
+                4567.5,
+                0.0,
+                6384.39990234375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Nadb\u00f3r",
+            "Position": [
+                6109.5,
+                0.0,
+                3983.169921875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Nidek",
+            "Position": [
+                6128.89013671875,
+                0.0,
+                8013.33984375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Olszanka",
+            "Position": [
+                4819.02978515625,
+                0.0,
+                7674.1298828125
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Piek\u0142o",
+            "Position": [
+                3323.860107421875,
+                0.0,
+                3717.300048828125
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Pionier",
+            "Position": [
+                1341.449951171875,
+                0.0,
+                4867.16015625
+            ],
+            "Radius": 280.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Piorun",
+            "Position": [
+                645.6099853515625,
+                0.0,
+                12158.599609375
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Polana",
+            "Position": [
+                3279.610107421875,
+                0.0,
+                2132.14990234375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Potoki",
+            "Position": [
+                11633.8701171875,
+                0.0,
+                1947.199951171875
+            ],
+            "Radius": 280.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_P\u00f3\u0142krabiec",
+            "Position": [
+                11871.3095703125,
+                0.0,
+                6580.22021484375
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Radacz",
+            "Position": [
+                4007.780029296875,
+                0.0,
+                7939.91015625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Radunin",
+            "Position": [
+                7298.3798828125,
+                0.0,
+                6491.89990234375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rodzanica",
+            "Position": [
+                8881.5400390625,
+                0.0,
+                2041.9599609375
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Roztoka",
+            "Position": [
+                7695.27978515625,
+                0.0,
+                5317.47021484375
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rumianek",
+            "Position": [
+                11775.599609375,
+                0.0,
+                5487.06005859375
+            ],
+            "Radius": 280.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sarn\u00f3wek",
+            "Position": [
+                3308.06005859375,
+                0.0,
+                4970.25
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sitnickie",
+            "Position": [
+                11411.91015625,
+                0.0,
+                10439.599609375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sitnik",
+            "Position": [
+                11502.3095703125,
+                0.0,
+                9573.009765625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Skala",
+            "Position": [
+                2999.25,
+                0.0,
+                1956.0699462890625
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sobotka",
+            "Position": [
+                6256.93994140625,
+                0.0,
+                10252.919921875
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sowa",
+            "Position": [
+                11662.76953125,
+                0.0,
+                12064.330078125
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Swarog",
+            "Position": [
+                4854.97998046875,
+                0.0,
+                2224.27001953125
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tarnow",
+            "Position": [
+                9328.3095703125,
+                0.0,
+                10904.7998046875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Topolin",
+            "Position": [
+                1858.8199462890625,
+                0.0,
+                7330.8701171875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tymbark",
+            "Position": [
+                2902.449951171875,
+                0.0,
+                1221.25
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Tymianka",
+            "Position": [
+                11351.73046875,
+                0.0,
+                10062.73046875
+            ],
+            "Radius": 280.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Widok",
+            "Position": [
+                10238.5302734375,
+                0.0,
+                2143.580078125
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Wolisko",
+            "Position": [
+                12368.4697265625,
+                0.0,
+                10883.9599609375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Wrzeszcz",
+            "Position": [
+                9043.25,
+                0.0,
+                4438.47998046875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zalesie",
+            "Position": [
+                896.0800170898438,
+                0.0,
+                5536.1201171875
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zapadlisko",
+            "Position": [
+                8058.25,
+                0.0,
+                8711.759765625
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

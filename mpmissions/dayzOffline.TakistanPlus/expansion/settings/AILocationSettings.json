@@ -1,0 +1,731 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Ad_Dawi",
+            "Position": [
+                3238.2900390625,
+                0.0,
+                3636.300048828125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Adinaqla",
+            "Position": [
+                7392.669921875,
+                0.0,
+                1701.77001953125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Babair",
+            "Position": [
+                10477.1298828125,
+                0.0,
+                11086.9404296875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Bahludiyah",
+            "Position": [
+                7427.330078125,
+                0.0,
+                9352.7099609375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Falludiyah",
+            "Position": [
+                1496.449951171875,
+                0.0,
+                3602.7900390625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Falqas",
+            "Position": [
+                4217.27001953125,
+                0.0,
+                10747.7998046875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Falqas_Oil_Fields",
+            "Position": [
+                3650.6201171875,
+                0.0,
+                11103.2802734375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Hajasra",
+            "Position": [
+                11152.0498046875,
+                0.0,
+                7636.759765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Hamiqqah",
+            "Position": [
+                1563.4000244140625,
+                0.0,
+                5721.31982421875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Al_Nadaya",
+            "Position": [
+                6742.990234375,
+                0.0,
+                4855.06982421875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Anar",
+            "Position": [
+                6030.72021484375,
+                0.0,
+                5659.43017578125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_AzZablah",
+            "Position": [
+                11856.080078125,
+                0.0,
+                2612.10009765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_AzZablah_Outpost",
+            "Position": [
+                11874.1396484375,
+                0.0,
+                2543.669921875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Band_E_Kirmiz",
+            "Position": [
+                3531.56005859375,
+                0.0,
+                6884.10009765625
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Bastam",
+            "Position": [
+                5622.66015625,
+                0.0,
+                8899.4296875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Behbaman",
+            "Position": [
+                6082.97998046875,
+                0.0,
+                1144.3599853515625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_ChakChak",
+            "Position": [
+                4375.919921875,
+                0.0,
+                754.719970703125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Chaman",
+            "Position": [
+                876.0399780273438,
+                0.0,
+                3099.050048828125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Darre_Ye_Sabz",
+            "Position": [
+                8587.8603515625,
+                0.0,
+                3204.2099609375
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dawlatsah_Valley",
+            "Position": [
+                7532.2998046875,
+                0.0,
+                8283.1201171875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dhimran",
+            "Position": [
+                3606.669921875,
+                0.0,
+                8544.91015625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Dodr",
+            "Position": [
+                5035.85986328125,
+                0.0,
+                5428.009765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_El_Thoubaroh",
+            "Position": [
+                2039.6700439453125,
+                0.0,
+                7659.6298828125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Falar",
+            "Position": [
+                6063.7998046875,
+                0.0,
+                7256.97021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Farakkah",
+            "Position": [
+                8861.26953125,
+                0.0,
+                5271.47021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_FeeruzAbad",
+            "Position": [
+                5364.52978515625,
+                0.0,
+                6197.93017578125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_FeeruzAbad_FOB",
+            "Position": [
+                5247.08984375,
+                0.0,
+                5796.93017578125
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_FeeruzAbad_MilitaryBase",
+            "Position": [
+                5151.2001953125,
+                0.0,
+                6076.9599609375
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_FeeruzAbad_RadioTower",
+            "Position": [
+                4116.0498046875,
+                0.0,
+                6754.080078125
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Garmarud",
+            "Position": [
+                9149.8896484375,
+                0.0,
+                6716.39013671875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Garmsar",
+            "Position": [
+                10794.669921875,
+                0.0,
+                6345.33984375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Garmsar_Military_Base",
+            "Position": [
+                10422.4501953125,
+                0.0,
+                6434.39013671875
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Gospandi",
+            "Position": [
+                3933.1298828125,
+                0.0,
+                9373.1298828125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Hachaman",
+            "Position": [
+                9152.490234375,
+                0.0,
+                9741.919921875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Hammaqiyah",
+            "Position": [
+                11502.8701171875,
+                0.0,
+                8238.26953125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Imarat",
+            "Position": [
+                8238.3896484375,
+                0.0,
+                7847.22021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Jaglangir",
+            "Position": [
+                4891.35009765625,
+                0.0,
+                10594.509765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Jalelam",
+            "Position": [
+                6832.68994140625,
+                0.0,
+                12294.080078125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Jilavur",
+            "Position": [
+                2537.2099609375,
+                0.0,
+                5026.47021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Kakaru",
+            "Position": [
+                5313.4599609375,
+                0.0,
+                4740.72021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Karachinar",
+            "Position": [
+                12333.7998046875,
+                0.0,
+                11110.6396484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Lalezar_Valley",
+            "Position": [
+                4401.77001953125,
+                0.0,
+                9763.1201171875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Landay",
+            "Position": [
+                1950.8599853515625,
+                0.0,
+                349.7200012207031
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Laschkar_Radarbase",
+            "Position": [
+                11243.08984375,
+                0.0,
+                9108.919921875
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_LoyManara",
+            "Position": [
+                8622.0498046875,
+                0.0,
+                2454.219970703125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_LoyManara_AirBase",
+            "Position": [
+                8059.39990234375,
+                0.0,
+                1856.030029296875
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_LoyManara_Refinery",
+            "Position": [
+                7115.06005859375,
+                0.0,
+                1025.4300537109375
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Mahahwit",
+            "Position": [
+                5670.259765625,
+                0.0,
+                9935.6396484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Mahjur",
+            "Position": [
+                9602.25,
+                0.0,
+                5664.2001953125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Marastar",
+            "Position": [
+                4146.02978515625,
+                0.0,
+                11758.759765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Marmamsiyah",
+            "Position": [
+                12328.3203125,
+                0.0,
+                10408.7900390625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Nagara",
+            "Position": [
+                3057.0,
+                0.0,
+                9808.0
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Nur",
+            "Position": [
+                1824.5799560546875,
+                0.0,
+                11879.66015625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Qaikkah",
+            "Position": [
+                10200.3798828125,
+                0.0,
+                2350.72998046875
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Qarma",
+            "Position": [
+                6792.43994140625,
+                0.0,
+                6089.240234375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rasman",
+            "Position": [
+                6244.27978515625,
+                0.0,
+                11217.33984375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rasman_Airbase",
+            "Position": [
+                5754.9501953125,
+                0.0,
+                11372.8603515625
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Reegshur_Valley",
+            "Position": [
+                4246.14013671875,
+                0.0,
+                5568.1201171875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rustaq_Military_Base",
+            "Position": [
+                2632.199951171875,
+                0.0,
+                5100.08984375
+            ],
+            "Radius": 350.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sakhee",
+            "Position": [
+                3588.989990234375,
+                0.0,
+                4284.47021484375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Silsila_Ye_Siah_Kuh",
+            "Position": [
+                4812.83984375,
+                0.0,
+                2556.02001953125
+            ],
+            "Radius": 250.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Sultansafee",
+            "Position": [
+                6578.669921875,
+                0.0,
+                1955.219970703125
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zabo_Valley",
+            "Position": [
+                2774.330078125,
+                0.0,
+                8016.47998046875
+            ],
+            "Radius": 200.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zarandaj",
+            "Position": [
+                8541.7998046875,
+                0.0,
+                3816.929931640625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zavarak",
+            "Position": [
+                9857.8798828125,
+                0.0,
+                11491.740234375
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Zayda",
+            "Position": [
+                141.5800018310547,
+                0.0,
+                2795.60009765625
+            ],
+            "Radius": 500.0,
+            "Type": "City",
+            "Enabled": 1
+        }
+    ]
+}

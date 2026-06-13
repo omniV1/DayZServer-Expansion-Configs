@@ -1,0 +1,213 @@
+{
+    "m_Version": 18,
+    "VehicleSync": 1,
+    "VehicleRequireKeyToStart": 0,
+    "VehicleRequireAllDoors": 0,
+    "VehicleLockedAllowInventoryAccess": 1,
+    "MasterKeyPairingMode": -1,
+    "MasterKeyUses": 10,
+    "CanPickLock": 1,
+    "PickLockTools": [
+        "Lockpick"
+    ],
+    "PickLockChancePercent": 50,
+    "PickLockTimeSeconds": 30,
+    "PickLockToolDamagePercent": 10,
+    "EnableWindAerodynamics": 1,
+    "EnableTailRotorDamage": 1,
+    "Towing": 1,
+    "EnableHelicopterExplosions": 0,
+    "DisableVehicleDamage": 0,
+    "VehicleCrewDamageMultiplier": 1.0,
+    "VehicleSpeedDamageMultiplier": 1.0,
+    "VehicleRoadKillDamageMultiplier": 1.0,
+    "CanChangeLock": 1,
+    "ChangeLockTools": [
+        "Screwdriver"
+    ],
+    "ChangeLockTimeSeconds": 60,
+    "ChangeLockToolDamagePercent": 10,
+    "PlacePlayerOnGroundOnReconnectInVehicle": 2,
+    "RevvingOverMaxRPMRuinsEngineInstantly": 0,
+    "VehicleDropsRuinedDoors": 1,
+    "ExplodingVehicleDropsAttachments": 1,
+    "DesyncInvulnerabilityTimeoutSeconds": 15.0,
+    "DamagedEngineStartupChancePercent": 50.0,
+    "EnableVehicleCovers": 0,
+    "AllowCoveringDEVehicles": 0,
+    "UseVirtualStorageForCoverCargo": 0,
+    "VehicleAutoCoverTimeSeconds": -1.0,
+    "VehicleAutoCoverRequireCamonet": 0,
+    "VehiclesConfig": [
+        {
+            "ClassName": "OffroadHatchback",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "Offroad_02",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "Hatchback_02",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "Sedan_02",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "CivilianSedan",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "ExpansionBus",
+            "CanPlayerAttach": 1,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "ExpansionUAZ",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "ExpansionVodnik",
+            "CanPlayerAttach": 1,
+            "LockComplexity": 2.0
+        },
+        {
+            "ClassName": "ExpansionTractor",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.0
+        },
+        {
+            "ClassName": "ExpansionMerlin",
+            "CanPlayerAttach": 1,
+            "LockComplexity": 2.0
+        },
+        {
+            "ClassName": "ExpansionUh1h",
+            "CanPlayerAttach": 1,
+            "LockComplexity": 2.0
+        },
+        {
+            "ClassName": "ExpansionGyrocopter",
+            "CanPlayerAttach": 0,
+            "LockComplexity": 1.5
+        }
+    ],
+    "Vehicles": [
+        {
+            "ClassName": "OffroadHatchback",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        },
+        {
+            "ClassName": "Offroad_02",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        },
+        {
+            "ClassName": "Hatchback_02",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "Sedan_02",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "CivilianSedan",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionBus",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionUAZ",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionVodnik",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionTractor",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionMerlin",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionUh1h",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 0,
+            "Parts": []
+        },
+        {
+            "ClassName": "ExpansionGyrocopter",
+            "Lifetime": -1,
+            "Min": 0,
+            "Max": 0,
+            "LimitPerTerritory": -1,
+            "SpawnOffroad": 1,
+            "Parts": []
+        }
+    ]
+}
