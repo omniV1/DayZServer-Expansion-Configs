@@ -8,7 +8,7 @@ This repo is intended to share scripts and configuration patterns, not copyright
 
 - Map launch helpers and admin scripts under `admin/`
 - Shared mod-list files, launcher helpers, loot/AI tuning scripts
-- A sanitized `serverDZChernarus.example.cfg` starter config
+- Sanitized `serverDZ*.example.cfg` starter configs for each map
 - Chernarus Expansion mission configuration:
   - Expansion AI tuning
   - Expansion Market/trader configs
@@ -40,7 +40,7 @@ The `.gitignore` intentionally excludes:
 1. Install DayZ Dedicated Server through Steam.
 2. Install the required Workshop mods locally.
 3. Copy or adapt the allowed config files from this repo.
-4. Copy `serverDZChernarus.example.cfg` to `serverDZChernarus.cfg`, then set your own hostname, admin password, ports, shard ID, and server values.
+4. Copy the matching `serverDZ*.example.cfg` to the real private config filename used by the launcher, then set your own hostname, admin password, ports, shard ID, and server values.
 5. Restart the server after changing Expansion, economy, AI, or event configs.
 
 ## Publishing Notes
