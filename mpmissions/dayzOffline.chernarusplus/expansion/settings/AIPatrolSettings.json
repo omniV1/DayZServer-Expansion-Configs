@@ -289,7 +289,7 @@
         {
             "Name": "ChernarusPatrol_0_Airfield_Balota",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -363,7 +363,7 @@
         {
             "Name": "ChernarusPatrol_1_Airfield_Krasno",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -511,7 +511,7 @@
         {
             "Name": "ChernarusPatrol_3_Arsenovo_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -585,7 +585,7 @@
         {
             "Name": "ChernarusPatrol_4_Bashnya_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -807,7 +807,7 @@
         {
             "Name": "ChernarusPatrol_7_Elektrozavodsk_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -881,7 +881,7 @@
         {
             "Name": "ChernarusPatrol_8_Gorka_Military",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1029,7 +1029,7 @@
         {
             "Name": "ChernarusPatrol_10_Kamensk_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1177,7 +1177,7 @@
         {
             "Name": "ChernarusPatrol_12_Military_base_Pavlovo",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1251,7 +1251,7 @@
         {
             "Name": "ChernarusPatrol_13_Military_base_Tisy",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1325,7 +1325,7 @@
         {
             "Name": "ChernarusPatrol_14_Military_base_VMC",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1547,7 +1547,7 @@
         {
             "Name": "ChernarusPatrol_17_Novoselki_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1695,7 +1695,7 @@
         {
             "Name": "ChernarusPatrol_19_Ostry_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1769,7 +1769,7 @@
         {
             "Name": "ChernarusPatrol_20_Prison_Island_Military",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1843,7 +1843,7 @@
         {
             "Name": "ChernarusPatrol_21_Severograd_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -1991,7 +1991,7 @@
         {
             "Name": "ChernarusPatrol_23_Staroye_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2065,7 +2065,7 @@
         {
             "Name": "ChernarusPatrol_24_Stary_Sobor_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2139,7 +2139,7 @@
         {
             "Name": "ChernarusPatrol_25_Tikhiyzaliv_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2213,7 +2213,7 @@
         {
             "Name": "ChernarusPatrol_26_Topolka_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2287,7 +2287,7 @@
         {
             "Name": "ChernarusPatrol_27_Tri_Kresta_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2361,7 +2361,7 @@
         {
             "Name": "ChernarusPatrol_28_Turovo_Military",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2435,7 +2435,7 @@
         {
             "Name": "ChernarusPatrol_29_Zaprudnoye_Military",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2583,7 +2583,7 @@
         {
             "Name": "ChernarusPatrol_31_Berezino",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2657,7 +2657,7 @@
         {
             "Name": "ChernarusPatrol_32_Chernaya_Polyana",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2731,7 +2731,7 @@
         {
             "Name": "ChernarusPatrol_33_Chernogorsk",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -2879,7 +2879,7 @@
         {
             "Name": "ChernarusPatrol_35_Elektrozavodsk",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -3027,7 +3027,7 @@
         {
             "Name": "ChernarusPatrol_37_Krasnostav",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "West",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -3175,7 +3175,7 @@
         {
             "Name": "ChernarusPatrol_39_Novodmitrovsk",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -3249,7 +3249,7 @@
         {
             "Name": "ChernarusPatrol_40_Novoselki",
             "Persist": 0,
-            "Faction": "East",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -3397,7 +3397,7 @@
         {
             "Name": "ChernarusPatrol_42_Severograd",
             "Persist": 0,
-            "Faction": "West",
+            "Faction": "Raiders",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,
@@ -3471,7 +3471,7 @@
         {
             "Name": "ChernarusPatrol_43_Solnechny",
             "Persist": 0,
-            "Faction": "Raiders",
+            "Faction": "East",
             "Formation": "RANDOM",
             "FormationScale": -1.0,
             "FormationLooseness": 0.0,

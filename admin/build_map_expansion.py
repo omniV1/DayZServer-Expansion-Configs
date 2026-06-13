@@ -768,7 +768,8 @@ def is_chernarus_major_ai_location(cfg: MapConfig, loc: dict) -> bool:
 
 def patrol_faction_for_location(cfg: MapConfig, loc: dict, *, military: bool = False) -> tuple[str, str]:
     # Raiders/East heavy — hostile military feel even at villages
-    roll = abs(hash(loc.get("Name", ""))) % 10
+    name = loc.get("Name", "")
+    roll = sum(name.encode("utf-8")) % 10
     if roll < 5:
         return "Raiders", PVP_LOADOUT
     if roll < 8:
