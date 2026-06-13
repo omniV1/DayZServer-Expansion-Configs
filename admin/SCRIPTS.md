@@ -1,10 +1,10 @@
-# DayZ Server Admin Scripts
+﻿# DayZ Server Admin Scripts
 
 All scripts live under `DayZServer/admin/`. Run PowerShell from the server folder unless noted.
 
 ## Map launchers (shared Chernarus mods)
 
-Chernarus mod list: `admin/chernarus_mods.txt` (edit once — applies to all maps below).
+Chernarus mod list: `admin/chernarus_mods.txt` (edit once â€” applies to all maps below).
 
 | Map | Desktop / server start |
 |-----|-------------------------|
@@ -12,12 +12,13 @@ Chernarus mod list: `admin/chernarus_mods.txt` (edit once — applies to all map
 | Livonia | `start_Enoch.bat` or `start_enoch.cmd` |
 | Sakhal | `start_Sakhal.bat` or `start_sakhal.cmd` (+ `@Zens ExpansionAI Audio`) |
 | Namalsk | `start_Namalsk.bat` or `start_namalsk.cmd` (+ `@Namalsk Island`, server mod `@Namalsk Survival (server)`) |
-| Takistan | **paused** — not updated for latest DayZ |
+| Takistan | `start_Takistan.bat` or `start_Takistan.cmd` (`@Dabs Framework` before `@TakistanPlus`) |
 
 ```powershell
 .\Launch-DayZMap.ps1 -Map enoch
 .\Launch-DayZMap.ps1 -Map sakhal
 .\Launch-DayZMap.ps1 -Map namalsk
+.\Launch-DayZMap.ps1 -Map takistan
 ```
 
 Ports: Chernarus **2302** (query **2303**), Livonia **2402** (query **2403**), Namalsk **2502** (query **2503**), Sakhal **2602** (query **2603**). Sakhal no longer shares 2302 with Chernarus.
@@ -32,7 +33,7 @@ After adding a mod on Chernarus, append it to `admin/chernarus_mods.txt` and res
 
 ## Quick access (AI ammo)
 
-Patrols and spatial AI run dry in long fights — this enables **unlimited reload** and adds spare mags to loadouts.
+Patrols and spatial AI run dry in long fights â€” this enables **unlimited reload** and adds spare mags to loadouts.
 
 | Command | What it does |
 |---------|----------------|
@@ -50,7 +51,7 @@ Restart server after applying (or wait for AI to respawn).
 
 ## Quick access (AI patrols on all maps)
 
-Sync **Chernarus patrol caps / radii / unlimited reload** to Livonia, Sakhal, Namalsk (keeps each map’s own routes):
+Sync **Chernarus patrol caps / radii / unlimited reload** to Livonia, Sakhal, Namalsk, and Takistan (keeps each map's own routes):
 
 ```bat
 admin\replicate-ai.ps1
@@ -64,11 +65,11 @@ Or: `python admin\replicate_ai_settings.py` then `python admin\apply_ai_ammo.py`
 | Livonia (enoch) | yes | Own routes; synced globals |
 | Sakhal | yes | Own routes; synced globals |
 | Namalsk | created if missing | Object/heli patrols only until you add routes |
-| Takistan | paused | Re-add to `ai_config.json` when map mod is updated |
+| Takistan | yes | Active via `dayzOffline.TakistanPlus`; keep Dabs before TakistanPlus |
 
 **Spatial AI** on other maps: copies Group + timers (no Chernarus XYZ). Set `"sync_spatial_fixed_locations": true` in `admin/ai_config.json` only after you add map coords.
 
-**AI War Zones** — one active file; swap per map before start:
+**AI War Zones** â€” one active file; swap per map before start:
 
 ```bat
 warzones.cmd enoch
@@ -110,7 +111,7 @@ Config: `admin/ai_config.json`
 |------|------|
 | `loot.cmd` | Launcher at server root (calls `apply-loot.ps1`) |
 | `apply-loot.ps1` | PowerShell wrapper with `-Action` / `-Preset` |
-| `apply_loot.py` | Main Python entry — orchestrates everything |
+| `apply_loot.py` | Main Python entry â€” orchestrates everything |
 | `loot_config.json` | Presets and mission list (edit multipliers here) |
 | `loot_settings.py` | Loads config (used by other scripts) |
 | `build_mod_ce.py` | Generates `mpmissions/.../mod_ce/*.xml` |
@@ -141,7 +142,7 @@ python admin\apply_loot.py status
 
 ## Typical workflows
 
-### “Loot feels too low”
+### â€œLoot feels too lowâ€
 
 1. `loot.cmd -Action status`
 2. `loot.cmd -Action all -Preset high`
@@ -165,3 +166,4 @@ python admin\apply_loot.py status
 ## Source mission
 
 Chernarus (`dayzOffline.chernarusplus`) is the **source** for generated `mod_ce`. Other maps receive a copy on `replicate`. Change `source_mission` in `loot_config.json` if you build from another map.
+

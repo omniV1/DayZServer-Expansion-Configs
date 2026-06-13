@@ -4,7 +4,8 @@
   "replicate_missions": [
     "dayzOffline.enoch",
     "dayzOffline.sakhal",
-    "regular.namalsk"
+    "regular.namalsk",
+    "dayzOffline.TakistanPlus"
   ],
   "presets": {
     "light": {

@@ -36,7 +36,7 @@ MISSIONS = [
     "regular.namalsk",
     "dayzOffline.enoch",
     "dayzOffline.sakhal",
-    "dayzOffline.Takistan",
+    "dayzOffline.TakistanPlus",
 ]
 
 # Expansion reads AI loadouts from the active -profiles folder, not mpmissions.
@@ -45,7 +45,7 @@ MISSION_PROFILE: dict[str, str] = {
     "regular.namalsk": "profiles_namalsk",
     "dayzOffline.enoch": "profiles_enoch",
     "dayzOffline.sakhal": "profiles_sakhal",
-    "dayzOffline.Takistan": "profiles_takistan",
+    "dayzOffline.TakistanPlus": "profiles_takistan",
 }
 
 
@@ -377,7 +377,7 @@ MISSION_GEAR: dict[str, str] = {
     "regular.namalsk": "winter",
     "dayzOffline.enoch": "temperate",
     "dayzOffline.sakhal": "winter",
-    "dayzOffline.Takistan": "desert",
+    "dayzOffline.TakistanPlus": "desert",
 }
 
 

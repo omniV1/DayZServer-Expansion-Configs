@@ -3,13 +3,15 @@
   "patrol_targets": [
     "dayzOffline.enoch",
     "dayzOffline.sakhal",
-    "regular.namalsk"
+    "regular.namalsk",
+    "dayzOffline.TakistanPlus"
   ],
   "spatial_targets": [
     "dayzOffline.enoch",
-    "dayzOffline.sakhal"
+    "dayzOffline.sakhal",
+    "dayzOffline.TakistanPlus"
   ],
-  "takistan_mission": "dayzOffline.Takistan",
+  "takistan_mission": "dayzOffline.TakistanPlus",
   "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan"],
   "expansion_build": "python admin/build_map_expansion.py --all",
   "takistan_note": "Use build_map_expansion.py per map; do not replicate Chernarus spatial coords onto custom maps",

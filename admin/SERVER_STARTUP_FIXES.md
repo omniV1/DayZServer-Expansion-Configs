@@ -1,8 +1,8 @@
-# Server startup fixes
+﻿# Server startup fixes
 
-**Admin scripts:** [SCRIPTS.md](SCRIPTS.md) — quick loot: `loot.cmd` from server root.
+**Admin scripts:** [SCRIPTS.md](SCRIPTS.md) â€” quick loot: `loot.cmd` from server root.
 
-## 1. SNAFU CE errors — fixed
+## 1. SNAFU CE errors â€” fixed
 
 Log showed:
 `Type 'ACR_Gun' will be ignored. (Type does not exist.)`
@@ -11,7 +11,7 @@ Log showed:
 
 **Fix applied:** `mod_ce/mod_weapons_types.xml` now uses **@Techs Weapon Mod** classnames (`TWM_*`), which are on your Chernarus mod line.
 
-**Optional — if you want SNAFU loot:** Add to your server launcher `-mod=` list (after other mods):
+**Optional â€” if you want SNAFU loot:** Add to your server launcher `-mod=` list (after other mods):
 ```
 @SNAFU Weapons
 ```
@@ -19,7 +19,7 @@ Then re-run `admin/build_mod_ce.py` with SNAFU names, or merge SNAFU XML from `@
 
 ---
 
-## 2. Cannot join — Expansion Bundle version mismatch
+## 2. Cannot join â€” Expansion Bundle version mismatch
 
 Log showed:
 `kicked: 146 (Client has a more recent version ... DayZ-Expansion-Bundle (PBO: ))`
@@ -28,7 +28,7 @@ Log showed:
 
 **Fix:** Update server Expansion mods to match the client (same Workshop versions):
 
-1. In Steam → DayZ → Workshop, note the latest update time on:
+1. In Steam â†’ DayZ â†’ Workshop, note the latest update time on:
    - DayZ-Expansion-Bundle
    - DayZ-Expansion-Core
    - DayZ-Expansion-AI
@@ -40,13 +40,13 @@ Log showed:
 
 ---
 
-## 3. Remaining CE warnings (2026-06-01 19:23 restart) — fixed
+## 3. Remaining CE warnings (2026-06-01 19:23 restart) â€” fixed
 
 | Warning | Fix |
 |---------|-----|
 | `TWM_Tikka` type does not exist | Removed from `mod_ce`; added to `cfgignorelist.xml` |
 | `Expansion_Longhorn` type does not exist | Removed from Expansion in current Bundle; added to `cfgignorelist.xml` |
-| `Expansion_M79` / `ExpansionFlaregun` not spawnable | Normal Expansion CE behaviour — ignore |
+| `Expansion_M79` / `ExpansionFlaregun` not spawnable | Normal Expansion CE behaviour â€” ignore |
 | `dynamic_009.002` corrupt | Stop server, delete `storage_1\data\dynamic_009.002`, restart |
 
 After restart you should see **4 classes** in mod_ce TypeSetup and no SNAFU/Tikka/Longhorn spam.
@@ -60,7 +60,7 @@ After restart you should see **4 classes** in mod_ce TypeSetup and no SNAFU/Tikk
 | `Server.core.xml` parser error | Regenerated on start; safe to ignore if inputs work |
 | `ChristmasTree`, `Expansion_M79` not spawnable | Normal Expansion CE flags |
 | `VehicleTransitBus` event missing | Vanilla/event mismatch; low priority |
-| `dynamic_009.002` read failed once | Corrupt backup; CE used `.bin` — delete `storage_1\data\dynamic_009.002` if repeats |
+| `dynamic_009.002` read failed once | Corrupt backup; CE used `.bin` â€” delete `storage_1\data\dynamic_009.002` if repeats |
 
 ---
 
@@ -71,20 +71,20 @@ python admin\build_mod_ce.py
 python admin\replicate_mod_ce.py
 ```
 
-Restart server. For a full CE types refresh, stop server and delete `mpmissions\dayzOffline.chernarusplus\storage_1\data\types.bin` (and `.001`/`.002`) once — **this resets persisted loot counts**.
+Restart server. For a full CE types refresh, stop server and delete `mpmissions\dayzOffline.chernarusplus\storage_1\data\types.bin` (and `.001`/`.002`) once â€” **this resets persisted loot counts**.
 
 ---
 
-## 5. Takistan — “No world with name 'Takistan'”
+## 5. Takistan â€” â€œNo world with name 'Takistan'â€
 
-**World / mission:** `dayzOffline.Takistan` in `serverDZ_Takistan.cfg` (terrain world name is `Takistan`).
+**World / mission:** `dayzOffline.TakistanPlus` in `serverDZ_Takistan.cfg` (terrain world name is `TakistanPlus`).
 
 **Root cause (found in RPT):** The server was **not loading any mods**. Either:
 
 1. `-mod=%DAYZ_MODS%` appeared **literally** in the log (batch `start` did not expand the variable), or  
 2. `-mod=` was unquoted and broke at `@Dabs Framework`, so **`@TakistanPlus` never loaded**.
 
-**Fix — use the PowerShell launcher only:**
+**Fix â€” use the PowerShell launcher only:**
 
 ```powershell
 C:\Games\Steam\steamapps\common\DayZServer\Launch-Takistan.ps1
@@ -102,26 +102,26 @@ Should say **OK** and the newest RPT must **not** contain `-mod=%DAYZ_MODS%` or 
 
 **DayZ client:** Enable `@TakistanPlus` and `@Dabs Framework` before joining (same order: CF, Dabs, then TakistanPlus).
 
-**Sandstorm compile error (`Unknown type 'WeatherEvent'`):** Takistan’s weather PBO needs **Dabs Framework** loaded **before** `@TakistanPlus` in `-mod=`. The launchers use `@CF;@Dabs Framework;@TakistanPlus;...`.
+**Sandstorm compile error (`Unknown type 'WeatherEvent'`):** Takistanâ€™s weather PBO needs **Dabs Framework** loaded **before** `@TakistanPlus` in `-mod=`. The launchers use `@CF;@Dabs Framework;@TakistanPlus;...`.
 
-**“No world named Takistan” after reordering mods:** If `-mod=` is **not one quoted argument**, Windows splits at the space in `@Dabs Framework`. With `@CF` first, only `@CF` loads and `@TakistanPlus` is dropped. RPT shows `Can't load @Dabs/Anims` and no `Takistan.pbo`. Use **`Launch-Takistan.ps1`** (call operator, not `Start-Process`) or **`start_Takistan_DIRECT.cmd`** (`"-mod=%DAYZ_MODS%"`). Do not use unquoted `-mod=` lines.
+**â€œNo world named Takistanâ€ after reordering mods:** If `-mod=` is **not one quoted argument**, Windows splits at the space in `@Dabs Framework`. With `@CF` first, only `@CF` loads and `@TakistanPlus` is dropped. RPT shows `Can't load @Dabs/Anims` and no `Takistan.pbo`. Use **`Launch-Takistan.ps1`** (call operator, not `Start-Process`) or **`start_Takistan_DIRECT.cmd`** (`"-mod=%DAYZ_MODS%"`). Do not use unquoted `-mod=` lines.
 
-**Server “keeps restarting” every ~10s:** `Launch-Takistan.ps1` used to auto-restart every 10 seconds. That spawns overlapping `DayZServer_x64` processes while the first is still loading. Use **one** launcher window; wait 2–5 minutes on first boot. Optional: `powershell -File Launch-Takistan.ps1 -AutoRestart` (60s delay).
+**Server â€œkeeps restartingâ€ every ~10s:** `Launch-Takistan.ps1` used to auto-restart every 10 seconds. That spawns overlapping `DayZServer_x64` processes while the first is still loading. Use **one** launcher window; wait 2â€“5 minutes on first boot. Optional: `powershell -File Launch-Takistan.ps1 -AutoRestart` (60s delay).
 
-**Inputs / `Server.core.xml` parser error on first line:** Harmless on first run; the server recreates the file. “Dedicated host created” + Expansion inputs loading means startup is progressing.
+**Inputs / `Server.core.xml` parser error on first line:** Harmless on first run; the server recreates the file. â€œDedicated host createdâ€ + Expansion inputs loading means startup is progressing.
 
-**Other maps (Chernarus mod parity):** Edit `admin/chernarus_mods.txt` once, start with `Launch-DayZMap.ps1 -Map enoch|sakhal|namalsk` or Desktop `start_*.bat`. Takistan launchers unchanged but map mod is outdated — use Chernarus/Livonia/Sakhal/Namalsk for now.
+**Other maps (Chernarus mod parity):** Edit `admin/chernarus_mods.txt` once, start with `Launch-DayZMap.ps1 -Map enoch|sakhal|namalsk|takistan` or Desktop `start_*.bat`. Takistan is active, but still requires `@Dabs Framework` before `@TakistanPlus`.
 
-## Namalsk / Sakhal — launcher shows “no mods”
+## Namalsk / Sakhal â€” launcher shows â€œno modsâ€
 
 **Symptoms:** DayZ join dialog says *Server can't transmit all data* and *(server doesn't require any mods)*, while Chernarus/Enoch list ~9 mods.
 
 **Common causes fixed in this repo:**
 
-1. **Sakhal used the same game port as Chernarus (2302)** — only one process can bind; the browser may query the wrong server. Sakhal is now **2602** (query **2603**) in `admin/map_launch.json` and `serverDZSakhal.cfg`.
-2. **Per-map `steamQueryPort` must be sequential from 27016** — Chernarus **27016**, Livonia **27017**, Namalsk **27018**, Sakhal **27019**. Each map also uses its own `-profiles=` folder (`profiles`, `profiles_enoch`, etc.).
-3. **Missing `@CannabisPlus` folder** — removed from `admin/chernarus_mods.txt` (was causing RPT load errors).
-4. **Joining before init finishes** — wait for RPT `Init sequence finished` / `IdleMode` (Namalsk CE init can take 1–2 minutes).
+1. **Sakhal used the same game port as Chernarus (2302)** â€” only one process can bind; the browser may query the wrong server. Sakhal is now **2602** (query **2603**) in `admin/map_launch.json` and `serverDZSakhal.cfg`.
+2. **Per-map `steamQueryPort` must be sequential from 27016** â€” Chernarus **27016**, Livonia **27017**, Namalsk **27018**, Sakhal **27019**. Each map also uses its own `-profiles=` folder (`profiles`, `profiles_enoch`, etc.).
+3. **Missing `@CannabisPlus` folder** â€” removed from `admin/chernarus_mods.txt` (was causing RPT load errors).
+4. **Joining before init finishes** â€” wait for RPT `Init sequence finished` / `IdleMode` (Namalsk CE init can take 1â€“2 minutes).
 
 **Verify:**
 
@@ -160,3 +160,4 @@ Direct connect in the launcher: `192.168.0.3` + port from the table (e.g. `192.1
 - Windows Firewall: allow **UDP** inbound on game + query ports for `DayZServer_x64.exe`.
 
 **Refresh official CE:** `python admin\install_takistan_mission.py`
+

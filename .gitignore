@@ -108,24 +108,24 @@ mpmissions/regular.namalsk/expansion/*
 !mpmissions/regular.namalsk/expansion/traderzones/
 !mpmissions/regular.namalsk/expansion/traderzones/**
 
-!mpmissions/dayzOffline.Takistan/
-mpmissions/dayzOffline.Takistan/*
-!mpmissions/dayzOffline.Takistan/db/
-mpmissions/dayzOffline.Takistan/db/*
-!mpmissions/dayzOffline.Takistan/db/events.xml
-!mpmissions/dayzOffline.Takistan/db/globals.xml
-!mpmissions/dayzOffline.Takistan/mod_ce/
-!mpmissions/dayzOffline.Takistan/mod_ce/**
-!mpmissions/dayzOffline.Takistan/expansion/
-mpmissions/dayzOffline.Takistan/expansion/*
-!mpmissions/dayzOffline.Takistan/expansion/Loadouts/
-!mpmissions/dayzOffline.Takistan/expansion/Loadouts/**
-!mpmissions/dayzOffline.Takistan/expansion/missions/
-!mpmissions/dayzOffline.Takistan/expansion/missions/**
-!mpmissions/dayzOffline.Takistan/expansion/settings/
-!mpmissions/dayzOffline.Takistan/expansion/settings/**
-!mpmissions/dayzOffline.Takistan/expansion/traderzones/
-!mpmissions/dayzOffline.Takistan/expansion/traderzones/**
+!mpmissions/dayzOffline.TakistanPlus/
+mpmissions/dayzOffline.TakistanPlus/*
+!mpmissions/dayzOffline.TakistanPlus/db/
+mpmissions/dayzOffline.TakistanPlus/db/*
+!mpmissions/dayzOffline.TakistanPlus/db/events.xml
+!mpmissions/dayzOffline.TakistanPlus/db/globals.xml
+!mpmissions/dayzOffline.TakistanPlus/mod_ce/
+!mpmissions/dayzOffline.TakistanPlus/mod_ce/**
+!mpmissions/dayzOffline.TakistanPlus/expansion/
+mpmissions/dayzOffline.TakistanPlus/expansion/*
+!mpmissions/dayzOffline.TakistanPlus/expansion/Loadouts/
+!mpmissions/dayzOffline.TakistanPlus/expansion/Loadouts/**
+!mpmissions/dayzOffline.TakistanPlus/expansion/missions/
+!mpmissions/dayzOffline.TakistanPlus/expansion/missions/**
+!mpmissions/dayzOffline.TakistanPlus/expansion/settings/
+!mpmissions/dayzOffline.TakistanPlus/expansion/settings/**
+!mpmissions/dayzOffline.TakistanPlus/expansion/traderzones/
+!mpmissions/dayzOffline.TakistanPlus/expansion/traderzones/**
 
 # Expansion profile configs. Keep player/account persistence private.
 !profiles/

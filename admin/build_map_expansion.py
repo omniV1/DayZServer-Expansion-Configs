@@ -304,7 +304,7 @@ MAP_CONFIGS: dict[str, MapConfig] = {
     ),
     "takistan": MapConfig(
         key="takistan",
-        mission="dayzOffline.Takistan",
+        mission="dayzOffline.TakistanPlus",
         profile="profiles_takistan",
         teleports_file="Teleports_TakistanPlus.json",
         cache_file="takistan_locations.json",
