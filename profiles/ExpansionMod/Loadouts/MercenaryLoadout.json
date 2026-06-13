@@ -1,0 +1,28 @@
+{
+  "className": "MercenaryLoadout",
+  "Loadout": {
+    "primaryWeapon": "M4A1",
+    "primaryAttachments": ["M4_RISHndgrd_Black", "ACOGOptic", "M4_Suppressor"],
+    "secondaryWeapon": "Glock19",
+    "secondaryAttachments": ["PistolSuppressor"],
+    "meleeWeapon": "CombatKnife",
+    "headgear": "MICH_Helmet",
+    "facewear": "NVGoggles",
+    "gloves": "TacticalGloves_Green",
+    "top": "M65Jacket_Tan",
+    "pants": "CargoPants_Green",
+    "shoes": "MilitaryBoots_Black",
+    "vest": "PlateCarrierVest",
+    "backpack": "AssaultBag_Ttsko",
+    "magazines": ["Mag_STANAG_30Rnd", "Mag_Glock_15Rnd"],
+    "items": ["BandageDressing", "SalineBagIV", "Ammo_556x45", "Ammo_9x19"],
+    "quantity": {
+      "BandageDressing": 5,
+      "SalineBagIV": 1,
+      "Ammo_556x45": 90,
+      "Ammo_9x19": 45,
+      "Mag_STANAG_30Rnd": 3,
+      "Mag_Glock_15Rnd": 2
+    }
+  }
+}

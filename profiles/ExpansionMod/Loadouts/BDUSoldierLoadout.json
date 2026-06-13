@@ -1,0 +1,27 @@
+{
+  "className": "BDUSoldierLoadout",
+  "Loadout": {
+    "primaryWeapon": "FAL",
+    "primaryAttachments": ["ACOGOptic", "Fal_FoldingBttstck"],
+    "secondaryWeapon": "M1911",
+    "secondaryAttachments": [],
+    "meleeWeapon": "CombatKnife",
+    "headgear": "MilitaryBeret_UN",
+    "facewear": "",
+    "gloves": "TacticalGloves_Black",
+    "top": "USMCJacket_Desert",
+    "pants": "USMCPants_Desert",
+    "shoes": "CombatBoots_Black",
+    "vest": "PlateCarrierVest",
+    "backpack": "AssaultBag_Black",
+    "magazines": ["Mag_FAL_20Rnd", "Mag_1911_7Rnd"],
+    "items": ["BandageDressing", "Ammo_308Win", "Ammo_45ACP"],
+    "quantity": {
+      "BandageDressing": 4,
+      "Ammo_308Win": 60,
+      "Ammo_45ACP": 14,
+      "Mag_FAL_20Rnd": 3,
+      "Mag_1911_7Rnd": 2
+    }
+  }
+}

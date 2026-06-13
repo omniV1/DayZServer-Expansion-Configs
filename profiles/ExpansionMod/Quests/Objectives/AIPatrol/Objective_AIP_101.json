@@ -1,0 +1,86 @@
+{
+    "ConfigVersion": 28,
+    "ID": 101,
+    "ObjectiveType": 7,
+    "ObjectiveText": "Eliminate the 6 raiders patrolling Vybor Airfield",
+    "TimeLimit": -1,
+    "Active": 1,
+    "MaxDistance": -1.0,
+    "MinDistance": -1.0,
+    "AllowedWeapons": [],
+    "AllowedDamageZones": [],
+    "AISpawn": {
+        "Name": "Vybor Raiders",
+        "Persist": 0,
+        "Faction": "West",
+        "Formation": "Vee",
+        "FormationScale": 0.0,
+        "FormationLooseness": 0.0,
+        "Loadout": "PvPLoadout",
+        "Units": [
+            "eAI_SurvivorM_Boris",
+            "eAI_SurvivorM_Cyril",
+            "eAI_SurvivorM_Denis",
+            "eAI_SurvivorM_Elias",
+            "eAI_SurvivorM_Francis",
+            "eAI_SurvivorF_Eva",
+            "eAI_SurvivorF_Frida",
+            "eAI_SurvivorF_Gabi",
+            "eAI_SurvivorF_Helga",
+            "eAI_SurvivorF_Irena"
+        ],
+        "NumberOfAI": 6,
+        "Behaviour": "HALT_OR_LOOP",
+        "LootingBehaviour": "",
+        "Speed": "JOG",
+        "UnderThreatSpeed": "SPRINT",
+        "CanBeLooted": 1,
+        "UnlimitedReload": 1,
+        "SniperProneDistanceThreshold": 300.0,
+        "AccuracyMin": 0.45,
+        "AccuracyMax": 0.75,
+        "ThreatDistanceLimit": 500.0,
+        "NoiseInvestigationDistanceLimit": -1.0,
+        "DamageMultiplier": 1.0,
+        "DamageReceivedMultiplier": 1.0,
+        "CanBeTriggeredByAI": 0,
+        "MinDistRadius": 50.0,
+        "MaxDistRadius": 600.0,
+        "DespawnRadius": 800.0,
+        "MinSpreadRadius": 0.0,
+        "MaxSpreadRadius": 70.0,
+        "Chance": 1.0,
+        "WaypointInterpolation": "",
+        "DespawnTime": 60.0,
+        "RespawnTime": 1.0,
+        "LoadBalancingCategory": "",
+        "UseRandomWaypointAsStartPoint": 1,
+        "Waypoints": [
+            [
+                4428.0,
+                0.0,
+                10179.0
+            ],
+            [
+                4260.0,
+                0.0,
+                10280.0
+            ],
+            [
+                4610.0,
+                0.0,
+                10320.0
+            ],
+            [
+                4745.0,
+                0.0,
+                10050.0
+            ],
+            [
+                4385.0,
+                0.0,
+                9955.0
+            ]
+        ]
+    }
+}

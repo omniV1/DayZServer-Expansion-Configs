@@ -1,0 +1,27 @@
+Chernarus AI + Loot — test checklist (2026-06-01)
+================================================
+
+Startup (RPT / script log)
+- [ ] No JSON ERROR for SoldierCDFLoadout / SoldierMOTRSLoadout
+- [ ] No Invalid value for AI War Zones smoke colors
+- [ ] [ExpansionAIPatrolSettings] loads with Enabled: 1
+- [ ] AI War Zones: zone count 6
+- [ ] No CE errors for unknown types in mod_ce
+
+In-game — AI
+- [ ] Berezino war zone: West vs East engagement, lootable bodies
+- [ ] NWAF war zone spawns when in range
+- [ ] Spatial AI: visit Chem area (~2133, 91, 3353) for spawn/notification
+- [ ] Expansion patrol: approach Green Mountain route (~4211, 109, 6382) from 400–1000m
+- [ ] Heli wreck patrol at a crash site (object-based spawn)
+
+In-game — Loot
+- [ ] Military building: more vanilla weapons/ammo than before
+- [ ] At least one Techs Weapon Mod gun (e.g. TWM_AKSocom, TWM_HK417_Black) in military loot after ~30 min uptime
+- [ ] No CE "Type does not exist" for TWM_* in RPT on startup
+
+Performance (solo maxPlayers=1)
+- [ ] Server FPS stable; if stutter: lower Spatial MaxAI (28→20) or maxConcurrentZones (2→1)
+
+Maps using same loot pattern (mod_ce copied): enoch, sakhal, Takistan, regular.namalsk
+- Per-map AI coordinates still need in-game patrol export for non-Chernarus routes.

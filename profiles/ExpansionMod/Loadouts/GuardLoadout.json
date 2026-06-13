@@ -1,0 +1,25 @@
+{
+  "className": "GuardLoadout",
+  "Loadout": {
+    "primaryWeapon": "SKS",
+    "primaryAttachments": ["KazuarOptic"],
+    "secondaryWeapon": "",
+    "secondaryAttachments": [],
+    "meleeWeapon": "PoliceBaton",
+    "headgear": "GorkaHelmetComplete",
+    "facewear": "",
+    "gloves": "OMNOGloves_Brown",
+    "top": "PoliceJacket",
+    "pants": "PolicePants",
+    "shoes": "CombatBoots_Beige",
+    "vest": "PoliceVest",
+    "backpack": "HuntingBag",
+    "magazines": ["Mag_SKS_10Rnd"],
+    "items": ["BandageDressing", "Ammo_762x39"],
+    "quantity": {
+      "BandageDressing": 3,
+      "Ammo_762x39": 40,
+      "Mag_SKS_10Rnd": 3
+    }
+  }
+}

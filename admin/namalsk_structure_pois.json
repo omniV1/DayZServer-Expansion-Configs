@@ -1,0 +1,46 @@
+{
+  "comment": "Optional overrides for Namalsk topside/structure. Patrol + spawn POIs are auto-detected from COT teleports via poi_patrol_keywords in build_map_expansion.py.",
+  "locations": [],
+  "spawn_regions": [
+    {
+      "name": "Vorkuta",
+      "match": "Vorkuta"
+    },
+    {
+      "name": "Norinsk",
+      "match": "Norinsk"
+    },
+    {
+      "name": "Sebjan",
+      "match": "Sebjan"
+    },
+    {
+      "name": "Athena Research",
+      "match": "Athena Research Institute"
+    },
+    {
+      "name": "Namalsk Airfield",
+      "match": "airfield"
+    },
+    {
+      "name": "Refugee Camp",
+      "match": "refugee camp"
+    },
+    {
+      "name": "Factory Complex",
+      "match": "factory"
+    },
+    {
+      "name": "Phoenix Base",
+      "match": "Phoenix"
+    },
+    {
+      "name": "SKAT-12",
+      "match": "SKAT-12"
+    },
+    {
+      "name": "TF Bering Outpost",
+      "match": "TF Bering outpost"
+    }
+  ]
+}

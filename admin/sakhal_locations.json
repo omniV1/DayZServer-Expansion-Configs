@@ -1,0 +1,613 @@
+{
+    "Types": [
+        "ALL",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "City",
+            "Name": "Aniva",
+            "Position": [
+                12895.0,
+                0.0,
+                7273.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Ayan",
+            "Position": [
+                1243.0,
+                0.0,
+                3022.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Baykovo",
+            "Position": [
+                14571.0,
+                0.0,
+                9794.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Black Cape",
+            "Position": [
+                5084.0,
+                0.0,
+                3592.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Blunt",
+            "Position": [
+                11898.0,
+                0.0,
+                11267.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Bolotnoye",
+            "Position": [
+                5040.0,
+                0.0,
+                8667.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Broken",
+            "Position": [
+                6313.0,
+                0.0,
+                6454.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Burukan",
+            "Position": [
+                2706.0,
+                0.0,
+                6540.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Cliff",
+            "Position": [
+                5453.0,
+                0.0,
+                14535.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Darkness",
+            "Position": [
+                8443.0,
+                0.0,
+                1328.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Dolinovka",
+            "Position": [
+                9831.0,
+                0.0,
+                9835.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Duck Island",
+            "Position": [
+                8628.0,
+                0.0,
+                5146.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Dudino",
+            "Position": [
+                6233.0,
+                0.0,
+                7245.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Eastern Peak",
+            "Position": [
+                12835.0,
+                0.0,
+                9418.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Elizarovo",
+            "Position": [
+                13492.0,
+                0.0,
+                5178.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Evai",
+            "Position": [
+                7954.0,
+                0.0,
+                13512.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Goryachevo",
+            "Position": [
+                8774.0,
+                0.0,
+                10059.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Icy Ridge",
+            "Position": [
+                10756.0,
+                0.0,
+                8669.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Iturup",
+            "Position": [
+                10371.0,
+                0.0,
+                10700.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Kekra",
+            "Position": [
+                7188.0,
+                0.0,
+                4235.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Ketoy",
+            "Position": [
+                5755.0,
+                0.0,
+                2066.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Lesogorovka",
+            "Position": [
+                10969.0,
+                0.0,
+                9695.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Lonely Volcano",
+            "Position": [
+                10029.0,
+                0.0,
+                12087.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Matrosovo",
+            "Position": [
+                14233.0,
+                0.0,
+                11586.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Neran",
+            "Position": [
+                2666.0,
+                0.0,
+                9297.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Nogovo",
+            "Position": [
+                7814.0,
+                0.0,
+                7949.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Orlovo",
+            "Position": [
+                10373.0,
+                0.0,
+                13348.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Capital",
+            "Name": "Petropavlovsk-Sakhalinsky",
+            "Position": [
+                4749.0,
+                0.0,
+                10695.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Podgornoye",
+            "Position": [
+                10985.0,
+                0.0,
+                13209.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Point",
+            "Position": [
+                3755.0,
+                0.0,
+                14402.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Marine",
+            "Name": "Rocket Bay",
+            "Position": [
+                4396.0,
+                0.0,
+                7269.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Rudnogorsk",
+            "Position": [
+                13587.0,
+                0.0,
+                12152.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rybnoye",
+            "Position": [
+                12471.0,
+                0.0,
+                12667.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Sakhalag",
+            "Position": [
+                12163.0,
+                0.0,
+                9698.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Sakhalin Geo Power Plant",
+            "Position": [
+                8407.0,
+                0.0,
+                10204.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Severomorsk",
+            "Position": [
+                9544.0,
+                0.0,
+                13656.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Shantar",
+            "Position": [
+                2278.0,
+                0.0,
+                3413.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Sharp",
+            "Position": [
+                11546.0,
+                0.0,
+                11669.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Shumnoye",
+            "Position": [
+                14383.0,
+                0.0,
+                8842.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Solisko",
+            "Position": [
+                12653.0,
+                0.0,
+                2121.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Sovetskoye",
+            "Position": [
+                6413.0,
+                0.0,
+                12783.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Sputnik",
+            "Position": [
+                7786.0,
+                0.0,
+                14802.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Star Nickel",
+            "Position": [
+                12033.0,
+                0.0,
+                10323.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Strozh",
+            "Position": [
+                8776.0,
+                0.0,
+                12791.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Taranai",
+            "Position": [
+                9706.0,
+                0.0,
+                6584.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Tikhoye",
+            "Position": [
+                6260.0,
+                0.0,
+                8669.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Troika",
+            "Position": [
+                9016.0,
+                0.0,
+                9268.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Tugur",
+            "Position": [
+                1738.0,
+                0.0,
+                6131.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Tumanovo",
+            "Position": [
+                8417.0,
+                0.0,
+                13646.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Tungar",
+            "Position": [
+                12630.0,
+                0.0,
+                14135.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Turtle",
+            "Position": [
+                835.0,
+                0.0,
+                11285.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Urip",
+            "Position": [
+                1537.0,
+                0.0,
+                891.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Ushki",
+            "Position": [
+                10817.0,
+                0.0,
+                14631.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Vostok",
+            "Position": [
+                13910.0,
+                0.0,
+                8337.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Vysokoye",
+            "Position": [
+                11186.201171875,
+                0.0,
+                7965.83837890625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Wolf Peak",
+            "Position": [
+                8196.0,
+                0.0,
+                11668.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Yasnaya Polyana",
+            "Position": [
+                8116.0,
+                0.0,
+                9191.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Yasnomorsk",
+            "Position": [
+                6951.0,
+                0.0,
+                13331.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Yuzhnoye",
+            "Position": [
+                10972.0,
+                0.0,
+                6323.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Zhuvanovo",
+            "Position": [
+                5741.0,
+                0.0,
+                12516.0
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

@@ -1,0 +1,274 @@
+{
+  "active_preset": "saturated",
+  "source_mission": "dayzOffline.chernarusplus",
+  "replicate_missions": [
+    "dayzOffline.enoch",
+    "dayzOffline.sakhal",
+    "regular.namalsk"
+  ],
+  "presets": {
+    "light": {
+      "description": "Modest boost over vanilla",
+      "nominal_mult": 1.75,
+      "min_mult": 1.5,
+      "bulk_nominal_mult": 1.5,
+      "bulk_min_mult": 1.5,
+      "bulk_nominal_max": 80,
+      "bulk_nominal_cap": 100,
+      "twm_scale": 0.5,
+      "optics_scale": 1.2,
+      "globals": {
+        "SpawnInitial": 1400,
+        "InitialSpawn": 120,
+        "RespawnLimit": 25,
+        "RespawnTypes": 14,
+        "RespawnAttempt": 2,
+        "ZombieMaxCount": 1100
+      },
+      "rare_floors": {
+        "M4A1": [
+          4,
+          2
+        ],
+        "AK101": [
+          4,
+          2
+        ],
+        "SVD": [
+          3,
+          1
+        ]
+      }
+    },
+    "medium": {
+      "description": "Current balanced solo/PvE loot (default)",
+      "nominal_mult": 2.5,
+      "min_mult": 2.0,
+      "bulk_nominal_mult": 2.0,
+      "bulk_min_mult": 2.0,
+      "bulk_nominal_max": 55,
+      "bulk_nominal_cap": 120,
+      "twm_scale": 0.65,
+      "optics_scale": 1.8,
+      "globals": {
+        "SpawnInitial": 2000,
+        "InitialSpawn": 160,
+        "RespawnLimit": 40,
+        "RespawnTypes": 18,
+        "RespawnAttempt": 3,
+        "ZombieMaxCount": 1300
+      },
+      "rare_floors": {
+        "M4A1": [
+          8,
+          4
+        ],
+        "AK101": [
+          8,
+          4
+        ],
+        "SVD": [
+          5,
+          2
+        ],
+        "FAL": [
+          6,
+          3
+        ],
+        "VSS": [
+          5,
+          2
+        ],
+        "Aug": [
+          5,
+          2
+        ],
+        "FAMAS": [
+          5,
+          2
+        ],
+        "M79": [
+          3,
+          1
+        ],
+        "NVGoggles": [
+          8,
+          4
+        ]
+      }
+    },
+    "high": {
+      "description": "Noticeably loot-rich servers",
+      "nominal_mult": 3.25,
+      "min_mult": 2.5,
+      "bulk_nominal_mult": 2.5,
+      "bulk_min_mult": 2.25,
+      "bulk_nominal_max": 70,
+      "bulk_nominal_cap": 150,
+      "twm_scale": 0.85,
+      "optics_scale": 2.2,
+      "globals": {
+        "SpawnInitial": 2600,
+        "InitialSpawn": 200,
+        "RespawnLimit": 55,
+        "RespawnTypes": 22,
+        "RespawnAttempt": 4,
+        "ZombieMaxCount": 1400
+      },
+      "rare_floors": {
+        "M4A1": [
+          12,
+          6
+        ],
+        "AK101": [
+          12,
+          6
+        ],
+        "SVD": [
+          8,
+          4
+        ],
+        "FAL": [
+          10,
+          5
+        ],
+        "VSS": [
+          8,
+          4
+        ],
+        "Aug": [
+          8,
+          4
+        ],
+        "FAMAS": [
+          8,
+          4
+        ],
+        "M79": [
+          5,
+          2
+        ],
+        "NVGoggles": [
+          12,
+          6
+        ]
+      }
+    },
+    "saturated": {
+      "description": "Loot-rich Chernarus \u2014 full buildings, fast respawn (PvP default)",
+      "nominal_mult": 3.75,
+      "min_mult": 2.75,
+      "bulk_nominal_mult": 3.25,
+      "bulk_min_mult": 2.5,
+      "bulk_nominal_max": 120,
+      "bulk_nominal_cap": 180,
+      "twm_scale": 0.95,
+      "optics_scale": 2.5,
+      "globals": {
+        "SpawnInitial": 3000,
+        "InitialSpawn": 220,
+        "RespawnLimit": 65,
+        "RespawnTypes": 26,
+        "RespawnAttempt": 5,
+        "ZombieMaxCount": 1450,
+        "LootSpawnAvoidance": 70,
+        "ZoneSpawnDist": 250
+      },
+      "rare_floors": {
+        "M4A1": [
+          14,
+          7
+        ],
+        "AK101": [
+          14,
+          7
+        ],
+        "SVD": [
+          10,
+          5
+        ],
+        "FAL": [
+          12,
+          6
+        ],
+        "VSS": [
+          10,
+          5
+        ],
+        "Aug": [
+          10,
+          5
+        ],
+        "FAMAS": [
+          10,
+          5
+        ],
+        "M79": [
+          6,
+          3
+        ],
+        "NVGoggles": [
+          14,
+          7
+        ]
+      }
+    },
+    "arcade": {
+      "description": "Very high loot density (stress-test / casual)",
+      "nominal_mult": 4.0,
+      "min_mult": 3.0,
+      "bulk_nominal_mult": 3.0,
+      "bulk_min_mult": 2.75,
+      "bulk_nominal_max": 90,
+      "bulk_nominal_cap": 200,
+      "twm_scale": 1.0,
+      "optics_scale": 2.8,
+      "globals": {
+        "SpawnInitial": 3200,
+        "InitialSpawn": 250,
+        "RespawnLimit": 70,
+        "RespawnTypes": 28,
+        "RespawnAttempt": 5,
+        "ZombieMaxCount": 1500
+      },
+      "rare_floors": {
+        "M4A1": [
+          18,
+          9
+        ],
+        "AK101": [
+          18,
+          9
+        ],
+        "SVD": [
+          12,
+          6
+        ],
+        "FAL": [
+          14,
+          7
+        ],
+        "VSS": [
+          12,
+          6
+        ],
+        "Aug": [
+          12,
+          6
+        ],
+        "FAMAS": [
+          12,
+          6
+        ],
+        "M79": [
+          8,
+          4
+        ],
+        "NVGoggles": [
+          18,
+          9
+        ]
+      }
+    }
+  }
+}

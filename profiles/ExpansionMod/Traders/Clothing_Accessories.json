@@ -1,0 +1,33 @@
+{
+    "m_Version": 13,
+    "DisplayName": "#STR_EXPANSION_MARKET_TRADER_CLOTHING_ACCESSORIES",
+    "MinRequiredReputation": 0,
+    "MaxRequiredReputation": 2147483647,
+    "RequiredFaction": "",
+    "RequiredCompletedQuestID": -1,
+    "TraderIcon": "Backpack",
+    "Currencies": [
+        "expansionbanknotehryvnia"
+    ],
+    "DisplayCurrencyValue": 1,
+    "DisplayCurrencyName": "expansionbanknotehryvnia",
+    "UseCategoryOrder": 0,
+    "Categories": [
+        "Helmets:1",
+        "Caps:1",
+        "Hats_And_Hoods:1",
+        "Armbands:1",
+        "Backpacks:1",
+        "Eyewear:1",
+        "Gloves:1",
+        "Bandanas:1",
+        "Masks:1",
+        "Vests:1",
+        "Holsters_And_Pouches:1",
+        "Ghillies:1",
+        "Belts:1"
+    ],
+    "Items": {
+        "gasmask_filter": 1
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "source_mission": "dayzOffline.chernarusplus",
+  "patrol_targets": [
+    "dayzOffline.enoch",
+    "dayzOffline.sakhal",
+    "regular.namalsk"
+  ],
+  "spatial_targets": [
+    "dayzOffline.enoch",
+    "dayzOffline.sakhal"
+  ],
+  "takistan_mission": "dayzOffline.Takistan",
+  "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan"],
+  "expansion_build": "python admin/build_map_expansion.py --all",
+  "takistan_note": "Use build_map_expansion.py per map; do not replicate Chernarus spatial coords onto custom maps",
+  "sync_spatial_fixed_locations": false,
+  "comment": "spatial_fixed_locations false = copy Group/global spatial tuning only, not Chernarus XYZ coords"
+}

@@ -1,0 +1,21 @@
+{
+    "m_Version": 13,
+    "DisplayName": "#STR_EXPANSION_MARKET_TRADER_BOATS",
+    "MinRequiredReputation": 0,
+    "MaxRequiredReputation": 2147483647,
+    "RequiredFaction": "",
+    "RequiredCompletedQuestID": -1,
+    "TraderIcon": "Boat",
+    "Currencies": [
+        "expansionbanknotehryvnia"
+    ],
+    "DisplayCurrencyValue": 1,
+    "DisplayCurrencyName": "expansionbanknotehryvnia",
+    "UseCategoryOrder": 0,
+    "Categories": [
+        "Boats:1",
+        "Vehicle_Parts:1",
+        "Batteries:1"
+    ],
+    "Items": {}
+}

@@ -1,0 +1,86 @@
+{
+    "ConfigVersion": 28,
+    "ID": 100,
+    "ObjectiveType": 7,
+    "ObjectiveText": "Eliminate the 5 raiders patrolling Balota Airfield",
+    "TimeLimit": -1,
+    "Active": 1,
+    "MaxDistance": -1.0,
+    "MinDistance": -1.0,
+    "AllowedWeapons": [],
+    "AllowedDamageZones": [],
+    "AISpawn": {
+        "Name": "Balota Raiders",
+        "Persist": 0,
+        "Faction": "West",
+        "Formation": "Vee",
+        "FormationScale": 0.0,
+        "FormationLooseness": 0.0,
+        "Loadout": "PvPLoadout",
+        "Units": [
+            "eAI_SurvivorM_Boris",
+            "eAI_SurvivorM_Cyril",
+            "eAI_SurvivorM_Denis",
+            "eAI_SurvivorM_Elias",
+            "eAI_SurvivorM_Francis",
+            "eAI_SurvivorF_Eva",
+            "eAI_SurvivorF_Frida",
+            "eAI_SurvivorF_Gabi",
+            "eAI_SurvivorF_Helga",
+            "eAI_SurvivorF_Irena"
+        ],
+        "NumberOfAI": 5,
+        "Behaviour": "HALT_OR_LOOP",
+        "LootingBehaviour": "",
+        "Speed": "JOG",
+        "UnderThreatSpeed": "SPRINT",
+        "CanBeLooted": 1,
+        "UnlimitedReload": 1,
+        "SniperProneDistanceThreshold": 300.0,
+        "AccuracyMin": 0.35,
+        "AccuracyMax": 0.65,
+        "ThreatDistanceLimit": 450.0,
+        "NoiseInvestigationDistanceLimit": -1.0,
+        "DamageMultiplier": 1.0,
+        "DamageReceivedMultiplier": 1.0,
+        "CanBeTriggeredByAI": 0,
+        "MinDistRadius": 50.0,
+        "MaxDistRadius": 500.0,
+        "DespawnRadius": 700.0,
+        "MinSpreadRadius": 0.0,
+        "MaxSpreadRadius": 50.0,
+        "Chance": 1.0,
+        "WaypointInterpolation": "",
+        "DespawnTime": 60.0,
+        "RespawnTime": 1.0,
+        "LoadBalancingCategory": "",
+        "UseRandomWaypointAsStartPoint": 1,
+        "Waypoints": [
+            [
+                5082.03,
+                0.0,
+                2376.33
+            ],
+            [
+                4975.0,
+                0.0,
+                2450.0
+            ],
+            [
+                5175.0,
+                0.0,
+                2505.0
+            ],
+            [
+                5245.0,
+                0.0,
+                2295.0
+            ],
+            [
+                5050.0,
+                0.0,
+                2215.0
+            ]
+        ]
+    }
+}

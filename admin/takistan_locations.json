@@ -1,0 +1,681 @@
+{
+    "Types": [
+        "ALL",
+        "City",
+        "Hill",
+        "Local",
+        "StrongpointArea"
+    ],
+    "Locations": [
+        {
+            "Type": "City",
+            "Name": "Ad Dawi",
+            "Position": [
+                3238.2900390625,
+                0.0,
+                3636.300048828125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Adinaqla",
+            "Position": [
+                7392.669921875,
+                0.0,
+                1701.77001953125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Babair",
+            "Position": [
+                10477.1298828125,
+                0.0,
+                11086.9404296875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Bahludiyah",
+            "Position": [
+                7427.330078125,
+                0.0,
+                9352.7099609375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Falludiyah",
+            "Position": [
+                1496.449951171875,
+                0.0,
+                3602.7900390625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Falqas",
+            "Position": [
+                4217.27001953125,
+                0.0,
+                10747.7998046875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Hajasra",
+            "Position": [
+                11152.0498046875,
+                0.0,
+                7636.759765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Hamiqqah",
+            "Position": [
+                1563.4000244140626,
+                0.0,
+                5721.31982421875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Al Nadaya",
+            "Position": [
+                6742.990234375,
+                0.0,
+                4855.06982421875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Al-Falqas Oil Fields",
+            "Position": [
+                3650.6201171875,
+                0.0,
+                11103.2802734375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Anar",
+            "Position": [
+                6030.72021484375,
+                0.0,
+                5659.43017578125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "AzZablah",
+            "Position": [
+                11856.080078125,
+                0.0,
+                2612.10009765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "AzZablah Outpost",
+            "Position": [
+                11874.1396484375,
+                0.0,
+                2543.669921875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Band-E Kirmiz",
+            "Position": [
+                3531.56005859375,
+                0.0,
+                6884.10009765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Bastam",
+            "Position": [
+                5622.66015625,
+                0.0,
+                8899.4296875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Behbaman",
+            "Position": [
+                6082.97998046875,
+                0.0,
+                1144.3599853515626
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "ChakChak",
+            "Position": [
+                4375.919921875,
+                0.0,
+                754.719970703125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Chaman",
+            "Position": [
+                876.0399780273438,
+                0.0,
+                3099.050048828125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Darre-Ye Sabz",
+            "Position": [
+                8587.8603515625,
+                0.0,
+                3204.2099609375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Dawlatsah Valley",
+            "Position": [
+                7532.2998046875,
+                0.0,
+                8283.1201171875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Dawlatsah Valley",
+            "Position": [
+                7532.2998046875,
+                0.0,
+                8283.1201171875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Dhimran",
+            "Position": [
+                3606.669921875,
+                0.0,
+                8544.91015625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Dodr",
+            "Position": [
+                5035.85986328125,
+                0.0,
+                5428.009765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "El Thoubaroh",
+            "Position": [
+                2039.6700439453126,
+                0.0,
+                7659.6298828125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Falar",
+            "Position": [
+                6063.7998046875,
+                0.0,
+                7256.97021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Farakkah",
+            "Position": [
+                8861.26953125,
+                0.0,
+                5271.47021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "FeeruzAbad",
+            "Position": [
+                5364.52978515625,
+                0.0,
+                6197.93017578125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "FeeruzAbad FOB",
+            "Position": [
+                5247.08984375,
+                0.0,
+                5796.93017578125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "FeeruzAbad MilitaryBase",
+            "Position": [
+                5151.2001953125,
+                0.0,
+                6076.9599609375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "FeeruzAbad RadioTower",
+            "Position": [
+                4116.0498046875,
+                0.0,
+                6754.080078125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Garmarud",
+            "Position": [
+                9149.8896484375,
+                0.0,
+                6716.39013671875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Garmsar",
+            "Position": [
+                10794.669921875,
+                0.0,
+                6345.33984375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "Garmsar Military Base",
+            "Position": [
+                10422.4501953125,
+                0.0,
+                6434.39013671875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Gospandi",
+            "Position": [
+                3933.1298828125,
+                0.0,
+                9373.1298828125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Hachaman",
+            "Position": [
+                9152.490234375,
+                0.0,
+                9741.919921875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Hammaqiyah",
+            "Position": [
+                11502.8701171875,
+                0.0,
+                8238.26953125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Imarat",
+            "Position": [
+                8238.3896484375,
+                0.0,
+                7847.22021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Jaglangir",
+            "Position": [
+                4891.35009765625,
+                0.0,
+                10594.509765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Jalelam",
+            "Position": [
+                6832.68994140625,
+                0.0,
+                12294.080078125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Jilavur",
+            "Position": [
+                2537.2099609375,
+                0.0,
+                5026.47021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Kakaru",
+            "Position": [
+                5313.4599609375,
+                0.0,
+                4740.72021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Karachinar",
+            "Position": [
+                12333.7998046875,
+                0.0,
+                11110.6396484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Lalezar Valley",
+            "Position": [
+                4401.77001953125,
+                0.0,
+                9763.1201171875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Landay",
+            "Position": [
+                1950.8599853515626,
+                0.0,
+                349.7200012207031
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "Laschkar_Radarbase",
+            "Position": [
+                11243.08984375,
+                0.0,
+                9108.919921875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "LoyManara",
+            "Position": [
+                8622.0498046875,
+                0.0,
+                2454.219970703125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "LoyManara AirBase",
+            "Position": [
+                8059.39990234375,
+                0.0,
+                1856.030029296875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "LoyManara Refinery ",
+            "Position": [
+                7115.06005859375,
+                0.0,
+                1025.4300537109376
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Mahahwit",
+            "Position": [
+                5670.259765625,
+                0.0,
+                9935.6396484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Mahjur",
+            "Position": [
+                9602.25,
+                0.0,
+                5664.2001953125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Marastar",
+            "Position": [
+                4146.02978515625,
+                0.0,
+                11758.759765625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Marmamsiyah",
+            "Position": [
+                12328.3203125,
+                0.0,
+                10408.7900390625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Nagara",
+            "Position": [
+                3057.0,
+                0.0,
+                9808.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Nur",
+            "Position": [
+                1824.5799560546876,
+                0.0,
+                11879.66015625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Qaikkah",
+            "Position": [
+                10200.3798828125,
+                0.0,
+                2350.72998046875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Qarma",
+            "Position": [
+                6792.43994140625,
+                0.0,
+                6089.240234375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Rasman",
+            "Position": [
+                6244.27978515625,
+                0.0,
+                11217.33984375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "Rasman Airbase",
+            "Position": [
+                5754.9501953125,
+                0.0,
+                11372.8603515625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Reegshur Valley",
+            "Position": [
+                4246.14013671875,
+                0.0,
+                5568.1201171875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "StrongpointArea",
+            "Name": "Rustaq Military Base",
+            "Position": [
+                2632.199951171875,
+                0.0,
+                5100.08984375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Sakhee",
+            "Position": [
+                3588.989990234375,
+                0.0,
+                4284.47021484375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Hill",
+            "Name": "Silsila-Ye Siah Kuh",
+            "Position": [
+                4812.83984375,
+                0.0,
+                2556.02001953125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Sultansafee",
+            "Position": [
+                6578.669921875,
+                0.0,
+                1955.219970703125
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Zabo Valley",
+            "Position": [
+                2774.330078125,
+                0.0,
+                8016.47998046875
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Zarandaj",
+            "Position": [
+                8541.7998046875,
+                0.0,
+                3816.929931640625
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Zavarak",
+            "Position": [
+                9857.8798828125,
+                0.0,
+                11491.740234375
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "City",
+            "Name": "Zayda",
+            "Position": [
+                141.5800018310547,
+                0.0,
+                2795.60009765625
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "m_Version": 13,
+    "DisplayName": "#STR_EXPANSION_MARKET_TRADER_WEAPONS",
+    "MinRequiredReputation": 0,
+    "MaxRequiredReputation": 2147483647,
+    "RequiredFaction": "",
+    "RequiredCompletedQuestID": -1,
+    "TraderIcon": "Trader",
+    "Currencies": [
+        "expansionbanknotehryvnia"
+    ],
+    "DisplayCurrencyValue": 1,
+    "DisplayCurrencyName": "",
+    "UseCategoryOrder": 0,
+    "Categories": [
+        "Assault_Rifles",
+        "Ammo_Boxes",
+        "Magazines",
+        "Ammo",
+        "Rifles",
+        "Shotguns",
+        "Sniper_Rifles",
+        "Submachine_Guns",
+        "Pistols",
+        "Bayonets",
+        "Explosives_And_Grenades",
+        "Melee_Weapons"
+    ],
+    "Items": {}
+}

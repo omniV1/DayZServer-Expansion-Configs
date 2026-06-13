@@ -1,0 +1,59 @@
+{
+  "comment": "Base -mod= list is admin/chernarus_mods.txt. Takistan uses admin/takistan_mods.txt (Chernarus list + @TakistanPlus after @Dabs Framework).",
+  "mods_file": "chernarus_mods.txt",
+  "maps": {
+    "chernarus": {
+      "title": "Owens DayZ Chernarus Server",
+      "config": "serverDZChernarus.cfg",
+      "port": 2302,
+      "steam_query_port": 27016,
+      "profiles_dir": "profiles",
+      "cpu": 2,
+      "extra_mods": [],
+      "server_mods": []
+    },
+    "enoch": {
+      "title": "Owens DayZ Livonia Server",
+      "config": "serverDZEnoch.cfg",
+      "port": 2402,
+      "steam_query_port": 27017,
+      "profiles_dir": "profiles_enoch",
+      "cpu": 2,
+      "extra_mods": [],
+      "server_mods": []
+    },
+    "sakhal": {
+      "title": "Owens DayZ Sakhal Server",
+      "config": "serverDZSakhal.cfg",
+      "port": 2602,
+      "steam_query_port": 27019,
+      "profiles_dir": "profiles_sakhal",
+      "cpu": 4,
+      "extra_mods": ["@Zens ExpansionAI Audio"],
+      "server_mods": []
+    },
+    "namalsk": {
+      "title": "Owens DayZ Namalsk Server",
+      "config": "serverDZ_Namalsk.cfg",
+      "port": 2502,
+      "steam_query_port": 27018,
+      "profiles_dir": "profiles_namalsk",
+      "cpu": 2,
+      "mods_file": "namalsk_mods.txt",
+      "prepend_mods": ["@Namalsk Island", "@Namalsk Survival (server)"],
+      "extra_mods": [],
+      "server_mods": ["@Namalsk Survival (server)"]
+    },
+    "takistan": {
+      "title": "Owens DayZ Takistan Server",
+      "config": "serverDZ_Takistan.cfg",
+      "port": 2702,
+      "steam_query_port": 27020,
+      "profiles_dir": "profiles_takistan",
+      "cpu": 2,
+      "mods_file": "takistan_mods.txt",
+      "extra_mods": [],
+      "server_mods": []
+    }
+  }
+}
