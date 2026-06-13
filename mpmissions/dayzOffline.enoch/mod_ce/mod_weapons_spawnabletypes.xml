@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spawnabletypes>
+<type name="TWM_AKSocom">
+		<attachments chance="0.35">
+			<item name="FNP45_MRDSOptic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.10">
+			<item name="AK_Suppressor" chance="1.00" />
+		</attachments>
+		<attachments chance="0.05">
+			<item name="UniversalLight" chance="1.00" />
+		</attachments>
+		<attachments chance="0.30">
+			<item name="TWM_Mag_Socom458_10rnd" chance="1.00" />
+		</attachments>
+		<attachments chance="0.15">
+			<item name="TWM_Mag_Socom458_15rnd" chance="1.00" />
+		</attachments>
+	</type>
+<type name="TWM_Ash12">
+		<attachments chance="0.25">
+			<item name="AcogOptic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.15">
+			<item name="TWM_Mag_Ash12" chance="1.00" />
+		</attachments> 
+		<attachments chance="0.05">
+			<item name="UniversalLight" chance="1.00" />
+		</attachments>
+	</type>
+<type name="TWM_Vepr">
+		<attachments chance="0.60">
+			<item name="RelexOptic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.05">
+			<item name="UniversalLight" chance="1.00" />
+		</attachments>
+		<attachments chance="0.30">
+			<item name="TWM_Mag_Vepr_15rnd" chance="1.00" />
+		</attachments>
+		<attachments chance="0.15">
+			<item name="TWM_Mag_Vepr_25rnd" chance="1.00" />
+		</attachments>
+	</type>
+<type name="TWM_Banshee_22">
+		<attachments chance="0.60">
+			<item name="RelexOptic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.20">
+			<item name="PistolSuppressor" chance="1.00" />
+		</attachments> 
+		<attachments chance="0.60">
+			<item name="M4_OEBttstck" chance="1.00" />
+		</attachments> 
+		<attachments chance="0.30">
+			<item name="TWM_Mag_Banshee_22" chance="1.00" />
+		</attachments> 
+	</type>
+<type name="TWM_Vector">
+		<attachments chance="0.25">
+			<item name="M68Optic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.15">
+			<item name="TWM_Mag_Vector_30Rnd" chance="1.00" />
+		</attachments> 
+		<attachments chance="0.15">
+			<item name="PistolSuppressor" chance="1.00" />
+		</attachments>		
+	</type>
+<type name="TWM_M200">
+		<attachments chance="0.25">
+			<item name="AcogOptic" chance="1.00" />
+		</attachments>
+		<attachments chance="0.15">
+			<item name="TWM_Mag_M200" chance="1.00" />
+		</attachments> 
+	</type>
+</spawnabletypes>
