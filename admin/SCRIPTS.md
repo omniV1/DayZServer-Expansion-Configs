@@ -25,6 +25,12 @@ Ports: Chernarus **2302** (query **2303**), Livonia **2402** (query **2403**), N
 
 Preflight: `powershell -File admin\check_map_launch.ps1 -Map namalsk`
 
+Create a Desktop launcher for any map listed in `admin/map_launch.json`:
+
+```powershell
+powershell -File admin\new_map_desktop_launcher.ps1 -Map takistan
+```
+
 LAN browser: connect on **game port** (2302 / 2402 / 2502 / 2602). Do not use query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.
 
 After adding a mod on Chernarus, append it to `admin/chernarus_mods.txt` and restart any map.

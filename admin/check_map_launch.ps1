@@ -1,12 +1,10 @@
 # Verify map launcher: ports, mod folders, latest RPT -mod= line
 param(
-    [ValidateSet('chernarus', 'enoch', 'sakhal', 'namalsk', 'all')]
     [string]$Map = 'all'
 )
 
 $Root = Split-Path $PSScriptRoot -Parent
 $Launch = Get-Content (Join-Path $Root 'admin\map_launch.json') -Raw | ConvertFrom-Json
-$ModsRaw = (Get-Content (Join-Path $Root 'admin\chernarus_mods.txt') -Raw).Trim()
 
 function Test-MapLaunch {
     param($Name, $Cfg)
@@ -14,6 +12,15 @@ function Test-MapLaunch {
     Write-Host "`n=== $Name ===" -ForegroundColor Cyan
     Write-Host "  Port: $($Cfg.port) | steam_query: $($Cfg.steam_query_port)"
     Write-Host "  Config: $($Cfg.config)"
+
+    $modsFileName = if ($Cfg.mods_file) { $Cfg.mods_file } else { $Launch.mods_file }
+    if (-not $modsFileName) { $modsFileName = 'chernarus_mods.txt' }
+    $modsPath = Join-Path $Root (Join-Path 'admin' $modsFileName)
+    if (-not (Test-Path $modsPath)) {
+        Write-Host "  MISSING mods file: admin\$modsFileName" -ForegroundColor Red
+        return
+    }
+    $ModsRaw = (Get-Content $modsPath -Raw).Trim()
 
     $missing = @()
     foreach ($m in ($ModsRaw -split ';')) {
@@ -63,10 +70,14 @@ function Test-MapLaunch {
     }
 }
 
-$maps = if ($Map -eq 'all') { $Launch.maps.PSObject.Properties } else { @($Launch.maps.$Map | ForEach-Object { [pscustomobject]@{ Name = $Map; Value = $_ } }) }
 if ($Map -eq 'all') {
     foreach ($p in $Launch.maps.PSObject.Properties) { Test-MapLaunch $p.Name $p.Value }
 } else {
+    $cfg = $Launch.maps.$Map
+    if (-not $cfg) {
+        $known = ($Launch.maps.PSObject.Properties.Name -join ', ')
+        throw "Unknown map in admin/map_launch.json: $Map. Known maps: $known"
+    }
     Test-MapLaunch $Map $Launch.maps.$Map
 }
 

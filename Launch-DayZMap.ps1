@@ -9,7 +9,6 @@
 
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('chernarus', 'enoch', 'sakhal', 'namalsk', 'takistan')]
     [string]$Map,
 
     [int]$ScheduledRestartSeconds = 0
@@ -24,8 +23,9 @@ $lanPatch = Join-Path $ServerRoot 'admin\apply_lan_query_ports.ps1'
 if (Test-Path $lanPatch) { & $lanPatch }
 
 $Launch = Get-Content $MapCfgPath -Raw | ConvertFrom-Json
+$MapNames = @($Launch.maps.PSObject.Properties.Name)
 $MapCfg = $Launch.maps.$Map
-if (-not $MapCfg) { throw "Unknown map in map_launch.json: $Map" }
+if (-not $MapCfg) { throw "Unknown map in map_launch.json: $Map. Known maps: $($MapNames -join ', ')" }
 
 $modsFileName = if ($MapCfg.mods_file) { $MapCfg.mods_file } else { 'chernarus_mods.txt' }
 $ModsFile = Join-Path $ServerRoot (Join-Path 'admin' $modsFileName)
