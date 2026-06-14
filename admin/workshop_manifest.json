@@ -1,0 +1,633 @@
+{
+  "generated_from": [
+    "admin/map_launch.json",
+    "admin/map_workshop_catalog.json",
+    "admin/*_mods.txt",
+    "@*/meta.cpp"
+  ],
+  "maps": {
+    "chernarus": {
+      "title": "Owens DayZ Chernarus Server",
+      "config_example": "serverDZChernarus.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 2302,
+      "steam_query_port": 27016,
+      "profiles_dir": "profiles",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [],
+      "server_mods": []
+    },
+    "enoch": {
+      "title": "Owens DayZ Livonia Server",
+      "config_example": "serverDZEnoch.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 2402,
+      "steam_query_port": 27017,
+      "profiles_dir": "profiles_enoch",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [],
+      "server_mods": []
+    },
+    "sakhal": {
+      "title": "Owens DayZ Sakhal Server",
+      "config_example": "serverDZSakhal.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 2602,
+      "steam_query_port": 27019,
+      "profiles_dir": "profiles_sakhal",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Zens ExpansionAI Audio"
+      ],
+      "server_mods": []
+    },
+    "namalsk": {
+      "title": "Owens DayZ Namalsk Server",
+      "config_example": "serverDZ_Namalsk.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 2502,
+      "steam_query_port": 27018,
+      "profiles_dir": "profiles_namalsk",
+      "mods_file": "namalsk_mods.txt",
+      "extra_mods": [],
+      "server_mods": [
+        "@Namalsk Survival (server)"
+      ]
+    },
+    "takistan": {
+      "title": "Owens DayZ Takistan Server",
+      "config_example": "serverDZ_Takistan.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 2702,
+      "steam_query_port": 27020,
+      "profiles_dir": "profiles_takistan",
+      "mods_file": "takistan_mods.txt",
+      "extra_mods": [],
+      "server_mods": []
+    },
+    "deerisle": {
+      "title": "Owens DayZ Deer Isle Server",
+      "config_example": "serverDZ_DeerIsle.example.cfg",
+      "mission_template": "empty.deerisle",
+      "map_mod_folder": "@DeerIsle",
+      "workshop_id": "1602372402",
+      "port": 2802,
+      "steam_query_port": 27021,
+      "profiles_dir": "profiles_deerisle",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@DeerIsle"
+      ],
+      "server_mods": []
+    },
+    "banov": {
+      "title": "Owens DayZ Banov Server",
+      "config_example": "serverDZ_Banov.example.cfg",
+      "mission_template": "dayzOffline.banov",
+      "map_mod_folder": "@Banov",
+      "workshop_id": "2415195639",
+      "port": 2902,
+      "steam_query_port": 27022,
+      "profiles_dir": "profiles_banov",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Banov"
+      ],
+      "server_mods": []
+    },
+    "esseker": {
+      "title": "Owens DayZ Esseker Server",
+      "config_example": "serverDZ_Esseker.example.cfg",
+      "mission_template": "dayzOffline.Esseker",
+      "map_mod_folder": "@Esseker",
+      "workshop_id": "2462896799",
+      "port": 3002,
+      "steam_query_port": 27023,
+      "profiles_dir": "profiles_esseker",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Esseker"
+      ],
+      "server_mods": []
+    },
+    "rostow": {
+      "title": "Owens DayZ Rostow Server",
+      "config_example": "serverDZ_Rostow.example.cfg",
+      "mission_template": "Offline.rostow",
+      "map_mod_folder": "@Rostowmap",
+      "workshop_id": "2344585107",
+      "port": 3102,
+      "steam_query_port": 27024,
+      "profiles_dir": "profiles_rostow",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Rostowmap"
+      ],
+      "server_mods": []
+    },
+    "iztek": {
+      "title": "Owens DayZ Iztek Server",
+      "config_example": "serverDZ_Iztek.example.cfg",
+      "mission_template": "empty.Iztek",
+      "map_mod_folder": "@Iztek",
+      "workshop_id": "2978912938",
+      "port": 3202,
+      "steam_query_port": 27025,
+      "profiles_dir": "profiles_iztek",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Iztek"
+      ],
+      "server_mods": []
+    },
+    "alteria": {
+      "title": "Owens DayZ Alteria Server",
+      "config_example": "serverDZ_Alteria.example.cfg",
+      "mission_template": "empty.alteria",
+      "map_mod_folder": "@Alteria",
+      "workshop_id": "3296994216",
+      "port": 3302,
+      "steam_query_port": 27026,
+      "profiles_dir": "profiles_alteria",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Alteria"
+      ],
+      "server_mods": []
+    }
+  },
+  "mods": [
+    {
+      "folder": "@Advanced Weapon Scopes",
+      "name": "Advanced Weapon Scopes",
+      "workshop_id": "2143128974",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@AI War Zones",
+      "name": "AI War Zones",
+      "workshop_id": "3521304609",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Alteria",
+      "name": "Alteria",
+      "workshop_id": "3296994216",
+      "maps": [
+        "alteria"
+      ]
+    },
+    {
+      "folder": "@AmmoStackBullet",
+      "name": "AmmoStackBullet",
+      "workshop_id": "2832884779",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Banov",
+      "name": "Banov",
+      "workshop_id": "2415195639",
+      "maps": [
+        "banov"
+      ]
+    },
+    {
+      "folder": "@Better Batteries",
+      "name": "Better Batteries",
+      "workshop_id": "3146753440",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@BetterTrac",
+      "name": "BetterTrac",
+      "workshop_id": "3191155841",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@BetterVendingMachines_Expansion",
+      "name": "BetterVendingMachines_Expansion",
+      "workshop_id": "2777701910",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@CF",
+      "name": "CF",
+      "workshop_id": "1559212036",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Cl0ud's Winter Gear",
+      "name": "Cl0ud's Winter Gear",
+      "workshop_id": "1618078236",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Code Lock",
+      "name": "Code Lock",
+      "workshop_id": "1646187754",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Community-Online-Tools",
+      "name": "Community-Online-Tools",
+      "workshop_id": "1564026768",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Dabs Framework",
+      "name": "Dabs Framework",
+      "workshop_id": "2545327648",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Dynamic-AI-Addon",
+      "name": "DayZ-Dynamic-AI-Addon",
+      "workshop_id": "2874589934",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Expansion-AI",
+      "name": "DayZ-Expansion-AI",
+      "workshop_id": "2792982069",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Expansion-Bundle",
+      "name": "DayZ-Expansion-Bundle",
+      "workshop_id": "2572331007",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Expansion-Core",
+      "name": "DayZ-Expansion-Core",
+      "workshop_id": "2291785308",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Expansion-Licensed",
+      "name": "DayZ-Expansion-Licensed",
+      "workshop_id": "2116157322",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DayZ-Expansion-Market",
+      "name": "DayZ-Expansion-Market",
+      "workshop_id": "2572328470",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "namalsk",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@DeerIsle",
+      "name": "DeerIsle",
+      "workshop_id": "1602372402",
+      "maps": [
+        "deerisle"
+      ]
+    },
+    {
+      "folder": "@Esseker",
+      "name": "Esseker",
+      "workshop_id": "2462896799",
+      "maps": [
+        "esseker"
+      ]
+    },
+    {
+      "folder": "@Fish's Knife Mod - Complete Collection",
+      "name": "Fish's Knife Mod - Complete Collection",
+      "workshop_id": "2441462118",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@FlipTransport",
+      "name": "FlipTransport",
+      "workshop_id": "1832448183",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@GhillieFix",
+      "name": "GhillieFix",
+      "workshop_id": "2889783501",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@GhillieHoodFix",
+      "name": "GhillieHoodFix",
+      "workshop_id": "2893103893",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@InventoryInCar",
+      "name": "InventoryInCar",
+      "workshop_id": "2361330944",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@InventoryPlusPlus",
+      "name": "InventoryPlusPlus",
+      "workshop_id": "1663971788",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@InventorySlotsHotfix",
+      "name": "InventorySlotsHotfix",
+      "workshop_id": "3431076620",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Iztek",
+      "name": "Iztek",
+      "workshop_id": "2978912938",
+      "maps": [
+        "iztek"
+      ]
+    },
+    {
+      "folder": "@Modular Vest System - Reworked",
+      "name": "Modular Vest System - Reworked",
+      "workshop_id": "2629595854",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@More Containers V2",
+      "name": "More Containers V2",
+      "workshop_id": "3450039079",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Namalsk Island",
+      "name": "Namalsk Island",
+      "workshop_id": "2289456201",
+      "maps": [
+        "namalsk"
+      ]
+    },
+    {
+      "folder": "@Namalsk Survival (server)",
+      "name": "Namalsk Survival (server)",
+      "workshop_id": "2288336145",
+      "maps": [
+        "namalsk"
+      ]
+    },
+    {
+      "folder": "@Paragon Gear and Armor",
+      "name": "Paragon Gear and Armor",
+      "workshop_id": "2820370970",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Pristine Repair",
+      "name": "Pristine Repair",
+      "workshop_id": "3189514422",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@ProjectHope Survivor Backpack",
+      "name": "ProjectHope Survivor Backpack",
+      "workshop_id": "2926289548",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Rostowmap",
+      "name": "Rostowmap",
+      "workshop_id": "2344585107",
+      "maps": [
+        "rostow"
+      ]
+    },
+    {
+      "folder": "@Tactical Flava",
+      "name": "Tactical Flava",
+      "workshop_id": "2646817942",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@TakistanPlus",
+      "name": "TakistanPlus",
+      "workshop_id": "2563233742",
+      "maps": [
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Techs Weapon Mod",
+      "name": "Techs Weapon Mod",
+      "workshop_id": "2419315705",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Trader",
+      "name": "Trader",
+      "workshop_id": "1590841260",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@TreeHouse",
+      "name": "TreeHouse",
+      "workshop_id": "3467458480",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Unlimited Stamina",
+      "name": "Unlimited Stamina",
+      "workshop_id": "1560819773",
+      "maps": [
+        "chernarus",
+        "enoch",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Zens ExpansionAI Audio",
+      "name": "Zens ExpansionAI Audio",
+      "workshop_id": "3321340470",
+      "maps": [
+        "sakhal"
+      ]
+    }
+  ]
+}

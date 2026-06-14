@@ -4,7 +4,14 @@
 # Repo metadata/docs
 !.gitignore
 !README.md
+!QUICKSTART.md
+!REPO_MAP.md
+!MODS.md
+!BALANCE.md
+!CONTRIBUTING.md
 !LICENSE
+!.github/
+!.github/**
 
 # Admin automation and root launch helpers
 !admin/
