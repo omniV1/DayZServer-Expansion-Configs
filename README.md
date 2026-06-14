@@ -49,6 +49,7 @@ python admin\apply_loot.py all --preset arcade
 python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\standardize_world_events.py
+python admin\status_all.py
 python admin\validate_public_repo.py
 ```
 

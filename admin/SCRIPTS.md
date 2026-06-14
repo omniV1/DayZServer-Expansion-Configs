@@ -142,6 +142,14 @@ python admin\apply_loot.py status
 
 ## Typical workflows
 
+### Quick balance status
+
+```powershell
+python admin\status_all.py
+```
+
+Shows the active loot preset, Expansion mission pacing, AI patrol counts, `mod_ce` wiring, key globals, event categories, and enabled airdrops for each active map.
+
 ### Full active-map refresh
 
 ```powershell
