@@ -41,10 +41,10 @@ TOWN_MIN_AI = 2
 TOWN_MAX_AI = 4
 HUB_MIN_AI = 2
 HUB_MAX_AI = 4
-PATROL_CATEGORY_MIN = 18
-PATROL_CATEGORY_CAP = 24
-OBJECT_PATROL_MAX = 10
-HELICOPTER_WRECK_MAX = 16
+PATROL_CATEGORY_MIN = 24
+PATROL_CATEGORY_CAP = 32
+OBJECT_PATROL_MAX = 12
+HELICOPTER_WRECK_MAX = 18
 SPATIAL_MAX_AI_CAP = 60
 SPATIAL_MAX_AI_FLOOR = 30
 
@@ -1018,7 +1018,7 @@ def tune_spatial_globals(spatial: dict, zone_count: int, town_patrol_count: int)
     for group in spatial.get("Group", []):
         group["Spatial_MinCount"] = 1
         group["Spatial_MaxCount"] = 3
-        group["Spatial_Chance"] = 0.4
+        group["Spatial_Chance"] = 0.45
 
 
 def sync_patrol_globals_from_chernarus(patrol: dict) -> None:
@@ -1050,7 +1050,7 @@ def tune_patrol_load_balance(patrol: dict, town_count: int, hub_count: int) -> N
     for entry in cats.get("Global", []):
         mp = entry.get("MaxPatrols", 0)
         if 0 < mp < 255:
-            entry["MaxPatrols"] = min(max(mp, 12), 14)
+            entry["MaxPatrols"] = min(max(mp, 18), 20)
 
 
 def count_active_town_patrols(patrol: dict) -> int:

@@ -81,7 +81,13 @@ def summarize_map(label: str, mission: str) -> str:
     ai_text = "missing"
     if patrols:
         ranges = ", ".join(f"{lo}-{hi}" for lo, hi in ai_ranges if lo is not None and hi is not None)
-        ai_text = f"{len(patrols)} patrols, AI {ranges or 'varied'}, acc {ai.get('AccuracyMin', '?')}-{ai.get('AccuracyMax', '?')}"
+        caps = ai.get("LoadBalancingCategories", {})
+        patrol_cap = next((entry.get("MaxPatrols") for entry in caps.get("Patrol", []) if "MaxPatrols" in entry), "?")
+        global_cap = next((entry.get("MaxPatrols") for entry in caps.get("Global", []) if "MaxPatrols" in entry), "?")
+        ai_text = (
+            f"{len(patrols)} patrols, active {patrol_cap}/global {global_cap}, "
+            f"AI {ranges or 'varied'}, acc {ai.get('AccuracyMin', '?')}-{ai.get('AccuracyMax', '?')}"
+        )
 
     economy = base / "cfgeconomycore.xml"
     economy_text = "mod_ce yes" if economy.exists() and "mod_ce" in economy.read_text(encoding="utf-8", errors="replace") else "mod_ce no"

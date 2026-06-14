@@ -313,8 +313,8 @@ def tune_spatial_dict(spatial: dict) -> None:
             loc["Spatial_ZoneLoadout"] = [f"{PVP_LOADOUT}.json"]
     for group in spatial.get("Group", []):
         group["Spatial_MinCount"] = 1
-        group["Spatial_MaxCount"] = 2
-        group["Spatial_Chance"] = 0.25
+        group["Spatial_MaxCount"] = 3
+        group["Spatial_Chance"] = 0.45
 
 
 def patch_ai_settings(profile_dir: Path) -> bool:

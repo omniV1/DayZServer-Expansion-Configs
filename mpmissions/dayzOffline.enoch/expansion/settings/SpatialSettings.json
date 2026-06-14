@@ -34,13 +34,13 @@
     "Group": [
         {
             "Spatial_MinCount": 1,
-            "Spatial_MaxCount": 2,
+            "Spatial_MaxCount": 3,
             "Spatial_Weight": 300.0,
             "Spatial_Loadout": "HumanLoadout.json",
             "Spatial_Faction": "Mercenaries",
             "Spatial_Name": "Mercenaries",
             "Spatial_Lootable": 1,
-            "Spatial_Chance": 0.25,
+            "Spatial_Chance": 0.45,
             "Spatial_MinAccuracy": 0.45,
             "Spatial_MaxAccuracy": 0.7,
             "Spatial_UnlimitedReload": 1
