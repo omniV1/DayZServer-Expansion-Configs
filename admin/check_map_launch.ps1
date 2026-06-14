@@ -12,6 +12,23 @@ function Test-MapLaunch {
     Write-Host "`n=== $Name ===" -ForegroundColor Cyan
     Write-Host "  Port: $($Cfg.port) | steam_query: $($Cfg.steam_query_port)"
     Write-Host "  Config: $($Cfg.config)"
+    $configPath = Join-Path $Root $Cfg.config
+    if (Test-Path $configPath) {
+        $configText = Get-Content $configPath -Raw
+        if ($configText -match 'template\s*=\s*"([^"]+)"') {
+            $template = $Matches[1]
+            $missionPath = Join-Path (Join-Path $Root 'mpmissions') $template
+            if (Test-Path $missionPath) {
+                Write-Host "  Mission: $template" -ForegroundColor Green
+            } else {
+                Write-Host "  MISSING mission folder: mpmissions\$template" -ForegroundColor Red
+            }
+        } else {
+            Write-Host "  WARN: could not find mission template in $($Cfg.config)" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  MISSING config: $($Cfg.config)" -ForegroundColor Red
+    }
 
     $modsFileName = if ($Cfg.mods_file) { $Cfg.mods_file } else { $Launch.mods_file }
     if (-not $modsFileName) { $modsFileName = 'chernarus_mods.txt' }

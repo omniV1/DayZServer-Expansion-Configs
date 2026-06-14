@@ -41,6 +41,7 @@ Sync downloaded map Workshop folders into the server root:
 
 ```powershell
 powershell -File admin\sync_map_workshop_mods.ps1 -Map all -OpenMissingWorkshopPages
+python admin\repair_mission_xml.py dayzOffline.banov dayzOffline.Esseker Offline.rostow empty.Iztek empty.alteria empty.deerisle
 ```
 
 LAN browser: connect on **game port** (2302 / 2402 / 2502 / 2602). Do not use query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.

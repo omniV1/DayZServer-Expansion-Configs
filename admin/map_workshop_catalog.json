@@ -8,7 +8,7 @@
   "banov": {
     "workshop_id": "2415195639",
     "server_mod_folder": "@Banov",
-    "mission_template": "empty.banov",
+    "mission_template": "dayzOffline.banov",
     "mission_source": "https://github.com/KubeloLive/Banov"
   },
   "esseker": {
@@ -28,7 +28,7 @@
   "iztek": {
     "workshop_id": "2978912938",
     "server_mod_folder": "@Iztek",
-    "mission_template": "dayzOffline.Iztek",
+    "mission_template": "empty.Iztek",
     "mission_source": "https://github.com/ItsZarge/IztekMissionFiles"
   },
   "alteria": {

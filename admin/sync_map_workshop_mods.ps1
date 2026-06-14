@@ -2,6 +2,7 @@
 param(
     [string]$Map = 'all',
     [string]$WorkshopRoot = 'C:\Games\Steam\steamapps\workshop\content\221100',
+    [string]$ClientWorkshopRoot = 'C:\Games\Steam\steamapps\common\DayZ\!Workshop',
     [switch]$OpenMissingWorkshopPages
 )
 
@@ -33,11 +34,16 @@ function Sync-Map {
     $id = [string]$Info.workshop_id
     $destName = [string]$Info.server_mod_folder
     $src = Join-Path $WorkshopRoot $id
+    if (-not (Test-Path $src)) {
+        $namedSrc = Join-Path $ClientWorkshopRoot $destName
+        if (Test-Path $namedSrc) { $src = $namedSrc }
+    }
     $dst = Join-Path $ServerRoot $destName
 
     Write-Host "`n=== $Name ($id -> $destName) ===" -ForegroundColor Cyan
     if (-not (Test-Path $src)) {
         Write-Host "Missing Workshop folder: $src" -ForegroundColor Yellow
+        Write-Host "Also checked named folder: $(Join-Path $ClientWorkshopRoot $destName)"
         Write-Host "Subscribe/download first: https://steamcommunity.com/sharedfiles/filedetails/?id=$id"
         if ($OpenMissingWorkshopPages) {
             Start-Process "steam://openurl/https://steamcommunity.com/sharedfiles/filedetails/?id=$id"
