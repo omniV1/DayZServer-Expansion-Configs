@@ -10,6 +10,7 @@ This repo is intended to share scripts and configuration patterns, not copyright
 - Shared mod-list files, launcher helpers, loot/AI tuning scripts
 - COT (`@Community-Online-Tools`) as the standard admin tool across active map launches
 - Sanitized `serverDZ*.example.cfg` starter configs for each map
+- New-map launch stubs for Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria
 - Chernarus Expansion mission configuration:
   - Expansion AI tuning
   - Expansion Market/trader configs
@@ -63,6 +64,7 @@ After config changes, restart the affected DayZ server so Central Economy, Expan
 3. Copy or adapt the allowed config files from this repo.
 4. Copy the matching `serverDZ*.example.cfg` to the real private config filename used by the launcher, then set your own hostname, admin password, ports, shard ID, and server values.
 5. Restart the server after changing Expansion, economy, AI, or event configs.
+6. For new map mods, subscribe/download them in Steam, then run `powershell -File admin\sync_map_workshop_mods.ps1 -Map all`.
 
 ## Publishing Notes
 

@@ -1,0 +1,40 @@
+{
+  "deerisle": {
+    "workshop_id": "1602372402",
+    "server_mod_folder": "@DeerIsle",
+    "mission_template": "empty.deerisle",
+    "mission_source": "Deer Isle official mission files"
+  },
+  "banov": {
+    "workshop_id": "2415195639",
+    "server_mod_folder": "@Banov",
+    "mission_template": "empty.banov",
+    "mission_source": "https://github.com/KubeloLive/Banov"
+  },
+  "esseker": {
+    "workshop_id": "2462896799",
+    "server_mod_folder": "@Esseker",
+    "mission_template": "dayzOffline.Esseker",
+    "mission_source": "https://github.com/InclementDab/Esseker-Server",
+    "note": "Steam search results currently mark this item removed/incompatible for some users; verify availability before spending time tuning it."
+  },
+  "rostow": {
+    "workshop_id": "2344585107",
+    "server_mod_folder": "@Rostowmap",
+    "mission_template": "Offline.rostow",
+    "mission_source": "https://github.com/CypeR79/DayZ-Projects",
+    "note": "Steam search results currently mark this item removed/incompatible for some users; verify availability before spending time tuning it."
+  },
+  "iztek": {
+    "workshop_id": "2978912938",
+    "server_mod_folder": "@Iztek",
+    "mission_template": "dayzOffline.Iztek",
+    "mission_source": "https://github.com/ItsZarge/IztekMissionFiles"
+  },
+  "alteria": {
+    "workshop_id": "3296994216",
+    "server_mod_folder": "@Alteria",
+    "mission_template": "empty.alteria",
+    "mission_source": "https://github.com/johnmclane666/DayZ-Alteria-Stable"
+  }
+}

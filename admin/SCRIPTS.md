@@ -13,6 +13,12 @@ Chernarus mod list: `admin/chernarus_mods.txt` (edit once â€” applies to al
 | Sakhal | `start_Sakhal.bat` or `start_sakhal.cmd` (+ `@Zens ExpansionAI Audio`) |
 | Namalsk | `start_Namalsk.bat` or `start_namalsk.cmd` (+ `@Namalsk Island`, server mod `@Namalsk Survival (server)`) |
 | Takistan | `start_Takistan.bat` or `start_Takistan.cmd` (`@Dabs Framework` before `@TakistanPlus`) |
+| Deer Isle | `start_deerisle.cmd` or generated Desktop `start_deerisle.bat` |
+| Banov | `start_banov.cmd` or generated Desktop `start_banov.bat` |
+| Esseker | `start_esseker.cmd` or generated Desktop `start_esseker.bat` |
+| Rostow | `start_rostow.cmd` or generated Desktop `start_rostow.bat` |
+| Iztek | `start_iztek.cmd` or generated Desktop `start_iztek.bat` |
+| Alteria | `start_alteria.cmd` or generated Desktop `start_alteria.bat` |
 
 ```powershell
 .\Launch-DayZMap.ps1 -Map enoch
@@ -29,6 +35,12 @@ Create a Desktop launcher for any map listed in `admin/map_launch.json`:
 
 ```powershell
 powershell -File admin\new_map_desktop_launcher.ps1 -Map takistan
+```
+
+Sync downloaded map Workshop folders into the server root:
+
+```powershell
+powershell -File admin\sync_map_workshop_mods.ps1 -Map all -OpenMissingWorkshopPages
 ```
 
 LAN browser: connect on **game port** (2302 / 2402 / 2502 / 2602). Do not use query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.

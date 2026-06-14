@@ -54,6 +54,66 @@
       "mods_file": "takistan_mods.txt",
       "extra_mods": [],
       "server_mods": []
+    },
+    "deerisle": {
+      "title": "Owens DayZ Deer Isle Server",
+      "config": "serverDZ_DeerIsle.cfg",
+      "port": 2802,
+      "steam_query_port": 27021,
+      "profiles_dir": "profiles_deerisle",
+      "cpu": 2,
+      "extra_mods": ["@DeerIsle"],
+      "server_mods": []
+    },
+    "banov": {
+      "title": "Owens DayZ Banov Server",
+      "config": "serverDZ_Banov.cfg",
+      "port": 2902,
+      "steam_query_port": 27022,
+      "profiles_dir": "profiles_banov",
+      "cpu": 2,
+      "extra_mods": ["@Banov"],
+      "server_mods": []
+    },
+    "esseker": {
+      "title": "Owens DayZ Esseker Server",
+      "config": "serverDZ_Esseker.cfg",
+      "port": 3002,
+      "steam_query_port": 27023,
+      "profiles_dir": "profiles_esseker",
+      "cpu": 2,
+      "extra_mods": ["@Esseker"],
+      "server_mods": []
+    },
+    "rostow": {
+      "title": "Owens DayZ Rostow Server",
+      "config": "serverDZ_Rostow.cfg",
+      "port": 3102,
+      "steam_query_port": 27024,
+      "profiles_dir": "profiles_rostow",
+      "cpu": 2,
+      "extra_mods": ["@Rostowmap"],
+      "server_mods": []
+    },
+    "iztek": {
+      "title": "Owens DayZ Iztek Server",
+      "config": "serverDZ_Iztek.cfg",
+      "port": 3202,
+      "steam_query_port": 27025,
+      "profiles_dir": "profiles_iztek",
+      "cpu": 2,
+      "extra_mods": ["@Iztek"],
+      "server_mods": []
+    },
+    "alteria": {
+      "title": "Owens DayZ Alteria Server",
+      "config": "serverDZ_Alteria.cfg",
+      "port": 3302,
+      "steam_query_port": 27026,
+      "profiles_dir": "profiles_alteria",
+      "cpu": 2,
+      "extra_mods": ["@Alteria"],
+      "server_mods": []
     }
   }
 }
