@@ -61,6 +61,7 @@ Normal refresh:
 python admin\build_map_expansion.py --all
 python admin\seed_imported_cot_locations.py
 python admin\build_map_expansion.py --imported
+python admin\tune_player_spawns.py
 python admin\apply_ai_ammo.py
 python admin\apply_loot.py all --preset arcade
 python admin\tune_chernarus_spawn_economy.py
