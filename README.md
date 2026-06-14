@@ -11,6 +11,7 @@ This repo is intended to share scripts and configuration patterns, not copyright
 - COT (`@Community-Online-Tools`) as the standard admin tool across active map launches
 - Sanitized `serverDZ*.example.cfg` starter configs for each map
 - New-map launch stubs for Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria
+- Public-safe loot/event config coverage for Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria
 - Chernarus Expansion mission configuration:
   - Expansion AI tuning
   - Expansion Market/trader configs
@@ -51,11 +52,33 @@ python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\tune_quest_ai.py
 python admin\standardize_world_events.py
+python admin\check_imported_ai_ready.py
 python admin\status_all.py
 python admin\validate_public_repo.py
 ```
 
 After config changes, restart the affected DayZ server so Central Economy, Expansion missions, AI, and event settings reload.
+
+## Imported Map Patrols
+
+Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria are launch-ready and have boosted loot/events plus money-contract scaffolding. Full map-wide Expansion patrols need COT location exports first so the generator uses real map coordinates.
+
+For each imported map:
+
+```powershell
+powershell -File .\Launch-DayZMap.ps1 -Map deerisle
+```
+
+Join as admin with COT enabled, create/export map locations into that map profile folder, then check readiness:
+
+```powershell
+python admin\check_imported_ai_ready.py
+python admin\build_map_expansion.py --imported
+python admin\apply_ai_ammo.py
+python admin\status_all.py
+```
+
+The expected COT files are `profiles_deerisle\CommunityOnlineTools\Teleports_deerisle.json`, `profiles_banov\CommunityOnlineTools\Teleports_banov.json`, `profiles_esseker\CommunityOnlineTools\Teleports_esseker.json`, `profiles_rostow\CommunityOnlineTools\Teleports_rostow.json`, `profiles_iztek\CommunityOnlineTools\Teleports_iztek.json`, and `profiles_alteria\CommunityOnlineTools\Teleports_alteria.json`.
 
 ## Before Using
 

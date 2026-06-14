@@ -153,6 +153,52 @@ def _y_takistan(x: float, z: float) -> float:
     return 115.0
 
 
+GENERIC_TYPE_RADIUS = {
+    "Capital": 650.0,
+    "City": 500.0,
+    "Village": 350.0,
+    "Local": 220.0,
+    "Hill": 250.0,
+    "Marine": 220.0,
+    "Camp": 280.0,
+    "Ruin": 240.0,
+    "Airfield": 450.0,
+    "Military Base": 400.0,
+}
+
+GENERIC_TYPE_CATEGORY = {
+    "Capital": "Capital",
+    "City": "City",
+    "Village": "Village",
+    "Local": "Local",
+    "Hill": "Local",
+    "Marine": "Local",
+    "Camp": "Local",
+    "Ruin": "Local",
+    "Airfield": "Local",
+    "Military Base": "Local",
+}
+
+GENERIC_POI_KEYWORDS = [
+    "airfield",
+    "army",
+    "base",
+    "bunker",
+    "camp",
+    "castle",
+    "factory",
+    "harbor",
+    "industrial",
+    "military",
+    "mine",
+    "police",
+    "port",
+    "prison",
+    "quarry",
+    "radio",
+]
+
+
 MAP_CONFIGS: dict[str, MapConfig] = {
     "namalsk": MapConfig(
         key="namalsk",
@@ -371,6 +417,120 @@ MAP_CONFIGS: dict[str, MapConfig] = {
         },
         patrol_hubs=[],
         estimate_y=_y_chernarus,
+        gear_theme="temperate",
+    ),
+    "deerisle": MapConfig(
+        key="deerisle",
+        mission="empty.deerisle",
+        profile="profiles_deerisle",
+        teleports_file="Teleports_deerisle.json",
+        cache_file="deerisle_locations.json",
+        patrol_prefix="DeerIslePatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=10,
+        gear_theme="temperate",
+    ),
+    "banov": MapConfig(
+        key="banov",
+        mission="dayzOffline.banov",
+        profile="profiles_banov",
+        teleports_file="Teleports_banov.json",
+        cache_file="banov_locations.json",
+        patrol_prefix="BanovPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=10,
+        gear_theme="temperate",
+    ),
+    "esseker": MapConfig(
+        key="esseker",
+        mission="dayzOffline.Esseker",
+        profile="profiles_esseker",
+        teleports_file="Teleports_esseker.json",
+        cache_file="esseker_locations.json",
+        patrol_prefix="EssekerPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=8,
+        gear_theme="temperate",
+    ),
+    "rostow": MapConfig(
+        key="rostow",
+        mission="Offline.rostow",
+        profile="profiles_rostow",
+        teleports_file="Teleports_rostow.json",
+        cache_file="rostow_locations.json",
+        patrol_prefix="RostowPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=10,
+        gear_theme="temperate",
+    ),
+    "iztek": MapConfig(
+        key="iztek",
+        mission="empty.Iztek",
+        profile="profiles_iztek",
+        teleports_file="Teleports_iztek.json",
+        cache_file="iztek_locations.json",
+        patrol_prefix="IztekPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=8,
+        gear_theme="desert",
+    ),
+    "alteria": MapConfig(
+        key="alteria",
+        mission="empty.alteria",
+        profile="profiles_alteria",
+        teleports_file="Teleports_alteria.json",
+        cache_file="alteria_locations.json",
+        patrol_prefix="AlteriaPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=8,
         gear_theme="temperate",
     ),
 }
@@ -1332,15 +1492,19 @@ def apply_gear_only(cfg: MapConfig) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build Expansion spawn + AI for custom maps")
-    ap.add_argument("maps", nargs="*", help="namalsk enoch sakhal takistan chernarus")
+    ap.add_argument("maps", nargs="*", help="namalsk enoch sakhal takistan chernarus deerisle banov esseker rostow iztek alteria")
     ap.add_argument("--all", action="store_true", help="Build all configured maps")
+    ap.add_argument("--imported", action="store_true", help="Build imported Workshop maps only after COT teleports have been exported")
     ap.add_argument("--gear-only", action="store_true", help="Only update StartingClothing/StartingGear")
     ap.add_argument("--ai-only", action="store_true", help="Boost AI on existing patrols (Chernarus); custom maps use full build")
     args = ap.parse_args()
 
     all_maps = ["namalsk", "enoch", "sakhal", "takistan", "chernarus"]
+    imported_maps = ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"]
     if args.all:
         keys = list(MAP_CONFIGS.keys()) if args.gear_only else all_maps
+    elif args.imported:
+        keys = imported_maps
     else:
         keys = args.maps
     if not keys:

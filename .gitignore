@@ -135,6 +135,16 @@ mpmissions/empty.deerisle/db/*
 !mpmissions/empty.deerisle/db/globals.xml
 !mpmissions/empty.deerisle/mod_ce/
 !mpmissions/empty.deerisle/mod_ce/**
+!mpmissions/empty.deerisle/expansion/
+mpmissions/empty.deerisle/expansion/*
+!mpmissions/empty.deerisle/expansion/Loadouts/
+!mpmissions/empty.deerisle/expansion/Loadouts/**
+!mpmissions/empty.deerisle/expansion/missions/
+!mpmissions/empty.deerisle/expansion/missions/**
+!mpmissions/empty.deerisle/expansion/settings/
+!mpmissions/empty.deerisle/expansion/settings/**
+!mpmissions/empty.deerisle/expansion/traderzones/
+!mpmissions/empty.deerisle/expansion/traderzones/**
 
 !mpmissions/dayzOffline.banov/
 mpmissions/dayzOffline.banov/*
@@ -144,6 +154,16 @@ mpmissions/dayzOffline.banov/db/*
 !mpmissions/dayzOffline.banov/db/globals.xml
 !mpmissions/dayzOffline.banov/mod_ce/
 !mpmissions/dayzOffline.banov/mod_ce/**
+!mpmissions/dayzOffline.banov/expansion/
+mpmissions/dayzOffline.banov/expansion/*
+!mpmissions/dayzOffline.banov/expansion/Loadouts/
+!mpmissions/dayzOffline.banov/expansion/Loadouts/**
+!mpmissions/dayzOffline.banov/expansion/missions/
+!mpmissions/dayzOffline.banov/expansion/missions/**
+!mpmissions/dayzOffline.banov/expansion/settings/
+!mpmissions/dayzOffline.banov/expansion/settings/**
+!mpmissions/dayzOffline.banov/expansion/traderzones/
+!mpmissions/dayzOffline.banov/expansion/traderzones/**
 
 !mpmissions/dayzOffline.Esseker/
 mpmissions/dayzOffline.Esseker/*
@@ -153,6 +173,16 @@ mpmissions/dayzOffline.Esseker/db/*
 !mpmissions/dayzOffline.Esseker/db/globals.xml
 !mpmissions/dayzOffline.Esseker/mod_ce/
 !mpmissions/dayzOffline.Esseker/mod_ce/**
+!mpmissions/dayzOffline.Esseker/expansion/
+mpmissions/dayzOffline.Esseker/expansion/*
+!mpmissions/dayzOffline.Esseker/expansion/Loadouts/
+!mpmissions/dayzOffline.Esseker/expansion/Loadouts/**
+!mpmissions/dayzOffline.Esseker/expansion/missions/
+!mpmissions/dayzOffline.Esseker/expansion/missions/**
+!mpmissions/dayzOffline.Esseker/expansion/settings/
+!mpmissions/dayzOffline.Esseker/expansion/settings/**
+!mpmissions/dayzOffline.Esseker/expansion/traderzones/
+!mpmissions/dayzOffline.Esseker/expansion/traderzones/**
 
 !mpmissions/Offline.rostow/
 mpmissions/Offline.rostow/*
@@ -162,6 +192,16 @@ mpmissions/Offline.rostow/db/*
 !mpmissions/Offline.rostow/db/globals.xml
 !mpmissions/Offline.rostow/mod_ce/
 !mpmissions/Offline.rostow/mod_ce/**
+!mpmissions/Offline.rostow/expansion/
+mpmissions/Offline.rostow/expansion/*
+!mpmissions/Offline.rostow/expansion/Loadouts/
+!mpmissions/Offline.rostow/expansion/Loadouts/**
+!mpmissions/Offline.rostow/expansion/missions/
+!mpmissions/Offline.rostow/expansion/missions/**
+!mpmissions/Offline.rostow/expansion/settings/
+!mpmissions/Offline.rostow/expansion/settings/**
+!mpmissions/Offline.rostow/expansion/traderzones/
+!mpmissions/Offline.rostow/expansion/traderzones/**
 
 !mpmissions/empty.Iztek/
 mpmissions/empty.Iztek/*
@@ -171,6 +211,16 @@ mpmissions/empty.Iztek/db/*
 !mpmissions/empty.Iztek/db/globals.xml
 !mpmissions/empty.Iztek/mod_ce/
 !mpmissions/empty.Iztek/mod_ce/**
+!mpmissions/empty.Iztek/expansion/
+mpmissions/empty.Iztek/expansion/*
+!mpmissions/empty.Iztek/expansion/Loadouts/
+!mpmissions/empty.Iztek/expansion/Loadouts/**
+!mpmissions/empty.Iztek/expansion/missions/
+!mpmissions/empty.Iztek/expansion/missions/**
+!mpmissions/empty.Iztek/expansion/settings/
+!mpmissions/empty.Iztek/expansion/settings/**
+!mpmissions/empty.Iztek/expansion/traderzones/
+!mpmissions/empty.Iztek/expansion/traderzones/**
 
 !mpmissions/empty.alteria/
 mpmissions/empty.alteria/*
@@ -180,6 +230,16 @@ mpmissions/empty.alteria/db/*
 !mpmissions/empty.alteria/db/globals.xml
 !mpmissions/empty.alteria/mod_ce/
 !mpmissions/empty.alteria/mod_ce/**
+!mpmissions/empty.alteria/expansion/
+mpmissions/empty.alteria/expansion/*
+!mpmissions/empty.alteria/expansion/Loadouts/
+!mpmissions/empty.alteria/expansion/Loadouts/**
+!mpmissions/empty.alteria/expansion/missions/
+!mpmissions/empty.alteria/expansion/missions/**
+!mpmissions/empty.alteria/expansion/settings/
+!mpmissions/empty.alteria/expansion/settings/**
+!mpmissions/empty.alteria/expansion/traderzones/
+!mpmissions/empty.alteria/expansion/traderzones/**
 
 # Expansion profile configs. Keep player/account persistence private.
 !profiles/

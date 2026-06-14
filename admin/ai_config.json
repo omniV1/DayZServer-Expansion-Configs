@@ -13,7 +13,9 @@
   ],
   "takistan_mission": "dayzOffline.TakistanPlus",
   "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan"],
+  "imported_expansion_maps": ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"],
   "expansion_build": "python admin/build_map_expansion.py --all",
+  "imported_expansion_build": "python admin/build_map_expansion.py --imported",
   "takistan_note": "Use build_map_expansion.py per map; do not replicate Chernarus spatial coords onto custom maps",
   "sync_spatial_fixed_locations": false,
   "comment": "spatial_fixed_locations false = copy Group/global spatial tuning only, not Chernarus XYZ coords"
