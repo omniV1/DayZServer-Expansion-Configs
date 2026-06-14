@@ -14,6 +14,12 @@ MISSIONS = {
     "sakhal": "dayzOffline.sakhal",
     "namalsk": "regular.namalsk",
     "takistan": "dayzOffline.TakistanPlus",
+    "deerisle": "empty.deerisle",
+    "banov": "dayzOffline.banov",
+    "esseker": "dayzOffline.Esseker",
+    "rostow": "Offline.rostow",
+    "iztek": "empty.Iztek",
+    "alteria": "empty.alteria",
 }
 
 # Higher huntable wildlife without turning Chernarus into a constant wolf/bear fight.

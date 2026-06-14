@@ -14,6 +14,12 @@ MISSIONS = {
     "sakhal": "dayzOffline.sakhal",
     "namalsk": "regular.namalsk",
     "takistan": "dayzOffline.TakistanPlus",
+    "deerisle": "empty.deerisle",
+    "banov": "dayzOffline.banov",
+    "esseker": "dayzOffline.Esseker",
+    "rostow": "Offline.rostow",
+    "iztek": "empty.Iztek",
+    "alteria": "empty.alteria",
 }
 
 ENABLED_AIRDROPS = {
@@ -22,6 +28,12 @@ ENABLED_AIRDROPS = {
     "sakhal": {"Airdrop_Random_Settlement_Capital.json", "Airdrop_Random_Settlement_CityAirfield.json", "Airdrop_Random_Shantar.json"},
     "namalsk": {"Airdrop_Random_Airstrip.json", "Airdrop_Random_Tara-Harbor.json", "Airdrop_Random_Vorkuta.json"},
     "takistan": {"Airdrop_Random_NEAF.json", "Airdrop_Random_NWAF.json", "Airdrop_Random_Zelenogorsk.json"},
+    "deerisle": set(),
+    "banov": set(),
+    "esseker": set(),
+    "rostow": set(),
+    "iztek": set(),
+    "alteria": set(),
 }
 
 MISSION_SETTINGS = {
@@ -61,6 +73,8 @@ def tune_profile_missions() -> bool:
 
 def tune_airdrops(map_key: str, mission: str) -> tuple[int, int]:
     folder = SERVER / "mpmissions" / mission / "expansion" / "missions"
+    if not folder.exists():
+        return 0, 0
     enabled = ENABLED_AIRDROPS[map_key]
     changed = 0
     total = 0
