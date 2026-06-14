@@ -108,9 +108,6 @@ def validate_content(path: Path, errors: list[str]) -> None:
 def validate_parse(path: Path, errors: list[str]) -> None:
     full = ROOT / path
     suffix = path.suffix.lower()
-    parts = set(path.parts)
-    if suffix == ".json" and {"profiles", "ExpansionMod"} <= parts and ("Market" in parts or "Traders" in parts):
-        return
     try:
         if suffix == ".json":
             json.loads(full.read_text(encoding="utf-8-sig"))
