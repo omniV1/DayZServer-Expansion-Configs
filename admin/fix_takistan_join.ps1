@@ -6,15 +6,11 @@ Write-Host '1/3 Sync @TakistanPlus from Steam Workshop...'
 & (Join-Path $PSScriptRoot 'sync_takistan_plus.ps1')
 
 $mp = Join-Path $root 'mpmissions'
-$link = Join-Path $mp 'dayzOffline.TakistanPlus'
-if (-not (Test-Path $link)) {
-    $src = Join-Path $mp 'dayzOffline.Takistan'
-    if (-not (Test-Path $src)) {
-        Write-Host 'Missing mission folder. Run: python admin\install_takistan_mission.py' -ForegroundColor Red
-        exit 1
-    }
-    cmd /c mklink /J "$link" "$src" | Out-Null
-    Write-Host "Linked mission: dayzOffline.TakistanPlus -> dayzOffline.Takistan"
+$mission = Join-Path $mp 'dayzOffline.TakistanPlus'
+if (-not (Test-Path $mission)) {
+    Write-Host 'Missing mission folder: mpmissions\dayzOffline.TakistanPlus' -ForegroundColor Red
+    Write-Host 'Run: python admin\install_takistan_mission.py' -ForegroundColor Yellow
+    exit 1
 }
 
 Write-Host '2/4 Takistan Expansion spawn + AI (towns 1-2 AI, map-native coords)...'

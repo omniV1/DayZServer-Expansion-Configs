@@ -1,7 +1,7 @@
 """
 Install the official TakistanPlus mission from CypeR79's GitHub repo.
 
-Preserves expansion/ and mod_ce/ under mpmissions/dayzOffline.Takistan.
+Preserves expansion/ and mod_ce/ under mpmissions/dayzOffline.TakistanPlus.
 https://github.com/CypeR79/DayZ-Projects/tree/main/TakistanPlus
 """
 from __future__ import annotations
@@ -13,7 +13,7 @@ import zipfile
 from pathlib import Path
 
 SERVER = Path(r"c:\Games\Steam\steamapps\common\DayZServer")
-MISSION = SERVER / "mpmissions" / "dayzOffline.Takistan"
+MISSION = SERVER / "mpmissions" / "dayzOffline.TakistanPlus"
 ZIP_URL = "https://github.com/CypeR79/DayZ-Projects/archive/refs/heads/main.zip"
 KEEP_DIRS = {"expansion", "mod_ce"}
 CE_BLOCK = """

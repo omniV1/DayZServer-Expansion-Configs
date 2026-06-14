@@ -11,7 +11,7 @@ CE_BLOCK = (
     "\t</ce>\n"
 )
 
-for name in ["dayzOffline.Takistan", "regular.namalsk"]:
+for name in ["dayzOffline.TakistanPlus", "regular.namalsk"]:
     m = SERVER / name
     dest = m / "mod_ce"
     if dest.exists():
