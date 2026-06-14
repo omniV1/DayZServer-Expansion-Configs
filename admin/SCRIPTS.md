@@ -4,7 +4,7 @@ All scripts live under `DayZServer/admin/`. Run PowerShell from the server folde
 
 ## Map launchers (shared Chernarus mods)
 
-Chernarus mod list: `admin/chernarus_mods.txt` (edit once â€” applies to all maps below).
+Chernarus mod list: `admin/chernarus_mods.txt` (edit once â€” applies to all maps below). COT (`@Community-Online-Tools`) is the standard admin tool.
 
 | Map | Desktop / server start |
 |-----|-------------------------|

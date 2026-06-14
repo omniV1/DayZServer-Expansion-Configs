@@ -24,7 +24,6 @@ $copyDirs = @(
     'PermissionsFramework',
     'configs',
     'CommunityOnlineTools',
-    'VPPAdminTools',
     'AIWarZones'
 )
 foreach ($rel in $copyDirs) {

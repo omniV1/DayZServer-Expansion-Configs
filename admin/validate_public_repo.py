@@ -46,13 +46,9 @@ SECRET_PATTERNS = [
     re.compile(r"steam_appid\.txt", re.I),
 ]
 
-COT_ACTIVE_PATTERNS = [
-    "@Community-Online-Tools",
-    "UACOT",
-    "UATeleportModule",
-    "UACameraTool",
-    "UAObjectModule",
-    "UAPlayerModule",
+VPP_ACTIVE_PATTERNS = [
+    "@VPPAdminTools",
+    "VPPAdminTools",
 ]
 
 
@@ -101,12 +97,12 @@ def validate_content(path: Path, errors: list[str]) -> None:
             if pattern.search(text):
                 errors.append(f"Secret-like content in {path}: {pattern.pattern}")
     if path.name in {"chernarus_mods.txt", "namalsk_mods.txt", "takistan_mods.txt"}:
-        if "@Community-Online-Tools" in text:
-            errors.append(f"COT is active in mod list: {path}")
-    if path.name.endswith("preset_User.xml") or path.name.endswith("core.xml"):
-        for needle in COT_ACTIVE_PATTERNS:
+        if "@VPPAdminTools" in text:
+            errors.append(f"VPP is active in mod list: {path}")
+    if path.name.endswith("preset_User.xml") or path.name.endswith("core.xml") or "install_" in path.name:
+        for needle in VPP_ACTIVE_PATTERNS:
             if needle in text:
-                errors.append(f"Stale COT input reference in {path}: {needle}")
+                errors.append(f"Stale VPP reference in {path}: {needle}")
 
 
 def validate_parse(path: Path, errors: list[str]) -> None:

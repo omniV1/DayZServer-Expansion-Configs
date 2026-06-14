@@ -8,6 +8,7 @@ This repo is intended to share scripts and configuration patterns, not copyright
 
 - Map launch helpers and admin scripts under `admin/`
 - Shared mod-list files, launcher helpers, loot/AI tuning scripts
+- COT (`@Community-Online-Tools`) as the standard admin tool across active map launches
 - Sanitized `serverDZ*.example.cfg` starter configs for each map
 - Chernarus Expansion mission configuration:
   - Expansion AI tuning

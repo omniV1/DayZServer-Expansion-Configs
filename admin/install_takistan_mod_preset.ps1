@@ -6,7 +6,7 @@ $dstPreset = Join-Path $presetDir 'Owens-Takistan.preset2'
 # TakistanPlus last; Dabs before it (sandstorm). Other IDs match common Owens Chernarus stack.
 $required = @(
     'steam:1559212036'   # @CF
-    'steam:1828439124'   # @VPPAdminTools
+    'steam:1564026768'   # @Community-Online-Tools
     'steam:2291785308'   # @DayZ-Expansion-Core
     'steam:2792982069'   # @DayZ-Expansion-AI
     'steam:2572331007'   # @DayZ-Expansion-Bundle
