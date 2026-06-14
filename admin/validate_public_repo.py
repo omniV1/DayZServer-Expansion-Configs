@@ -46,6 +46,9 @@ SECRET_PATTERNS = [
     re.compile(r"steam_appid\.txt", re.I),
 ]
 
+SHARD_ID_PATTERN = re.compile(r'shardId\s*=\s*"([^"]+)"', re.I)
+VALID_SHARD_ID = re.compile(r"^[A-Za-z0-9]{4,6}$")
+
 VPP_ACTIVE_PATTERNS = [
     "@VPPAdminTools",
     "VPPAdminTools",
@@ -99,6 +102,10 @@ def validate_content(path: Path, errors: list[str]) -> None:
     if path.name in {"chernarus_mods.txt", "namalsk_mods.txt", "takistan_mods.txt"}:
         if "@VPPAdminTools" in text:
             errors.append(f"VPP is active in mod list: {path}")
+    if path.name.lower().startswith("serverdz") and path.suffix.lower() == ".cfg":
+        match = SHARD_ID_PATTERN.search(text)
+        if match and not VALID_SHARD_ID.fullmatch(match.group(1)):
+            errors.append(f"Invalid shardId in {path}: {match.group(1)!r} (use 4-6 letters/numbers)")
     if path.name.endswith("preset_User.xml") or path.name.endswith("core.xml") or "install_" in path.name:
         for needle in VPP_ACTIVE_PATTERNS:
             if needle in text:
