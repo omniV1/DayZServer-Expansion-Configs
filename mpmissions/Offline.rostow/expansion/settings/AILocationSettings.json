@@ -1,0 +1,467 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Rostow_Airfield_01",
+            "Position": [
+                4312.3,
+                0.0,
+                6103.63
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Camp_01",
+            "Position": [
+                8993.56,
+                0.0,
+                2789.9
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Camp_02",
+            "Position": [
+                9187.29,
+                0.0,
+                2866.82
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Camp_03",
+            "Position": [
+                10610.48,
+                0.0,
+                6566.91
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Local_01",
+            "Position": [
+                970.94,
+                0.0,
+                4045.44
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_01",
+            "Position": [
+                8767.55,
+                0.0,
+                2234.82
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_02",
+            "Position": [
+                9490.83,
+                0.0,
+                10633.22
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_03",
+            "Position": [
+                11471.24,
+                0.0,
+                12640.73
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_04",
+            "Position": [
+                9575.58,
+                0.0,
+                10226.39
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_05",
+            "Position": [
+                3005.38,
+                0.0,
+                9392.73
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_06",
+            "Position": [
+                11866.98,
+                0.0,
+                12629.67
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_07",
+            "Position": [
+                8623.15,
+                0.0,
+                1837.29
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Military_Base_08",
+            "Position": [
+                11553.08,
+                0.0,
+                8938.73
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Ruin_01",
+            "Position": [
+                13290.68,
+                0.0,
+                7016.79
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Ruin_02",
+            "Position": [
+                6089.96,
+                0.0,
+                10618.55
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Ruin_03",
+            "Position": [
+                2910.9,
+                0.0,
+                5633.89
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Ruin_04",
+            "Position": [
+                7103.1,
+                0.0,
+                12455.22
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Ruin_05",
+            "Position": [
+                9541.4,
+                0.0,
+                8169.11
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_01",
+            "Position": [
+                13927.36,
+                0.0,
+                11158.46
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_02",
+            "Position": [
+                881.96,
+                0.0,
+                8205.78
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_03",
+            "Position": [
+                4306.43,
+                0.0,
+                944.83
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_04",
+            "Position": [
+                4751.84,
+                0.0,
+                11371.74
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_05",
+            "Position": [
+                4878.76,
+                0.0,
+                7388.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_06",
+            "Position": [
+                9855.6,
+                0.0,
+                10232.67
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_07",
+            "Position": [
+                12743.15,
+                0.0,
+                8305.55
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_08",
+            "Position": [
+                1102.14,
+                0.0,
+                3827.07
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_09",
+            "Position": [
+                1164.41,
+                0.0,
+                12677.79
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_10",
+            "Position": [
+                9147.08,
+                0.0,
+                2298.03
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_11",
+            "Position": [
+                9014.05,
+                0.0,
+                4861.62
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_12",
+            "Position": [
+                10128.65,
+                0.0,
+                13236.49
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_13",
+            "Position": [
+                6801.22,
+                0.0,
+                10874.17
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_14",
+            "Position": [
+                8075.53,
+                0.0,
+                7645.4
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_15",
+            "Position": [
+                9419.09,
+                0.0,
+                8753.7
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_16",
+            "Position": [
+                4141.04,
+                0.0,
+                4235.01
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_17",
+            "Position": [
+                9316.64,
+                0.0,
+                12578.35
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_18",
+            "Position": [
+                3709.36,
+                0.0,
+                6051.08
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_19",
+            "Position": [
+                10205.11,
+                0.0,
+                1365.63
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_20",
+            "Position": [
+                3392.99,
+                0.0,
+                8587.16
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_21",
+            "Position": [
+                7638.13,
+                0.0,
+                1773.54
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_22",
+            "Position": [
+                13406.78,
+                0.0,
+                7191.97
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_23",
+            "Position": [
+                3659.23,
+                0.0,
+                3067.36
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Rostow_Village_24",
+            "Position": [
+                5951.08,
+                0.0,
+                5007.44
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

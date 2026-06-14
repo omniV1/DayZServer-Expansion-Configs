@@ -1,0 +1,433 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Alteria Village 01",
+            "Positions": [
+                [
+                    3865.0,
+                    0.0,
+                    7852.0
+                ],
+                [
+                    3615.0,
+                    0.0,
+                    7446.0
+                ],
+                [
+                    3412.0,
+                    0.0,
+                    7355.0
+                ],
+                [
+                    3393.0,
+                    0.0,
+                    6931.0
+                ],
+                [
+                    3373.0,
+                    0.0,
+                    6664.0
+                ],
+                [
+                    2954.0,
+                    0.0,
+                    6799.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 02",
+            "Positions": [
+                [
+                    3260.0,
+                    0.0,
+                    5950.0
+                ],
+                [
+                    3239.0,
+                    0.0,
+                    5733.0
+                ],
+                [
+                    2954.0,
+                    0.0,
+                    6799.0
+                ],
+                [
+                    3373.0,
+                    0.0,
+                    6664.0
+                ],
+                [
+                    3019.0,
+                    0.0,
+                    5210.0
+                ],
+                [
+                    3703.0,
+                    0.0,
+                    5890.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 03",
+            "Positions": [
+                [
+                    1085.0,
+                    0.0,
+                    4061.0
+                ],
+                [
+                    1302.0,
+                    0.0,
+                    4627.0
+                ],
+                [
+                    1087.0,
+                    0.0,
+                    4952.0
+                ],
+                [
+                    955.0,
+                    0.0,
+                    5410.0
+                ],
+                [
+                    2349.0,
+                    0.0,
+                    5216.0
+                ],
+                [
+                    609.0,
+                    0.0,
+                    5748.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 04",
+            "Positions": [
+                [
+                    2349.0,
+                    0.0,
+                    5216.0
+                ],
+                [
+                    3260.0,
+                    0.0,
+                    5950.0
+                ],
+                [
+                    3239.0,
+                    0.0,
+                    5733.0
+                ],
+                [
+                    2954.0,
+                    0.0,
+                    6799.0
+                ],
+                [
+                    3019.0,
+                    0.0,
+                    5210.0
+                ],
+                [
+                    3373.0,
+                    0.0,
+                    6664.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 05",
+            "Positions": [
+                [
+                    2793.0,
+                    0.0,
+                    7455.0
+                ],
+                [
+                    1914.0,
+                    0.0,
+                    7887.0
+                ],
+                [
+                    2954.0,
+                    0.0,
+                    6799.0
+                ],
+                [
+                    3412.0,
+                    0.0,
+                    7355.0
+                ],
+                [
+                    1122.0,
+                    0.0,
+                    7588.0
+                ],
+                [
+                    3393.0,
+                    0.0,
+                    6931.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 06",
+            "Positions": [
+                [
+                    3019.0,
+                    0.0,
+                    5210.0
+                ],
+                [
+                    3239.0,
+                    0.0,
+                    5733.0
+                ],
+                [
+                    2349.0,
+                    0.0,
+                    5216.0
+                ],
+                [
+                    3260.0,
+                    0.0,
+                    5950.0
+                ],
+                [
+                    3703.0,
+                    0.0,
+                    5890.0
+                ],
+                [
+                    3938.0,
+                    0.0,
+                    5628.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 07",
+            "Positions": [
+                [
+                    2954.0,
+                    0.0,
+                    6799.0
+                ],
+                [
+                    2793.0,
+                    0.0,
+                    7455.0
+                ],
+                [
+                    1914.0,
+                    0.0,
+                    7887.0
+                ],
+                [
+                    3373.0,
+                    0.0,
+                    6664.0
+                ],
+                [
+                    3393.0,
+                    0.0,
+                    6931.0
+                ],
+                [
+                    3412.0,
+                    0.0,
+                    7355.0
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Alteria Village 08",
+            "Positions": [
+                [
+                    3865.0,
+                    0.0,
+                    7852.0
+                ],
+                [
+                    3615.0,
+                    0.0,
+                    7446.0
+                ],
+                [
+                    3938.0,
+                    0.0,
+                    5628.0
+                ],
+                [
+                    3703.0,
+                    0.0,
+                    5890.0
+                ],
+                [
+                    3393.0,
+                    0.0,
+                    6931.0
+                ],
+                [
+                    3412.0,
+                    0.0,
+                    7355.0
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "BaseballCap_Black",
+            "BeanieHat_Green",
+            ""
+        ],
+        "Glasses": [],
+        "Masks": [],
+        "Tops": [
+            "HunterJacket_Brown",
+            "HunterJacket_Autumn",
+            "Shirt_BlueCheckBright",
+            "Sweater_Gray"
+        ],
+        "Vests": [],
+        "Gloves": [],
+        "Pants": [
+            "CargoPants_Green",
+            "CargoPants_Beige",
+            "CargoPants_Black"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Black",
+            "CombatBoots_Brown",
+            "CombatBoots_Green"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TaloonBag_Green",
+            "DryBag_Green",
+            "AssaultBag_Green"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Chemlight_Green",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TacticalBaconCan",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "PeachesCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

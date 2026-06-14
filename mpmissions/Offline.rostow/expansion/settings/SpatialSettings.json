@@ -1,0 +1,408 @@
+{
+    "Group": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Rostow_Airfield_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4312.3,
+                0.0,
+                6103.63
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4327.3,
+                    0.0,
+                    6118.63
+                ],
+                [
+                    4300.3,
+                    0.0,
+                    6093.63
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Camp_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8993.56,
+                0.0,
+                2789.9
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9008.56,
+                    0.0,
+                    2804.9
+                ],
+                [
+                    8981.56,
+                    0.0,
+                    2779.9
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Camp_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9187.29,
+                0.0,
+                2866.82
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9202.29,
+                    0.0,
+                    2881.82
+                ],
+                [
+                    9175.29,
+                    0.0,
+                    2856.82
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Camp_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10610.48,
+                0.0,
+                6566.91
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10625.48,
+                    0.0,
+                    6581.91
+                ],
+                [
+                    10598.48,
+                    0.0,
+                    6556.91
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8767.55,
+                0.0,
+                2234.82
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8782.55,
+                    0.0,
+                    2249.82
+                ],
+                [
+                    8755.55,
+                    0.0,
+                    2224.82
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9490.83,
+                0.0,
+                10633.22
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9505.83,
+                    0.0,
+                    10648.22
+                ],
+                [
+                    9478.83,
+                    0.0,
+                    10623.22
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11471.24,
+                0.0,
+                12640.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11486.24,
+                    0.0,
+                    12655.73
+                ],
+                [
+                    11459.24,
+                    0.0,
+                    12630.73
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9575.58,
+                0.0,
+                10226.39
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9590.58,
+                    0.0,
+                    10241.39
+                ],
+                [
+                    9563.58,
+                    0.0,
+                    10216.39
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3005.38,
+                0.0,
+                9392.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3020.38,
+                    0.0,
+                    9407.73
+                ],
+                [
+                    2993.38,
+                    0.0,
+                    9382.73
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_06",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11866.98,
+                0.0,
+                12629.67
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11881.98,
+                    0.0,
+                    12644.67
+                ],
+                [
+                    11854.98,
+                    0.0,
+                    12619.67
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_07",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8623.15,
+                0.0,
+                1837.29
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8638.15,
+                    0.0,
+                    1852.29
+                ],
+                [
+                    8611.15,
+                    0.0,
+                    1827.29
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Rostow_Military_Base_08",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11553.08,
+                0.0,
+                8938.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11568.08,
+                    0.0,
+                    8953.73
+                ],
+                [
+                    11541.08,
+                    0.0,
+                    8928.73
+                ]
+            ]
+        }
+    ],
+    "MinimumPlayerDistance": 80,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "MaxAI": 46,
+    "Locations_Enabled": 2,
+    "Points_Enabled": 0,
+    "Point": []
+}

@@ -52,6 +52,7 @@ python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\tune_quest_ai.py
 python admin\standardize_world_events.py
+python admin\seed_imported_cot_locations.py
 python admin\check_imported_ai_ready.py
 python admin\status_all.py
 python admin\validate_public_repo.py
@@ -61,17 +62,22 @@ After config changes, restart the affected DayZ server so Central Economy, Expan
 
 ## Imported Map Patrols
 
-Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria are launch-ready and have boosted loot/events plus money-contract scaffolding. Full map-wide Expansion patrols need COT location exports first so the generator uses real map coordinates.
+Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria are launch-ready and have boosted loot/events, money-contract scaffolding, and generated first-pass Expansion patrols. The patrol generator can use either real COT exports or auto-seeded locations from each mission's `mapgrouppos.xml`.
 
-For each imported map:
+To refresh first-pass imported map patrols:
+
+```powershell
+python admin\seed_imported_cot_locations.py
+python admin\check_imported_ai_ready.py
+python admin\build_map_expansion.py --imported
+python admin\apply_ai_ammo.py
+python admin\status_all.py
+```
+
+To improve those auto-seeded patrols later, launch each imported map, refine/create COT map locations in-game, then rerun:
 
 ```powershell
 powershell -File .\Launch-DayZMap.ps1 -Map deerisle
-```
-
-Join as admin with COT enabled, create/export map locations into that map profile folder, then check readiness:
-
-```powershell
 python admin\check_imported_ai_ready.py
 python admin\build_map_expansion.py --imported
 python admin\apply_ai_ammo.py

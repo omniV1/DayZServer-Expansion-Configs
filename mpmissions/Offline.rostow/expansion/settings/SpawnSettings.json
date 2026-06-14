@@ -1,0 +1,505 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Rostow Village 01",
+            "Positions": [
+                [
+                    3047.4185,
+                    0.0,
+                    13132.47811
+                ],
+                [
+                    3007.868184,
+                    0.0,
+                    13042.591026
+                ],
+                [
+                    2956.332923,
+                    0.0,
+                    13225.960676
+                ],
+                [
+                    2890.41573,
+                    0.0,
+                    13309.855288
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    12909.558142
+                ],
+                [
+                    2878.430786,
+                    0.0,
+                    13440.491182
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 02",
+            "Positions": [
+                [
+                    918.128448,
+                    0.0,
+                    8021.714097
+                ],
+                [
+                    655.418461,
+                    0.0,
+                    8137.728362
+                ],
+                [
+                    1101.615007,
+                    0.0,
+                    8301.840723
+                ],
+                [
+                    620.90182,
+                    0.0,
+                    8326.61109
+                ],
+                [
+                    885.529398,
+                    0.0,
+                    7907.617423
+                ],
+                [
+                    990.179957,
+                    0.0,
+                    7920.899734
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 03",
+            "Positions": [
+                [
+                    1072.494535,
+                    0.0,
+                    7617.102363
+                ],
+                [
+                    1014.008005,
+                    0.0,
+                    7800.232318
+                ],
+                [
+                    1634.348741,
+                    0.0,
+                    8111.840881
+                ],
+                [
+                    905.253685,
+                    0.0,
+                    7807.501064
+                ],
+                [
+                    840.454449,
+                    0.0,
+                    7816.337324
+                ],
+                [
+                    990.179957,
+                    0.0,
+                    7920.899734
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 04",
+            "Positions": [
+                [
+                    3007.868184,
+                    0.0,
+                    13042.591026
+                ],
+                [
+                    3047.4185,
+                    0.0,
+                    13132.47811
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    12909.558142
+                ],
+                [
+                    2764.573816,
+                    0.0,
+                    12969.482865
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    13033.00307
+                ],
+                [
+                    2956.332923,
+                    0.0,
+                    13225.960676
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 05",
+            "Positions": [
+                [
+                    1634.348741,
+                    0.0,
+                    8111.840881
+                ],
+                [
+                    1562.439073,
+                    0.0,
+                    8217.308394
+                ],
+                [
+                    1482.859041,
+                    0.0,
+                    8362.086527
+                ],
+                [
+                    1402.320213,
+                    0.0,
+                    8559.598415
+                ],
+                [
+                    1291.099926,
+                    0.0,
+                    8259.4954
+                ],
+                [
+                    1217.272667,
+                    0.0,
+                    8133.893179
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 06",
+            "Positions": [
+                [
+                    3047.4185,
+                    0.0,
+                    13132.47811
+                ],
+                [
+                    3007.868184,
+                    0.0,
+                    13042.591026
+                ],
+                [
+                    2956.332923,
+                    0.0,
+                    13225.960676
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    12909.558142
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    13033.00307
+                ],
+                [
+                    2764.573816,
+                    0.0,
+                    12969.482865
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 07",
+            "Positions": [
+                [
+                    3007.868184,
+                    0.0,
+                    13042.591026
+                ],
+                [
+                    3047.4185,
+                    0.0,
+                    13132.47811
+                ],
+                [
+                    2956.332923,
+                    0.0,
+                    13225.960676
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    12909.558142
+                ],
+                [
+                    2764.573816,
+                    0.0,
+                    12969.482865
+                ],
+                [
+                    2789.742199,
+                    0.0,
+                    13033.00307
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 08",
+            "Positions": [
+                [
+                    1072.494535,
+                    0.0,
+                    7617.102363
+                ],
+                [
+                    1014.008005,
+                    0.0,
+                    7800.232318
+                ],
+                [
+                    905.253685,
+                    0.0,
+                    7807.501064
+                ],
+                [
+                    840.454449,
+                    0.0,
+                    7816.337324
+                ],
+                [
+                    885.529398,
+                    0.0,
+                    7907.617423
+                ],
+                [
+                    699.523057,
+                    0.0,
+                    7898.029467
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 09",
+            "Positions": [
+                [
+                    1317.928336,
+                    0.0,
+                    12865.71251
+                ],
+                [
+                    1456.761926,
+                    0.0,
+                    12683.924876
+                ],
+                [
+                    1372.387921,
+                    0.0,
+                    12929.376534
+                ],
+                [
+                    1446.023416,
+                    0.0,
+                    12420.064343
+                ],
+                [
+                    1408.438632,
+                    0.0,
+                    12348.729955
+                ],
+                [
+                    1596.362553,
+                    0.0,
+                    12561.966083
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Rostow Village 10",
+            "Positions": [
+                [
+                    1634.348741,
+                    0.0,
+                    8111.840881
+                ],
+                [
+                    1562.439073,
+                    0.0,
+                    8217.308394
+                ],
+                [
+                    1072.494535,
+                    0.0,
+                    7617.102363
+                ],
+                [
+                    1482.859041,
+                    0.0,
+                    8362.086527
+                ],
+                [
+                    1014.008005,
+                    0.0,
+                    7800.232318
+                ],
+                [
+                    1217.272667,
+                    0.0,
+                    8133.893179
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "BaseballCap_Black",
+            "BeanieHat_Green",
+            ""
+        ],
+        "Glasses": [],
+        "Masks": [],
+        "Tops": [
+            "HunterJacket_Brown",
+            "HunterJacket_Autumn",
+            "Shirt_BlueCheckBright",
+            "Sweater_Gray"
+        ],
+        "Vests": [],
+        "Gloves": [],
+        "Pants": [
+            "CargoPants_Green",
+            "CargoPants_Beige",
+            "CargoPants_Black"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Black",
+            "CombatBoots_Brown",
+            "CombatBoots_Green"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TaloonBag_Green",
+            "DryBag_Green",
+            "AssaultBag_Green"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Chemlight_Green",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TacticalBaconCan",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "PeachesCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

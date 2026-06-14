@@ -1,0 +1,448 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Iztek Village 01",
+            "Positions": [
+                [
+                    6779.295898,
+                    0.0,
+                    891.995056
+                ],
+                [
+                    6542.850098,
+                    0.0,
+                    877.36499
+                ],
+                [
+                    6565.271484,
+                    0.0,
+                    813.272278
+                ],
+                [
+                    6960.260254,
+                    0.0,
+                    868.726318
+                ],
+                [
+                    6367.029785,
+                    0.0,
+                    952.544006
+                ],
+                [
+                    6619.92334,
+                    0.0,
+                    664.157715
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 02",
+            "Positions": [
+                [
+                    6043.679199,
+                    0.0,
+                    1894.047485
+                ],
+                [
+                    5731.79541,
+                    0.0,
+                    1834.996094
+                ],
+                [
+                    7290.717773,
+                    0.0,
+                    1840.022095
+                ],
+                [
+                    7460.189453,
+                    0.0,
+                    1561.033081
+                ],
+                [
+                    5976.871582,
+                    0.0,
+                    1166.019897
+                ],
+                [
+                    7426.015625,
+                    0.0,
+                    1245.312134
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 03",
+            "Positions": [
+                [
+                    2446.568115,
+                    0.0,
+                    844.777588
+                ],
+                [
+                    3045.459961,
+                    0.0,
+                    658.005981
+                ],
+                [
+                    5731.79541,
+                    0.0,
+                    1834.996094
+                ],
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ],
+                [
+                    3942.879883,
+                    0.0,
+                    672.875
+                ],
+                [
+                    6043.679199,
+                    0.0,
+                    1894.047485
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 04",
+            "Positions": [
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ],
+                [
+                    3942.879883,
+                    0.0,
+                    672.875
+                ],
+                [
+                    4535.47998,
+                    0.0,
+                    699.882996
+                ],
+                [
+                    4865.450195,
+                    0.0,
+                    701.145996
+                ],
+                [
+                    4946.759766,
+                    0.0,
+                    650.263
+                ],
+                [
+                    5089.160156,
+                    0.0,
+                    658.244995
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 05",
+            "Positions": [
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ],
+                [
+                    3942.879883,
+                    0.0,
+                    672.875
+                ],
+                [
+                    4535.47998,
+                    0.0,
+                    699.882996
+                ],
+                [
+                    4865.450195,
+                    0.0,
+                    701.145996
+                ],
+                [
+                    4946.759766,
+                    0.0,
+                    650.263
+                ],
+                [
+                    5089.160156,
+                    0.0,
+                    658.244995
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 06",
+            "Positions": [
+                [
+                    2446.568115,
+                    0.0,
+                    844.777588
+                ],
+                [
+                    3045.459961,
+                    0.0,
+                    658.005981
+                ],
+                [
+                    3942.879883,
+                    0.0,
+                    672.875
+                ],
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ],
+                [
+                    4535.47998,
+                    0.0,
+                    699.882996
+                ],
+                [
+                    5731.79541,
+                    0.0,
+                    1834.996094
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 07",
+            "Positions": [
+                [
+                    5731.79541,
+                    0.0,
+                    1834.996094
+                ],
+                [
+                    6043.679199,
+                    0.0,
+                    1894.047485
+                ],
+                [
+                    7290.717773,
+                    0.0,
+                    1840.022095
+                ],
+                [
+                    5976.871582,
+                    0.0,
+                    1166.019897
+                ],
+                [
+                    7460.189453,
+                    0.0,
+                    1561.033081
+                ],
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Iztek Village 08",
+            "Positions": [
+                [
+                    5731.79541,
+                    0.0,
+                    1834.996094
+                ],
+                [
+                    6043.679199,
+                    0.0,
+                    1894.047485
+                ],
+                [
+                    5976.871582,
+                    0.0,
+                    1166.019897
+                ],
+                [
+                    4865.450195,
+                    0.0,
+                    701.145996
+                ],
+                [
+                    4535.47998,
+                    0.0,
+                    699.882996
+                ],
+                [
+                    4105.649902,
+                    0.0,
+                    752.531982
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "BaseballCap_Tan",
+            "BaseballCap_Olive",
+            "BeanieHat_Brown"
+        ],
+        "Glasses": [
+            "Sunglasses",
+            "AviatorGlasses"
+        ],
+        "Masks": [
+            "Balaclava3Holes_Beige"
+        ],
+        "Tops": [
+            "GorkaEJacket_Autumn",
+            "TShirt_Beige",
+            "TShirt_OrangeWhiteStripes",
+            "FieldJacket_Green"
+        ],
+        "Vests": [],
+        "Gloves": [],
+        "Pants": [
+            "CargoPants_Beige",
+            "GorkaPants_Autumn",
+            "CargoPants_Green"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Beige",
+            "CombatBoots_Brown",
+            "CombatBoots_Green"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TortillaBag",
+            "TaloonBag_Green",
+            "DryBag_Yellow"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Chemlight_White",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SodaCan_Pipsi",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "WaterBottle",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TunaCan",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "PeachesCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

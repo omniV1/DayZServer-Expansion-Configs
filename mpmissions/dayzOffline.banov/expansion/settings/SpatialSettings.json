@@ -1,0 +1,540 @@
+{
+    "Group": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Banov_Airfield_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6167.4,
+                0.0,
+                1637.21
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6182.4,
+                    0.0,
+                    1652.21
+                ],
+                [
+                    6155.4,
+                    0.0,
+                    1627.21
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Airfield_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                12014.96,
+                0.0,
+                14855.26
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    12029.96,
+                    0.0,
+                    14870.26
+                ],
+                [
+                    12002.96,
+                    0.0,
+                    14845.26
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Airfield_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1870.69,
+                0.0,
+                11994.48
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1885.69,
+                    0.0,
+                    12009.48
+                ],
+                [
+                    1858.69,
+                    0.0,
+                    11984.48
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Airfield_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2131.8,
+                0.0,
+                12057.21
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2146.8,
+                    0.0,
+                    12072.21
+                ],
+                [
+                    2119.8,
+                    0.0,
+                    12047.21
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Camp_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                13110.78,
+                0.0,
+                465.37
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    13125.78,
+                    0.0,
+                    480.37
+                ],
+                [
+                    13098.78,
+                    0.0,
+                    455.37
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Camp_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6879.36,
+                0.0,
+                3642.52
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6894.36,
+                    0.0,
+                    3657.52
+                ],
+                [
+                    6867.36,
+                    0.0,
+                    3632.52
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Camp_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7101.14,
+                0.0,
+                12086.74
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7116.14,
+                    0.0,
+                    12101.74
+                ],
+                [
+                    7089.14,
+                    0.0,
+                    12076.74
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Camp_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8204.12,
+                0.0,
+                13819.88
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8219.12,
+                    0.0,
+                    13834.88
+                ],
+                [
+                    8192.12,
+                    0.0,
+                    13809.88
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6124.8,
+                0.0,
+                2208.7
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6139.8,
+                    0.0,
+                    2223.7
+                ],
+                [
+                    6112.8,
+                    0.0,
+                    2198.7
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4984.76,
+                0.0,
+                450.8
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4999.76,
+                    0.0,
+                    465.8
+                ],
+                [
+                    4972.76,
+                    0.0,
+                    440.8
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6068.05,
+                0.0,
+                1075.22
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6083.05,
+                    0.0,
+                    1090.22
+                ],
+                [
+                    6056.05,
+                    0.0,
+                    1065.22
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2947.34,
+                0.0,
+                6220.49
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2962.34,
+                    0.0,
+                    6235.49
+                ],
+                [
+                    2935.34,
+                    0.0,
+                    6210.49
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6757.65,
+                0.0,
+                1509.66
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6772.65,
+                    0.0,
+                    1524.66
+                ],
+                [
+                    6745.65,
+                    0.0,
+                    1499.66
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_06",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8122.91,
+                0.0,
+                9989.86
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8137.91,
+                    0.0,
+                    10004.86
+                ],
+                [
+                    8110.91,
+                    0.0,
+                    9979.86
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_07",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                12726.92,
+                0.0,
+                10847.08
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    12741.92,
+                    0.0,
+                    10862.08
+                ],
+                [
+                    12714.92,
+                    0.0,
+                    10837.08
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Banov_Military_Base_08",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4312.27,
+                0.0,
+                3465.29
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4327.27,
+                    0.0,
+                    3480.29
+                ],
+                [
+                    4300.27,
+                    0.0,
+                    3455.29
+                ]
+            ]
+        }
+    ],
+    "MinimumPlayerDistance": 80,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "MaxAI": 56,
+    "Locations_Enabled": 2,
+    "Points_Enabled": 0,
+    "Point": []
+}

@@ -1,0 +1,437 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "Airfield",
+            "Name": "Banov Airfield 01",
+            "Position": [
+                6167.4,
+                217.76,
+                1637.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Banov Airfield 02",
+            "Position": [
+                12014.96,
+                619.16,
+                14855.26
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Banov Airfield 03",
+            "Position": [
+                1870.69,
+                270.9,
+                11994.48
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Banov Airfield 04",
+            "Position": [
+                2131.8,
+                269.95,
+                12057.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 01",
+            "Position": [
+                6124.8,
+                218.62,
+                2208.7
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 02",
+            "Position": [
+                4984.76,
+                195.65,
+                450.8
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 03",
+            "Position": [
+                6068.05,
+                207.96,
+                1075.22
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 04",
+            "Position": [
+                2947.34,
+                216.31,
+                6220.49
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 05",
+            "Position": [
+                6757.65,
+                209.97,
+                1509.66
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 06",
+            "Position": [
+                8122.91,
+                524.4,
+                9989.86
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 07",
+            "Position": [
+                12726.92,
+                328.52,
+                10847.08
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Banov Military Base 08",
+            "Position": [
+                4312.27,
+                207.06,
+                3465.29
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Banov Camp 01",
+            "Position": [
+                13110.78,
+                306.17,
+                465.37
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Banov Camp 02",
+            "Position": [
+                6879.36,
+                223.25,
+                3642.52
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Banov Camp 03",
+            "Position": [
+                7101.14,
+                580.06,
+                12086.74
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Banov Camp 04",
+            "Position": [
+                8204.12,
+                439.41,
+                13819.88
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Banov Ruin 01",
+            "Position": [
+                5667.94,
+                200.28,
+                2269.7
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Banov Ruin 02",
+            "Position": [
+                5661.05,
+                202.91,
+                1730.94
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Banov Ruin 03",
+            "Position": [
+                4316.69,
+                235.75,
+                11283.19
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Banov Ruin 04",
+            "Position": [
+                4707.84,
+                212.35,
+                6830.89
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Banov Ruin 05",
+            "Position": [
+                1675.06,
+                219.81,
+                7662.36
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 01",
+            "Position": [
+                874.46,
+                268.44,
+                13266.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 02",
+            "Position": [
+                4302.48,
+                254.08,
+                13426.76
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 03",
+            "Position": [
+                11857.25,
+                244.02,
+                4251.43
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 04",
+            "Position": [
+                4070.1,
+                266.2,
+                13849.87
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 05",
+            "Position": [
+                1604.21,
+                234.76,
+                10133.42
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 06",
+            "Position": [
+                7629.93,
+                243.55,
+                7410.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 07",
+            "Position": [
+                4930.51,
+                214.71,
+                6357.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 08",
+            "Position": [
+                11299.39,
+                237.5,
+                3729.85
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 09",
+            "Position": [
+                1194.49,
+                224.7,
+                4116.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 10",
+            "Position": [
+                12144.44,
+                263.58,
+                6822.8
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 11",
+            "Position": [
+                1411.96,
+                239.58,
+                10593.11
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 12",
+            "Position": [
+                6007.86,
+                215.88,
+                4947.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 13",
+            "Position": [
+                3780.62,
+                210.78,
+                970.11
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 14",
+            "Position": [
+                828.23,
+                264.5,
+                12848.73
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 15",
+            "Position": [
+                5742.7,
+                203.38,
+                1053.94
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 16",
+            "Position": [
+                9474.07,
+                253.22,
+                1654.64
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 17",
+            "Position": [
+                4788.2,
+                230.87,
+                10796.83
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 18",
+            "Position": [
+                1206.04,
+                236.65,
+                10112.9
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 19",
+            "Position": [
+                4618.92,
+                206.48,
+                3461.07
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 20",
+            "Position": [
+                12724.14,
+                274.69,
+                6461.22
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Banov Village 21",
+            "Position": [
+                8921.52,
+                206.23,
+                3357.79
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

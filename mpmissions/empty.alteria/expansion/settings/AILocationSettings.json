@@ -1,0 +1,467 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Alteria_Airfield_01",
+            "Position": [
+                7567.06,
+                0.0,
+                2196.98
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Airfield_02",
+            "Position": [
+                6866.73,
+                0.0,
+                2223.4
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Airfield_03",
+            "Position": [
+                6225.98,
+                0.0,
+                2177.65
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Camp_01",
+            "Position": [
+                5424.57,
+                0.0,
+                5410.63
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Camp_02",
+            "Position": [
+                4940.54,
+                0.0,
+                5517.68
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Camp_03",
+            "Position": [
+                4244.77,
+                0.0,
+                2310.43
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Camp_04",
+            "Position": [
+                4660.14,
+                0.0,
+                4290.0
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_01",
+            "Position": [
+                4305.72,
+                0.0,
+                7478.71
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_02",
+            "Position": [
+                1699.95,
+                0.0,
+                494.31
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_03",
+            "Position": [
+                2246.63,
+                0.0,
+                3071.43
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_04",
+            "Position": [
+                2097.54,
+                0.0,
+                1007.82
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_05",
+            "Position": [
+                1901.97,
+                0.0,
+                1199.41
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_06",
+            "Position": [
+                2851.1,
+                0.0,
+                4238.44
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_07",
+            "Position": [
+                2342.76,
+                0.0,
+                5619.15
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Military_Base_08",
+            "Position": [
+                3576.29,
+                0.0,
+                6177.54
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Ruin_01",
+            "Position": [
+                6748.67,
+                0.0,
+                3704.68
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Ruin_02",
+            "Position": [
+                3721.56,
+                0.0,
+                4784.21
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Ruin_03",
+            "Position": [
+                2926.54,
+                0.0,
+                3631.86
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Ruin_04",
+            "Position": [
+                4195.25,
+                0.0,
+                6715.1
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Ruin_05",
+            "Position": [
+                6103.38,
+                0.0,
+                6120.43
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_01",
+            "Position": [
+                4714.48,
+                0.0,
+                7508.09
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_02",
+            "Position": [
+                2836.67,
+                0.0,
+                6053.82
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_03",
+            "Position": [
+                1006.33,
+                0.0,
+                2954.43
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_04",
+            "Position": [
+                2360.64,
+                0.0,
+                6061.79
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_05",
+            "Position": [
+                2320.2,
+                0.0,
+                7536.57
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_06",
+            "Position": [
+                2794.06,
+                0.0,
+                5595.35
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_07",
+            "Position": [
+                2231.87,
+                0.0,
+                6841.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_08",
+            "Position": [
+                5530.76,
+                0.0,
+                6946.85
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_09",
+            "Position": [
+                1621.19,
+                0.0,
+                7488.5
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_10",
+            "Position": [
+                3580.0,
+                0.0,
+                6845.93
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_11",
+            "Position": [
+                1639.9,
+                0.0,
+                3549.16
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_12",
+            "Position": [
+                6321.91,
+                0.0,
+                3561.44
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_13",
+            "Position": [
+                7548.55,
+                0.0,
+                5357.79
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_14",
+            "Position": [
+                860.87,
+                0.0,
+                5996.62
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_15",
+            "Position": [
+                2942.21,
+                0.0,
+                6816.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_16",
+            "Position": [
+                445.88,
+                0.0,
+                6215.21
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_17",
+            "Position": [
+                4877.3,
+                0.0,
+                940.41
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_18",
+            "Position": [
+                6058.34,
+                0.0,
+                5421.6
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_19",
+            "Position": [
+                2850.22,
+                0.0,
+                4804.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_20",
+            "Position": [
+                3769.51,
+                0.0,
+                4364.9
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_21",
+            "Position": [
+                4618.2,
+                0.0,
+                7922.46
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Alteria_Village_22",
+            "Position": [
+                6047.81,
+                0.0,
+                7316.24
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

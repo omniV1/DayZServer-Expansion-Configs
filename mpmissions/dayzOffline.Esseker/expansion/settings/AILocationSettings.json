@@ -1,0 +1,456 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Esseker_Airfield_01",
+            "Position": [
+                8761.77,
+                0.0,
+                5530.71
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Airfield_02",
+            "Position": [
+                9932.15,
+                0.0,
+                4809.73
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Camp_01",
+            "Position": [
+                7725.24,
+                0.0,
+                10146.18
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Camp_02",
+            "Position": [
+                8354.43,
+                0.0,
+                8649.5
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Local_01",
+            "Position": [
+                10063.62,
+                0.0,
+                5602.47
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Local_02",
+            "Position": [
+                11913.82,
+                0.0,
+                7954.15
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Local_03",
+            "Position": [
+                4933.82,
+                0.0,
+                5122.99
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_01",
+            "Position": [
+                9414.76,
+                0.0,
+                5591.79
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_02",
+            "Position": [
+                8212.56,
+                0.0,
+                5590.33
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_03",
+            "Position": [
+                8655.42,
+                0.0,
+                5900.67
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_04",
+            "Position": [
+                7687.47,
+                0.0,
+                7604.67
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_05",
+            "Position": [
+                6335.58,
+                0.0,
+                5527.69
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_06",
+            "Position": [
+                7705.26,
+                0.0,
+                6887.7
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_07",
+            "Position": [
+                9237.21,
+                0.0,
+                8045.66
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Military_Base_08",
+            "Position": [
+                10993.36,
+                0.0,
+                6576.27
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Ruin_01",
+            "Position": [
+                10654.76,
+                0.0,
+                5454.91
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Ruin_02",
+            "Position": [
+                9601.0,
+                0.0,
+                8539.57
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_01",
+            "Position": [
+                10058.52,
+                0.0,
+                9898.7
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_02",
+            "Position": [
+                5001.57,
+                0.0,
+                8723.24
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_03",
+            "Position": [
+                6316.88,
+                0.0,
+                6168.42
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_04",
+            "Position": [
+                6178.46,
+                0.0,
+                6901.19
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_05",
+            "Position": [
+                7061.08,
+                0.0,
+                9291.1
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_06",
+            "Position": [
+                4790.29,
+                0.0,
+                7420.75
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_07",
+            "Position": [
+                7557.36,
+                0.0,
+                5559.41
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_08",
+            "Position": [
+                10313.36,
+                0.0,
+                9679.59
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_09",
+            "Position": [
+                7891.08,
+                0.0,
+                6914.29
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_10",
+            "Position": [
+                7748.81,
+                0.0,
+                8296.81
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_11",
+            "Position": [
+                7222.86,
+                0.0,
+                9375.07
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_12",
+            "Position": [
+                10122.93,
+                0.0,
+                7951.95
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_13",
+            "Position": [
+                6582.56,
+                0.0,
+                6084.03
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_14",
+            "Position": [
+                8741.26,
+                0.0,
+                9859.96
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_15",
+            "Position": [
+                8279.0,
+                0.0,
+                9348.91
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_16",
+            "Position": [
+                9621.77,
+                0.0,
+                4867.95
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_17",
+            "Position": [
+                9443.44,
+                0.0,
+                9617.88
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_18",
+            "Position": [
+                6886.15,
+                0.0,
+                8995.16
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_19",
+            "Position": [
+                8303.99,
+                0.0,
+                5939.36
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_20",
+            "Position": [
+                9959.39,
+                0.0,
+                10838.2
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_21",
+            "Position": [
+                10468.82,
+                0.0,
+                8693.56
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_22",
+            "Position": [
+                11246.0,
+                0.0,
+                9552.01
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_23",
+            "Position": [
+                10865.03,
+                0.0,
+                10173.19
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Esseker_Village_24",
+            "Position": [
+                11147.26,
+                0.0,
+                9781.22
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

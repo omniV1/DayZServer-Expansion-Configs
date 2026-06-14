@@ -1347,7 +1347,11 @@ def cluster_spawn_regions(
 def update_spawn_settings(cfg: MapConfig, mission: Path, teleports: dict) -> str:
     spawn_path = mission / "expansion" / "settings" / "SpawnSettings.json"
     if not spawn_path.exists():
-        raise FileNotFoundError(f"Missing {spawn_path}")
+        template = SERVER / "mpmissions" / "dayzOffline.chernarusplus" / "expansion" / "settings" / "SpawnSettings.json"
+        if not template.exists():
+            raise FileNotFoundError(f"Missing {spawn_path} and template {template}")
+        spawn_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(template, spawn_path)
     settings = json.loads(spawn_path.read_text(encoding="utf-8"))
     bubbles = load_bubbles(mission)
 
@@ -1391,6 +1395,7 @@ def copy_loadouts(mission: Path) -> int:
 def build_map(cfg: MapConfig) -> None:
     mission, settings_dir, _ = mission_paths(cfg)
     teleports = load_teleports(cfg)
+    settings_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n=== {cfg.key.upper()} ({cfg.mission}) ===")
 

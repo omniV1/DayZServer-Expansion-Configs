@@ -1,0 +1,467 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Banov_Airfield_01",
+            "Position": [
+                6167.4,
+                0.0,
+                1637.21
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Airfield_02",
+            "Position": [
+                12014.96,
+                0.0,
+                14855.26
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Airfield_03",
+            "Position": [
+                1870.69,
+                0.0,
+                11994.48
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Airfield_04",
+            "Position": [
+                2131.8,
+                0.0,
+                12057.21
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Camp_01",
+            "Position": [
+                13110.78,
+                0.0,
+                465.37
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Camp_02",
+            "Position": [
+                6879.36,
+                0.0,
+                3642.52
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Camp_03",
+            "Position": [
+                7101.14,
+                0.0,
+                12086.74
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Camp_04",
+            "Position": [
+                8204.12,
+                0.0,
+                13819.88
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_01",
+            "Position": [
+                6124.8,
+                0.0,
+                2208.7
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_02",
+            "Position": [
+                4984.76,
+                0.0,
+                450.8
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_03",
+            "Position": [
+                6068.05,
+                0.0,
+                1075.22
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_04",
+            "Position": [
+                2947.34,
+                0.0,
+                6220.49
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_05",
+            "Position": [
+                6757.65,
+                0.0,
+                1509.66
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_06",
+            "Position": [
+                8122.91,
+                0.0,
+                9989.86
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_07",
+            "Position": [
+                12726.92,
+                0.0,
+                10847.08
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Military_Base_08",
+            "Position": [
+                4312.27,
+                0.0,
+                3465.29
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Ruin_01",
+            "Position": [
+                5667.94,
+                0.0,
+                2269.7
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Ruin_02",
+            "Position": [
+                5661.05,
+                0.0,
+                1730.94
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Ruin_03",
+            "Position": [
+                4316.69,
+                0.0,
+                11283.19
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Ruin_04",
+            "Position": [
+                4707.84,
+                0.0,
+                6830.89
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Ruin_05",
+            "Position": [
+                1675.06,
+                0.0,
+                7662.36
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_01",
+            "Position": [
+                874.46,
+                0.0,
+                13266.21
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_02",
+            "Position": [
+                4302.48,
+                0.0,
+                13426.76
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_03",
+            "Position": [
+                11857.25,
+                0.0,
+                4251.43
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_04",
+            "Position": [
+                4070.1,
+                0.0,
+                13849.87
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_05",
+            "Position": [
+                1604.21,
+                0.0,
+                10133.42
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_06",
+            "Position": [
+                7629.93,
+                0.0,
+                7410.21
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_07",
+            "Position": [
+                4930.51,
+                0.0,
+                6357.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_08",
+            "Position": [
+                11299.39,
+                0.0,
+                3729.85
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_09",
+            "Position": [
+                1194.49,
+                0.0,
+                4116.82
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_10",
+            "Position": [
+                12144.44,
+                0.0,
+                6822.8
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_11",
+            "Position": [
+                1411.96,
+                0.0,
+                10593.11
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_12",
+            "Position": [
+                6007.86,
+                0.0,
+                4947.82
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_13",
+            "Position": [
+                3780.62,
+                0.0,
+                970.11
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_14",
+            "Position": [
+                828.23,
+                0.0,
+                12848.73
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_15",
+            "Position": [
+                5742.7,
+                0.0,
+                1053.94
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_16",
+            "Position": [
+                9474.07,
+                0.0,
+                1654.64
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_17",
+            "Position": [
+                4788.2,
+                0.0,
+                10796.83
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_18",
+            "Position": [
+                1206.04,
+                0.0,
+                10112.9
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_19",
+            "Position": [
+                4618.92,
+                0.0,
+                3461.07
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_20",
+            "Position": [
+                12724.14,
+                0.0,
+                6461.22
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Banov_Village_21",
+            "Position": [
+                8921.52,
+                0.0,
+                3357.79
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

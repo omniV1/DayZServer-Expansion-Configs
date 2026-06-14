@@ -1,0 +1,437 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "Airfield",
+            "Name": "Deerisle Airfield 01",
+            "Position": [
+                15749.03,
+                34.16,
+                4850.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Deerisle Airfield 02",
+            "Position": [
+                1045.0,
+                10.75,
+                13349.03
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Deerisle Airfield 03",
+            "Position": [
+                5518.17,
+                76.38,
+                3708.34
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Deerisle Airfield 04",
+            "Position": [
+                10034.26,
+                17.95,
+                10810.75
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 01",
+            "Position": [
+                6103.48,
+                15.61,
+                14655.02
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 02",
+            "Position": [
+                7184.82,
+                418.68,
+                11602.75
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 03",
+            "Position": [
+                6875.11,
+                22.28,
+                1610.9
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 04",
+            "Position": [
+                11401.27,
+                13.02,
+                10144.59
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 05",
+            "Position": [
+                6045.4,
+                17.95,
+                14073.73
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 06",
+            "Position": [
+                6855.3,
+                45.11,
+                2173.03
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 07",
+            "Position": [
+                8785.51,
+                7.77,
+                8839.68
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Deerisle Military Base 08",
+            "Position": [
+                896.32,
+                12.31,
+                15258.02
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Deerisle Camp 01",
+            "Position": [
+                8804.19,
+                12.23,
+                9378.39
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Deerisle Camp 02",
+            "Position": [
+                8265.05,
+                2.57,
+                13506.92
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Deerisle Camp 03",
+            "Position": [
+                10149.87,
+                22.17,
+                5510.7
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Deerisle Camp 04",
+            "Position": [
+                4856.44,
+                9.2,
+                2297.63
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Deerisle Camp 05",
+            "Position": [
+                8571.66,
+                3.38,
+                13473.34
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Deerisle Ruin 01",
+            "Position": [
+                819.59,
+                28.4,
+                369.61
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Deerisle Ruin 02",
+            "Position": [
+                6318.72,
+                37.42,
+                2082.34
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Deerisle Ruin 03",
+            "Position": [
+                10156.92,
+                46.25,
+                4892.79
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Deerisle Ruin 04",
+            "Position": [
+                1097.7,
+                -19.93,
+                14010.16
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Deerisle Ruin 05",
+            "Position": [
+                479.36,
+                8.24,
+                15274.87
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 01",
+            "Position": [
+                7319.93,
+                10.7,
+                1566.75
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 02",
+            "Position": [
+                4808.41,
+                26.44,
+                8200.15
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 03",
+            "Position": [
+                6247.23,
+                28.26,
+                6827.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 04",
+            "Position": [
+                7510.19,
+                32.32,
+                3657.19
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 05",
+            "Position": [
+                394.66,
+                13.38,
+                12017.13
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 06",
+            "Position": [
+                4726.75,
+                20.76,
+                4397.36
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 07",
+            "Position": [
+                6140.56,
+                7.37,
+                8150.78
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 08",
+            "Position": [
+                7419.87,
+                12.2,
+                8241.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 09",
+            "Position": [
+                5546.24,
+                13.93,
+                8194.66
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 10",
+            "Position": [
+                4730.41,
+                10.23,
+                1496.71
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 11",
+            "Position": [
+                2835.91,
+                19.0,
+                10848.64
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 12",
+            "Position": [
+                6311.27,
+                25.31,
+                1629.25
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 13",
+            "Position": [
+                8086.31,
+                11.46,
+                1757.29
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 14",
+            "Position": [
+                7978.91,
+                37.38,
+                8119.44
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 15",
+            "Position": [
+                10651.39,
+                6.18,
+                4329.1
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 16",
+            "Position": [
+                8994.16,
+                30.56,
+                7546.72
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 17",
+            "Position": [
+                1179.24,
+                5.3,
+                15714.07
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 18",
+            "Position": [
+                9443.79,
+                26.05,
+                7565.78
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 19",
+            "Position": [
+                1610.59,
+                1.66,
+                11350.98
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Deerisle Village 20",
+            "Position": [
+                3661.52,
+                7.18,
+                13494.14
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

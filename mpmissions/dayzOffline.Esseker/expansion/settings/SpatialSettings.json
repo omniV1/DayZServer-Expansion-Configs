@@ -1,0 +1,408 @@
+{
+    "Group": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Esseker_Airfield_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8761.77,
+                0.0,
+                5530.71
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8776.77,
+                    0.0,
+                    5545.71
+                ],
+                [
+                    8749.77,
+                    0.0,
+                    5520.71
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Airfield_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9932.15,
+                0.0,
+                4809.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9947.15,
+                    0.0,
+                    4824.73
+                ],
+                [
+                    9920.15,
+                    0.0,
+                    4799.73
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Camp_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7725.24,
+                0.0,
+                10146.18
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7740.24,
+                    0.0,
+                    10161.18
+                ],
+                [
+                    7713.24,
+                    0.0,
+                    10136.18
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Camp_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8354.43,
+                0.0,
+                8649.5
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8369.43,
+                    0.0,
+                    8664.5
+                ],
+                [
+                    8342.43,
+                    0.0,
+                    8639.5
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9414.76,
+                0.0,
+                5591.79
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9429.76,
+                    0.0,
+                    5606.79
+                ],
+                [
+                    9402.76,
+                    0.0,
+                    5581.79
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8212.56,
+                0.0,
+                5590.33
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8227.56,
+                    0.0,
+                    5605.33
+                ],
+                [
+                    8200.56,
+                    0.0,
+                    5580.33
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8655.42,
+                0.0,
+                5900.67
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8670.42,
+                    0.0,
+                    5915.67
+                ],
+                [
+                    8643.42,
+                    0.0,
+                    5890.67
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7687.47,
+                0.0,
+                7604.67
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7702.47,
+                    0.0,
+                    7619.67
+                ],
+                [
+                    7675.47,
+                    0.0,
+                    7594.67
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6335.58,
+                0.0,
+                5527.69
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6350.58,
+                    0.0,
+                    5542.69
+                ],
+                [
+                    6323.58,
+                    0.0,
+                    5517.69
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_06",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7705.26,
+                0.0,
+                6887.7
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7720.26,
+                    0.0,
+                    6902.7
+                ],
+                [
+                    7693.26,
+                    0.0,
+                    6877.7
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_07",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                9237.21,
+                0.0,
+                8045.66
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    9252.21,
+                    0.0,
+                    8060.66
+                ],
+                [
+                    9225.21,
+                    0.0,
+                    8035.66
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Esseker_Military_Base_08",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10993.36,
+                0.0,
+                6576.27
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11008.36,
+                    0.0,
+                    6591.27
+                ],
+                [
+                    10981.36,
+                    0.0,
+                    6566.27
+                ]
+            ]
+        }
+    ],
+    "MinimumPlayerDistance": 80,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "MaxAI": 47,
+    "Locations_Enabled": 2,
+    "Points_Enabled": 0,
+    "Point": []
+}

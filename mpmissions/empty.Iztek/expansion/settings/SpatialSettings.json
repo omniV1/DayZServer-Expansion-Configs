@@ -1,0 +1,474 @@
+{
+    "Group": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Iztek_Airfield_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3473.11,
+                0.0,
+                5346.56
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3488.11,
+                    0.0,
+                    5361.56
+                ],
+                [
+                    3461.11,
+                    0.0,
+                    5336.56
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Camp_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5650.94,
+                0.0,
+                2690.04
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5665.94,
+                    0.0,
+                    2705.04
+                ],
+                [
+                    5638.94,
+                    0.0,
+                    2680.04
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Camp_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5059.85,
+                0.0,
+                996.33
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5074.85,
+                    0.0,
+                    1011.33
+                ],
+                [
+                    5047.85,
+                    0.0,
+                    986.33
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Camp_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1078.89,
+                0.0,
+                6966.09
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1093.89,
+                    0.0,
+                    6981.09
+                ],
+                [
+                    1066.89,
+                    0.0,
+                    6956.09
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Camp_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                2903.93,
+                0.0,
+                6949.68
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    2918.93,
+                    0.0,
+                    6964.68
+                ],
+                [
+                    2891.93,
+                    0.0,
+                    6939.68
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Camp_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6278.04,
+                0.0,
+                2071.65
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6293.04,
+                    0.0,
+                    2086.65
+                ],
+                [
+                    6266.04,
+                    0.0,
+                    2061.65
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6389.89,
+                0.0,
+                3621.32
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6404.89,
+                    0.0,
+                    3636.32
+                ],
+                [
+                    6377.89,
+                    0.0,
+                    3611.32
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5456.54,
+                0.0,
+                1045.31
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5471.54,
+                    0.0,
+                    1060.31
+                ],
+                [
+                    5444.54,
+                    0.0,
+                    1035.31
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6623.27,
+                0.0,
+                3560.12
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6638.27,
+                    0.0,
+                    3575.12
+                ],
+                [
+                    6611.27,
+                    0.0,
+                    3550.12
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6796.68,
+                0.0,
+                1541.17
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6811.68,
+                    0.0,
+                    1556.17
+                ],
+                [
+                    6784.68,
+                    0.0,
+                    1531.17
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                3505.4,
+                0.0,
+                2890.94
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    3520.4,
+                    0.0,
+                    2905.94
+                ],
+                [
+                    3493.4,
+                    0.0,
+                    2880.94
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_06",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1521.97,
+                0.0,
+                4287.71
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1536.97,
+                    0.0,
+                    4302.71
+                ],
+                [
+                    1509.97,
+                    0.0,
+                    4277.71
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_07",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5657.83,
+                0.0,
+                2560.65
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5672.83,
+                    0.0,
+                    2575.65
+                ],
+                [
+                    5645.83,
+                    0.0,
+                    2550.65
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Iztek_Military_Base_08",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5465.04,
+                0.0,
+                3600.16
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5480.04,
+                    0.0,
+                    3615.16
+                ],
+                [
+                    5453.04,
+                    0.0,
+                    3590.16
+                ]
+            ]
+        }
+    ],
+    "MinimumPlayerDistance": 80,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "MaxAI": 49,
+    "Locations_Enabled": 2,
+    "Points_Enabled": 0,
+    "Point": []
+}

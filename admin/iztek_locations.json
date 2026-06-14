@@ -1,0 +1,387 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "Airfield",
+            "Name": "Iztek Airfield 01",
+            "Position": [
+                3473.11,
+                10.88,
+                5346.56
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 01",
+            "Position": [
+                6389.89,
+                13.81,
+                3621.32
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 02",
+            "Position": [
+                5456.54,
+                13.44,
+                1045.31
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 03",
+            "Position": [
+                6623.27,
+                14.53,
+                3560.12
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 04",
+            "Position": [
+                6796.68,
+                45.9,
+                1541.17
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 05",
+            "Position": [
+                3505.4,
+                8.29,
+                2890.94
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 06",
+            "Position": [
+                1521.97,
+                13.28,
+                4287.71
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 07",
+            "Position": [
+                5657.83,
+                6.28,
+                2560.65
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Iztek Military Base 08",
+            "Position": [
+                5465.04,
+                7.59,
+                3600.16
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Iztek Camp 01",
+            "Position": [
+                5650.94,
+                8.55,
+                2690.04
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Iztek Camp 02",
+            "Position": [
+                5059.85,
+                9.99,
+                996.33
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Iztek Camp 03",
+            "Position": [
+                1078.89,
+                25.29,
+                6966.09
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Iztek Camp 04",
+            "Position": [
+                2903.93,
+                11.23,
+                6949.68
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Iztek Camp 05",
+            "Position": [
+                6278.04,
+                25.06,
+                2071.65
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Iztek Ruin 01",
+            "Position": [
+                5480.06,
+                14.42,
+                5430.54
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Iztek Ruin 02",
+            "Position": [
+                1015.74,
+                10.61,
+                4925.51
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Iztek Ruin 03",
+            "Position": [
+                3406.78,
+                7.32,
+                2249.91
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 01",
+            "Position": [
+                6680.43,
+                13.97,
+                988.93
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 02",
+            "Position": [
+                6337.82,
+                15.23,
+                4062.67
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 03",
+            "Position": [
+                2527.98,
+                8.77,
+                5312.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 04",
+            "Position": [
+                4080.09,
+                12.84,
+                906.17
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 05",
+            "Position": [
+                4103.11,
+                7.83,
+                1434.33
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 06",
+            "Position": [
+                1527.91,
+                11.2,
+                5067.17
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 07",
+            "Position": [
+                4769.67,
+                58.57,
+                5444.23
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 08",
+            "Position": [
+                4767.39,
+                15.27,
+                3080.06
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 09",
+            "Position": [
+                2666.41,
+                14.43,
+                5383.39
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 10",
+            "Position": [
+                1401.04,
+                6.5,
+                6995.98
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 11",
+            "Position": [
+                2710.64,
+                10.31,
+                989.76
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 12",
+            "Position": [
+                3079.56,
+                13.19,
+                7184.9
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 13",
+            "Position": [
+                1535.04,
+                11.72,
+                5928.51
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 14",
+            "Position": [
+                5977.56,
+                9.96,
+                5701.35
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 15",
+            "Position": [
+                2270.03,
+                9.67,
+                4637.18
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 16",
+            "Position": [
+                2931.1,
+                11.33,
+                3722.27
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 17",
+            "Position": [
+                3766.81,
+                12.33,
+                3525.94
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 18",
+            "Position": [
+                6221.39,
+                21.72,
+                1810.12
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Iztek Village 19",
+            "Position": [
+                4843.59,
+                15.95,
+                4853.86
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Iztek Local 01",
+            "Position": [
+                7210.49,
+                19.43,
+                1677.62
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

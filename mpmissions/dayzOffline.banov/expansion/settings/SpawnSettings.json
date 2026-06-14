@@ -1,0 +1,405 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Banov Village 01",
+            "Positions": [
+                [
+                    874.46,
+                    0.0,
+                    13266.21
+                ],
+                [
+                    914.46,
+                    0.0,
+                    13296.21
+                ],
+                [
+                    839.46,
+                    0.0,
+                    13291.21
+                ],
+                [
+                    899.46,
+                    0.0,
+                    13226.21
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 02",
+            "Positions": [
+                [
+                    4302.48,
+                    0.0,
+                    13426.76
+                ],
+                [
+                    4342.48,
+                    0.0,
+                    13456.76
+                ],
+                [
+                    4267.48,
+                    0.0,
+                    13451.76
+                ],
+                [
+                    4327.48,
+                    0.0,
+                    13386.76
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 03",
+            "Positions": [
+                [
+                    11857.25,
+                    0.0,
+                    4251.43
+                ],
+                [
+                    11897.25,
+                    0.0,
+                    4281.43
+                ],
+                [
+                    11822.25,
+                    0.0,
+                    4276.43
+                ],
+                [
+                    11882.25,
+                    0.0,
+                    4211.43
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 04",
+            "Positions": [
+                [
+                    4070.1,
+                    0.0,
+                    13849.87
+                ],
+                [
+                    4110.1,
+                    0.0,
+                    13879.87
+                ],
+                [
+                    4035.1,
+                    0.0,
+                    13874.87
+                ],
+                [
+                    4095.1,
+                    0.0,
+                    13809.87
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 05",
+            "Positions": [
+                [
+                    1604.21,
+                    0.0,
+                    10133.42
+                ],
+                [
+                    1644.21,
+                    0.0,
+                    10163.42
+                ],
+                [
+                    1569.21,
+                    0.0,
+                    10158.42
+                ],
+                [
+                    1629.21,
+                    0.0,
+                    10093.42
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 06",
+            "Positions": [
+                [
+                    7629.93,
+                    0.0,
+                    7410.21
+                ],
+                [
+                    7669.93,
+                    0.0,
+                    7440.21
+                ],
+                [
+                    7594.93,
+                    0.0,
+                    7435.21
+                ],
+                [
+                    7654.93,
+                    0.0,
+                    7370.21
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 07",
+            "Positions": [
+                [
+                    4930.51,
+                    0.0,
+                    6357.45
+                ],
+                [
+                    4970.51,
+                    0.0,
+                    6387.45
+                ],
+                [
+                    4895.51,
+                    0.0,
+                    6382.45
+                ],
+                [
+                    4955.51,
+                    0.0,
+                    6317.45
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 08",
+            "Positions": [
+                [
+                    11299.39,
+                    0.0,
+                    3729.85
+                ],
+                [
+                    11339.39,
+                    0.0,
+                    3759.85
+                ],
+                [
+                    11264.39,
+                    0.0,
+                    3754.85
+                ],
+                [
+                    11324.39,
+                    0.0,
+                    3689.85
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 09",
+            "Positions": [
+                [
+                    1194.49,
+                    0.0,
+                    4116.82
+                ],
+                [
+                    1234.49,
+                    0.0,
+                    4146.82
+                ],
+                [
+                    1159.49,
+                    0.0,
+                    4141.82
+                ],
+                [
+                    1219.49,
+                    0.0,
+                    4076.8199999999997
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Banov Village 10",
+            "Positions": [
+                [
+                    12144.44,
+                    0.0,
+                    6822.8
+                ],
+                [
+                    12184.44,
+                    0.0,
+                    6852.8
+                ],
+                [
+                    12109.44,
+                    0.0,
+                    6847.8
+                ],
+                [
+                    12169.44,
+                    0.0,
+                    6782.8
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "BaseballCap_Black",
+            "BeanieHat_Green",
+            ""
+        ],
+        "Glasses": [],
+        "Masks": [],
+        "Tops": [
+            "HunterJacket_Brown",
+            "HunterJacket_Autumn",
+            "Shirt_BlueCheckBright",
+            "Sweater_Gray"
+        ],
+        "Vests": [],
+        "Gloves": [],
+        "Pants": [
+            "CargoPants_Green",
+            "CargoPants_Beige",
+            "CargoPants_Black"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Black",
+            "CombatBoots_Brown",
+            "CombatBoots_Green"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TaloonBag_Green",
+            "DryBag_Green",
+            "AssaultBag_Green"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Chemlight_Green",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TacticalBaconCan",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "PeachesCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

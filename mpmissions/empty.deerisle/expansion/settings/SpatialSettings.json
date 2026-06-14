@@ -1,0 +1,573 @@
+{
+    "Group": [],
+    "Location": [
+        {
+            "Spatial_Name": "Site_Deerisle_Airfield_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                15749.03,
+                0.0,
+                4850.21
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    15764.03,
+                    0.0,
+                    4865.21
+                ],
+                [
+                    15737.03,
+                    0.0,
+                    4840.21
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Airfield_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                1045.0,
+                0.0,
+                13349.03
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    1060.0,
+                    0.0,
+                    13364.03
+                ],
+                [
+                    1033.0,
+                    0.0,
+                    13339.03
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Airfield_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                5518.17,
+                0.0,
+                3708.34
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    5533.17,
+                    0.0,
+                    3723.34
+                ],
+                [
+                    5506.17,
+                    0.0,
+                    3698.34
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Airfield_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10034.26,
+                0.0,
+                10810.75
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10049.26,
+                    0.0,
+                    10825.75
+                ],
+                [
+                    10022.26,
+                    0.0,
+                    10800.75
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Camp_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8804.19,
+                0.0,
+                9378.39
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8819.19,
+                    0.0,
+                    9393.39
+                ],
+                [
+                    8792.19,
+                    0.0,
+                    9368.39
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Camp_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8265.05,
+                0.0,
+                13506.92
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8280.05,
+                    0.0,
+                    13521.92
+                ],
+                [
+                    8253.05,
+                    0.0,
+                    13496.92
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Camp_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                10149.87,
+                0.0,
+                5510.7
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    10164.87,
+                    0.0,
+                    5525.7
+                ],
+                [
+                    10137.87,
+                    0.0,
+                    5500.7
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Camp_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                4856.44,
+                0.0,
+                2297.63
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    4871.44,
+                    0.0,
+                    2312.63
+                ],
+                [
+                    4844.44,
+                    0.0,
+                    2287.63
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Camp_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8571.66,
+                0.0,
+                13473.34
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8586.66,
+                    0.0,
+                    13488.34
+                ],
+                [
+                    8559.66,
+                    0.0,
+                    13463.34
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_01",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6103.48,
+                0.0,
+                14655.02
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6118.48,
+                    0.0,
+                    14670.02
+                ],
+                [
+                    6091.48,
+                    0.0,
+                    14645.02
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_02",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                7184.82,
+                0.0,
+                11602.75
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    7199.82,
+                    0.0,
+                    11617.75
+                ],
+                [
+                    7172.82,
+                    0.0,
+                    11592.75
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_03",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6875.11,
+                0.0,
+                1610.9
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6890.11,
+                    0.0,
+                    1625.9
+                ],
+                [
+                    6863.11,
+                    0.0,
+                    1600.9
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_04",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                11401.27,
+                0.0,
+                10144.59
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    11416.27,
+                    0.0,
+                    10159.59
+                ],
+                [
+                    11389.27,
+                    0.0,
+                    10134.59
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_05",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6045.4,
+                0.0,
+                14073.73
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6060.4,
+                    0.0,
+                    14088.73
+                ],
+                [
+                    6033.4,
+                    0.0,
+                    14063.73
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_06",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                6855.3,
+                0.0,
+                2173.03
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    6870.3,
+                    0.0,
+                    2188.03
+                ],
+                [
+                    6843.3,
+                    0.0,
+                    2163.03
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_07",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                8785.51,
+                0.0,
+                8839.68
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    8800.51,
+                    0.0,
+                    8854.68
+                ],
+                [
+                    8773.51,
+                    0.0,
+                    8829.68
+                ]
+            ]
+        },
+        {
+            "Spatial_Name": "Site_Deerisle_Military_Base_08",
+            "Spatial_TriggerRadius": 340.0,
+            "Spatial_ZoneLoadout": "PvPLoadout.json",
+            "Spatial_MinCount": 2,
+            "Spatial_MaxCount": 4,
+            "Spatial_HuntMode": 3,
+            "Spatial_Faction": "Raiders",
+            "Spatial_Lootable": 1,
+            "Spatial_Chance": 0.65,
+            "Spatial_MinAccuracy": 0.42,
+            "Spatial_MaxAccuracy": 0.68,
+            "Spatial_Timer": 35.0,
+            "Spatial_SpawnMode": 1,
+            "Spatial_UnlimitedReload": 1,
+            "Spatial_TriggerPosition": [
+                896.32,
+                0.0,
+                15258.02
+            ],
+            "Spatial_SpawnPosition": [
+                [
+                    911.32,
+                    0.0,
+                    15273.02
+                ],
+                [
+                    884.32,
+                    0.0,
+                    15248.02
+                ]
+            ]
+        }
+    ],
+    "MinimumPlayerDistance": 80,
+    "MinDistance": 150,
+    "MaxDistance": 300,
+    "MaxAI": 58,
+    "Locations_Enabled": 2,
+    "Points_Enabled": 0,
+    "Point": []
+}

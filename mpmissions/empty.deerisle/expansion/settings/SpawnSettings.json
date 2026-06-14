@@ -1,0 +1,505 @@
+{
+    "m_Version": 7,
+    "SpawnLocations": [
+        {
+            "Name": "Deerisle Village 01",
+            "Positions": [
+                [
+                    7316.703,
+                    0.0,
+                    1691.83
+                ],
+                [
+                    7377.875,
+                    0.0,
+                    1422.687
+                ],
+                [
+                    7260.531,
+                    0.0,
+                    1414.167
+                ],
+                [
+                    7208.266,
+                    0.0,
+                    1384.934
+                ],
+                [
+                    7542.531,
+                    0.0,
+                    1551.447
+                ],
+                [
+                    7091.625,
+                    0.0,
+                    1866.609
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 02",
+            "Positions": [
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ],
+                [
+                    5897.906,
+                    0.0,
+                    1775.014
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 03",
+            "Positions": [
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ],
+                [
+                    8233.172,
+                    0.0,
+                    2545.118
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 04",
+            "Positions": [
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ],
+                [
+                    8233.172,
+                    0.0,
+                    2545.118
+                ],
+                [
+                    8109.844,
+                    0.0,
+                    2385.38
+                ],
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    7687.406,
+                    0.0,
+                    2093.197
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 05",
+            "Positions": [
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ],
+                [
+                    5897.906,
+                    0.0,
+                    1775.014
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    6120.969,
+                    0.0,
+                    1795.155
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 06",
+            "Positions": [
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ],
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    5897.906,
+                    0.0,
+                    1775.014
+                ],
+                [
+                    6120.969,
+                    0.0,
+                    1795.155
+                ],
+                [
+                    5790.406,
+                    0.0,
+                    1588.942
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 07",
+            "Positions": [
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ],
+                [
+                    8233.172,
+                    0.0,
+                    2545.118
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 08",
+            "Positions": [
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    8233.172,
+                    0.0,
+                    2545.118
+                ],
+                [
+                    8744.266,
+                    0.0,
+                    2561.806
+                ],
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 09",
+            "Positions": [
+                [
+                    6586.297,
+                    0.0,
+                    2563.466
+                ],
+                [
+                    6350.766,
+                    0.0,
+                    2489.887
+                ],
+                [
+                    7136.016,
+                    0.0,
+                    2497.756
+                ],
+                [
+                    6041.328,
+                    0.0,
+                    2142.734
+                ],
+                [
+                    7505.828,
+                    0.0,
+                    2391.661
+                ],
+                [
+                    8233.172,
+                    0.0,
+                    2545.118
+                ]
+            ],
+            "UseCooldown": 1
+        },
+        {
+            "Name": "Deerisle Village 10",
+            "Positions": [
+                [
+                    5243.734,
+                    0.0,
+                    827.5898
+                ],
+                [
+                    5113.672,
+                    0.0,
+                    605.7552
+                ],
+                [
+                    5523.828,
+                    0.0,
+                    834.3649
+                ],
+                [
+                    5790.406,
+                    0.0,
+                    1588.942
+                ],
+                [
+                    5897.906,
+                    0.0,
+                    1775.014
+                ],
+                [
+                    5934.922,
+                    0.0,
+                    1447.913
+                ]
+            ],
+            "UseCooldown": 1
+        }
+    ],
+    "StartingClothing": {
+        "EnableCustomClothing": 1,
+        "SetRandomHealth": 1,
+        "Headgear": [
+            "BaseballCap_Black",
+            "BeanieHat_Green",
+            ""
+        ],
+        "Glasses": [],
+        "Masks": [],
+        "Tops": [
+            "HunterJacket_Brown",
+            "HunterJacket_Autumn",
+            "Shirt_BlueCheckBright",
+            "Sweater_Gray"
+        ],
+        "Vests": [],
+        "Gloves": [],
+        "Pants": [
+            "CargoPants_Green",
+            "CargoPants_Beige",
+            "CargoPants_Black"
+        ],
+        "Belts": [],
+        "Shoes": [
+            "CombatBoots_Black",
+            "CombatBoots_Brown",
+            "CombatBoots_Green"
+        ],
+        "Armbands": [],
+        "Backpacks": [
+            "TaloonBag_Green",
+            "DryBag_Green",
+            "AssaultBag_Green"
+        ]
+    },
+    "EnableSpawnSelection": 1,
+    "SpawnOnTerritory": 0,
+    "StartingGear": {
+        "EnableStartingGear": 1,
+        "ApplyEnergySources": 0,
+        "SetRandomHealth": 1,
+        "UseUpperGear": 1,
+        "UsePantsGear": 1,
+        "UseBackpackGear": 1,
+        "UseVestGear": 0,
+        "UsePrimaryWeapon": 1,
+        "UseSecondaryWeapon": 0,
+        "UpperGear": [
+            {
+                "ClassName": "Rag",
+                "Quantity": 4,
+                "Attachments": []
+            },
+            {
+                "ClassName": "BandageDressing",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Compass",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "SteakKnife",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Chemlight_Green",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "PantsGear": [
+            {
+                "ClassName": "Canteen",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "BackpackGear": [
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "Mag_AKM_30Rnd",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "TacticalBaconCan",
+                "Quantity": -1,
+                "Attachments": []
+            },
+            {
+                "ClassName": "PeachesCan",
+                "Quantity": -1,
+                "Attachments": []
+            }
+        ],
+        "VestGear": [],
+        "PrimaryWeapon": {
+            "ClassName": "AKM",
+            "Quantity": 1,
+            "Attachments": [
+                "AK_PlasticBttstck",
+                "AK_PlasticHndgrd",
+                "Mag_AKM_30Rnd"
+            ]
+        },
+        "SecondaryWeapon": {}
+    },
+    "UseLoadouts": 0,
+    "MaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "FemaleLoadouts": [
+        {
+            "Loadout": "PlayerSurvivorLoadout",
+            "Chance": 1.0
+        }
+    ],
+    "SpawnHealthValue": 100.0,
+    "SpawnEnergyValue": 500.0,
+    "SpawnWaterValue": 500.0,
+    "EnableRespawnCooldowns": 1,
+    "RespawnCooldown": 120,
+    "TerritoryRespawnCooldown": 240,
+    "PunishMultispawn": 1,
+    "PunishCooldown": 120,
+    "PunishTimeframe": 300,
+    "CreateDeathMarker": 1,
+    "BackgroundImagePath": "DayZExpansion/SpawnSelection/GUI/textures/wood_background.edds"
+}

@@ -1,0 +1,437 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "Airfield",
+            "Name": "Rostow Airfield 01",
+            "Position": [
+                4312.3,
+                109.17,
+                6103.63
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 01",
+            "Position": [
+                8767.55,
+                59.58,
+                2234.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 02",
+            "Position": [
+                9490.83,
+                57.34,
+                10633.22
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 03",
+            "Position": [
+                11471.24,
+                54.34,
+                12640.73
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 04",
+            "Position": [
+                9575.58,
+                56.02,
+                10226.39
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 05",
+            "Position": [
+                3005.38,
+                199.14,
+                9392.73
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 06",
+            "Position": [
+                11866.98,
+                49.96,
+                12629.67
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 07",
+            "Position": [
+                8623.15,
+                49.03,
+                1837.29
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Rostow Military Base 08",
+            "Position": [
+                11553.08,
+                47.4,
+                8938.73
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Rostow Camp 01",
+            "Position": [
+                8993.56,
+                68.6,
+                2789.9
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Rostow Camp 02",
+            "Position": [
+                9187.29,
+                73.64,
+                2866.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Rostow Camp 03",
+            "Position": [
+                10610.48,
+                428.92,
+                6566.91
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Rostow Ruin 01",
+            "Position": [
+                13290.68,
+                80.1,
+                7016.79
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Rostow Ruin 02",
+            "Position": [
+                6089.96,
+                160.77,
+                10618.55
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Rostow Ruin 03",
+            "Position": [
+                2910.9,
+                273.28,
+                5633.89
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Rostow Ruin 04",
+            "Position": [
+                7103.1,
+                195.59,
+                12455.22
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Rostow Ruin 05",
+            "Position": [
+                9541.4,
+                118.74,
+                8169.11
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 01",
+            "Position": [
+                13927.36,
+                40.35,
+                11158.46
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 02",
+            "Position": [
+                881.96,
+                196.73,
+                8205.78
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 03",
+            "Position": [
+                4306.43,
+                274.5,
+                944.83
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 04",
+            "Position": [
+                4751.84,
+                148.5,
+                11371.74
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 05",
+            "Position": [
+                4878.76,
+                135.72,
+                7388.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 06",
+            "Position": [
+                9855.6,
+                61.71,
+                10232.67
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 07",
+            "Position": [
+                12743.15,
+                41.87,
+                8305.55
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 08",
+            "Position": [
+                1102.14,
+                315.6,
+                3827.07
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 09",
+            "Position": [
+                1164.41,
+                159.05,
+                12677.79
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 10",
+            "Position": [
+                9147.08,
+                66.21,
+                2298.03
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 11",
+            "Position": [
+                9014.05,
+                99.57,
+                4861.62
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 12",
+            "Position": [
+                10128.65,
+                74.6,
+                13236.49
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 13",
+            "Position": [
+                6801.22,
+                163.14,
+                10874.17
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 14",
+            "Position": [
+                8075.53,
+                389.74,
+                7645.4
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 15",
+            "Position": [
+                9419.09,
+                123.5,
+                8753.7
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 16",
+            "Position": [
+                4141.04,
+                107.64,
+                4235.01
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 17",
+            "Position": [
+                9316.64,
+                82.54,
+                12578.35
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 18",
+            "Position": [
+                3709.36,
+                131.62,
+                6051.08
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 19",
+            "Position": [
+                10205.11,
+                48.11,
+                1365.63
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 20",
+            "Position": [
+                3392.99,
+                139.21,
+                8587.16
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 21",
+            "Position": [
+                7638.13,
+                53.71,
+                1773.54
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 22",
+            "Position": [
+                13406.78,
+                58.9,
+                7191.97
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 23",
+            "Position": [
+                3659.23,
+                126.48,
+                3067.36
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Rostow Village 24",
+            "Position": [
+                5951.08,
+                86.92,
+                5007.44
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Local",
+            "Name": "Rostow Local 01",
+            "Position": [
+                970.94,
+                318.75,
+                4045.44
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

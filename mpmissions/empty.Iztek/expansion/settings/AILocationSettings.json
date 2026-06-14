@@ -1,0 +1,412 @@
+{
+    "m_Version": 4,
+    "RoamingLocations": [
+        {
+            "Name": "Settlement_Iztek_Airfield_01",
+            "Position": [
+                3473.11,
+                0.0,
+                5346.56
+            ],
+            "Radius": 450.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Camp_01",
+            "Position": [
+                5650.94,
+                0.0,
+                2690.04
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Camp_02",
+            "Position": [
+                5059.85,
+                0.0,
+                996.33
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Camp_03",
+            "Position": [
+                1078.89,
+                0.0,
+                6966.09
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Camp_04",
+            "Position": [
+                2903.93,
+                0.0,
+                6949.68
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Camp_05",
+            "Position": [
+                6278.04,
+                0.0,
+                2071.65
+            ],
+            "Radius": 320.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Local_01",
+            "Position": [
+                7210.49,
+                0.0,
+                1677.62
+            ],
+            "Radius": 220.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_01",
+            "Position": [
+                6389.89,
+                0.0,
+                3621.32
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_02",
+            "Position": [
+                5456.54,
+                0.0,
+                1045.31
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_03",
+            "Position": [
+                6623.27,
+                0.0,
+                3560.12
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_04",
+            "Position": [
+                6796.68,
+                0.0,
+                1541.17
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_05",
+            "Position": [
+                3505.4,
+                0.0,
+                2890.94
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_06",
+            "Position": [
+                1521.97,
+                0.0,
+                4287.71
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_07",
+            "Position": [
+                5657.83,
+                0.0,
+                2560.65
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Military_Base_08",
+            "Position": [
+                5465.04,
+                0.0,
+                3600.16
+            ],
+            "Radius": 400.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Ruin_01",
+            "Position": [
+                5480.06,
+                0.0,
+                5430.54
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Ruin_02",
+            "Position": [
+                1015.74,
+                0.0,
+                4925.51
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Ruin_03",
+            "Position": [
+                3406.78,
+                0.0,
+                2249.91
+            ],
+            "Radius": 240.0,
+            "Type": "Local",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_01",
+            "Position": [
+                6680.43,
+                0.0,
+                988.93
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_02",
+            "Position": [
+                6337.82,
+                0.0,
+                4062.67
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_03",
+            "Position": [
+                2527.98,
+                0.0,
+                5312.45
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_04",
+            "Position": [
+                4080.09,
+                0.0,
+                906.17
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_05",
+            "Position": [
+                4103.11,
+                0.0,
+                1434.33
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_06",
+            "Position": [
+                1527.91,
+                0.0,
+                5067.17
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_07",
+            "Position": [
+                4769.67,
+                0.0,
+                5444.23
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_08",
+            "Position": [
+                4767.39,
+                0.0,
+                3080.06
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_09",
+            "Position": [
+                2666.41,
+                0.0,
+                5383.39
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_10",
+            "Position": [
+                1401.04,
+                0.0,
+                6995.98
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_11",
+            "Position": [
+                2710.64,
+                0.0,
+                989.76
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_12",
+            "Position": [
+                3079.56,
+                0.0,
+                7184.9
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_13",
+            "Position": [
+                1535.04,
+                0.0,
+                5928.51
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_14",
+            "Position": [
+                5977.56,
+                0.0,
+                5701.35
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_15",
+            "Position": [
+                2270.03,
+                0.0,
+                4637.18
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_16",
+            "Position": [
+                2931.1,
+                0.0,
+                3722.27
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_17",
+            "Position": [
+                3766.81,
+                0.0,
+                3525.94
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_18",
+            "Position": [
+                6221.39,
+                0.0,
+                1810.12
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        },
+        {
+            "Name": "Settlement_Iztek_Village_19",
+            "Position": [
+                4843.59,
+                0.0,
+                4853.86
+            ],
+            "Radius": 350.0,
+            "Type": "Village",
+            "Enabled": 1
+        }
+    ]
+}

@@ -1,0 +1,437 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": [
+        {
+            "Type": "Airfield",
+            "Name": "Alteria Airfield 01",
+            "Position": [
+                7567.06,
+                30.06,
+                2196.98
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Alteria Airfield 02",
+            "Position": [
+                6866.73,
+                30.4,
+                2223.4
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Airfield",
+            "Name": "Alteria Airfield 03",
+            "Position": [
+                6225.98,
+                27.82,
+                2177.65
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 01",
+            "Position": [
+                4305.72,
+                21.02,
+                7478.71
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 02",
+            "Position": [
+                1699.95,
+                16.03,
+                494.31
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 03",
+            "Position": [
+                2246.63,
+                59.27,
+                3071.43
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 04",
+            "Position": [
+                2097.54,
+                8.18,
+                1007.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 05",
+            "Position": [
+                1901.97,
+                3.3,
+                1199.41
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 06",
+            "Position": [
+                2851.1,
+                20.82,
+                4238.44
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 07",
+            "Position": [
+                2342.76,
+                36.22,
+                5619.15
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Military Base",
+            "Name": "Alteria Military Base 08",
+            "Position": [
+                3576.29,
+                14.03,
+                6177.54
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Alteria Camp 01",
+            "Position": [
+                5424.57,
+                9.71,
+                5410.63
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Alteria Camp 02",
+            "Position": [
+                4940.54,
+                4.96,
+                5517.68
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Alteria Camp 03",
+            "Position": [
+                4244.77,
+                12.57,
+                2310.43
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Camp",
+            "Name": "Alteria Camp 04",
+            "Position": [
+                4660.14,
+                80.39,
+                4290.0
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Alteria Ruin 01",
+            "Position": [
+                6748.67,
+                22.72,
+                3704.68
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Alteria Ruin 02",
+            "Position": [
+                3721.56,
+                11.31,
+                4784.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Alteria Ruin 03",
+            "Position": [
+                2926.54,
+                36.33,
+                3631.86
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Alteria Ruin 04",
+            "Position": [
+                4195.25,
+                31.96,
+                6715.1
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Ruin",
+            "Name": "Alteria Ruin 05",
+            "Position": [
+                6103.38,
+                13.57,
+                6120.43
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 01",
+            "Position": [
+                4714.48,
+                21.65,
+                7508.09
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 02",
+            "Position": [
+                2836.67,
+                42.77,
+                6053.82
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 03",
+            "Position": [
+                1006.33,
+                18.66,
+                2954.43
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 04",
+            "Position": [
+                2360.64,
+                57.54,
+                6061.79
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 05",
+            "Position": [
+                2320.2,
+                14.34,
+                7536.57
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 06",
+            "Position": [
+                2794.06,
+                28.79,
+                5595.35
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 07",
+            "Position": [
+                2231.87,
+                69.12,
+                6841.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 08",
+            "Position": [
+                5530.76,
+                12.53,
+                6946.85
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 09",
+            "Position": [
+                1621.19,
+                15.38,
+                7488.5
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 10",
+            "Position": [
+                3580.0,
+                13.56,
+                6845.93
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 11",
+            "Position": [
+                1639.9,
+                53.47,
+                3549.16
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 12",
+            "Position": [
+                6321.91,
+                30.88,
+                3561.44
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 13",
+            "Position": [
+                7548.55,
+                7.58,
+                5357.79
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 14",
+            "Position": [
+                860.87,
+                25.96,
+                5996.62
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 15",
+            "Position": [
+                2942.21,
+                11.92,
+                6816.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 16",
+            "Position": [
+                445.88,
+                11.89,
+                6215.21
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 17",
+            "Position": [
+                4877.3,
+                28.71,
+                940.41
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 18",
+            "Position": [
+                6058.34,
+                32.29,
+                5421.6
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 19",
+            "Position": [
+                2850.22,
+                8.15,
+                4804.45
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 20",
+            "Position": [
+                3769.51,
+                9.35,
+                4364.9
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 21",
+            "Position": [
+                4618.2,
+                11.12,
+                7922.46
+            ],
+            "Radius": 4.0
+        },
+        {
+            "Type": "Village",
+            "Name": "Alteria Village 22",
+            "Position": [
+                6047.81,
+                4.7,
+                7316.24
+            ],
+            "Radius": 4.0
+        }
+    ]
+}

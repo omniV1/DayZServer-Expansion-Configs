@@ -11,7 +11,7 @@
             "SlotName": "Body",
             "Items": [
                 {
-                    "ClassName": "GorkaEJacket_Autumn",
+                    "ClassName": "USMCJacket_Desert",
                     "Chance": 1.0,
                     "Quantity": {
                         "Min": 0.0,
@@ -29,7 +29,7 @@
                     "ConstructionPartsBuilt": []
                 },
                 {
-                    "ClassName": "TacticalShirt_Grey",
+                    "ClassName": "TacticalShirt_Olive",
                     "Chance": 1.0,
                     "Quantity": {
                         "Min": 0.0,
@@ -52,7 +52,7 @@
             "SlotName": "Legs",
             "Items": [
                 {
-                    "ClassName": "GorkaPants_Autumn",
+                    "ClassName": "USMCPants_Desert",
                     "Chance": 1.0,
                     "Quantity": {
                         "Min": 0.0,
@@ -70,7 +70,7 @@
                     "ConstructionPartsBuilt": []
                 },
                 {
-                    "ClassName": "CargoPants_Green",
+                    "ClassName": "CargoPants_Beige",
                     "Chance": 1.0,
                     "Quantity": {
                         "Min": 0.0,
