@@ -59,6 +59,60 @@ MAPS = {
             ("Rasman Raiders", [6244.28, 115.0, 11217.34], 6, 13000),
         ],
     },
+    "deerisle": {
+        "profile": "profiles_deerisle",
+        "label": "Deer Isle",
+        "board": ("Deer Isle Contract Board", [6586.30, 0.0, 1588.94], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("South Coast Raiders", [8904.06, 0.0, 2408.41], 5, 9000),
+            ("Harbor Route Raiders", [6117.80, 0.0, 987.09], 6, 13000),
+        ],
+    },
+    "banov": {
+        "profile": "profiles_banov",
+        "label": "Banov",
+        "board": ("Banov Contract Board", [5823.13, 218.26, 1113.63], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("Lowland Raiders", [3169.17, 199.99, 317.77], 5, 9000),
+            ("Village Route Raiders", [1659.55, 218.22, 2093.20], 6, 13000),
+        ],
+    },
+    "esseker": {
+        "profile": "profiles_esseker",
+        "label": "Esseker",
+        "board": ("Esseker Contract Board", [9075.77, 0.0, 9364.67], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("Western Road Raiders", [6854.85, 0.0, 9057.99], 5, 9000),
+            ("North Route Raiders", [7492.87, 0.0, 9511.03], 6, 13000),
+        ],
+    },
+    "rostow": {
+        "profile": "profiles_rostow",
+        "label": "Rostow",
+        "board": ("Rostow Contract Board", [1288.78, 0.0, 11919.19], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("North Road Raiders", [601.52, 0.0, 12680.86], 5, 9000),
+            ("Rail Line Raiders", [1691.48, 0.0, 12174.61], 6, 13000),
+        ],
+    },
+    "iztek": {
+        "profile": "profiles_iztek",
+        "label": "Iztek",
+        "board": ("Iztek Contract Board", [6406.93, 0.0, 844.78], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("West Road Raiders", [2446.57, 0.0, 844.78], 5, 9000),
+            ("Coastal Route Raiders", [3942.88, 0.0, 672.88], 6, 13000),
+        ],
+    },
+    "alteria": {
+        "profile": "profiles_alteria",
+        "label": "Alteria",
+        "board": ("Alteria Contract Board", [2793.00, 0.0, 5950.00], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("West Trail Raiders", [1087.00, 0.0, 4952.00], 5, 9000),
+            ("North Road Raiders", [1914.00, 0.0, 7887.00], 6, 13000),
+        ],
+    },
 }
 
 

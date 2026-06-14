@@ -29,6 +29,12 @@ PROFILE_DIRS = [
     "profiles_enoch",
     "profiles_sakhal",
     "profiles_takistan",
+    "profiles_deerisle",
+    "profiles_banov",
+    "profiles_esseker",
+    "profiles_rostow",
+    "profiles_iztek",
+    "profiles_alteria",
 ]
 
 MISSIONS = [
@@ -37,6 +43,12 @@ MISSIONS = [
     "dayzOffline.enoch",
     "dayzOffline.sakhal",
     "dayzOffline.TakistanPlus",
+    "empty.deerisle",
+    "dayzOffline.banov",
+    "dayzOffline.Esseker",
+    "Offline.rostow",
+    "empty.Iztek",
+    "empty.alteria",
 ]
 
 # Expansion reads AI loadouts from the active -profiles folder, not mpmissions.
@@ -46,6 +58,12 @@ MISSION_PROFILE: dict[str, str] = {
     "dayzOffline.enoch": "profiles_enoch",
     "dayzOffline.sakhal": "profiles_sakhal",
     "dayzOffline.TakistanPlus": "profiles_takistan",
+    "empty.deerisle": "profiles_deerisle",
+    "dayzOffline.banov": "profiles_banov",
+    "dayzOffline.Esseker": "profiles_esseker",
+    "Offline.rostow": "profiles_rostow",
+    "empty.Iztek": "profiles_iztek",
+    "empty.alteria": "profiles_alteria",
 }
 
 
@@ -320,8 +338,14 @@ def tune_spatial_dict(spatial: dict) -> None:
 def patch_ai_settings(profile_dir: Path) -> bool:
     path = profile_dir / "ExpansionMod" / "Settings" / "AISettings.json"
     if not path.exists():
-        return False
-    data = json.loads(path.read_text(encoding="utf-8"))
+        template = SERVER / "profiles" / "ExpansionMod" / "Settings" / "AISettings.json"
+        if template.exists():
+            data = json.loads(template.read_text(encoding="utf-8"))
+        else:
+            data = {}
+        path.parent.mkdir(parents=True, exist_ok=True)
+    else:
+        data = json.loads(path.read_text(encoding="utf-8"))
     data["AccuracyMin"] = AI_ACCURACY_MIN
     data["AccuracyMax"] = AI_ACCURACY_MAX
     data["ThreatDistanceLimit"] = AI_THREAT_DISTANCE
