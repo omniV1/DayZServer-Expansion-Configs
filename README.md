@@ -39,6 +39,7 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 - Rare airdrops instead of constant spam
 - Repeatable Hryvnia money contracts for Expansion gear progression
 - Public repo validation to prevent accidental leaks
+- GitHub Actions validation for repo-safe syntax and public-safety checks
 
 ## Daily Refresh
 

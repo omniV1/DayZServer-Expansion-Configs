@@ -1,0 +1,33 @@
+name: Validate public configs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile admin Python scripts
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import py_compile
+
+          for path in sorted(Path("admin").glob("*.py")):
+              py_compile.compile(str(path), doraise=True)
+          PY
+
+      - name: Validate public repo contents
+        run: python admin/validate_public_repo.py
