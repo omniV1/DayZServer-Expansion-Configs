@@ -104,6 +104,7 @@ if ($QueryPort -lt 27016) {
 }
 Write-Host "Profiles: $profileDir"
 Write-Host "LAN: start Steam first, then this server, then DayZ launcher -> Servers -> LAN tab (query $QueryPort)."
+Write-Host "LAN check: powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map $Map -RepairFirewall"
 Write-Host "Mods: $($Mods.Length) chars, $($Mods.Split(';').Count) folders"
 if ($ServerModArg) { Write-Host "Server mods: $ServerModArg" }
 

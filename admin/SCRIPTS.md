@@ -45,7 +45,21 @@ powershell -File admin\sync_map_workshop_mods.ps1 -Map all -OpenMissingWorkshopP
 python admin\repair_mission_xml.py dayzOffline.banov dayzOffline.Esseker Offline.rostow empty.Iztek empty.alteria empty.deerisle
 ```
 
-LAN/direct connect uses the **game port**, not the query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.
+LAN visibility uses the **query port** in `serverDZ*.cfg`, while joining uses the **game port**. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.
+
+If the DayZ launcher LAN tab is empty, run the LAN doctor from the server root:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map all -RepairFirewall
+```
+
+For one running map:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map rostow -RepairFirewall
+```
+
+The script checks Steam/launcher state, syncs `steamQueryPort`, repairs server and client firewall rules, verifies active UDP endpoints, runs A2S query when a map is running, and prints recent DayZ Launcher LAN/browser warnings.
 
 Imported map stability workflow:
 
@@ -57,7 +71,7 @@ python admin\validate_imported_maps.py
 powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-imported
 ```
 
-If the DayZ launcher UI does not list a server but the smoke test passes, use the matching `Connect-*.bat` helper or Direct Connect to the game port.
+If the DayZ launcher UI still says it cannot retrieve the LAN server list after the LAN doctor passes A2S, the remaining failure is in the launcher/Steam browser layer, not the server config.
 
 One-map recovery:
 

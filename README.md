@@ -67,11 +67,10 @@ Restart affected servers after changing economy, Expansion, AI, event, or quest 
 
 For imported maps, run `python admin\sanitize_imported_expansion.py --wipe-storage` once after changing safety/economy settings so old bad objects are not loaded from persistence.
 
-If servers start but do not appear in the DayZ launcher, allow their UDP game/query ports:
+If servers start but do not appear in the DayZ launcher LAN tab, run the LAN visibility repair/check. This syncs query ports, refreshes server/client firewall rules for Steam and the DayZ launcher, checks active UDP endpoints, and prints recent launcher browser warnings:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
-python admin\query_dayz_server.py --map rostow --host 127.0.0.1
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map all -RepairFirewall
 ```
 
 To prove a map can boot, advertise, and answer Steam query, run a smoke test while no other DayZ server is running:
