@@ -46,7 +46,7 @@ function Enable-PortRule {
     $existing = Get-NetFirewallRule -DisplayName $Name -ErrorAction SilentlyContinue
     if ($existing) {
         Set-NetFirewallRule -DisplayName $Name -Enabled True -Direction $Direction -Action Allow
-        Set-NetFirewallPortFilter -AssociatedNetFirewallRule $existing -Protocol UDP -LocalPort $Port
+        $existing | Get-NetFirewallPortFilter | Set-NetFirewallPortFilter -Protocol UDP -LocalPort $Port
         Write-Host "Updated firewall rule: $Name"
     } else {
         New-NetFirewallRule -DisplayName $Name -Direction $Direction -Action Allow -Protocol UDP -LocalPort $Port | Out-Null
@@ -65,7 +65,7 @@ function Enable-ProgramRule {
     $existing = Get-NetFirewallRule -DisplayName $Name -ErrorAction SilentlyContinue
     if ($existing) {
         Set-NetFirewallRule -DisplayName $Name -Enabled True -Direction $Direction -Action Allow
-        Set-NetFirewallApplicationFilter -AssociatedNetFirewallRule $existing -Program $Program
+        $existing | Get-NetFirewallApplicationFilter | Set-NetFirewallApplicationFilter -Program $Program
         Write-Host "Updated firewall rule: $Name"
     } else {
         New-NetFirewallRule -DisplayName $Name -Direction $Direction -Action Allow -Program $Program | Out-Null
