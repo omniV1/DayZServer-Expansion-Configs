@@ -94,6 +94,7 @@ To test one map end-to-end while no other DayZ server is running:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\smoke_test_map.ps1 -Map rostow
+powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-imported
 ```
 
 ## 6. Launch
