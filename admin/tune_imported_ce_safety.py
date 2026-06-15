@@ -33,10 +33,37 @@ SEARCH_OVERTIME_TYPES = {
     "FireworksLauncher",
     "Headtorch_Black",
     "HikingJacket_Blue",
+    "Hatchback_02_Trunk_RedRust",
     "Hook",
     "MetalPlate",
     "PartyTent_Lunapark",
 }
+
+BULKY_VEHICLE_PART_PREFIXES = (
+    "CivSedanDoors_",
+    "CivSedanHood",
+    "CivSedanTrunk",
+    "CivSedanWheel",
+    "Expansion_Landrover_",
+    "ExpansionTractor",
+    "ExpansionUAZDoor",
+    "ExpansionUAZWheel",
+    "Hatchback_02_Door_",
+    "Hatchback_02_Hood",
+    "Hatchback_02_Trunk",
+    "Hatchback_02_Wheel",
+    "HatchbackDoors_",
+    "HatchbackHood",
+    "HatchbackTrunk",
+    "Offroad_02_Door_",
+    "Offroad_02_Trunk",
+    "Sedan_02_Door_",
+    "Sedan_02_Hood",
+    "Sedan_02_Trunk",
+    "Truck_01_Door_",
+    "Truck_01_Hood",
+    "Truck_01_Wheel",
+)
 
 CATEGORY_ALIASES = {
     "bags": "containers",
@@ -69,6 +96,16 @@ def set_child_text(element: ET.Element, name: str, value: str) -> bool:
         return False
     child.text = value
     return True
+
+
+def has_category(element: ET.Element, name: str) -> bool:
+    return any(child.tag == "category" and child.get("name") == name for child in element)
+
+
+def is_bulky_vehicle_part(element: ET.Element, type_name: str) -> bool:
+    if not has_category(element, "vehiclesparts"):
+        return False
+    return type_name.startswith(BULKY_VEHICLE_PART_PREFIXES)
 
 
 def tune_globals(path: Path) -> list[str]:
@@ -123,7 +160,7 @@ def tune_types(path: Path) -> list[str]:
     changed: list[str] = []
     for item_type in root.findall("type"):
         name = item_type.get("name", "")
-        if name in SEARCH_OVERTIME_TYPES:
+        if name in SEARCH_OVERTIME_TYPES or is_bulky_vehicle_part(item_type, name):
             edits = []
             for tag in ("nominal", "min"):
                 if child_text(item_type, tag) != "0" and set_child_text(item_type, tag, "0"):
