@@ -79,12 +79,13 @@ foreach ($port in @($ports)) {
 }
 
 if (-not $SkipClientRules) {
-    $steamRoot = Split-Path $Root -Parent
+    $commonRoot = Split-Path $Root -Parent
+    $steamRoot = Split-Path (Split-Path $commonRoot -Parent) -Parent
     $programs = @(
         @{ Name = 'DayZ Server'; Path = (Join-Path $Root 'DayZServer_x64.exe') },
         @{ Name = 'Steam'; Path = (Join-Path $steamRoot 'steam.exe') },
-        @{ Name = 'DayZ Launcher'; Path = (Join-Path $steamRoot 'steamapps\common\DayZ\DayZLauncher.exe') },
-        @{ Name = 'DayZ Client'; Path = (Join-Path $steamRoot 'steamapps\common\DayZ\DayZ_x64.exe') }
+        @{ Name = 'DayZ Launcher'; Path = (Join-Path $commonRoot 'DayZ\DayZLauncher.exe') },
+        @{ Name = 'DayZ Client'; Path = (Join-Path $commonRoot 'DayZ\DayZ_x64.exe') }
     )
     foreach ($program in $programs) {
         Enable-ProgramRule -Name "DayZ LAN $($program.Name) UDP In" -Direction Inbound -Program $program.Path

@@ -133,8 +133,8 @@ if (-not $steamRunning) {
 }
 
 if ($OpenLauncher) {
-    $steamRoot = Split-Path $Root -Parent
-    $launcher = Join-Path $steamRoot 'steamapps\common\DayZ\DayZLauncher.exe'
+    $commonRoot = Split-Path $Root -Parent
+    $launcher = Join-Path $commonRoot 'DayZ\DayZLauncher.exe'
     if (Test-Path $launcher) {
         Start-Process -FilePath $launcher | Out-Null
     } else {
@@ -144,3 +144,4 @@ if ($OpenLauncher) {
 
 Write-Host ""
 Write-Host "LAN tab rule of thumb: start Steam online, start exactly one map, wait for 'Player connect enabled', then refresh LAN."
+Write-Host "If A2S is OK but LAN is still empty, run: powershell -ExecutionPolicy Bypass -File admin\reset_dayz_launcher_browser.ps1 -StopLauncher -OpenLauncher"
