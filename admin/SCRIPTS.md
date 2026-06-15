@@ -179,6 +179,16 @@ python admin\apply_loot.py status
 
 ## Typical workflows
 
+### Local config snapshot
+
+```powershell
+python admin\snapshot_configs.py --label before-risky-change
+python admin\snapshot_configs.py --list
+python admin\snapshot_configs.py --restore admin\backups\YYYYMMDD-HHMMSS-config.zip --yes
+```
+
+Snapshots stay local under ignored `admin/backups/` and skip storage, logs, Workshop folders, binaries, and keys.
+
 ### Quick balance status
 
 ```powershell

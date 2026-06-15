@@ -16,6 +16,8 @@
 # Admin automation and root launch helpers
 !admin/
 !admin/**
+admin/backups/
+admin/backups/**
 !*.cmd
 !*.bat
 !*.ps1
