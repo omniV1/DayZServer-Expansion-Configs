@@ -75,6 +75,18 @@ python admin\status_all.py
 
 Restart affected servers after changing economy, Expansion, AI, or event configs.
 
+For imported maps that previously looped during startup, clear persisted bad objects once:
+
+```powershell
+python admin\sanitize_imported_expansion.py --wipe-storage
+```
+
+If a running server does not appear in the DayZ launcher LAN/community list, add the UDP firewall rules:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
+```
+
 ## 6. Launch
 
 Launch one map:

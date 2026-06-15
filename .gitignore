@@ -141,6 +141,7 @@ mpmissions/empty.deerisle/db/*
 !mpmissions/empty.deerisle/db/events.xml
 !mpmissions/empty.deerisle/db/globals.xml
 !mpmissions/empty.deerisle/cfgplayerspawnpoints.xml
+!mpmissions/empty.deerisle/cfgeconomycore.xml
 !mpmissions/empty.deerisle/mod_ce/
 !mpmissions/empty.deerisle/mod_ce/**
 !mpmissions/empty.deerisle/expansion/
@@ -157,6 +158,7 @@ mpmissions/dayzOffline.banov/db/*
 !mpmissions/dayzOffline.banov/db/events.xml
 !mpmissions/dayzOffline.banov/db/globals.xml
 !mpmissions/dayzOffline.banov/cfgplayerspawnpoints.xml
+!mpmissions/dayzOffline.banov/cfgeconomycore.xml
 !mpmissions/dayzOffline.banov/mod_ce/
 !mpmissions/dayzOffline.banov/mod_ce/**
 !mpmissions/dayzOffline.banov/expansion/
@@ -173,6 +175,7 @@ mpmissions/dayzOffline.Esseker/db/*
 !mpmissions/dayzOffline.Esseker/db/events.xml
 !mpmissions/dayzOffline.Esseker/db/globals.xml
 !mpmissions/dayzOffline.Esseker/cfgplayerspawnpoints.xml
+!mpmissions/dayzOffline.Esseker/cfgeconomycore.xml
 !mpmissions/dayzOffline.Esseker/mod_ce/
 !mpmissions/dayzOffline.Esseker/mod_ce/**
 !mpmissions/dayzOffline.Esseker/expansion/
@@ -189,6 +192,7 @@ mpmissions/Offline.rostow/db/*
 !mpmissions/Offline.rostow/db/events.xml
 !mpmissions/Offline.rostow/db/globals.xml
 !mpmissions/Offline.rostow/cfgplayerspawnpoints.xml
+!mpmissions/Offline.rostow/cfgeconomycore.xml
 !mpmissions/Offline.rostow/mod_ce/
 !mpmissions/Offline.rostow/mod_ce/**
 !mpmissions/Offline.rostow/expansion/
@@ -205,6 +209,7 @@ mpmissions/empty.Iztek/db/*
 !mpmissions/empty.Iztek/db/events.xml
 !mpmissions/empty.Iztek/db/globals.xml
 !mpmissions/empty.Iztek/cfgplayerspawnpoints.xml
+!mpmissions/empty.Iztek/cfgeconomycore.xml
 !mpmissions/empty.Iztek/mod_ce/
 !mpmissions/empty.Iztek/mod_ce/**
 !mpmissions/empty.Iztek/expansion/
@@ -221,6 +226,7 @@ mpmissions/empty.alteria/db/*
 !mpmissions/empty.alteria/db/events.xml
 !mpmissions/empty.alteria/db/globals.xml
 !mpmissions/empty.alteria/cfgplayerspawnpoints.xml
+!mpmissions/empty.alteria/cfgeconomycore.xml
 !mpmissions/empty.alteria/mod_ce/
 !mpmissions/empty.alteria/mod_ce/**
 !mpmissions/empty.alteria/expansion/

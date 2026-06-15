@@ -62,7 +62,9 @@ function Test-MapLaunch {
         Write-Host "  All listed mod folders present." -ForegroundColor Green
     }
 
-    $rpt = Get-ChildItem (Join-Path $Root 'profiles') -Filter 'DayZServer_x64_*.RPT' -ErrorAction SilentlyContinue |
+    $profileDir = if ($Cfg.profiles_dir) { $Cfg.profiles_dir } else { "profiles_$Name" }
+    $rptDir = Join-Path $Root $profileDir
+    $rpt = Get-ChildItem $rptDir -Filter 'DayZServer_x64_*.RPT' -ErrorAction SilentlyContinue |
         Sort-Object LastWriteTime -Descending | Select-Object -First 1
     if ($rpt) {
         $line = Get-Content $rpt.FullName -TotalCount 3 | Select-Object -First 1
@@ -81,9 +83,11 @@ function Test-MapLaunch {
         Write-Host "  RPT: $($rpt.Name)"
     }
 
-    $listener = Get-NetTCPConnection -LocalPort $Cfg.port -State Listen -ErrorAction SilentlyContinue
-    if ($listener) {
-        Write-Host "  Port $($Cfg.port) is IN USE (server may already be running)." -ForegroundColor Yellow
+    foreach ($udpPort in @([int]$Cfg.port, [int]$Cfg.steam_query_port, ([int]$Cfg.port + 2))) {
+        $listener = Get-NetUDPEndpoint -LocalPort $udpPort -ErrorAction SilentlyContinue
+        if ($listener) {
+            Write-Host "  UDP $udpPort is IN USE (server/query port active)." -ForegroundColor Yellow
+        }
     }
 }
 
@@ -99,4 +103,5 @@ if ($Map -eq 'all') {
 }
 
 Write-Host "`nLauncher tip: wait for RPT 'Init sequence finished' before joining."
+Write-Host "If a map does not show in the launcher, confirm its steamQueryPort UDP endpoint is active and allowed through Windows Firewall."
 Write-Host "Chernarus/Enoch may show only ~9 mods (Steam packet limit); load the full list in the DayZ client mod launcher."

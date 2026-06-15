@@ -42,4 +42,4 @@ Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria use seeded COT-style locat
 
 Generated P2P traders, personal storage objects, trader zones, and map-specific Expansion missions are disabled on imported maps until their coordinates are verified in-game. This avoids custom-map boot loops caused by objects being placed outside usable terrain.
 
-Imported maps also run `admin/tune_imported_ce_safety.py` after loot generation. That keeps loot generous, but lowers initial placement pressure and disables risky static/boat events that can spam CE search overtime or reference missing classes on community terrains.
+Imported maps also run `admin/tune_imported_ce_safety.py` after loot generation. That keeps the native map loot economy stable, lowers initial placement pressure, removes generated `mod_ce` wiring, and disables risky static/boat events that can spam CE search overtime or reference missing classes on community terrains.

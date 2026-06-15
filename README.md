@@ -34,6 +34,7 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings
 - Generated first-pass patrol support for imported Workshop maps
 - Higher-loot Central Economy support through generated `mod_ce`
+- Imported community maps default to native map CE for stability; generated `mod_ce` is disabled there until each terrain is verified
 - More useful animals, vehicles, heli crashes, police/train-style events where maps support them
 - Rare airdrops instead of constant spam
 - Repeatable Hryvnia money contracts for Expansion gear progression
@@ -61,6 +62,14 @@ python admin\validate_public_repo.py
 ```
 
 Restart affected servers after changing economy, Expansion, AI, event, or quest configs.
+
+For imported maps, run `python admin\sanitize_imported_expansion.py --wipe-storage` once after changing safety/economy settings so old bad objects are not loaded from persistence.
+
+If servers start but do not appear in the DayZ launcher, allow their UDP game/query ports:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
+```
 
 ## Safety
 

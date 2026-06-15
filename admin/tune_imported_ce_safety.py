@@ -133,6 +133,21 @@ def tune_types(path: Path) -> list[str]:
     return changed
 
 
+def tune_economy_core(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for ce in list(root.findall("ce")):
+        if ce.get("folder") == "mod_ce":
+            root.remove(ce)
+            changed.append("removed mod_ce")
+    if changed:
+        write_tree(tree, path)
+    return changed
+
+
 def main() -> int:
     for label, mission in MISSIONS.items():
         base = ROOT / "mpmissions" / mission
@@ -152,6 +167,10 @@ def main() -> int:
         type_changes = tune_types(base / "db" / "types.xml")
         if type_changes:
             changes.append(f"types {len(type_changes)} edits")
+
+        economy_changes = tune_economy_core(base / "cfgeconomycore.xml")
+        if economy_changes:
+            changes.append("economycore " + ", ".join(economy_changes))
 
         if changes:
             print(f"{label}: " + " | ".join(changes))
