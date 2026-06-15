@@ -100,7 +100,7 @@ def validate_map(label: str, mission: str) -> list[str]:
     for storage in root.glob("storage_*"):
         errors.append(f"{label}: storage folder exists after cleanup: {storage.name}")
 
-    for name in ("MarketSettings.json", "P2PMarketSettings.json", "PersonalStorageSettings.json", "SafeZoneSettings.json"):
+    for name in ("MarketSettings.json", "MissionSettings.json", "P2PMarketSettings.json", "PersonalStorageSettings.json", "SafeZoneSettings.json"):
         path = root / "expansion" / "settings" / name
         if not is_disabled_setting(path):
             errors.append(f"{label}: setting is missing or enabled: expansion/settings/{name}")

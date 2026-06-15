@@ -60,6 +60,15 @@ SETTING_DEFAULTS = {
     },
     "P2PMarketSettings.json": {"m_Version": 3, "Enabled": 0},
     "PersonalStorageSettings.json": {"m_Version": 1, "Enabled": 0},
+    "MissionSettings.json": {
+        "m_Version": 2,
+        "Enabled": 0,
+        "InitialMissionStartDelay": 0,
+        "TimeBetweenMissions": 21600000,
+        "MinMissions": 0,
+        "MaxMissions": 0,
+        "MinPlayersToStartMissions": 999,
+    },
     "SafeZoneSettings.json": {
         "m_Version": 11,
         "Enabled": 0,

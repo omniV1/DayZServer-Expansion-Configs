@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 FATAL_PATTERNS = [
+    ("crash", re.compile(r"ENGINE\s+\(F\):\s+Crashed|Exception code:|Minidump has been generated|heap has been corrupted", re.I)),
     ("termination", re.compile(r"\btermination in:|\[ERROR\]\[Server config\]|server config.*invalid", re.I)),
     ("no-spawns", re.compile(r"NO VALID SPAWNS|no valid regular player spawn points", re.I)),
     ("missing-file", re.compile(r"cannot open file|cannot load file|missing .*pbo|file .* not found", re.I)),
