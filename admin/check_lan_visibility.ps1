@@ -53,6 +53,29 @@ function Test-A2S {
     return "FAIL $($output -join ' ')"
 }
 
+function Get-MissingLanFirewallRules {
+    $required = @(
+        'DayZ LAN DayZ Server UDP In',
+        'DayZ LAN DayZ Server UDP Out',
+        'DayZ LAN Steam UDP In',
+        'DayZ LAN Steam UDP Out',
+        'DayZ LAN Steam WebHelper UDP In',
+        'DayZ LAN Steam WebHelper UDP Out',
+        'DayZ LAN DayZ Launcher UDP In',
+        'DayZ LAN DayZ Launcher UDP Out',
+        'DayZ LAN DayZ Client UDP In',
+        'DayZ LAN DayZ Client UDP Out'
+    )
+    $missing = @()
+    foreach ($name in $required) {
+        $rule = Get-NetFirewallRule -DisplayName $name -ErrorAction SilentlyContinue
+        if (-not $rule -or $rule.Enabled -ne 'True' -or $rule.Action -ne 'Allow') {
+            $missing += $name
+        }
+    }
+    return $missing
+}
+
 $lanIp = if ($QueryHost -eq 'auto') { Get-LanIPv4 } else { $QueryHost }
 $Launch = Get-Content $LaunchPath -Raw | ConvertFrom-Json
 $maps = if ($Map -eq 'all') {
@@ -96,12 +119,17 @@ if ($StartMap) {
 $steamRunning = [bool](Get-Process steam -ErrorAction SilentlyContinue)
 $launcherRunning = [bool](Get-Process DayZLauncher -ErrorAction SilentlyContinue)
 $serverProcesses = @(Get-Process DayZServer_x64 -ErrorAction SilentlyContinue)
+$missingFirewallRules = @(Get-MissingLanFirewallRules)
 
 Write-Host "LAN Visibility Check"
 Write-Host "  LAN IP: $lanIp"
 Write-Host "  Steam running: $steamRunning"
 Write-Host "  DayZ Launcher running: $launcherRunning"
 Write-Host "  DayZ server processes: $($serverProcesses.Count)"
+Write-Host "  LAN firewall program rules missing: $($missingFirewallRules.Count)"
+if ($missingFirewallRules.Count -gt 0) {
+    Write-Host "  Run from Administrator PowerShell: powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map $Map -RepairFirewall"
+}
 if ($serverProcesses.Count -eq 0) {
     Write-Host "  No server is running, so LAN cannot list any of these maps yet."
     if ($Map -ne 'all') {

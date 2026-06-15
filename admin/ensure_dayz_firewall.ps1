@@ -68,7 +68,7 @@ function Enable-ProgramRule {
         Set-NetFirewallApplicationFilter -AssociatedNetFirewallRule $existing -Program $Program
         Write-Host "Updated firewall rule: $Name"
     } else {
-        New-NetFirewallRule -DisplayName $Name -Direction $Direction -Action Allow -Protocol UDP -Program $Program | Out-Null
+        New-NetFirewallRule -DisplayName $Name -Direction $Direction -Action Allow -Program $Program | Out-Null
         Write-Host "Created firewall rule: $Name"
     }
 }
@@ -84,6 +84,7 @@ if (-not $SkipClientRules) {
     $programs = @(
         @{ Name = 'DayZ Server'; Path = (Join-Path $Root 'DayZServer_x64.exe') },
         @{ Name = 'Steam'; Path = (Join-Path $steamRoot 'steam.exe') },
+        @{ Name = 'Steam WebHelper'; Path = (Join-Path $steamRoot 'bin\cef\cef.win64\steamwebhelper.exe') },
         @{ Name = 'DayZ Launcher'; Path = (Join-Path $commonRoot 'DayZ\DayZLauncher.exe') },
         @{ Name = 'DayZ Client'; Path = (Join-Path $commonRoot 'DayZ\DayZ_x64.exe') }
     )

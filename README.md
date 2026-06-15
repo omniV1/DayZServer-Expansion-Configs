@@ -73,6 +73,8 @@ If servers start but do not appear in the DayZ launcher LAN tab, run the LAN vis
 powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map all -RepairFirewall
 ```
 
+Run the `-RepairFirewall` command from **Administrator PowerShell**. The LAN tab depends on both server UDP port rules and client program rules for Steam, Steam WebHelper, DayZ Launcher, DayZ client, and `DayZServer_x64.exe`.
+
 To start one map and verify LAN/query visibility in one command:
 
 ```powershell
