@@ -2,6 +2,7 @@
 """Reduce Central Economy placement pressure on imported community maps."""
 from __future__ import annotations
 
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -14,6 +15,15 @@ MISSIONS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+}
+
+PROFILES = {
+    "deerisle": "profiles_deerisle",
+    "banov": "profiles_banov",
+    "esseker": "profiles_esseker",
+    "rostow": "profiles_rostow",
+    "iztek": "profiles_iztek",
+    "alteria": "profiles_alteria",
 }
 
 GLOBAL_LIMITS = {
@@ -72,6 +82,7 @@ CATEGORY_ALIASES = {
 }
 
 INVALID_NAMES = {"Historical", "Lunapark", "SeasonalEvent", "Unique"}
+SEARCH_OVERTIME_RE = re.compile(r'causing search overtime:\s*"([^"]+)"', re.I)
 
 
 def indent(tree: ET.ElementTree) -> None:
@@ -106,6 +117,25 @@ def is_bulky_vehicle_part(element: ET.Element, type_name: str) -> bool:
     if not has_category(element, "vehiclesparts"):
         return False
     return type_name.startswith(BULKY_VEHICLE_PART_PREFIXES)
+
+
+def latest_rpt(profile_dir: Path) -> Path | None:
+    if not profile_dir.exists():
+        return None
+    rpts = sorted(profile_dir.glob("DayZServer_x64_*.RPT"), key=lambda path: path.stat().st_mtime, reverse=True)
+    return rpts[0] if rpts else None
+
+
+def collect_search_overtime_types(label: str) -> set[str]:
+    rpt = latest_rpt(ROOT / PROFILES[label])
+    if not rpt:
+        return set()
+    found: set[str] = set()
+    for line in rpt.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+        match = SEARCH_OVERTIME_RE.search(line)
+        if match:
+            found.add(match.group(1).lower())
+    return found
 
 
 def tune_globals(path: Path) -> list[str]:
@@ -152,7 +182,7 @@ def tune_events(path: Path) -> list[str]:
     return changed
 
 
-def tune_types(path: Path) -> list[str]:
+def tune_types(path: Path, search_overtime_types: set[str]) -> list[str]:
     if not path.exists():
         return []
     tree = ET.parse(path)
@@ -160,7 +190,12 @@ def tune_types(path: Path) -> list[str]:
     changed: list[str] = []
     for item_type in root.findall("type"):
         name = item_type.get("name", "")
-        if name in SEARCH_OVERTIME_TYPES or is_bulky_vehicle_part(item_type, name):
+        should_disable = (
+            name in SEARCH_OVERTIME_TYPES
+            or name.lower() in search_overtime_types
+            or is_bulky_vehicle_part(item_type, name)
+        )
+        if should_disable:
             edits = []
             for tag in ("nominal", "min"):
                 if child_text(item_type, tag) != "0" and set_child_text(item_type, tag, "0"):
@@ -213,9 +248,11 @@ def main() -> int:
         if event_changes:
             changes.append("events " + ", ".join(event_changes))
 
-        type_changes = tune_types(base / "db" / "types.xml")
+        log_overtime_types = collect_search_overtime_types(label)
+        type_changes = tune_types(base / "db" / "types.xml", log_overtime_types)
         if type_changes:
-            changes.append(f"types {len(type_changes)} edits")
+            learned = f", {len(log_overtime_types)} from latest RPT" if log_overtime_types else ""
+            changes.append(f"types {len(type_changes)} edits{learned}")
 
         economy_changes = tune_economy_core(base / "cfgeconomycore.xml")
         if economy_changes:
