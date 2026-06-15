@@ -39,3 +39,5 @@ The default target is public-friendly PvE with meaningful danger and generous pr
 ## Imported Maps
 
 Deer Isle, Banov, Esseker, Rostow, Iztek, and Alteria use seeded COT-style locations from `mapgrouppos.xml` for first-pass patrols. These are usable defaults, but server owners can refine them by creating/exporting real COT locations in-game and rerunning the imported map generator.
+
+Generated P2P traders, personal storage objects, trader zones, and map-specific Expansion missions are disabled on imported maps until their coordinates are verified in-game. This avoids custom-map boot loops caused by objects being placed outside usable terrain.

@@ -33,6 +33,7 @@ The `admin/` folder contains all repeatable automation:
 
 - `build_map_expansion.py`: Expansion AI, spawn settings, spatial zones, loadouts
 - `seed_imported_cot_locations.py`: creates COT-style location caches from imported map mission data
+- `sanitize_imported_expansion.py`: disables/removes generated imported-map world placements until coordinates are verified
 - `tune_player_spawns.py`: widens imported-map player spawn generators so custom maps do not fall back to `{0,0,0}`
 - `apply_loot.py`: applies the selected loot preset and generated `mod_ce`
 - `tune_chernarus_spawn_economy.py`: multi-map animal and vehicle event tuning

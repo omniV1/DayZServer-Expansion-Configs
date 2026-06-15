@@ -1,4 +1,98 @@
 {
+    "m_Version": 32,
+    "Enabled": 1,
+    "FormationScale": -1.0,
+    "DespawnTime": 500.0,
+    "RespawnTime": -1.0,
+    "MinDistRadius": 175.0,
+    "MaxDistRadius": 850.0,
+    "DespawnRadius": 950.0,
+    "AccuracyMin": 0.42,
+    "AccuracyMax": 0.68,
+    "ThreatDistanceLimit": 450.0,
+    "NoiseInvestigationDistanceLimit": 250.0,
+    "MaxFlankingDistance": 120.0,
+    "EnableFlankingOutsideCombat": 0,
+    "DamageMultiplier": 1.0,
+    "DamageReceivedMultiplier": 1.0,
+    "ShoryukenChance": 0.0,
+    "ShoryukenDamageMultiplier": 3.0,
+    "LoadBalancingCategories": {
+        "Example": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": -1
+            }
+        ],
+        "Quest": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": -1
+            }
+        ],
+        "ObjectPatrol": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": 12
+            }
+        ],
+        "HelicopterWreck": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": 18
+            }
+        ],
+        "Global": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 10,
+                "MaxPatrols": 18
+            },
+            {
+                "MinPlayers": 11,
+                "MaxPlayers": 20,
+                "MaxPatrols": 18
+            },
+            {
+                "MinPlayers": 21,
+                "MaxPlayers": 30,
+                "MaxPatrols": 18
+            },
+            {
+                "MinPlayers": 31,
+                "MaxPlayers": 40,
+                "MaxPatrols": 18
+            },
+            {
+                "MinPlayers": 41,
+                "MaxPlayers": 50,
+                "MaxPatrols": 18
+            },
+            {
+                "MinPlayers": 51,
+                "MaxPlayers": 255,
+                "MaxPatrols": 0
+            }
+        ],
+        "ContaminatedArea": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": 1
+            }
+        ],
+        "Patrol": [
+            {
+                "MinPlayers": 0,
+                "MaxPlayers": 255,
+                "MaxPatrols": 32
+            }
+        ]
+    },
     "Patrols": [
         {
             "Name": "EssekerPatrol_0_Esseker_Airfield_01",
@@ -3345,98 +3439,5 @@
             ]
         }
     ],
-    "Enabled": 1,
-    "FormationScale": -1.0,
-    "DespawnTime": 500.0,
-    "RespawnTime": -1.0,
-    "MinDistRadius": 175.0,
-    "MaxDistRadius": 850.0,
-    "DespawnRadius": 950.0,
-    "AccuracyMin": 0.42,
-    "AccuracyMax": 0.68,
-    "ThreatDistanceLimit": 450.0,
-    "NoiseInvestigationDistanceLimit": 250.0,
-    "MaxFlankingDistance": 120.0,
-    "EnableFlankingOutsideCombat": 0,
-    "DamageMultiplier": 1.0,
-    "DamageReceivedMultiplier": 1.0,
-    "ShoryukenChance": 0.0,
-    "ShoryukenDamageMultiplier": 3.0,
-    "LoadBalancingCategories": {
-        "Example": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": -1
-            }
-        ],
-        "Quest": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": -1
-            }
-        ],
-        "ObjectPatrol": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": 12
-            }
-        ],
-        "HelicopterWreck": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": 18
-            }
-        ],
-        "Global": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 10,
-                "MaxPatrols": 18
-            },
-            {
-                "MinPlayers": 11,
-                "MaxPlayers": 20,
-                "MaxPatrols": 18
-            },
-            {
-                "MinPlayers": 21,
-                "MaxPlayers": 30,
-                "MaxPatrols": 18
-            },
-            {
-                "MinPlayers": 31,
-                "MaxPlayers": 40,
-                "MaxPatrols": 18
-            },
-            {
-                "MinPlayers": 41,
-                "MaxPlayers": 50,
-                "MaxPatrols": 18
-            },
-            {
-                "MinPlayers": 51,
-                "MaxPlayers": 255,
-                "MaxPatrols": 0
-            }
-        ],
-        "ContaminatedArea": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": 1
-            }
-        ],
-        "Patrol": [
-            {
-                "MinPlayers": 0,
-                "MaxPlayers": 255,
-                "MaxPatrols": 32
-            }
-        ]
-    },
     "SniperProneDistanceThreshold": 140.0
 }

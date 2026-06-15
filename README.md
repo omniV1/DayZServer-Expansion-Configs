@@ -46,6 +46,7 @@ From the server root:
 ```powershell
 python admin\build_map_expansion.py --all
 python admin\seed_imported_cot_locations.py
+python admin\sanitize_imported_expansion.py
 python admin\build_map_expansion.py --imported
 python admin\tune_player_spawns.py
 python admin\apply_ai_ammo.py

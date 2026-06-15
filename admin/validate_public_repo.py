@@ -79,6 +79,9 @@ def is_text_candidate(path: Path) -> bool:
 
 
 def validate_path(path: Path, errors: list[str]) -> None:
+    if not (ROOT / path).exists():
+        errors.append(f"Tracked file missing from working tree: {path}")
+        return
     parts = {p.lower() for p in path.parts}
     if path.parts and path.parts[0].startswith("@"):
         errors.append(f"Workshop mod folder tracked: {path}")
