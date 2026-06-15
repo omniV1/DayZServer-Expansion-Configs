@@ -1,57 +1,113 @@
 <?xml version='1.0' encoding='utf-8'?>
 <playerspawnpoints>
-    <fresh>
-        <spawn_params>
-            <min_dist_infected>20.0</min_dist_infected>
-            <max_dist_infected>90.0</max_dist_infected>
-            <min_dist_player>25.0</min_dist_player>
-            <max_dist_player>120.0</max_dist_player>
-            <min_dist_static>0.0</min_dist_static>
-            <max_dist_static>12.0</max_dist_static>
-        </spawn_params>
-        <generator_params>
-            <grid_density>6</grid_density>
-            <grid_width>180.0</grid_width>
-            <grid_height>180.0</grid_height>
-            <min_dist_static>0.0</min_dist_static>
-            <max_dist_static>12.0</max_dist_static>
-            <min_steepness>-45</min_steepness>
-            <max_steepness>45</max_steepness>
-        </generator_params>
-        <generator_posbubbles>
-            <pos x="2446.568115" z="844.777588" />
-            <pos x="3045.459961" z="658.005981" />
-            <pos x="3942.879883" z="672.875000" />
-            <pos x="4105.649902" z="752.531982" />
-            <pos x="4535.479980" z="699.882996" />
-            <pos x="4865.450195" z="701.145996" />
-            <pos x="4946.759766" z="650.263000" />
-            <pos x="5089.160156" z="658.244995" />
-            <pos x="5976.871582" z="1166.019897" />
-            <pos x="6367.029785" z="952.544006" />
-            <pos x="6542.850098" z="877.364990" />
-            <pos x="6565.271484" z="813.272278" />
-            <pos x="6486.025879" z="705.787109" />
-            <pos x="6406.934570" z="621.781982" />
-            <pos x="6507.378418" z="598.003113" />
-            <pos x="6619.923340" z="664.157715" />
-            <pos x="6779.295898" z="891.995056" />
-            <pos x="6960.260254" z="868.726318" />
-            <pos x="7239.189453" z="929.817444" />
-            <pos x="7351.393066" z="1089.568848" />
-            <pos x="7426.015625" z="1245.312134" />
-            <pos x="7460.189453" z="1561.033081" />
-            <pos x="7290.717773" z="1840.022095" />
-            <pos x="6043.679199" z="1894.047485" />
-            <pos x="5731.795410" z="1834.996094" />
-        </generator_posbubbles>
-    </fresh>
-    <hop>
-        <generator_posbubbles>
-        </generator_posbubbles>
-    </hop>
-    <travel>
-        <generator_posbubbles>
-        </generator_posbubbles>
-    </travel>
+    <generator type="PlayerSpawnHandler">
+        <spawn id="0">
+            <pos x="2775.100" z="3056.292" />
+        </spawn>
+        <spawn id="1">
+            <pos x="3265.803" z="3077.868" />
+        </spawn>
+        <spawn id="2">
+            <pos x="4368.419" z="3128.759" />
+        </spawn>
+        <spawn id="3">
+            <pos x="2551.801" z="3155.119" />
+        </spawn>
+        <spawn id="4">
+            <pos x="5349.838" z="3306.892" />
+        </spawn>
+        <spawn id="5">
+            <pos x="2155.483" z="3322.850" />
+        </spawn>
+        <spawn id="6">
+            <pos x="3900.548" z="3692.171" />
+        </spawn>
+        <spawn id="7">
+            <pos x="6269.833" z="3738.018" />
+        </spawn>
+        <spawn id="8">
+            <pos x="904.308" z="3801.115" />
+        </spawn>
+        <spawn id="9">
+            <pos x="1096.840" z="3939.672" />
+        </spawn>
+        <spawn id="10">
+            <pos x="5458.500" z="4102.600" />
+        </spawn>
+        <spawn id="11">
+            <pos x="4447.634" z="4176.621" />
+        </spawn>
+        <spawn id="12">
+            <pos x="6010.115" z="4332.244" />
+        </spawn>
+        <spawn id="13">
+            <pos x="2668.615" z="4449.917" />
+        </spawn>
+        <spawn id="14">
+            <pos x="2807.833" z="4563.785" />
+        </spawn>
+        <spawn id="15">
+            <pos x="1977.317" z="4629.593" />
+        </spawn>
+        <spawn id="16">
+            <pos x="3387.846" z="4705.059" />
+        </spawn>
+        <spawn id="17">
+            <pos x="5231.877" z="4767.446" />
+        </spawn>
+        <spawn id="18">
+            <pos x="1010.466" z="4916.674" />
+        </spawn>
+        <spawn id="19">
+            <pos x="1339.943" z="5107.988" />
+        </spawn>
+        <spawn id="20">
+            <pos x="4543.406" z="5216.808" />
+        </spawn>
+        <spawn id="21">
+            <pos x="7169.249" z="5233.454" />
+        </spawn>
+        <spawn id="22">
+            <pos x="1299.434" z="5241.890" />
+        </spawn>
+        <spawn id="23">
+            <pos x="4573.093" z="5279.636" />
+        </spawn>
+        <spawn id="24">
+            <pos x="2600.475" z="5423.922" />
+        </spawn>
+        <spawn id="25">
+            <pos x="3283.454" z="5506.803" />
+        </spawn>
+        <spawn id="26">
+            <pos x="1512.642" z="5872.515" />
+        </spawn>
+        <spawn id="27">
+            <pos x="3300.610" z="5999.429" />
+        </spawn>
+        <spawn id="28">
+            <pos x="2828.920" z="6169.505" />
+        </spawn>
+        <spawn id="29">
+            <pos x="5413.828" z="6189.319" />
+        </spawn>
+        <spawn id="30">
+            <pos x="4186.726" z="6381.419" />
+        </spawn>
+        <spawn id="31">
+            <pos x="6169.462" z="6684.368" />
+        </spawn>
+        <spawn id="32">
+            <pos x="1318.855" z="6844.545" />
+        </spawn>
+        <spawn id="33">
+            <pos x="958.740" z="6889.203" />
+        </spawn>
+        <spawn id="34">
+            <pos x="5894.000" z="7157.208" />
+        </spawn>
+        <spawn id="35">
+            <pos x="2983.524" z="7199.529" />
+        </spawn>
+    </generator>
 </playerspawnpoints>

@@ -90,6 +90,12 @@ python admin\query_dayz_server.py --map rostow --host 127.0.0.1
 
 You can also use `Connect-Rostow.bat`, `Connect-DeerIsle.bat`, and the other `Connect-*.bat` helpers to direct-connect locally once the RPT shows `Player connect enabled`.
 
+To test one map end-to-end while no other DayZ server is running:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\smoke_test_map.ps1 -Map rostow
+```
+
 ## 6. Launch
 
 Launch one map:

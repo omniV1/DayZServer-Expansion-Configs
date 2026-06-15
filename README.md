@@ -72,6 +72,12 @@ powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
 python admin\query_dayz_server.py --map rostow --host 127.0.0.1
 ```
 
+To prove a map can boot, advertise, and answer Steam query, run a smoke test while no other DayZ server is running:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\smoke_test_map.ps1 -Map rostow
+```
+
 ## Safety
 
 Before publishing:
