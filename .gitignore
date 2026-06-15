@@ -18,6 +18,8 @@
 !admin/**
 admin/backups/
 admin/backups/**
+local_runtime/
+local_runtime/**
 !*.cmd
 !*.bat
 !*.ps1

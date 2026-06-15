@@ -7,6 +7,10 @@ param(
 
     [string]$QueryHost = '127.0.0.1',
 
+    [string]$ConfigFile,
+
+    [int]$QueryPortOverride = 0,
+
     [switch]$KeepRunning,
 
     [switch]$ForceStopExisting
@@ -23,7 +27,11 @@ if ($existing) {
         $ids = ($existing | ForEach-Object { $_.Id }) -join ', '
         throw "DayZServer_x64.exe is already running (PID $ids). Stop it first, or rerun with -ForceStopExisting."
     }
-    $existing | Stop-Process -Force
+    try {
+        $existing | Stop-Process -Force
+    } catch {
+        throw "Could not stop existing DayZServer_x64.exe. Run this from Administrator PowerShell or close DayZServer_x64.exe in Task Manager, then retry. Original error: $_"
+    }
     Start-Sleep -Seconds 3
 }
 
@@ -89,10 +97,11 @@ if ($MapCfg.server_mods -and $MapCfg.server_mods.Count -gt 0) {
 
 $exe = Join-Path $Root 'DayZServer_x64.exe'
 if (-not (Test-Path $exe)) { throw "Missing $exe" }
-if (-not (Test-Path (Join-Path $Root $MapCfg.config))) { throw "Missing config: $($MapCfg.config)" }
+$cfgFile = if ($ConfigFile) { $ConfigFile } else { $MapCfg.config }
+if (-not (Test-Path (Join-Path $Root $cfgFile))) { throw "Missing config: $cfgFile" }
 
 $port = [int]$MapCfg.port
-$queryPort = [int]$MapCfg.steam_query_port
+$queryPort = if ($QueryPortOverride -gt 0) { $QueryPortOverride } else { [int]$MapCfg.steam_query_port }
 foreach ($checkPort in @($port, $queryPort, ($port + 2))) {
     if (Get-NetUDPEndpoint -LocalPort $checkPort -ErrorAction SilentlyContinue) {
         throw "UDP port $checkPort is already in use."
@@ -107,7 +116,7 @@ New-Item -ItemType Directory -Force -Path $profilePath | Out-Null
 $startTime = Get-Date
 
 $argsList = [System.Collections.Generic.List[string]]::new()
-$argsList.Add("-config=$($MapCfg.config)")
+$argsList.Add("-config=$cfgFile")
 $argsList.Add("-port=$port")
 $argsList.Add("-cpuCount=$($MapCfg.cpu)")
 $argsList.Add("-dologs")
@@ -160,7 +169,7 @@ try {
     Write-Host "READY: $Map reached Player connect enabled."
 
     $queryScript = Join-Path $Root 'admin\query_dayz_server.py'
-    & python $queryScript --map $Map --host $QueryHost
+    & python $queryScript --port $queryPort --host $QueryHost
     if ($LASTEXITCODE -ne 0) { throw "A2S query failed." }
     Write-Host "PASS: $Map booted and answered A2S query."
 } finally {

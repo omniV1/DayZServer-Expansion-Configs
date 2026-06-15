@@ -11,7 +11,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Map,
 
-    [int]$ScheduledRestartSeconds = 0
+    [int]$ScheduledRestartSeconds = 0,
+
+    [switch]$DisableLanQueryAuto
 )
 
 $ErrorActionPreference = 'Stop'
@@ -90,6 +92,50 @@ if (-not (Test-Path (Join-Path $ServerRoot $CfgFile))) { throw "Missing config: 
 
 $Port = [int]$MapCfg.port
 $QueryPort = if ($MapCfg.steam_query_port) { [int]$MapCfg.steam_query_port } else { $Port + 1 }
+$ConfiguredQueryPort = $QueryPort
+
+function Get-LanScanQueryPort {
+    param([int]$ConfiguredPort)
+
+    $scanPorts = @(27016, 27017, 27018, 27019, 27020, 27015)
+    if ($ConfiguredPort -in $scanPorts) { return $ConfiguredPort }
+    foreach ($candidate in $scanPorts) {
+        if (-not (Get-NetUDPEndpoint -LocalPort $candidate -ErrorAction SilentlyContinue)) {
+            return $candidate
+        }
+    }
+    return $ConfiguredPort
+}
+
+function New-LanQueryConfig {
+    param(
+        [string]$SourceConfig,
+        [string]$MapName,
+        [int]$LanQueryPort
+    )
+
+    $runtimeDir = Join-Path $ServerRoot 'local_runtime\lan_query'
+    New-Item -ItemType Directory -Force -Path $runtimeDir | Out-Null
+    $runtimeName = "serverDZ_$MapName.lan.cfg"
+    $runtimePath = Join-Path $runtimeDir $runtimeName
+    $text = Get-Content (Join-Path $ServerRoot $SourceConfig) -Raw
+    if ($text -match 'steamQueryPort\s*=') {
+        $text = $text -replace 'steamQueryPort\s*=\s*\d+\s*;', "steamQueryPort = $LanQueryPort;"
+    } else {
+        $text = $text -replace '(instanceId\s*=\s*\d+\s*;)', "`$1`nsteamQueryPort = $LanQueryPort;"
+    }
+    Set-Content -Path $runtimePath -Value $text -Encoding UTF8
+    return (Join-Path 'local_runtime\lan_query' $runtimeName)
+}
+
+if (-not $DisableLanQueryAuto) {
+    $lanQueryPort = Get-LanScanQueryPort -ConfiguredPort $QueryPort
+    if ($lanQueryPort -ne $QueryPort) {
+        $CfgFile = New-LanQueryConfig -SourceConfig $CfgFile -MapName $Map -LanQueryPort $lanQueryPort
+        $QueryPort = $lanQueryPort
+        Write-Host "LAN query auto: using temporary $CfgFile with steamQueryPort $QueryPort instead of configured $ConfiguredQueryPort."
+    }
+}
 
 foreach ($checkPort in @($Port, $QueryPort, ($Port + 2))) {
     if (Get-NetUDPEndpoint -LocalPort $checkPort -ErrorAction SilentlyContinue) {
@@ -98,9 +144,9 @@ foreach ($checkPort in @($Port, $QueryPort, ($Port + 2))) {
 }
 
 Write-Host "Map: $($MapCfg.title)"
-Write-Host "Config: $CfgFile | port $Port | steamQueryPort $QueryPort (must match serverDZ*.cfg)"
-if ($QueryPort -lt 27016) {
-    Write-Warning "steamQueryPort $QueryPort will not show in the DayZ LAN tab; use 27016+ per admin/map_launch.json."
+Write-Host "Config: $CfgFile | port $Port | steamQueryPort $QueryPort"
+if ($QueryPort -notin @(27015, 27016, 27017, 27018, 27019, 27020)) {
+    Write-Warning "steamQueryPort $QueryPort may not be scanned by the Steam/DayZ LAN browser. Free one of 27016-27020 or use the temporary LAN query config path."
 }
 Write-Host "Profiles: $profileDir"
 Write-Host "LAN: start Steam first, then this server, then DayZ launcher -> Servers -> LAN tab (query $QueryPort)."

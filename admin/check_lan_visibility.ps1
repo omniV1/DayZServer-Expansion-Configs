@@ -43,9 +43,9 @@ function Get-CfgValue {
 }
 
 function Test-A2S {
-    param([string]$HostName, [string]$MapName)
+    param([string]$HostName, [int]$Port)
     $query = Join-Path $Root 'admin\query_dayz_server.py'
-    $output = & python $query --map $MapName --host $HostName --timeout 1.5 2>&1
+    $output = & python $query --port $Port --host $HostName --timeout 1.5 2>&1
     if ($LASTEXITCODE -eq 0) {
         $name = ($output | Select-String -Pattern '^\s+name:\s*(.+)$' | Select-Object -First 1).Matches.Groups[1].Value
         return "OK $name"
@@ -76,6 +76,43 @@ function Get-MissingLanFirewallRules {
     return $missing
 }
 
+function Get-LanScanQueryPort {
+    param([int]$ConfiguredPort)
+    $scanPorts = @(27016, 27017, 27018, 27019, 27020, 27015)
+    if ($ConfiguredPort -in $scanPorts) { return $ConfiguredPort }
+    foreach ($candidate in $scanPorts) {
+        if (-not (Get-NetUDPEndpoint -LocalPort $candidate -ErrorAction SilentlyContinue)) {
+            return $candidate
+        }
+    }
+    return $ConfiguredPort
+}
+
+function Test-LanScanQueryPort {
+    param([int]$Port)
+    return $Port -in @(27016, 27017, 27018, 27019, 27020, 27015)
+}
+
+function New-LanQueryConfig {
+    param(
+        [string]$SourceConfig,
+        [string]$MapName,
+        [int]$LanQueryPort
+    )
+    $runtimeDir = Join-Path $Root 'local_runtime\lan_query'
+    New-Item -ItemType Directory -Force -Path $runtimeDir | Out-Null
+    $runtimeName = "serverDZ_$MapName.lan.cfg"
+    $runtimePath = Join-Path $runtimeDir $runtimeName
+    $text = Get-Content (Join-Path $Root $SourceConfig) -Raw
+    if ($text -match 'steamQueryPort\s*=') {
+        $text = $text -replace 'steamQueryPort\s*=\s*\d+\s*;', "steamQueryPort = $LanQueryPort;"
+    } else {
+        $text = $text -replace '(instanceId\s*=\s*\d+\s*;)', "`$1`nsteamQueryPort = $LanQueryPort;"
+    }
+    Set-Content -Path $runtimePath -Value $text -Encoding UTF8
+    return (Join-Path 'local_runtime\lan_query' $runtimeName)
+}
+
 $lanIp = if ($QueryHost -eq 'auto') { Get-LanIPv4 } else { $QueryHost }
 $Launch = Get-Content $LaunchPath -Raw | ConvertFrom-Json
 $maps = if ($Map -eq 'all') {
@@ -104,11 +141,22 @@ if (Test-Path $sync) { & $sync | Out-Null }
 if ($StartMap) {
     $smoke = Join-Path $Root 'admin\smoke_test_map.ps1'
     if (-not (Test-Path $smoke)) { throw "Missing $smoke" }
+    $startCfg = $Launch.maps.$Map
+    $startQueryPort = [int]$startCfg.steam_query_port
+    $startConfigFile = $startCfg.config
+    $lanQueryPort = Get-LanScanQueryPort -ConfiguredPort $startQueryPort
+    if ($lanQueryPort -ne $startQueryPort) {
+        $startConfigFile = New-LanQueryConfig -SourceConfig $startConfigFile -MapName $Map -LanQueryPort $lanQueryPort
+        $startQueryPort = $lanQueryPort
+        Write-Host "LAN query auto: using temporary $startConfigFile with steamQueryPort $startQueryPort so the launcher LAN scan can find $Map."
+    }
     $args = @{
         Map = $Map
         TimeoutSeconds = $StartupTimeoutSeconds
         QueryHost = if ($QueryHost -eq 'auto') { '127.0.0.1' } else { $QueryHost }
         KeepRunning = $true
+        ConfigFile = $startConfigFile
+        QueryPortOverride = $startQueryPort
     }
     if ($ForceStopExisting) { $args.ForceStopExisting = $true }
     & $smoke @args
@@ -142,8 +190,11 @@ foreach ($entry in $maps) {
     $name = $entry.Name
     $cfg = $entry.Value
     $cfgPath = Join-Path $Root $cfg.config
+    $runtimeCfgPath = Join-Path $Root (Join-Path 'local_runtime\lan_query' "serverDZ_$name.lan.cfg")
+    $useRuntimeCfg = $StartMap -and $name -eq $Map -and (Test-Path $runtimeCfgPath)
+    if ($useRuntimeCfg) { $cfgPath = $runtimeCfgPath }
     $cfgText = if (Test-Path $cfgPath) { Get-Content $cfgPath -Raw } else { '' }
-    $queryPort = [int]$cfg.steam_query_port
+    $queryPort = if ($useRuntimeCfg) { [int](Get-CfgValue -Text $cfgText -Name 'steamQueryPort') } else { [int]$cfg.steam_query_port }
     $gamePort = [int]$cfg.port
     $steamPort = $gamePort + 2
     $endpoint = Get-NetUDPEndpoint -LocalPort $queryPort -ErrorAction SilentlyContinue
@@ -156,10 +207,13 @@ foreach ($entry in $maps) {
     Write-Host "  game/query/steam: $gamePort / $queryPort / $steamPort"
     Write-Host "  cfg steamQueryPort/steamPort: $cfgQuery / $cfgSteam"
     Write-Host "  UDP endpoints active: game=$([bool]$gameEndpoint) query=$([bool]$endpoint) steam=$([bool]$steamEndpoint)"
+    if ($endpoint -and -not (Test-LanScanQueryPort -Port $queryPort)) {
+        Write-Warning "$name is answering A2S on $queryPort, but Steam/DayZ LAN auto-discovery may not scan that port. Restart with: powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map $name -StartMap -ForceStopExisting"
+    }
     if ($endpoint) {
-        Write-Host "  A2S localhost: $(Test-A2S -HostName '127.0.0.1' -MapName $name)"
+        Write-Host "  A2S localhost: $(Test-A2S -HostName '127.0.0.1' -Port $queryPort)"
         if ($lanIp -ne '127.0.0.1') {
-            Write-Host "  A2S LAN IP:    $(Test-A2S -HostName $lanIp -MapName $name)"
+            Write-Host "  A2S LAN IP:    $(Test-A2S -HostName $lanIp -Port $queryPort)"
         }
     } else {
         Write-Host "  A2S: skipped because the query port is not active. Start this map first."

@@ -81,6 +81,8 @@ To start one map and verify LAN/query visibility in one command:
 powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map esseker -StartMap
 ```
 
+The launcher's LAN auto-discovery appears to scan only the usual Steam query range around `27015-27020`. When a map's configured query port is higher, the launch tools create a temporary LAN-visible config under `local_runtime\lan_query\` and move that single map onto a free scanned query port.
+
 If the script shows A2S is OK but the launcher still cannot retrieve the LAN server list, reset the launcher browser cache:
 
 ```powershell

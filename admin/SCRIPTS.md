@@ -65,6 +65,16 @@ To start one map, wait for `Player connect enabled`, keep it running, and verify
 powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map rostow -StartMap
 ```
 
+The Steam/DayZ LAN browser appears to scan only a small query-port range, commonly `27015-27020`. Imported maps normally use higher query ports (`27021+`) so they can run together, but those higher ports may not appear automatically in LAN even when direct A2S query works. `Launch-DayZMap.ps1` and `check_lan_visibility.ps1 -StartMap` now create a temporary config under `local_runtime\lan_query\` and move a single running map onto a free LAN-scanned query port.
+
+If an old server is already running on `27021+`, restart it through the LAN checker:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map esseker -StartMap -ForceStopExisting
+```
+
+If `-ForceStopExisting` gets `Access is denied`, close `DayZServer_x64.exe` in Task Manager or rerun the command from Administrator PowerShell.
+
 The script checks Steam/launcher state, syncs `steamQueryPort`, repairs server and client firewall rules, verifies active UDP endpoints, runs A2S query when a map is running, and prints recent DayZ Launcher LAN/browser warnings.
 
 If A2S is OK but the DayZ Launcher still says it cannot retrieve the LAN server list, reset the launcher browser cache:
