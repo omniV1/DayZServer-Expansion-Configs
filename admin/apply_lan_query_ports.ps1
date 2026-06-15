@@ -1,5 +1,5 @@
 # Sync steamQueryPort / steamPort in each serverDZ*.cfg from admin/map_launch.json.
-# LAN tab: sequential Steam query ports 27016, 27017, 27018, 27019 (Bohemia multi-instance).
+# LAN tab: Steam query ports come from admin/map_launch.json (27016+ for multi-instance).
 
 $ErrorActionPreference = 'Stop'
 $ServerRoot = Split-Path $PSScriptRoot -Parent
