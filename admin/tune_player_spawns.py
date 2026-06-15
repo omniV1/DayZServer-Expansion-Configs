@@ -192,6 +192,8 @@ def main() -> int:
                 if write_simple_spawn_handler(path, positions):
                     changed.append(key)
                     print(f"{key}: wrote simple PlayerSpawnHandler spawns ({len(positions)} points)")
+                else:
+                    print(f"{key}: simple PlayerSpawnHandler spawns already tuned")
                 continue
             if replace_fresh_bubbles(path, positions):
                 changed.append(key)

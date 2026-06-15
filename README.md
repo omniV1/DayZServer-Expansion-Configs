@@ -78,6 +78,7 @@ To prove a map can boot, advertise, and answer Steam query, run a smoke test whi
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\smoke_test_map.ps1 -Map rostow
 powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-imported
+powershell -ExecutionPolicy Bypass -File admin\recover_imported_map.ps1 -Map rostow -StopExisting
 ```
 
 ## Safety

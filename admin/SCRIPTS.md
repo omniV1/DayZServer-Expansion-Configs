@@ -58,6 +58,12 @@ powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-impo
 
 If the DayZ launcher UI does not list a server but the smoke test passes, use the matching `Connect-*.bat` helper or Direct Connect to the game port.
 
+One-map recovery:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\recover_imported_map.ps1 -Map rostow -StopExisting
+```
+
 After adding a mod on Chernarus, append it to `admin/chernarus_mods.txt` and restart any map.
 
 ---
