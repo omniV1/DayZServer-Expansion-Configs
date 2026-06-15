@@ -79,15 +79,18 @@ SETTING_DEFAULTS = {
 }
 
 
-def safe_rmtree(path: Path) -> bool:
+def safe_rmtree(path: Path) -> tuple[bool, str | None]:
     resolved = path.resolve()
     root = ROOT.resolve()
     if not str(resolved).startswith(str(root)):
         raise RuntimeError(f"Refusing to delete outside server root: {path}")
     if not path.exists():
-        return False
-    shutil.rmtree(path)
-    return True
+        return False, None
+    try:
+        shutil.rmtree(path)
+    except PermissionError as exc:
+        return False, str(exc)
+    return True, None
 
 
 def write_json(path: Path, data: dict) -> None:
@@ -103,15 +106,20 @@ def main() -> int:
     removed_paths: list[str] = []
     wiped_storage: list[str] = []
     rewritten_settings: list[str] = []
+    locked_paths: list[str] = []
     for key, mission in MISSIONS.items():
         mission_root = ROOT / "mpmissions" / mission
         if not mission_root.exists():
             print(f"{key}: missing mission folder")
             continue
         for rel in RISKY_DIRS:
-            if safe_rmtree(mission_root / rel):
+            removed, locked = safe_rmtree(mission_root / rel)
+            if removed:
                 removed_paths.append(f"{key}:{rel}")
                 print(f"{key}: removed {rel}")
+            if locked:
+                locked_paths.append(f"{key}:{rel}: {locked}")
+                print(f"{key}: locked {rel}")
         settings_dir = mission_root / "expansion" / "settings"
         for name, data in SETTING_DEFAULTS.items():
             path = settings_dir / name
@@ -123,13 +131,23 @@ def main() -> int:
         print(f"{key}: disabled Market/P2P/PersonalStorage/SafeZone settings")
         if args.wipe_storage:
             for storage in mission_root.glob("storage_*"):
-                if safe_rmtree(storage):
+                removed, locked = safe_rmtree(storage)
+                if removed:
                     wiped_storage.append(f"{key}:{storage.name}")
                     print(f"{key}: wiped {storage.name}")
+                if locked:
+                    locked_paths.append(f"{key}:{storage.name}: {locked}")
+                    print(f"{key}: locked {storage.name}")
     print("Summary:")
     print(f"  removed risky folders: {len(removed_paths)}")
     print(f"  wiped storage folders: {len(wiped_storage)}")
     print(f"  rewritten settings: {len(rewritten_settings)}")
+    print(f"  locked paths: {len(locked_paths)}")
+    if locked_paths:
+        print("Locked paths require stopping the matching DayZ server before rerunning --wipe-storage:")
+        for item in locked_paths:
+            print(f"  - {item}")
+        return 1
     return 0
 
 

@@ -38,7 +38,13 @@ SEARCH_OVERTIME_TYPES = {
     "PartyTent_Lunapark",
 }
 
-INVALID_NAMES = {"Historical", "Unique"}
+CATEGORY_ALIASES = {
+    "bags": "containers",
+    "rifles": "weapons",
+    "vehicleparts": "vehiclesparts",
+}
+
+INVALID_NAMES = {"Historical", "Lunapark", "SeasonalEvent", "Unique"}
 
 
 def indent(tree: ET.ElementTree) -> None:
@@ -125,9 +131,15 @@ def tune_types(path: Path) -> list[str]:
             if edits:
                 changed.append(name)
         for child in list(item_type):
-            if child.tag in {"usage", "value"} and child.get("name") in INVALID_NAMES:
+            child_name = child.get("name")
+            if child.tag == "category" and child_name in CATEGORY_ALIASES:
+                new_name = CATEGORY_ALIASES[child_name]
+                child.set("name", new_name)
+                changed.append(f"{name}:category:{child_name}->{new_name}")
+                continue
+            if child.tag in {"usage", "value"} and child_name in INVALID_NAMES:
                 item_type.remove(child)
-                changed.append(f"{name}:{child.tag}:{child.get('name')}")
+                changed.append(f"{name}:{child.tag}:{child_name}")
     if changed:
         write_tree(tree, path)
     return changed

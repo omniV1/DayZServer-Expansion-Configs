@@ -27,6 +27,14 @@ RISKY_DIRS = [
     "expansion/traderzones",
 ]
 
+CATEGORY_ALIASES = {
+    "bags": "containers",
+    "rifles": "weapons",
+    "vehicleparts": "vehiclesparts",
+}
+
+INVALID_USAGE_OR_VALUE = {"Historical", "Lunapark", "SeasonalEvent", "Unique"}
+
 
 def read_json(path: Path) -> dict:
     if not path.exists():
@@ -76,6 +84,21 @@ def validate_map(label: str, mission: str) -> list[str]:
             ET.parse(spawns)
         except ET.ParseError as exc:
             errors.append(f"{label}: cfgplayerspawnpoints.xml parse failed: {exc}")
+
+    types = root / "db" / "types.xml"
+    if types.exists():
+        try:
+            types_root = ET.parse(types).getroot()
+            for item_type in types_root.findall("type"):
+                name = item_type.get("name", "")
+                for child in item_type:
+                    child_name = child.get("name")
+                    if child.tag == "category" and child_name in CATEGORY_ALIASES:
+                        errors.append(f"{label}: db/types.xml {name} has unnormalized category {child_name}")
+                    if child.tag in {"usage", "value"} and child_name in INVALID_USAGE_OR_VALUE:
+                        errors.append(f"{label}: db/types.xml {name} has unsupported {child.tag} {child_name}")
+        except ET.ParseError as exc:
+            errors.append(f"{label}: db/types.xml parse failed: {exc}")
 
     return errors
 
