@@ -193,9 +193,11 @@ Snapshots stay local under ignored `admin/backups/` and skip storage, logs, Work
 
 ```powershell
 python admin\status_all.py
+python admin\triage_latest_logs.py --map all
 ```
 
 Shows the active loot preset, Expansion mission pacing, AI patrol counts, `mod_ce` wiring, key globals, event categories, and enabled airdrops for each active map.
+The log triage command scans recent profile logs for launch blockers such as invalid spawns, bad server config, missing files, mod load failures, and port binding problems.
 
 ### Full active-map refresh
 
