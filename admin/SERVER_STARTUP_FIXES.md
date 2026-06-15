@@ -118,7 +118,7 @@ Should say **OK** and the newest RPT must **not** contain `-mod=%DAYZ_MODS%` or 
 
 **Common causes fixed in this repo:**
 
-1. **Sakhal used the same game port as Chernarus (2302)** â€” only one process can bind; the browser may query the wrong server. Sakhal is now **2602** (query **2603**) in `admin/map_launch.json` and `serverDZSakhal.cfg`.
+1. **Sakhal used the same game port as Chernarus (2302)** â€” only one process can bind; the browser may query the wrong server. Sakhal is now **2602** (query **27019**) in `admin/map_launch.json` and `serverDZSakhal.cfg`.
 2. **Per-map `steamQueryPort` must be sequential from 27016** â€” Chernarus **27016**, Livonia **27017**, Namalsk **27018**, Sakhal **27019**. Each map also uses its own `-profiles=` folder (`profiles`, `profiles_enoch`, etc.).
 3. **Missing `@CannabisPlus` folder** â€” removed from `admin/chernarus_mods.txt` (was causing RPT load errors).
 4. **Joining before init finishes** â€” wait for RPT `Init sequence finished` / `IdleMode` (Namalsk CE init can take 1â€“2 minutes).
@@ -149,6 +149,13 @@ Latest RPT line 1 must contain `-mod=` with `@Dabs Framework` and **not** `%DAYZ
 | Livonia (Enoch) | **2402** | **27017** |
 | Namalsk | **2502** | **27018** |
 | Sakhal | **2602** | **27019** |
+| Takistan | **2702** | **27020** |
+| Deer Isle | **2802** | **27021** |
+| Banov | **2902** | **27022** |
+| Esseker | **3002** | **27023** |
+| Rostow | **3102** | **27024** |
+| Iztek | **3202** | **27025** |
+| Alteria | **3302** | **27026** |
 
 Direct connect in the launcher: `192.168.0.3` + port from the table (e.g. `192.168.0.3:2502` for Namalsk).
 
@@ -156,6 +163,7 @@ Direct connect in the launcher: `192.168.0.3` + port from the table (e.g. `192.1
 
 - Steam: Settings > In-Game > enable **Local network game discovery** (wording may vary).
 - DayZ launcher **Remote** tab > Add server by IP:port if LAN stays empty.
+- If A2S query passes but the launcher UI still hides the server, use `Connect-Rostow.bat` style helpers or direct connect to the game port.
 - `shardId = "123abc"` in `serverDZ*.cfg` marks the server **private** (Community tab); LAN can still work once binding is fixed.
 - Windows Firewall: allow **UDP** inbound on game + query ports for `DayZServer_x64.exe`.
 

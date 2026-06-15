@@ -27,7 +27,7 @@ Chernarus mod list: `admin/chernarus_mods.txt` (edit once â€” applies to al
 .\Launch-DayZMap.ps1 -Map takistan
 ```
 
-Ports: Chernarus **2302** (query **2303**), Livonia **2402** (query **2403**), Namalsk **2502** (query **2503**), Sakhal **2602** (query **2603**). Sakhal no longer shares 2302 with Chernarus.
+Ports: Chernarus **2302** (query **27016**), Livonia **2402** (query **27017**), Namalsk **2502** (query **27018**), Sakhal **2602** (query **27019**), Takistan **2702** (query **27020**), Deer Isle **2802** (query **27021**), Banov **2902** (query **27022**), Esseker **3002** (query **27023**), Rostow **3102** (query **27024**), Iztek **3202** (query **27025**), Alteria **3302** (query **27026**).
 
 Preflight: `powershell -File admin\check_map_launch.ps1 -Map namalsk`
 
@@ -44,7 +44,19 @@ powershell -File admin\sync_map_workshop_mods.ps1 -Map all -OpenMissingWorkshopP
 python admin\repair_mission_xml.py dayzOffline.banov dayzOffline.Esseker Offline.rostow empty.Iztek empty.alteria empty.deerisle
 ```
 
-LAN browser: connect on **game port** (2302 / 2402 / 2502 / 2602). Do not use query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.
+LAN/direct connect uses the **game port**, not the query port. Launcher must not bind `-ip=127.0.0.1` or LAN stays empty.
+
+Imported map stability workflow:
+
+```powershell
+python admin\sanitize_imported_expansion.py --wipe-storage
+python admin\tune_player_spawns.py
+python admin\tune_imported_ce_safety.py
+python admin\validate_imported_maps.py
+powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-imported
+```
+
+If the DayZ launcher UI does not list a server but the smoke test passes, use the matching `Connect-*.bat` helper or Direct Connect to the game port.
 
 After adding a mod on Chernarus, append it to `admin/chernarus_mods.txt` and restart any map.
 
