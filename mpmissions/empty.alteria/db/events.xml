@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <events>
     <event name="AmbientHen">
-		<nominal>10</nominal>
+        <nominal>10</nominal>
         <min>4</min>
         <max>60</max>
         <lifetime>180</lifetime>
@@ -36,7 +36,7 @@
         <children>
             <child lootmax="0" lootmin="0" max="1" min="1" type="Animal_UrsusArctos" />
         </children>
-    </event>	
+    </event>
     <event name="AnimalCow">
         <nominal>12</nominal>
         <min>4</min>
@@ -287,7 +287,7 @@
             <child lootmax="5" lootmin="0" max="0" min="2" type="ZmbM_SkaterYoung_Brown" />
             <child lootmax="5" lootmin="0" max="0" min="2" type="ZmbM_SkaterYoung_Green" />
             <child lootmax="5" lootmin="0" max="0" min="2" type="ZmbM_SkaterYoung_Grey" />
-			<child lootmax="5" lootmin="0" max="0" min="8" type="ZmbF_CitizenANormal_Brown" />
+            <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbF_CitizenANormal_Brown" />
             <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbF_Clerk_Normal_Green" />
             <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbF_JournalistNormal_White" />
             <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbF_ShortSkirt_black" />
@@ -300,7 +300,7 @@
             <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbM_MotobikerFat_Black" />
             <child lootmax="5" lootmin="0" max="0" min="8" type="ZmbM_SkaterYoung_Blue" />
         </children>
-    </event>    
+    </event>
     <event name="InfectedFirefighter">
         <nominal>50</nominal>
         <min>25</min>
@@ -576,7 +576,7 @@
             <child lootmax="5" lootmin="0" max="0" min="17" type="ZmbM_Jacket_bluechecks" />
             <child lootmax="5" lootmin="0" max="0" min="17" type="ZmbM_Jacket_magenta" />
             <child lootmax="5" lootmin="0" max="0" min="17" type="ZmbM_JoggerSkinny_Red" />
-            <child lootmax="5" lootmin="0" max="0" min="5" type="ZmbM_VillagerOld_Green" />			
+            <child lootmax="5" lootmin="0" max="0" min="5" type="ZmbM_VillagerOld_Green" />
         </children>
     </event>
     <event name="ItemPlanks">
@@ -648,8 +648,8 @@
     </event>
     <event name="StaticContaminatedArea">
         <nominal>0</nominal>
-        <min>1</min>
-        <max>1</max>
+        <min>0</min>
+        <max>0</max>
         <lifetime>1800</lifetime>
         <restock>0</restock>
         <saferadius>0</saferadius>
@@ -680,7 +680,7 @@
         <children>
             <child lootmax="10" lootmin="7" max="3" min="2" type="Wreck_Mi8_Crashed" />
             <child lootmax="10" lootmin="7" max="3" min="2" type="Wreck_UH1Y" />
-        </children>				   
+        </children>
     </event>
     <event name="StaticPoliceCar">
         <nominal>8</nominal>

@@ -54,7 +54,6 @@
             <child lootmax="0" lootmin="0" max="4" min="1" type="Animal_GallusGallusDomesticusF_White" />
         </children>
     </event>
-    
     <event name="AnimalBear">
         <nominal>2</nominal>
         <min>1</min>
@@ -220,7 +219,6 @@
             <child lootmax="0" lootmin="0" max="4" min="0" type="Animal_CanisLupus_White" />
         </children>
     </event>
-    
     <event name="InfectedAlien">
         <nominal>20</nominal>
         <min>5</min>
@@ -684,7 +682,6 @@
             <child lootmax="5" lootmin="0" max="0" min="5" type="ZmbM_VillagerOld_Green" />
         </children>
     </event>
-    
     <event name="ItemPlanks">
         <nominal>50</nominal>
         <min>40</min>
@@ -702,9 +699,8 @@
             <child lootmax="0" lootmin="0" max="50" min="30" type="PileOfWoodenPlanks" />
         </children>
     </event>
-    
     <event name="StaticAirplaneCrate">
-        <nominal>9</nominal>
+        <nominal>0</nominal>
         <min>0</min>
         <max>0</max>
         <lifetime>1800</lifetime>
@@ -715,11 +711,11 @@
         <flags deletable="1" init_random="0" remove_damaged="0" />
         <position>fixed</position>
         <limit>child</limit>
-        <active>1</active>
+        <active>0</active>
         <children>
-            <child lootmax="8" lootmin="4" max="4" min="2" type="StaticObj_Misc_SupplyBox1_DE" />
-            <child lootmax="8" lootmin="4" max="4" min="2" type="StaticObj_Misc_SupplyBox2_DE" />
-            <child lootmax="8" lootmin="4" max="4" min="2" type="StaticObj_Misc_SupplyBox3_DE" />
+            <child lootmax="0" lootmin="0" max="4" min="2" type="StaticObj_Misc_SupplyBox1_DE" />
+            <child lootmax="0" lootmin="0" max="4" min="2" type="StaticObj_Misc_SupplyBox2_DE" />
+            <child lootmax="0" lootmin="0" max="4" min="2" type="StaticObj_Misc_SupplyBox3_DE" />
         </children>
     </event>
     <event name="StaticAmbulance">
@@ -740,7 +736,7 @@
             <child lootmax="8" lootmin="5" max="10" min="10" type="Land_Wreck_S1023_Medic_Beige_DE" />
         </children>
     </event>
-	   <event name="StaticContainerLocked">
+    <event name="StaticContainerLocked">
         <nominal>10</nominal>
         <min>8</min>
         <max>0</max>
@@ -756,14 +752,14 @@
         <children>
             <child lootmax="9" lootmin="5" max="6" min="2" type="Land_ContainerLocked_Blue_DE" />
             <child lootmax="9" lootmin="5" max="6" min="2" type="Land_ContainerLocked_Yellow_DE" />
-			 <child lootmax="9" lootmin="5" max="6" min="2" type="Land_ContainerLocked_Orange_DE" />
+            <child lootmax="9" lootmin="5" max="6" min="2" type="Land_ContainerLocked_Orange_DE" />
             <child lootmax="9" lootmin="5" max="6" min="2" type="Land_ContainerLocked_Red_DE" />
         </children>
     </event>
     <event name="StaticContaminatedArea">
         <nominal>0</nominal>
-        <min>2</min>
-        <max>4</max>
+        <min>0</min>
+        <max>0</max>
         <lifetime>2100</lifetime>
         <restock>0</restock>
         <saferadius>0</saferadius>
@@ -772,7 +768,7 @@
         <flags deletable="1" init_random="1" remove_damaged="0" />
         <position>fixed</position>
         <limit>parent</limit>
-        <active>1</active>
+        <active>0</active>
         <children>
             <child lootmax="0" lootmin="0" max="4" min="2" type="ContaminatedArea_Dynamic" />
         </children>
@@ -880,7 +876,7 @@
         <limit>child</limit>
         <active>1</active>
         <children>
-            <child lootmax="15" lootmin="10" max="3" min="1" type="Land_UFO_v2" />		
+            <child lootmax="15" lootmin="10" max="3" min="1" type="Land_UFO_v2" />
         </children>
     </event>
     <event name="StaticHeliCrash">
@@ -899,10 +895,9 @@
         <active>1</active>
         <children>
             <child lootmax="15" lootmin="10" max="3" min="1" type="Wreck_UH1Y" />
-			<child lootmax="15" lootmin="10" max="3" min="1" type="Wreck_Mi8_Crashed" />
+            <child lootmax="15" lootmin="10" max="3" min="1" type="Wreck_Mi8_Crashed" />
         </children>
     </event>
-    
     <event name="TrajectoryApple">
         <nominal>140</nominal>
         <min>2</min>
@@ -1007,11 +1002,10 @@
             <child lootmax="0" lootmin="0" max="0" min="0" type="SmallStone" />
         </children>
     </event>
-    
     <event name="VehicleBoat">
-        <nominal>28</nominal>
-        <min>22</min>
-        <max>32</max>
+        <nominal>0</nominal>
+        <min>0</min>
+        <max>0</max>
         <lifetime>600</lifetime>
         <restock>0</restock>
         <saferadius>500</saferadius>
@@ -1020,7 +1014,7 @@
         <flags deletable="0" init_random="0" remove_damaged="1" />
         <position>fixed</position>
         <limit>mixed</limit>
-        <active>1</active>
+        <active>0</active>
         <children>
             <child lootmax="0" lootmin="0" max="10" min="6" type="Boat_01_Black" />
             <child lootmax="0" lootmin="0" max="10" min="6" type="Boat_01_Blue" />
@@ -1140,7 +1134,6 @@
             <child lootmax="0" lootmin="0" max="5" min="3" type="Truck_01_Covered_Orange" />
         </children>
     </event>
-    
     <event name="Loot">
         <nominal>0</nominal>
         <min>0</min>

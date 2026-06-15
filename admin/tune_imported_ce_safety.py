@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""Reduce Central Economy placement pressure on imported community maps."""
+from __future__ import annotations
+
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+MISSIONS = {
+    "deerisle": "empty.deerisle",
+    "banov": "dayzOffline.banov",
+    "esseker": "dayzOffline.Esseker",
+    "rostow": "Offline.rostow",
+    "iztek": "empty.Iztek",
+    "alteria": "empty.alteria",
+}
+
+GLOBAL_LIMITS = {
+    "InitialSpawn": "120",
+    "SpawnInitial": "1400",
+    "ZombieMaxCount": "1100",
+}
+
+DISABLE_EVENTS = {
+    "StaticAirplaneCrate",
+    "StaticContaminatedArea",
+    "VehicleBoat",
+    "VehicleBoatSTAG",
+}
+
+SEARCH_OVERTIME_TYPES = {
+    "FireworksLauncher",
+    "Headtorch_Black",
+    "HikingJacket_Blue",
+    "Hook",
+    "MetalPlate",
+    "PartyTent_Lunapark",
+}
+
+INVALID_NAMES = {"Historical", "Unique"}
+
+
+def indent(tree: ET.ElementTree) -> None:
+    ET.indent(tree, space="    ")
+
+
+def write_tree(tree: ET.ElementTree, path: Path) -> None:
+    indent(tree)
+    tree.write(path, encoding="UTF-8", xml_declaration=True)
+
+
+def child_text(element: ET.Element, name: str) -> str | None:
+    child = element.find(name)
+    return child.text if child is not None else None
+
+
+def set_child_text(element: ET.Element, name: str, value: str) -> bool:
+    child = element.find(name)
+    if child is None:
+        return False
+    if child.text == value:
+        return False
+    child.text = value
+    return True
+
+
+def tune_globals(path: Path) -> list[str]:
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for var in root.findall("var"):
+        name = var.get("name")
+        if name not in GLOBAL_LIMITS:
+            continue
+        value = GLOBAL_LIMITS[name]
+        if var.get("value") != value:
+            var.set("value", value)
+            changed.append(f"{name}={value}")
+    if changed:
+        write_tree(tree, path)
+    return changed
+
+
+def tune_events(path: Path) -> list[str]:
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for event in root.findall("event"):
+        name = event.get("name", "")
+        if name not in DISABLE_EVENTS:
+            continue
+        edits = []
+        for tag in ("nominal", "min", "max"):
+            if set_child_text(event, tag, "0"):
+                edits.append(tag)
+        if set_child_text(event, "active", "0"):
+            edits.append("active")
+        if name == "StaticAirplaneCrate":
+            for child in event.findall("./children/child"):
+                for attr in ("lootmax", "lootmin"):
+                    if child.get(attr) != "0":
+                        child.set(attr, "0")
+                        edits.append(attr)
+        if edits:
+            changed.append(name)
+    if changed:
+        write_tree(tree, path)
+    return changed
+
+
+def tune_types(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for item_type in root.findall("type"):
+        name = item_type.get("name", "")
+        if name in SEARCH_OVERTIME_TYPES:
+            edits = []
+            for tag in ("nominal", "min"):
+                if child_text(item_type, tag) != "0" and set_child_text(item_type, tag, "0"):
+                    edits.append(tag)
+            if edits:
+                changed.append(name)
+        for child in list(item_type):
+            if child.tag in {"usage", "value"} and child.get("name") in INVALID_NAMES:
+                item_type.remove(child)
+                changed.append(f"{name}:{child.tag}:{child.get('name')}")
+    if changed:
+        write_tree(tree, path)
+    return changed
+
+
+def main() -> int:
+    for label, mission in MISSIONS.items():
+        base = ROOT / "mpmissions" / mission
+        if not base.exists():
+            print(f"{label}: missing {mission}")
+            continue
+
+        changes = []
+        globals_changes = tune_globals(base / "db" / "globals.xml")
+        if globals_changes:
+            changes.append("globals " + ", ".join(globals_changes))
+
+        event_changes = tune_events(base / "db" / "events.xml")
+        if event_changes:
+            changes.append("events " + ", ".join(event_changes))
+
+        type_changes = tune_types(base / "db" / "types.xml")
+        if type_changes:
+            changes.append(f"types {len(type_changes)} edits")
+
+        if changes:
+            print(f"{label}: " + " | ".join(changes))
+        else:
+            print(f"{label}: already safe")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

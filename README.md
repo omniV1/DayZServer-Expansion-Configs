@@ -51,6 +51,7 @@ python admin\build_map_expansion.py --imported
 python admin\tune_player_spawns.py
 python admin\apply_ai_ammo.py
 python admin\apply_loot.py all --preset arcade
+python admin\tune_imported_ce_safety.py
 python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\tune_quest_ai.py
