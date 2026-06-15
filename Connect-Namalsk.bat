@@ -8,4 +8,4 @@ echo.
 start "" "%LOCALAPPDATA%\DayZ Launcher\DayZLauncher.exe" 2>nul
 if errorlevel 1 start "" "C:\Program Files (x86)\Steam\steamapps\common\DayZ\DayZLauncher.exe" 2>nul
 timeout /t 3 >nul
-start "" steam://run/221100//+connect 127.0.0.1:2502:27018
+start "" steam://run/221100//+connect 127.0.0.1:2502

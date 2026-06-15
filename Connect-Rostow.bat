@@ -1,2 +1,2 @@
 @echo off
-start "" steam://run/221100//+connect 127.0.0.1:3102:27024
+start "" steam://run/221100//+connect 127.0.0.1:3102

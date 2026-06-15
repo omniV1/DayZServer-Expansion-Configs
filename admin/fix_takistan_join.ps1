@@ -25,4 +25,4 @@ Write-Host "  ... -> $tail"
 Write-Host '4/4 After server start, run: admin\check_takistan.ps1'
 Write-Host ''
 Write-Host 'Client: same mods as Chernarus + @TakistanPlus (2563233742), Dabs immediately before TakistanPlus.'
-Write-Host 'Start: Launch-DayZMap.ps1 -Map takistan   Join: 127.0.0.1:2702:27020'
+Write-Host 'Start: Launch-DayZMap.ps1 -Map takistan   Join: 127.0.0.1:2702'
