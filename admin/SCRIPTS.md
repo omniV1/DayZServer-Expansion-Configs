@@ -35,6 +35,7 @@ Create a Desktop launcher for any map listed in `admin/map_launch.json`:
 
 ```powershell
 powershell -File admin\new_map_desktop_launcher.ps1 -Map takistan
+powershell -File admin\sync_desktop_launchers.ps1
 ```
 
 Sync downloaded map Workshop folders into the server root:
