@@ -59,6 +59,12 @@ For one running map:
 powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map rostow -RepairFirewall
 ```
 
+To start one map, wait for `Player connect enabled`, keep it running, and verify A2S/LAN query visibility:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map rostow -StartMap
+```
+
 The script checks Steam/launcher state, syncs `steamQueryPort`, repairs server and client firewall rules, verifies active UDP endpoints, runs A2S query when a map is running, and prints recent DayZ Launcher LAN/browser warnings.
 
 If A2S is OK but the DayZ Launcher still says it cannot retrieve the LAN server list, reset the launcher browser cache:

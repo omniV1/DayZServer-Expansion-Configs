@@ -73,6 +73,12 @@ If servers start but do not appear in the DayZ launcher LAN tab, run the LAN vis
 powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map all -RepairFirewall
 ```
 
+To start one map and verify LAN/query visibility in one command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map esseker -StartMap
+```
+
 If the script shows A2S is OK but the launcher still cannot retrieve the LAN server list, reset the launcher browser cache:
 
 ```powershell

@@ -6,6 +6,12 @@ param(
 
     [switch]$RepairFirewall,
 
+    [switch]$StartMap,
+
+    [switch]$ForceStopExisting,
+
+    [int]$StartupTimeoutSeconds = 240,
+
     [switch]$OpenLauncher,
 
     [int]$LauncherLogLines = 40
@@ -50,6 +56,7 @@ function Test-A2S {
 $lanIp = if ($QueryHost -eq 'auto') { Get-LanIPv4 } else { $QueryHost }
 $Launch = Get-Content $LaunchPath -Raw | ConvertFrom-Json
 $maps = if ($Map -eq 'all') {
+    if ($StartMap) { throw "-StartMap requires one map name, not -Map all." }
     $Launch.maps.PSObject.Properties
 } else {
     $cfg = $Launch.maps.$Map
@@ -71,6 +78,21 @@ if ($RepairFirewall) {
 $sync = Join-Path $Root 'admin\apply_lan_query_ports.ps1'
 if (Test-Path $sync) { & $sync | Out-Null }
 
+if ($StartMap) {
+    $smoke = Join-Path $Root 'admin\smoke_test_map.ps1'
+    if (-not (Test-Path $smoke)) { throw "Missing $smoke" }
+    $args = @{
+        Map = $Map
+        TimeoutSeconds = $StartupTimeoutSeconds
+        QueryHost = if ($QueryHost -eq 'auto') { '127.0.0.1' } else { $QueryHost }
+        KeepRunning = $true
+    }
+    if ($ForceStopExisting) { $args.ForceStopExisting = $true }
+    & $smoke @args
+    if ($LASTEXITCODE -ne 0) { throw "Failed to start and validate $Map." }
+    Start-Sleep -Seconds 2
+}
+
 $steamRunning = [bool](Get-Process steam -ErrorAction SilentlyContinue)
 $launcherRunning = [bool](Get-Process DayZLauncher -ErrorAction SilentlyContinue)
 $serverProcesses = @(Get-Process DayZServer_x64 -ErrorAction SilentlyContinue)
@@ -80,6 +102,12 @@ Write-Host "  LAN IP: $lanIp"
 Write-Host "  Steam running: $steamRunning"
 Write-Host "  DayZ Launcher running: $launcherRunning"
 Write-Host "  DayZ server processes: $($serverProcesses.Count)"
+if ($serverProcesses.Count -eq 0) {
+    Write-Host "  No server is running, so LAN cannot list any of these maps yet."
+    if ($Map -ne 'all') {
+        Write-Host "  Start and check this map with: powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map $Map -StartMap"
+    }
+}
 Write-Host ""
 
 foreach ($entry in $maps) {
