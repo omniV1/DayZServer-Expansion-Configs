@@ -49,6 +49,7 @@ Run:
 python admin\validate_public_repo.py
 powershell -ExecutionPolicy Bypass -File admin\check_map_launch.ps1 -Map all
 python admin\status_all.py
+python admin\validate_imported_maps.py
 ```
 
 `check_map_launch.ps1` should report config, mission, and mod folders present for the maps you intend to run.

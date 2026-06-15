@@ -100,7 +100,9 @@ def main() -> int:
     parser.add_argument("--wipe-storage", action="store_true", help="Also delete imported-map storage_* folders to clear persisted bad objects.")
     args = parser.parse_args()
 
-    removed = 0
+    removed_paths: list[str] = []
+    wiped_storage: list[str] = []
+    rewritten_settings: list[str] = []
     for key, mission in MISSIONS.items():
         mission_root = ROOT / "mpmissions" / mission
         if not mission_root.exists():
@@ -108,18 +110,26 @@ def main() -> int:
             continue
         for rel in RISKY_DIRS:
             if safe_rmtree(mission_root / rel):
-                removed += 1
+                removed_paths.append(f"{key}:{rel}")
                 print(f"{key}: removed {rel}")
         settings_dir = mission_root / "expansion" / "settings"
         for name, data in SETTING_DEFAULTS.items():
-            write_json(settings_dir / name, data)
+            path = settings_dir / name
+            before = path.read_text(encoding="utf-8-sig", errors="replace") if path.exists() else ""
+            write_json(path, data)
+            after = path.read_text(encoding="utf-8", errors="replace")
+            if before != after:
+                rewritten_settings.append(f"{key}:{name}")
         print(f"{key}: disabled Market/P2P/PersonalStorage/SafeZone settings")
         if args.wipe_storage:
             for storage in mission_root.glob("storage_*"):
                 if safe_rmtree(storage):
-                    removed += 1
+                    wiped_storage.append(f"{key}:{storage.name}")
                     print(f"{key}: wiped {storage.name}")
-    print(f"Removed {removed} risky generated folder(s).")
+    print("Summary:")
+    print(f"  removed risky folders: {len(removed_paths)}")
+    print(f"  wiped storage folders: {len(wiped_storage)}")
+    print(f"  rewritten settings: {len(rewritten_settings)}")
     return 0
 
 
