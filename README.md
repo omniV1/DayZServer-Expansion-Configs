@@ -69,6 +69,7 @@ If servers start but do not appear in the DayZ launcher, allow their UDP game/qu
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
+python admin\query_dayz_server.py --map rostow --host 127.0.0.1
 ```
 
 ## Safety

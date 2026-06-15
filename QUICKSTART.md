@@ -85,7 +85,10 @@ If a running server does not appear in the DayZ launcher LAN/community list, add
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\ensure_dayz_firewall.ps1 -Map all
+python admin\query_dayz_server.py --map rostow --host 127.0.0.1
 ```
+
+You can also use `Connect-Rostow.bat`, `Connect-DeerIsle.bat`, and the other `Connect-*.bat` helpers to direct-connect locally once the RPT shows `Player connect enabled`.
 
 ## 6. Launch
 

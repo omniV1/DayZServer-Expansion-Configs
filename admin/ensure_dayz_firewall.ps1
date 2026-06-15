@@ -28,17 +28,17 @@ foreach ($entry in $maps) {
     [void]$ports.Add(([int]$cfg.port + 2))
 }
 
-$portList = ($ports | ForEach-Object { $_.ToString() }) -join ','
-$ruleName = if ($Map -eq 'all') { 'DayZ Multi-Map Servers UDP' } else { "DayZ $Map UDP" }
-
-$existing = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
-if ($existing) {
-    Set-NetFirewallRule -DisplayName $ruleName -Enabled True -Direction Inbound -Action Allow
-    Set-NetFirewallPortFilter -AssociatedNetFirewallRule $existing -Protocol UDP -LocalPort $portList
-    Write-Host "Updated firewall rule: $ruleName ($portList)"
-} else {
-    New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Action Allow -Protocol UDP -LocalPort $portList | Out-Null
-    Write-Host "Created firewall rule: $ruleName ($portList)"
+foreach ($port in @($ports)) {
+    $ruleName = "DayZ Server UDP $port"
+    $existing = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    if ($existing) {
+        Set-NetFirewallRule -DisplayName $ruleName -Enabled True -Direction Inbound -Action Allow
+        Set-NetFirewallPortFilter -AssociatedNetFirewallRule $existing -Protocol UDP -LocalPort $port
+        Write-Host "Updated firewall rule: $ruleName"
+    } else {
+        New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Action Allow -Protocol UDP -LocalPort $port | Out-Null
+        Write-Host "Created firewall rule: $ruleName"
+    }
 }
 
 Write-Host "Launcher visibility still requires the server to reach 'Player connect enabled' in its RPT log."
