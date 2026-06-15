@@ -45,6 +45,7 @@ CATEGORY_ALIASES = {
 
 INVALID_USAGE_OR_VALUE = {"Historical", "Lunapark", "SeasonalEvent", "Unique"}
 SEARCH_OVERTIME_RE = re.compile(r'causing search overtime:\s*"([^"]+)"', re.I)
+IGNORED_TYPE_RE = re.compile(r"Type '([^']+)' will be ignored", re.I)
 
 
 def read_json(path: Path) -> dict:
@@ -76,6 +77,18 @@ def collect_search_overtime_types(label: str) -> set[str]:
     found: set[str] = set()
     for line in rpt.read_text(encoding="utf-8-sig", errors="replace").splitlines():
         match = SEARCH_OVERTIME_RE.search(line)
+        if match:
+            found.add(match.group(1).lower())
+    return found
+
+
+def collect_ignored_types(label: str) -> set[str]:
+    rpt = latest_rpt(ROOT / PROFILES[label])
+    if not rpt:
+        return set()
+    found: set[str] = set()
+    for line in rpt.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+        match = IGNORED_TYPE_RE.search(line)
         if match:
             found.add(match.group(1).lower())
     return found
@@ -120,11 +133,39 @@ def validate_map(label: str, mission: str) -> list[str]:
         except ET.ParseError as exc:
             errors.append(f"{label}: cfgplayerspawnpoints.xml parse failed: {exc}")
 
+    eventgroups = root / "cfgeventgroups.xml"
+    if not eventgroups.exists():
+        errors.append(f"{label}: missing cfgeventgroups.xml")
+    else:
+        try:
+            ET.parse(eventgroups)
+        except ET.ParseError as exc:
+            errors.append(f"{label}: cfgeventgroups.xml parse failed: {exc}")
+
+    event_names: set[str] = set()
+    events = root / "db" / "events.xml"
+    if events.exists():
+        try:
+            event_names = {event.get("name", "") for event in ET.parse(events).getroot().findall("event")}
+        except ET.ParseError as exc:
+            errors.append(f"{label}: db/events.xml parse failed: {exc}")
+
+    eventspawns = root / "cfgeventspawns.xml"
+    if eventspawns.exists() and event_names:
+        try:
+            for event in ET.parse(eventspawns).getroot().findall("event"):
+                name = event.get("name", "")
+                if name and name not in event_names:
+                    errors.append(f"{label}: cfgeventspawns.xml references missing event {name}")
+        except ET.ParseError as exc:
+            errors.append(f"{label}: cfgeventspawns.xml parse failed: {exc}")
+
     types = root / "db" / "types.xml"
     if types.exists():
         try:
             types_root = ET.parse(types).getroot()
             overtime_names = collect_search_overtime_types(label)
+            ignored_names = collect_ignored_types(label)
             for item_type in types_root.findall("type"):
                 name = item_type.get("name", "")
                 for child in item_type:
@@ -135,6 +176,8 @@ def validate_map(label: str, mission: str) -> list[str]:
                         errors.append(f"{label}: db/types.xml {name} has unsupported {child.tag} {child_name}")
                 if name.lower() in overtime_names and (child_text(item_type, "nominal") != "0" or child_text(item_type, "min") != "0"):
                     errors.append(f"{label}: latest RPT search-overtime type still enabled: {name}")
+                if name.lower() in ignored_names:
+                    errors.append(f"{label}: latest RPT ignored type still present: {name}")
         except ET.ParseError as exc:
             errors.append(f"{label}: db/types.xml parse failed: {exc}")
 

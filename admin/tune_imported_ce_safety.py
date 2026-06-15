@@ -82,7 +82,9 @@ CATEGORY_ALIASES = {
 }
 
 INVALID_NAMES = {"Historical", "Lunapark", "SeasonalEvent", "Unique"}
+ALWAYS_DISABLE_EVENTS = {"ItemPlanks"}
 SEARCH_OVERTIME_RE = re.compile(r'causing search overtime:\s*"([^"]+)"', re.I)
+IGNORED_TYPE_RE = re.compile(r"Type '([^']+)' will be ignored", re.I)
 
 
 def indent(tree: ET.ElementTree) -> None:
@@ -138,6 +140,18 @@ def collect_search_overtime_types(label: str) -> set[str]:
     return found
 
 
+def collect_ignored_types(label: str) -> set[str]:
+    rpt = latest_rpt(ROOT / PROFILES[label])
+    if not rpt:
+        return set()
+    found: set[str] = set()
+    for line in rpt.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+        match = IGNORED_TYPE_RE.search(line)
+        if match:
+            found.add(match.group(1).lower())
+    return found
+
+
 def tune_globals(path: Path) -> list[str]:
     tree = ET.parse(path)
     root = tree.getroot()
@@ -182,14 +196,18 @@ def tune_events(path: Path) -> list[str]:
     return changed
 
 
-def tune_types(path: Path, search_overtime_types: set[str]) -> list[str]:
+def tune_types(path: Path, search_overtime_types: set[str], ignored_types: set[str]) -> list[str]:
     if not path.exists():
         return []
     tree = ET.parse(path)
     root = tree.getroot()
     changed: list[str] = []
-    for item_type in root.findall("type"):
+    for item_type in list(root.findall("type")):
         name = item_type.get("name", "")
+        if name.lower() in ignored_types:
+            root.remove(item_type)
+            changed.append(f"{name}:removed ignored type")
+            continue
         should_disable = (
             name in SEARCH_OVERTIME_TYPES
             or name.lower() in search_overtime_types
@@ -215,6 +233,78 @@ def tune_types(path: Path, search_overtime_types: set[str]) -> list[str]:
     if changed:
         write_tree(tree, path)
     return changed
+
+
+def event_names(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    return {event.get("name", "") for event in ET.parse(path).getroot().findall("event") if event.get("name")}
+
+
+def disable_event(event: ET.Element) -> bool:
+    changed = False
+    for tag in ("nominal", "min", "max"):
+        changed = set_child_text(event, tag, "0") or changed
+    changed = set_child_text(event, "active", "0") or changed
+    for child in event.findall("./children/child"):
+        for attr in ("lootmax", "lootmin", "max", "min"):
+            if child.get(attr) != "0":
+                child.set(attr, "0")
+                changed = True
+    return changed
+
+
+def tune_event_spawns(path: Path, valid_events: set[str]) -> list[str]:
+    if not path.exists():
+        return []
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for event in list(root.findall("event")):
+        name = event.get("name", "")
+        if name and name not in valid_events:
+            root.remove(event)
+            changed.append(f"{name}:removed orphan spawn")
+    if changed:
+        write_tree(tree, path)
+    return changed
+
+
+def tune_invalid_fixed_events(events_path: Path, spawns_path: Path) -> list[str]:
+    if not events_path.exists() or not spawns_path.exists():
+        return []
+    spawn_root = ET.parse(spawns_path).getroot()
+    spawn_counts = {
+        event.get("name", ""): len(event.findall("pos")) + len(event.findall("zone"))
+        for event in spawn_root.findall("event")
+    }
+    tree = ET.parse(events_path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for event in root.findall("event"):
+        name = event.get("name", "")
+        position = child_text(event, "position")
+        active = child_text(event, "active")
+        has_spawn_entry = name in spawn_counts
+        if name in ALWAYS_DISABLE_EVENTS or (
+            has_spawn_entry
+            and name.startswith("Vehicle")
+            and active != "0"
+            and position in {"fixed", "custom"}
+            and spawn_counts.get(name, 0) == 0
+        ):
+            if disable_event(event):
+                changed.append(name)
+    if changed:
+        write_tree(tree, events_path)
+    return changed
+
+
+def ensure_event_groups(path: Path) -> list[str]:
+    if path.exists():
+        return []
+    path.write_text('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<eventgroupdef />\n', encoding="utf-8")
+    return ["created cfgeventgroups.xml"]
 
 
 def tune_economy_core(path: Path) -> list[str]:
@@ -248,11 +338,27 @@ def main() -> int:
         if event_changes:
             changes.append("events " + ", ".join(event_changes))
 
+        valid_events = event_names(base / "db" / "events.xml")
+
+        spawn_changes = tune_event_spawns(base / "cfgeventspawns.xml", valid_events)
+        if spawn_changes:
+            changes.append(f"eventspawns {len(spawn_changes)} edits")
+
+        fixed_event_changes = tune_invalid_fixed_events(base / "db" / "events.xml", base / "cfgeventspawns.xml")
+        if fixed_event_changes:
+            changes.append(f"events disabled invalid fixed {', '.join(fixed_event_changes[:8])}")
+
+        group_changes = ensure_event_groups(base / "cfgeventgroups.xml")
+        if group_changes:
+            changes.append("eventgroups " + ", ".join(group_changes))
+
         log_overtime_types = collect_search_overtime_types(label)
-        type_changes = tune_types(base / "db" / "types.xml", log_overtime_types)
+        log_ignored_types = collect_ignored_types(label)
+        type_changes = tune_types(base / "db" / "types.xml", log_overtime_types, log_ignored_types)
         if type_changes:
             learned = f", {len(log_overtime_types)} from latest RPT" if log_overtime_types else ""
-            changes.append(f"types {len(type_changes)} edits{learned}")
+            ignored = f", {len(log_ignored_types)} ignored types from latest RPT" if log_ignored_types else ""
+            changes.append(f"types {len(type_changes)} edits{learned}{ignored}")
 
         economy_changes = tune_economy_core(base / "cfgeconomycore.xml")
         if economy_changes:

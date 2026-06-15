@@ -569,9 +569,9 @@
         </children>
     </event>
     <event name="ItemPlanks">
-        <nominal>50</nominal>
-        <min>40</min>
-        <max>50</max>
+        <nominal>0</nominal>
+        <min>0</min>
+        <max>0</max>
         <lifetime>7200</lifetime>
         <restock>0</restock>
         <saferadius>250</saferadius>
@@ -580,9 +580,9 @@
         <flags deletable="0" init_random="0" remove_damaged="0" />
         <position>fixed</position>
         <limit>mixed</limit>
-        <active>1</active>
+        <active>0</active>
         <children>
-            <child lootmax="0" lootmin="0" max="50" min="30" type="PileOfWoodenPlanks" />
+            <child lootmax="0" lootmin="0" max="0" min="0" type="PileOfWoodenPlanks" />
         </children>
     </event>
     <event name="Loot">
@@ -794,9 +794,9 @@
         </children>
     </event>
     <event name="VehicleOffroadHatchback">
-        <nominal>12</nominal>
-        <min>8</min>
-        <max>16</max>
+        <nominal>0</nominal>
+        <min>0</min>
+        <max>0</max>
         <lifetime>300</lifetime>
         <restock>0</restock>
         <saferadius>500</saferadius>
@@ -805,11 +805,11 @@
         <flags deletable="0" init_random="0" remove_damaged="1" />
         <position>fixed</position>
         <limit>mixed</limit>
-        <active>1</active>
+        <active>0</active>
         <children>
-            <child lootmax="0" lootmin="0" max="5" min="3" type="OffroadHatchback" />
-            <child lootmax="0" lootmin="0" max="5" min="3" type="OffroadHatchback_Blue" />
-            <child lootmax="0" lootmin="0" max="5" min="3" type="OffroadHatchback_White" />
+            <child lootmax="0" lootmin="0" max="0" min="0" type="OffroadHatchback" />
+            <child lootmax="0" lootmin="0" max="0" min="0" type="OffroadHatchback_Blue" />
+            <child lootmax="0" lootmin="0" max="0" min="0" type="OffroadHatchback_White" />
         </children>
     </event>
     <event name="VehicleSedan02">
