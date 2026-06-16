@@ -189,14 +189,22 @@ Write-Host ""
 foreach ($entry in $maps) {
     $name = $entry.Name
     $cfg = $entry.Value
+    $gamePort = [int]$cfg.port
+    $steamPort = $gamePort + 2
     $cfgPath = Join-Path $Root $cfg.config
     $runtimeCfgPath = Join-Path $Root (Join-Path 'local_runtime\lan_query' "serverDZ_$name.lan.cfg")
-    $useRuntimeCfg = $StartMap -and $name -eq $Map -and (Test-Path $runtimeCfgPath)
+    $useRuntimeCfg = $false
+    $runtimeCfgText = ''
+    if (Test-Path $runtimeCfgPath) {
+        $runtimeCfgText = Get-Content $runtimeCfgPath -Raw
+        $runtimeQuery = Get-CfgValue -Text $runtimeCfgText -Name 'steamQueryPort'
+        $runtimeEndpoint = if ($runtimeQuery) { Get-NetUDPEndpoint -LocalPort ([int]$runtimeQuery) -ErrorAction SilentlyContinue } else { $null }
+        $runtimeGameEndpoint = Get-NetUDPEndpoint -LocalPort $gamePort -ErrorAction SilentlyContinue
+        $useRuntimeCfg = ($StartMap -and $name -eq $Map) -or ($runtimeEndpoint -and $runtimeGameEndpoint)
+    }
     if ($useRuntimeCfg) { $cfgPath = $runtimeCfgPath }
     $cfgText = if (Test-Path $cfgPath) { Get-Content $cfgPath -Raw } else { '' }
     $queryPort = if ($useRuntimeCfg) { [int](Get-CfgValue -Text $cfgText -Name 'steamQueryPort') } else { [int]$cfg.steam_query_port }
-    $gamePort = [int]$cfg.port
-    $steamPort = $gamePort + 2
     $endpoint = Get-NetUDPEndpoint -LocalPort $queryPort -ErrorAction SilentlyContinue
     $gameEndpoint = Get-NetUDPEndpoint -LocalPort $gamePort -ErrorAction SilentlyContinue
     $steamEndpoint = Get-NetUDPEndpoint -LocalPort $steamPort -ErrorAction SilentlyContinue
@@ -206,6 +214,9 @@ foreach ($entry in $maps) {
     Write-Host "[$name] $($cfg.title)"
     Write-Host "  game/query/steam: $gamePort / $queryPort / $steamPort"
     Write-Host "  cfg steamQueryPort/steamPort: $cfgQuery / $cfgSteam"
+    if ($useRuntimeCfg) {
+        Write-Host "  LAN runtime cfg active: local_runtime\lan_query\serverDZ_$name.lan.cfg"
+    }
     Write-Host "  UDP endpoints active: game=$([bool]$gameEndpoint) query=$([bool]$endpoint) steam=$([bool]$steamEndpoint)"
     if ($endpoint -and -not (Test-LanScanQueryPort -Port $queryPort)) {
         Write-Warning "$name is answering A2S on $queryPort, but Steam/DayZ LAN auto-discovery may not scan that port. Restart with: powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map $name -StartMap -ForceStopExisting"

@@ -216,6 +216,7 @@ mpmissions/Offline.rostow/expansion/*
 
 !mpmissions/empty.Iztek/
 mpmissions/empty.Iztek/*
+!mpmissions/empty.Iztek/init.c
 !mpmissions/empty.Iztek/db/
 mpmissions/empty.Iztek/db/*
 !mpmissions/empty.Iztek/db/events.xml
