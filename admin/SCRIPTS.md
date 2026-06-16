@@ -91,6 +91,7 @@ Imported map stability workflow:
 python admin\sanitize_imported_expansion.py --wipe-storage
 python admin\tune_player_spawns.py
 python admin\tune_imported_ce_safety.py
+python admin\tune_ce_overtime.py --map all
 python admin\validate_imported_maps.py
 powershell -ExecutionPolicy Bypass -File admin\smoke_test_maps.ps1 -Map all-imported
 ```
@@ -177,6 +178,15 @@ Config: `admin/ai_config.json`
 
 **After any loot change:** restart the DayZ server so Central Economy reloads.
 
+If RPT logs show many `LootRespawner` hard-to-place or search-overtime warnings, cap the offending classes learned from recent logs:
+
+```powershell
+python admin\tune_ce_overtime.py --map all
+python admin\tune_ce_overtime.py --map esseker --dry-run
+```
+
+The tuner backs up edited files under `local_backups\ce_overtime\`, keeps private `db/types.xml` edits local, and updates tracked `mod_ce` caps where those files are public-safe. Restart affected maps after running it.
+
 **Tune numbers:** edit `admin/loot_config.json` (presets: `light`, `medium`, `high`, `saturated`, `arcade`).
 
 ---
@@ -191,6 +201,7 @@ Config: `admin/ai_config.json`
 | `loot_config.json` | Presets and mission list (edit multipliers here) |
 | `loot_settings.py` | Loads config (used by other scripts) |
 | `build_mod_ce.py` | Generates `mpmissions/.../mod_ce/*.xml` |
+| `tune_ce_overtime.py` | Caps classes causing CE `LootRespawner` placement overtime from recent RPT logs |
 | `replicate_mod_ce.py` | Legacy copy-only (prefer `apply_loot.py replicate`) |
 | `patch_loot_globals.py` | Legacy globals patch (prefer `apply_loot.py globals`) |
 
@@ -246,6 +257,7 @@ The drift check compares launch ports, server config ports, mission templates, e
 python admin\build_map_expansion.py --all
 python admin\apply_ai_ammo.py
 python admin\apply_loot.py all --preset arcade
+python admin\tune_ce_overtime.py --map all
 python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\tune_quest_ai.py

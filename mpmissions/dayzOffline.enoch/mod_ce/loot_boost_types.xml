@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <types>
     <type name="AKM">
         <nominal>12</nominal>
@@ -21,8 +21,8 @@
         <min>27</min>
     </type>
     <type name="Mosin9130">
-        <nominal>160</nominal>
-        <min>105</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Winchester70">
         <nominal>16</nominal>
@@ -53,12 +53,12 @@
         <min>30</min>
     </type>
     <type name="FNX45">
-        <nominal>100</nominal>
-        <min>63</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Glock19">
-        <nominal>160</nominal>
-        <min>60</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CZ75">
         <nominal>240</nominal>
@@ -77,8 +77,8 @@
         <min>60</min>
     </type>
     <type name="Colt1911">
-        <nominal>104</nominal>
-        <min>66</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Engraved1911">
         <nominal>20</nominal>
@@ -137,20 +137,20 @@
         <min>15</min>
     </type>
     <type name="Mag_UMP_25Rnd">
-        <nominal>80</nominal>
-        <min>51</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_MP5_30Rnd">
         <nominal>40</nominal>
         <min>21</min>
     </type>
     <type name="AmmoBox_762x39_20Rnd">
-        <nominal>72</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="AmmoBox_556x45_20Rnd">
-        <nominal>80</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="AmmoBox_308Win_20Rnd">
         <nominal>80</nominal>
@@ -161,8 +161,8 @@
         <min>36</min>
     </type>
     <type name="Ammo_762x39">
-        <nominal>400</nominal>
-        <min>210</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_556x45">
         <nominal>200</nominal>
@@ -177,76 +177,76 @@
         <min>39</min>
     </type>
     <type name="Ammo_9x19">
-        <nominal>400</nominal>
-        <min>225</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_45ACP">
         <nominal>300</nominal>
         <min>150</min>
     </type>
     <type name="Ammo_12gaPellets">
-        <nominal>400</nominal>
-        <min>225</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_12gaSlug">
-        <nominal>400</nominal>
-        <min>195</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_22">
-        <nominal>360</nominal>
-        <min>210</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_380">
-        <nominal>400</nominal>
-        <min>255</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_357">
-        <nominal>360</nominal>
-        <min>195</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_IJ70_8Rnd">
-        <nominal>280</nominal>
-        <min>150</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_CZ75_15Rnd">
-        <nominal>240</nominal>
-        <min>120</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_Glock_15Rnd">
-        <nominal>80</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BandageDressing">
-        <nominal>160</nominal>
-        <min>90</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Morphine">
-        <nominal>60</nominal>
-        <min>24</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Epinephrine">
         <nominal>120</nominal>
         <min>60</min>
     </type>
     <type name="SalineBag">
-        <nominal>100</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CharcoalTablets">
-        <nominal>80</nominal>
-        <min>36</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="VitaminBottle">
         <nominal>160</nominal>
         <min>60</min>
     </type>
     <type name="TetracyclineAntibiotics">
-        <nominal>80</nominal>
-        <min>36</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="PainkillerTablets">
-        <nominal>80</nominal>
-        <min>36</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="StartKitIV">
         <nominal>120</nominal>
@@ -273,32 +273,32 @@
         <min>36</min>
     </type>
     <type name="WaterBottle">
-        <nominal>400</nominal>
-        <min>255</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SodaCan_Cola">
-        <nominal>80</nominal>
-        <min>48</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SodaCan_Pipsi">
         <nominal>80</nominal>
         <min>48</min>
     </type>
     <type name="SodaCan_Spite">
-        <nominal>80</nominal>
-        <min>48</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TunaCan">
-        <nominal>80</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Rice">
         <nominal>80</nominal>
         <min>45</min>
     </type>
     <type name="PowderedMilk">
-        <nominal>60</nominal>
-        <min>36</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BoxCerealCrunchin">
         <nominal>92</nominal>
@@ -309,16 +309,16 @@
         <min>54</min>
     </type>
     <type name="SardinesCan">
-        <nominal>80</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Tomato">
         <nominal>80</nominal>
         <min>45</min>
     </type>
     <type name="Zucchini">
-        <nominal>80</nominal>
-        <min>45</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Honey">
         <nominal>60</nominal>
@@ -349,20 +349,20 @@
         <min>54</min>
     </type>
     <type name="Pate">
-        <nominal>92</nominal>
-        <min>54</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="UnknownFoodCan">
-        <nominal>172</nominal>
-        <min>111</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hatchet">
         <nominal>480</nominal>
         <min>285</min>
     </type>
     <type name="CombatKnife">
-        <nominal>80</nominal>
-        <min>30</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Pliers">
         <nominal>280</nominal>
@@ -373,28 +373,28 @@
         <min>90</min>
     </type>
     <type name="Wrench">
-        <nominal>280</nominal>
-        <min>150</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hammer">
-        <nominal>180</nominal>
-        <min>120</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hacksaw">
         <nominal>280</nominal>
         <min>150</min>
     </type>
     <type name="HandSaw">
-        <nominal>280</nominal>
-        <min>150</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Shovel">
         <nominal>280</nominal>
         <min>150</min>
     </type>
     <type name="Pickaxe">
-        <nominal>80</nominal>
-        <min>39</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Crowbar">
         <nominal>280</nominal>
@@ -441,8 +441,8 @@
         <min>6</min>
     </type>
     <type name="PoliceVest">
-        <nominal>80</nominal>
-        <min>30</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TortillaBag">
         <nominal>24</nominal>
@@ -461,32 +461,32 @@
         <min>6</min>
     </type>
     <type name="TaloonBag_Blue">
-        <nominal>80</nominal>
-        <min>42</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="HuntingBag">
         <nominal>48</nominal>
         <min>15</min>
     </type>
     <type name="Hoodie_Black">
-        <nominal>180</nominal>
-        <min>105</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hoodie_Blue">
-        <nominal>160</nominal>
-        <min>96</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hoodie_Green">
-        <nominal>180</nominal>
-        <min>105</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Jeans_Blue">
-        <nominal>140</nominal>
-        <min>75</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Jeans_Black">
-        <nominal>140</nominal>
-        <min>75</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TShirt_Black">
         <nominal>12</nominal>
@@ -509,12 +509,12 @@
         <min>15</min>
     </type>
     <type name="PoliceVest">
-        <nominal>80</nominal>
-        <min>30</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ChestHolster">
-        <nominal>160</nominal>
-        <min>90</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="M4_Suppressor">
         <nominal>8</nominal>
@@ -545,8 +545,8 @@
         <min>21</min>
     </type>
     <type name="ReflexOptic">
-        <nominal>80</nominal>
-        <min>30</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ACOGOptic">
         <nominal>40</nominal>
@@ -613,8 +613,8 @@
         <min>41</min>
     </type>
     <type name="AlarmClock_Green">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="AlarmClock_Red">
         <nominal>60</nominal>
@@ -689,8 +689,8 @@
         <min>33</min>
     </type>
     <type name="AmmoBox_9x19_25rnd">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="AmmoBox_9x39AP_20Rnd">
         <nominal>15</nominal>
@@ -741,12 +741,12 @@
         <min>41</min>
     </type>
     <type name="Ammo_762x39Tracer">
-        <nominal>135</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_762x54">
-        <nominal>180</nominal>
-        <min>123</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ammo_762x54Tracer">
         <nominal>75</nominal>
@@ -825,8 +825,8 @@
         <min>11</min>
     </type>
     <type name="B95">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BDUJacket">
         <nominal>15</nominal>
@@ -945,12 +945,12 @@
         <min>22</min>
     </type>
     <type name="BarbedWire">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Barrel_Blue">
-        <nominal>120</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Barrel_Green">
         <nominal>120</nominal>
@@ -969,8 +969,8 @@
         <min>13</min>
     </type>
     <type name="BaseballBat">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BaseballCap_Beige">
         <nominal>90</nominal>
@@ -985,20 +985,20 @@
         <min>55</min>
     </type>
     <type name="BaseballCap_CMMG_Black">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BaseballCap_CMMG_Pink">
         <nominal>90</nominal>
         <min>41</min>
     </type>
     <type name="BaseballCap_Camo">
-        <nominal>75</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BaseballCap_Olive">
-        <nominal>90</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BaseballCap_Pink">
         <nominal>90</nominal>
@@ -1049,8 +1049,8 @@
         <min>13</min>
     </type>
     <type name="Bear_Beige">
-        <nominal>75</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Bear_Dark">
         <nominal>75</nominal>
@@ -1065,8 +1065,8 @@
         <min>27</min>
     </type>
     <type name="Binoculars">
-        <nominal>150</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BloodBagEmpty">
         <nominal>60</nominal>
@@ -1089,8 +1089,8 @@
         <min>16</min>
     </type>
     <type name="Blowtorch">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BomberJacket_Black">
         <nominal>12</nominal>
@@ -1121,8 +1121,8 @@
         <min>22</min>
     </type>
     <type name="BoonieHat_Black">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BoonieHat_Blue">
         <nominal>60</nominal>
@@ -1145,16 +1145,16 @@
         <min>24</min>
     </type>
     <type name="BoonieHat_Olive">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BoonieHat_Orange">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BoonieHat_Red">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="BoonieHat_Tan">
         <nominal>60</nominal>
@@ -1173,16 +1173,16 @@
         <min>46</min>
     </type>
     <type name="Breeches_Beige">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Breeches_Black">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Breeches_Blackcheck">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Breeches_Blue">
         <nominal>75</nominal>
@@ -1193,16 +1193,16 @@
         <min>46</min>
     </type>
     <type name="Breeches_Green">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Breeches_Pink">
         <nominal>75</nominal>
         <min>46</min>
     </type>
     <type name="Breeches_Red">
-        <nominal>75</nominal>
-        <min>46</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Breeches_White">
         <nominal>75</nominal>
@@ -1213,24 +1213,24 @@
         <min>8</min>
     </type>
     <type name="CableReel">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Camonet">
         <nominal>120</nominal>
         <min>55</min>
     </type>
     <type name="CanOpener">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CanisterGasoline">
-        <nominal>150</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Canteen">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CanvasBag_Medical">
         <nominal>24</nominal>
@@ -1285,8 +1285,8 @@
         <min>110</min>
     </type>
     <type name="CarRadiator">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CarTent">
         <nominal>24</nominal>
@@ -1329,12 +1329,12 @@
         <min>82</min>
     </type>
     <type name="Chemlight_Green">
-        <nominal>105</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Chemlight_Red">
-        <nominal>105</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Chemlight_White">
         <nominal>105</nominal>
@@ -1401,8 +1401,8 @@
         <min>5</min>
     </type>
     <type name="CombinationLock">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CombinationLock4">
         <nominal>120</nominal>
@@ -1445,8 +1445,8 @@
         <min>33</min>
     </type>
     <type name="CowboyHat_darkBrown">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="CowboyHat_green">
         <nominal>60</nominal>
@@ -1513,12 +1513,12 @@
         <min>5</min>
     </type>
     <type name="DenimJacket">
-        <nominal>102</nominal>
-        <min>77</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Derringer_Grey">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="DesignerGlasses">
         <nominal>60</nominal>
@@ -1561,8 +1561,8 @@
         <min>27</min>
     </type>
     <type name="DisinfectantAlcohol">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="DisinfectantSpray">
         <nominal>90</nominal>
@@ -1577,16 +1577,16 @@
         <min>27</min>
     </type>
     <type name="DressShoes_Brown">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="DressShoes_Sunburst">
         <nominal>60</nominal>
         <min>27</min>
     </type>
     <type name="DressShoes_White">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="DryBag_Black">
         <nominal>15</nominal>
@@ -1609,8 +1609,8 @@
         <min>8</min>
     </type>
     <type name="DuctTape">
-        <nominal>200</nominal>
-        <min>192</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="DuffelBagSmall_Camo">
         <nominal>24</nominal>
@@ -1629,8 +1629,8 @@
         <min>82</min>
     </type>
     <type name="EpoxyPutty">
-        <nominal>150</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="EyeMask_Black">
         <nominal>9</nominal>
@@ -1653,8 +1653,8 @@
         <min>13</min>
     </type>
     <type name="Fabric">
-        <nominal>180</nominal>
-        <min>96</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Fal_FoldingBttstck">
         <nominal>15</nominal>
@@ -1669,12 +1669,12 @@
         <min>5</min>
     </type>
     <type name="FarmingHoe">
-        <nominal>200</nominal>
-        <min>192</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FieldShovel">
-        <nominal>105</nominal>
-        <min>77</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FirefighterAxe">
         <nominal>15</nominal>
@@ -1809,40 +1809,40 @@
         <min>13</min>
     </type>
     <type name="Flashlight">
-        <nominal>200</nominal>
-        <min>192</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_Black">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_BlackCheck">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_Blue">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_Brown">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_BrownCheck">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_Grey">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FlatCap_GreyCheck">
         <nominal>75</nominal>
         <min>52</min>
     </type>
     <type name="FlatCap_Red">
-        <nominal>75</nominal>
-        <min>52</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="FryingPan">
         <nominal>120</nominal>
@@ -1857,8 +1857,8 @@
         <min>41</min>
     </type>
     <type name="GardenLime">
-        <nominal>150</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="GasMask">
         <nominal>30</nominal>
@@ -1937,8 +1937,8 @@
         <min>5</min>
     </type>
     <type name="GreenBellPepper">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="GulagJacket_Grey">
         <nominal>60</nominal>
@@ -1953,8 +1953,8 @@
         <min>27</min>
     </type>
     <type name="HeadlightH7_Box">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Heatpack">
         <nominal>150</nominal>
@@ -1981,8 +1981,8 @@
         <min>55</min>
     </type>
     <type name="HikingBoots_Black">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="HikingBoots_Brown">
         <nominal>90</nominal>
@@ -1993,8 +1993,8 @@
         <min>27</min>
     </type>
     <type name="HikingJacket_Blue">
-        <nominal>75</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="HikingJacket_Green">
         <nominal>45</nominal>
@@ -2033,12 +2033,12 @@
         <min>55</min>
     </type>
     <type name="HockeyHelmet_White">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="HockeyMask">
-        <nominal>75</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hoodie_Brown">
         <nominal>120</nominal>
@@ -2049,8 +2049,8 @@
         <min>88</min>
     </type>
     <type name="Hoodie_Red">
-        <nominal>120</nominal>
-        <min>88</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Hook">
         <nominal>150</nominal>
@@ -2089,8 +2089,8 @@
         <min>5</min>
     </type>
     <type name="HuntingKnife">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="HuntingVest">
         <nominal>30</nominal>
@@ -2101,12 +2101,12 @@
         <min>82</min>
     </type>
     <type name="Izh18">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Izh18Shotgun">
-        <nominal>195</nominal>
-        <min>123</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Izh43Shotgun">
         <nominal>150</nominal>
@@ -2117,8 +2117,8 @@
         <min>68</min>
     </type>
     <type name="Jeans_Brown">
-        <nominal>105</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Jeans_Green">
         <nominal>105</nominal>
@@ -2133,16 +2133,16 @@
         <min>68</min>
     </type>
     <type name="JoggingShoes_Black">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="JoggingShoes_Blue">
         <nominal>90</nominal>
         <min>55</min>
     </type>
     <type name="JoggingShoes_Red">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="JoggingShoes_Violet">
         <nominal>90</nominal>
@@ -2177,8 +2177,8 @@
         <min>41</min>
     </type>
     <type name="JumpsuitPants_Grey">
-        <nominal>75</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="JumpsuitPants_Red">
         <nominal>75</nominal>
@@ -2213,8 +2213,8 @@
         <min>2</min>
     </type>
     <type name="KitchenKnife">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="KitchenTimer">
         <nominal>75</nominal>
@@ -2233,24 +2233,24 @@
         <min>13</min>
     </type>
     <type name="LargeGasCanister">
-        <nominal>120</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="LargeTent">
         <nominal>24</nominal>
         <min>11</min>
     </type>
     <type name="LeatherSewingKit">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Longhorn">
         <nominal>45</nominal>
         <min>27</min>
     </type>
     <type name="LugWrench">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="M14">
         <nominal>6</nominal>
@@ -2369,8 +2369,8 @@
         <min>2</min>
     </type>
     <type name="Machete">
-        <nominal>75</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_1911_7Rnd">
         <nominal>84</nominal>
@@ -2417,16 +2417,16 @@
         <min>27</min>
     </type>
     <type name="Mag_Deagle_9rnd">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_FAMAS_25Rnd">
         <nominal>15</nominal>
         <min>8</min>
     </type>
     <type name="Mag_FNX45_15Rnd">
-        <nominal>90</nominal>
-        <min>71</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_M14_10Rnd">
         <nominal>18</nominal>
@@ -2445,8 +2445,8 @@
         <min>38</min>
     </type>
     <type name="Mag_P1_8Rnd">
-        <nominal>105</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_PM73_15Rnd">
         <nominal>66</nominal>
@@ -2461,8 +2461,8 @@
         <min>27</min>
     </type>
     <type name="Mag_Ruger1022_15Rnd">
-        <nominal>105</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mag_Ruger1022_30Rnd">
         <nominal>90</nominal>
@@ -2501,8 +2501,8 @@
         <min>5</min>
     </type>
     <type name="MakarovIJ70">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ManSuit_Beige">
         <nominal>54</nominal>
@@ -2537,16 +2537,16 @@
         <min>35</min>
     </type>
     <type name="Marmalade">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Matchbox">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MeatTenderizer">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MedicalScrubsHat_Blue">
         <nominal>12</nominal>
@@ -2609,12 +2609,12 @@
         <min>27</min>
     </type>
     <type name="MetalPlate">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MetalWire">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mich2001Helmet">
         <nominal>12</nominal>
@@ -2677,36 +2677,36 @@
         <min>2</min>
     </type>
     <type name="MiniDress_BlueChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_BlueWithDots">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_BrownChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_GreenChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_Pink">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_PinkChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_RedChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="MiniDress_WhiteChecker">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Mosin_Bayonet">
         <nominal>30</nominal>
@@ -2761,8 +2761,8 @@
         <min>19</min>
     </type>
     <type name="Mp133Shotgun">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="NBCBootsGray">
         <nominal>6</nominal>
@@ -2805,8 +2805,8 @@
         <min>5</min>
     </type>
     <type name="NailBox">
-        <nominal>200</nominal>
-        <min>192</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Netting">
         <nominal>150</nominal>
@@ -2897,8 +2897,8 @@
         <min>19</min>
     </type>
     <type name="Pajka">
-        <nominal>69</nominal>
-        <min>49</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ParamedicJacket_Blue">
         <nominal>21</nominal>
@@ -2973,12 +2973,12 @@
         <min>13</min>
     </type>
     <type name="Pipe">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="PipeWrench">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="PistolOptic">
         <nominal>30</nominal>
@@ -3005,8 +3005,8 @@
         <min>13</min>
     </type>
     <type name="PoliceJacket">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="PoliceJacketOrel">
         <nominal>45</nominal>
@@ -3037,8 +3037,8 @@
         <min>77</min>
     </type>
     <type name="PowerGenerator">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="PressVest_LightBlue">
         <nominal>45</nominal>
@@ -3093,8 +3093,8 @@
         <min>41</min>
     </type>
     <type name="QuiltedJacket_Yellow">
-        <nominal>60</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="R12">
         <nominal>18</nominal>
@@ -3141,12 +3141,12 @@
         <min>68</min>
     </type>
     <type name="Raincoat_Green">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Raincoat_Orange">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Raincoat_Pink">
         <nominal>90</nominal>
@@ -3157,12 +3157,12 @@
         <min>68</min>
     </type>
     <type name="Raincoat_Yellow">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Rangefinder">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="RemoteDetonator">
         <nominal>15</nominal>
@@ -3217,8 +3217,8 @@
         <min>27</min>
     </type>
     <type name="Shemag_Brown">
-        <nominal>90</nominal>
-        <min>66</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Shemag_Green">
         <nominal>90</nominal>
@@ -3245,8 +3245,8 @@
         <min>19</min>
     </type>
     <type name="Shirt_BlueCheck">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Shirt_BlueCheckBright">
         <nominal>90</nominal>
@@ -3257,16 +3257,16 @@
         <min>55</min>
     </type>
     <type name="Shirt_PlaneBlack">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Shirt_RedCheck">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Shirt_WhiteCheck">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ShortJeans_Black">
         <nominal>30</nominal>
@@ -3301,52 +3301,52 @@
         <min>55</min>
     </type>
     <type name="SkateHelmet_Blue">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SkateHelmet_Gray">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SkateHelmet_Green">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SkateHelmet_Red">
-        <nominal>90</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Skirt_Blue">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Skirt_Red">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Skirt_White">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Skirt_Yellow">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SlacksPants_Beige">
         <nominal>60</nominal>
         <min>44</min>
     </type>
     <type name="SlacksPants_Black">
-        <nominal>60</nominal>
-        <min>44</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SlacksPants_Blue">
-        <nominal>60</nominal>
-        <min>44</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SlacksPants_Brown">
-        <nominal>60</nominal>
-        <min>44</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SlacksPants_DarkGrey">
         <nominal>60</nominal>
@@ -3357,16 +3357,16 @@
         <min>44</min>
     </type>
     <type name="SlacksPants_LightGrey">
-        <nominal>60</nominal>
-        <min>44</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SlacksPants_White">
         <nominal>60</nominal>
         <min>44</min>
     </type>
     <type name="SledgeHammer">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Slingbag_Black">
         <nominal>21</nominal>
@@ -3381,12 +3381,12 @@
         <min>11</min>
     </type>
     <type name="SmallGasCanister">
-        <nominal>120</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SmallProtectorCase">
-        <nominal>200</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SmershBag">
         <nominal>30</nominal>
@@ -3401,16 +3401,16 @@
         <min>82</min>
     </type>
     <type name="Sneakers_Gray">
-        <nominal>120</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Sneakers_Green">
         <nominal>120</nominal>
         <min>82</min>
     </type>
     <type name="Sneakers_Red">
-        <nominal>120</nominal>
-        <min>82</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Sneakers_White">
         <nominal>120</nominal>
@@ -3425,8 +3425,8 @@
         <min>44</min>
     </type>
     <type name="SparkPlug">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SportGlasses_Black">
         <nominal>48</nominal>
@@ -3449,20 +3449,20 @@
         <min>27</min>
     </type>
     <type name="Spotlight">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ssh68Helmet">
-        <nominal>60</nominal>
-        <min>27</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="StarlightOptic">
         <nominal>3</nominal>
         <min>2</min>
     </type>
     <type name="SteakKnife">
-        <nominal>200</nominal>
-        <min>165</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="SurgicalGloves_Blue">
         <nominal>24</nominal>
@@ -3485,16 +3485,16 @@
         <min>22</min>
     </type>
     <type name="Sweater_Blue">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Sweater_Gray">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Sweater_Green">
-        <nominal>75</nominal>
-        <min>55</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Sweater_Red">
         <nominal>90</nominal>
@@ -3617,36 +3617,36 @@
         <min>82</min>
     </type>
     <type name="TomatoSeedsPack">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TrackSuitJacket_Black">
         <nominal>90</nominal>
         <min>68</min>
     </type>
     <type name="TrackSuitJacket_Blue">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TrackSuitJacket_Green">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TrackSuitJacket_LightBlue">
         <nominal>90</nominal>
         <min>68</min>
     </type>
     <type name="TrackSuitJacket_Red">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TrackSuitPants_Black">
         <nominal>90</nominal>
         <min>68</min>
     </type>
     <type name="TrackSuitPants_Blue">
-        <nominal>90</nominal>
-        <min>68</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="TrackSuitPants_Green">
         <nominal>90</nominal>
@@ -3709,8 +3709,8 @@
         <min>55</min>
     </type>
     <type name="Ushanka_Black">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Ushanka_Blue">
         <nominal>60</nominal>
@@ -3737,8 +3737,8 @@
         <min>27</min>
     </type>
     <type name="WeaponCleaningKit">
-        <nominal>180</nominal>
-        <min>137</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="WeldingMask">
         <nominal>60</nominal>
@@ -3749,8 +3749,8 @@
         <min>41</min>
     </type>
     <type name="Wellies_Brown">
-        <nominal>75</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="Wellies_Green">
         <nominal>75</nominal>
@@ -3761,8 +3761,8 @@
         <min>41</min>
     </type>
     <type name="Whetstone">
-        <nominal>200</nominal>
-        <min>178</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="WinterCoif_Black">
         <nominal>42</nominal>
@@ -3885,8 +3885,8 @@
         <min>19</min>
     </type>
     <type name="WoolGloves_White">
-        <nominal>66</nominal>
-        <min>44</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="WorkingBoots_Beige">
         <nominal>75</nominal>
@@ -3901,8 +3901,8 @@
         <min>41</min>
     </type>
     <type name="WorkingBoots_Yellow">
-        <nominal>75</nominal>
-        <min>41</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="WorkingGloves_Beige">
         <nominal>45</nominal>
@@ -3921,8 +3921,8 @@
         <min>27</min>
     </type>
     <type name="XmasLights">
-        <nominal>180</nominal>
-        <min>110</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ZSh3PilotHelmet">
         <nominal>45</nominal>
@@ -3941,8 +3941,8 @@
         <min>33</min>
     </type>
     <type name="ZmijovkaCap_Black">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ZmijovkaCap_Blue">
         <nominal>60</nominal>
@@ -3957,8 +3957,8 @@
         <min>38</min>
     </type>
     <type name="ZmijovkaCap_Red">
-        <nominal>60</nominal>
-        <min>38</min>
+        <nominal>1</nominal>
+        <min>0</min>
     </type>
     <type name="ZucchiniSeedsPack">
         <nominal>90</nominal>

@@ -1,233 +1,233 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <types>
     <type name="TWM_AKSocom">
         <nominal>9</nominal>
         <min>4</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Ash12">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_Banshee_22">
         <nominal>8</nominal>
         <min>5</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier2"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier2" />
     </type>
     <type name="TWM_Banshee_9_Black">
-        <nominal>6</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier2"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier2" />
     </type>
     <type name="TWM_Vepr">
-        <nominal>8</nominal>
-        <min>5</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Socom458_10rnd">
-        <nominal>15</nominal>
-        <min>8</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Socom458_15rnd">
         <nominal>8</nominal>
         <min>5</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Vepr_15rnd">
         <nominal>15</nominal>
         <min>8</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Vepr_25rnd">
-        <nominal>10</nominal>
-        <min>7</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Banshee_22">
         <nominal>18</nominal>
         <min>10</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Banshee_9">
         <nominal>10</nominal>
         <min>5</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Mag_Ash12">
         <nominal>8</nominal>
         <min>3</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Ammobox_458">
         <nominal>15</nominal>
         <min>10</min>
         <lifetime>28800</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_Ammo_458">
         <nominal>70</nominal>
         <min>50</min>
         <lifetime>14400</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier2"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier2" />
     </type>
     <type name="TWM_Ammobox_12x55">
-        <nominal>15</nominal>
-        <min>10</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>28800</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier2"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier2" />
     </type>
     <type name="TWM_Ammo_12x55">
         <nominal>55</nominal>
         <min>35</min>
         <lifetime>14400</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier2"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier2" />
     </type>
     <type name="TWM_M200">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>8200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_Vector">
-        <nominal>15</nominal>
-        <min>7</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>3600</lifetime>
         <restock>1600</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_Mag_Vector_30Rnd">
-        <nominal>20</nominal>
-        <min>7</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>7200</lifetime>
         <restock>1800</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_FN57">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>3600</lifetime>
         <restock>1600</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_AN94">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>28800</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
     <type name="TWM_L85">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>28800</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier4"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier4" />
     </type>
     <type name="TWM_M14">
-        <nominal>5</nominal>
-        <min>3</min>
+        <nominal>1</nominal>
+        <min>0</min>
         <lifetime>28800</lifetime>
         <restock>0</restock>
-        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0"/>
-        <category name="weapons"/>
-        <usage name="Military"/>
-        <value name="Tier3"/>
+        <flags count_in_hoarder="0" count_in_player="0" count_in_map="1" count_in_cargo="0" crafted="0" deloot="0" />
+        <category name="weapons" />
+        <usage name="Military" />
+        <value name="Tier3" />
     </type>
 </types>

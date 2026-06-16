@@ -54,6 +54,7 @@ python admin\tune_player_spawns.py
 python admin\apply_ai_ammo.py
 python admin\apply_loot.py all --preset arcade
 python admin\tune_imported_ce_safety.py
+python admin\tune_ce_overtime.py --map all
 python admin\tune_chernarus_spawn_economy.py
 python admin\install_money_quests.py
 python admin\tune_quest_ai.py
@@ -64,6 +65,8 @@ python admin\validate_public_repo.py
 ```
 
 Restart affected servers after changing economy, Expansion, AI, event, or quest configs.
+
+`tune_ce_overtime.py` reads recent RPT logs and caps item classes that cause CE "hard to place" or "search overtime" storms. Restart the affected map after running it so the Central Economy reloads the changed `types.xml`/`mod_ce` values.
 
 For imported maps, run `python admin\sanitize_imported_expansion.py --wipe-storage` once after changing safety/economy settings so old bad objects are not loaded from persistence.
 
