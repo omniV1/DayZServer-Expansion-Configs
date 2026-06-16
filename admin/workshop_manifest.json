@@ -172,8 +172,14 @@
       "name": "Advanced Weapon Scopes",
       "workshop_id": "2143128974",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -183,8 +189,14 @@
       "name": "AI War Zones",
       "workshop_id": "3521304609",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -202,8 +214,14 @@
       "name": "AmmoStackBullet",
       "workshop_id": "2832884779",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -221,8 +239,14 @@
       "name": "Better Batteries",
       "workshop_id": "3146753440",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -232,8 +256,14 @@
       "name": "BetterTrac",
       "workshop_id": "3191155841",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -243,8 +273,14 @@
       "name": "BetterVendingMachines_Expansion",
       "workshop_id": "2777701910",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -254,9 +290,15 @@
       "name": "CF",
       "workshop_id": "1559212036",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -266,8 +308,14 @@
       "name": "Cl0ud's Winter Gear",
       "workshop_id": "1618078236",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -277,20 +325,14 @@
       "name": "Code Lock",
       "workshop_id": "1646187754",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
-        "sakhal",
-        "takistan"
-      ]
-    },
-    {
-      "folder": "@Community-Online-Tools",
-      "name": "Community-Online-Tools",
-      "workshop_id": "1564026768",
-      "maps": [
-        "chernarus",
-        "enoch",
-        "namalsk",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -300,9 +342,15 @@
       "name": "Dabs Framework",
       "workshop_id": "2545327648",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -312,8 +360,14 @@
       "name": "DayZ-Dynamic-AI-Addon",
       "workshop_id": "2874589934",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -323,9 +377,15 @@
       "name": "DayZ-Expansion-AI",
       "workshop_id": "2792982069",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -335,9 +395,15 @@
       "name": "DayZ-Expansion-Bundle",
       "workshop_id": "2572331007",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -347,9 +413,15 @@
       "name": "DayZ-Expansion-Core",
       "workshop_id": "2291785308",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -359,9 +431,15 @@
       "name": "DayZ-Expansion-Licensed",
       "workshop_id": "2116157322",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -371,9 +449,15 @@
       "name": "DayZ-Expansion-Market",
       "workshop_id": "2572328470",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
         "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -399,8 +483,14 @@
       "name": "Fish's Knife Mod - Complete Collection",
       "workshop_id": "2441462118",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -410,8 +500,14 @@
       "name": "FlipTransport",
       "workshop_id": "1832448183",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -421,8 +517,14 @@
       "name": "GhillieFix",
       "workshop_id": "2889783501",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -432,8 +534,14 @@
       "name": "GhillieHoodFix",
       "workshop_id": "2893103893",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -443,8 +551,14 @@
       "name": "InventoryInCar",
       "workshop_id": "2361330944",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -454,8 +568,14 @@
       "name": "InventoryPlusPlus",
       "workshop_id": "1663971788",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -465,8 +585,14 @@
       "name": "InventorySlotsHotfix",
       "workshop_id": "3431076620",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -484,8 +610,14 @@
       "name": "Modular Vest System - Reworked",
       "workshop_id": "2629595854",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -495,8 +627,14 @@
       "name": "More Containers V2",
       "workshop_id": "3450039079",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -522,8 +660,14 @@
       "name": "Paragon Gear and Armor",
       "workshop_id": "2820370970",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -533,8 +677,14 @@
       "name": "Pristine Repair",
       "workshop_id": "3189514422",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -544,8 +694,14 @@
       "name": "ProjectHope Survivor Backpack",
       "workshop_id": "2926289548",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -563,8 +719,14 @@
       "name": "Tactical Flava",
       "workshop_id": "2646817942",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -582,8 +744,14 @@
       "name": "Techs Weapon Mod",
       "workshop_id": "2419315705",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -593,8 +761,14 @@
       "name": "Trader",
       "workshop_id": "1590841260",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -604,8 +778,14 @@
       "name": "TreeHouse",
       "workshop_id": "3467458480",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
         "sakhal",
         "takistan"
       ]
@@ -615,8 +795,32 @@
       "name": "Unlimited Stamina",
       "workshop_id": "1560819773",
       "maps": [
+        "alteria",
+        "banov",
         "chernarus",
+        "deerisle",
         "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@VPPAdminTools",
+      "name": "VPPAdminTools",
+      "workshop_id": "1828439124",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "namalsk",
+        "rostow",
         "sakhal",
         "takistan"
       ]

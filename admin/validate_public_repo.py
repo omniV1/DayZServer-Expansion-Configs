@@ -49,10 +49,8 @@ SECRET_PATTERNS = [
 SHARD_ID_PATTERN = re.compile(r'shardId\s*=\s*"([^"]+)"', re.I)
 VALID_SHARD_ID = re.compile(r"^[A-Za-z0-9]{4,6}$")
 
-VPP_ACTIVE_PATTERNS = [
-    "@VPPAdminTools",
-    "VPPAdminTools",
-]
+MOD_LIST_NAMES = {"chernarus_mods.txt", "namalsk_mods.txt", "takistan_mods.txt"}
+COT_MOD_PATTERNS = ["@Community-Online-Tools", "1564026768"]
 
 
 def git_files() -> list[Path]:
@@ -102,17 +100,20 @@ def validate_content(path: Path, errors: list[str]) -> None:
         for pattern in SECRET_PATTERNS:
             if pattern.search(text):
                 errors.append(f"Secret-like content in {path}: {pattern.pattern}")
-    if path.name in {"chernarus_mods.txt", "namalsk_mods.txt", "takistan_mods.txt"}:
-        if "@VPPAdminTools" in text:
-            errors.append(f"VPP is active in mod list: {path}")
+    if path.name in MOD_LIST_NAMES:
+        if "@VPPAdminTools" not in text:
+            errors.append(f"VPP admin tool missing from mod list: {path}")
+        for needle in COT_MOD_PATTERNS:
+            if needle in text:
+                errors.append(f"COT admin tool is active in mod list: {path}")
     if path.name.lower().startswith("serverdz") and path.suffix.lower() == ".cfg":
         match = SHARD_ID_PATTERN.search(text)
         if match and not VALID_SHARD_ID.fullmatch(match.group(1)):
             errors.append(f"Invalid shardId in {path}: {match.group(1)!r} (use 4-6 letters/numbers)")
-    if path.name.endswith("preset_User.xml") or path.name.endswith("core.xml") or "install_" in path.name:
-        for needle in VPP_ACTIVE_PATTERNS:
+    if "install_" in path.name:
+        for needle in COT_MOD_PATTERNS:
             if needle in text:
-                errors.append(f"Stale VPP reference in {path}: {needle}")
+                errors.append(f"Stale COT reference in {path}: {needle}")
 
 
 def validate_parse(path: Path, errors: list[str]) -> None:

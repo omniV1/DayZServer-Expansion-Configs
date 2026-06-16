@@ -30,7 +30,7 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 
 - Data-driven map launching through `Launch-DayZMap.ps1`
 - Public-safe `serverDZ*.example.cfg` templates
-- COT (`@Community-Online-Tools`) as the standard admin tool
+- VPP (`@VPPAdminTools`) as the standard admin tool
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings
 - Generated first-pass patrol support for imported Workshop maps
 - Higher-loot Central Economy support through generated `mod_ce`
@@ -85,6 +85,13 @@ powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map ess
 ```
 
 The launcher's LAN auto-discovery appears to scan only the usual Steam query range around `27015-27020`. When a map's configured query port is higher, the launch tools create a temporary LAN-visible config under `local_runtime\lan_query\` and move that single map onto a free scanned query port.
+
+VPP admin credentials live in each map's private `profiles*\VPPAdminTools\Permissions` folder and are not published. After adding a new profile/map, sync the local VPP SuperAdmin/password files from the main `profiles` folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\sync_vpp_admin_profiles.ps1 -Map all
+powershell -ExecutionPolicy Bypass -File admin\switch_admin_inputs_to_vpp.ps1 -Map all -IncludeClientProfiles
+```
 
 If the script shows A2S is OK but the launcher still cannot retrieve the LAN server list, reset the launcher browser cache:
 

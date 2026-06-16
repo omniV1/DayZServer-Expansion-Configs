@@ -23,54 +23,54 @@ Workshop folders are not included in this repo; subscribe/download them through 
 
 | Folder | Workshop ID | Name | Used By |
 | --- | --- | --- | --- |
-| `@Advanced Weapon Scopes` | 2143128974 | Advanced Weapon Scopes | chernarus, enoch, sakhal, takistan |
-| `@AI War Zones` | 3521304609 | AI War Zones | chernarus, enoch, sakhal, takistan |
+| `@Advanced Weapon Scopes` | 2143128974 | Advanced Weapon Scopes | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@AI War Zones` | 3521304609 | AI War Zones | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@Alteria` | 3296994216 | Alteria | alteria |
-| `@AmmoStackBullet` | 2832884779 | AmmoStackBullet | chernarus, enoch, sakhal, takistan |
+| `@AmmoStackBullet` | 2832884779 | AmmoStackBullet | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@Banov` | 2415195639 | Banov | banov |
-| `@Better Batteries` | 3146753440 | Better Batteries | chernarus, enoch, sakhal, takistan |
-| `@BetterTrac` | 3191155841 | BetterTrac | chernarus, enoch, sakhal, takistan |
-| `@BetterVendingMachines_Expansion` | 2777701910 | BetterVendingMachines_Expansion | chernarus, enoch, sakhal, takistan |
-| `@CF` | 1559212036 | CF | chernarus, enoch, namalsk, sakhal, takistan |
-| `@Cl0ud's Winter Gear` | 1618078236 | Cl0ud's Winter Gear | chernarus, enoch, sakhal, takistan |
-| `@Code Lock` | 1646187754 | Code Lock | chernarus, enoch, sakhal, takistan |
-| `@Community-Online-Tools` | 1564026768 | Community-Online-Tools | chernarus, enoch, namalsk, sakhal, takistan |
-| `@Dabs Framework` | 2545327648 | Dabs Framework | chernarus, enoch, namalsk, sakhal, takistan |
-| `@DayZ-Dynamic-AI-Addon` | 2874589934 | DayZ-Dynamic-AI-Addon | chernarus, enoch, sakhal, takistan |
-| `@DayZ-Expansion-AI` | 2792982069 | DayZ-Expansion-AI | chernarus, enoch, namalsk, sakhal, takistan |
-| `@DayZ-Expansion-Bundle` | 2572331007 | DayZ-Expansion-Bundle | chernarus, enoch, namalsk, sakhal, takistan |
-| `@DayZ-Expansion-Core` | 2291785308 | DayZ-Expansion-Core | chernarus, enoch, namalsk, sakhal, takistan |
-| `@DayZ-Expansion-Licensed` | 2116157322 | DayZ-Expansion-Licensed | chernarus, enoch, namalsk, sakhal, takistan |
-| `@DayZ-Expansion-Market` | 2572328470 | DayZ-Expansion-Market | chernarus, enoch, namalsk, sakhal, takistan |
+| `@Better Batteries` | 3146753440 | Better Batteries | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@BetterTrac` | 3191155841 | BetterTrac | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@BetterVendingMachines_Expansion` | 2777701910 | BetterVendingMachines_Expansion | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@CF` | 1559212036 | CF | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@Cl0ud's Winter Gear` | 1618078236 | Cl0ud's Winter Gear | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@Code Lock` | 1646187754 | Code Lock | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@Dabs Framework` | 2545327648 | Dabs Framework | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@DayZ-Dynamic-AI-Addon` | 2874589934 | DayZ-Dynamic-AI-Addon | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@DayZ-Expansion-AI` | 2792982069 | DayZ-Expansion-AI | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@DayZ-Expansion-Bundle` | 2572331007 | DayZ-Expansion-Bundle | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@DayZ-Expansion-Core` | 2291785308 | DayZ-Expansion-Core | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@DayZ-Expansion-Licensed` | 2116157322 | DayZ-Expansion-Licensed | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
+| `@DayZ-Expansion-Market` | 2572328470 | DayZ-Expansion-Market | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
 | `@DeerIsle` | 1602372402 | DeerIsle | deerisle |
 | `@Esseker` | 2462896799 | Esseker | esseker |
-| `@Fish's Knife Mod - Complete Collection` | 2441462118 | Fish's Knife Mod - Complete Collection | chernarus, enoch, sakhal, takistan |
-| `@FlipTransport` | 1832448183 | FlipTransport | chernarus, enoch, sakhal, takistan |
-| `@GhillieFix` | 2889783501 | GhillieFix | chernarus, enoch, sakhal, takistan |
-| `@GhillieHoodFix` | 2893103893 | GhillieHoodFix | chernarus, enoch, sakhal, takistan |
-| `@InventoryInCar` | 2361330944 | InventoryInCar | chernarus, enoch, sakhal, takistan |
-| `@InventoryPlusPlus` | 1663971788 | InventoryPlusPlus | chernarus, enoch, sakhal, takistan |
-| `@InventorySlotsHotfix` | 3431076620 | InventorySlotsHotfix | chernarus, enoch, sakhal, takistan |
+| `@Fish's Knife Mod - Complete Collection` | 2441462118 | Fish's Knife Mod - Complete Collection | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@FlipTransport` | 1832448183 | FlipTransport | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@GhillieFix` | 2889783501 | GhillieFix | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@GhillieHoodFix` | 2893103893 | GhillieHoodFix | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@InventoryInCar` | 2361330944 | InventoryInCar | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@InventoryPlusPlus` | 1663971788 | InventoryPlusPlus | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@InventorySlotsHotfix` | 3431076620 | InventorySlotsHotfix | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@Iztek` | 2978912938 | Iztek | iztek |
-| `@Modular Vest System - Reworked` | 2629595854 | Modular Vest System - Reworked | chernarus, enoch, sakhal, takistan |
-| `@More Containers V2` | 3450039079 | More Containers V2 | chernarus, enoch, sakhal, takistan |
+| `@Modular Vest System - Reworked` | 2629595854 | Modular Vest System - Reworked | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@More Containers V2` | 3450039079 | More Containers V2 | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@Namalsk Island` | 2289456201 | Namalsk Island | namalsk |
 | `@Namalsk Survival (server)` | 2288336145 | Namalsk Survival (server) | namalsk |
-| `@Paragon Gear and Armor` | 2820370970 | Paragon Gear and Armor | chernarus, enoch, sakhal, takistan |
-| `@Pristine Repair` | 3189514422 | Pristine Repair | chernarus, enoch, sakhal, takistan |
-| `@ProjectHope Survivor Backpack` | 2926289548 | ProjectHope Survivor Backpack | chernarus, enoch, sakhal, takistan |
+| `@Paragon Gear and Armor` | 2820370970 | Paragon Gear and Armor | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@Pristine Repair` | 3189514422 | Pristine Repair | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@ProjectHope Survivor Backpack` | 2926289548 | ProjectHope Survivor Backpack | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@Rostowmap` | 2344585107 | Rostowmap | rostow |
-| `@Tactical Flava` | 2646817942 | Tactical Flava | chernarus, enoch, sakhal, takistan |
+| `@Tactical Flava` | 2646817942 | Tactical Flava | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
 | `@TakistanPlus` | 2563233742 | TakistanPlus | takistan |
-| `@Techs Weapon Mod` | 2419315705 | Techs Weapon Mod | chernarus, enoch, sakhal, takistan |
-| `@Trader` | 1590841260 | Trader | chernarus, enoch, sakhal, takistan |
-| `@TreeHouse` | 3467458480 | TreeHouse | chernarus, enoch, sakhal, takistan |
-| `@Unlimited Stamina` | 1560819773 | Unlimited Stamina | chernarus, enoch, sakhal, takistan |
+| `@Techs Weapon Mod` | 2419315705 | Techs Weapon Mod | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@Trader` | 1590841260 | Trader | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@TreeHouse` | 3467458480 | TreeHouse | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@Unlimited Stamina` | 1560819773 | Unlimited Stamina | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, rostow, sakhal, takistan |
+| `@VPPAdminTools` | 1828439124 | VPPAdminTools | alteria, banov, chernarus, deerisle, enoch, esseker, iztek, namalsk, rostow, sakhal, takistan |
 | `@Zens ExpansionAI Audio` | 3321340470 | Zens ExpansionAI Audio | sakhal |
 
 ## Notes
 
-- COT (`@Community-Online-Tools`) is the standard admin tool in these presets.
+- VPP (`@VPPAdminTools`) is the standard admin tool in these presets.
 - Real `serverDZ*.cfg` files, keys, Workshop folders, logs, and player data are intentionally ignored.
 - Namalsk uses its server-side survival mod as `-serverMod`.
 - Imported map patrols are generated from seeded COT-style locations and can be refined with real COT exports.

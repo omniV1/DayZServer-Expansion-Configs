@@ -4,7 +4,7 @@ All scripts live under `DayZServer/admin/`. Run PowerShell from the server folde
 
 ## Map launchers (shared Chernarus mods)
 
-Chernarus mod list: `admin/chernarus_mods.txt` (edit once - applies to all maps below). COT (`@Community-Online-Tools`) is the standard admin tool.
+Chernarus mod list: `admin/chernarus_mods.txt` (edit once - applies to all maps below). VPP (`@VPPAdminTools`) is the standard admin tool.
 
 | Map | Desktop / server start |
 |-----|-------------------------|
@@ -105,6 +105,13 @@ powershell -ExecutionPolicy Bypass -File admin\recover_imported_map.ps1 -Map ros
 ```
 
 After adding a mod on Chernarus, append it to `admin/chernarus_mods.txt` and restart any map.
+
+VPP admin credentials are private per profile. After adding a new map/profile, sync the local SuperAdmin/password files:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File admin\sync_vpp_admin_profiles.ps1 -Map all
+powershell -ExecutionPolicy Bypass -File admin\switch_admin_inputs_to_vpp.ps1 -Map all -IncludeClientProfiles
+```
 
 ---
 

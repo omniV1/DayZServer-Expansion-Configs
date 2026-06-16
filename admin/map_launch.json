@@ -1,5 +1,5 @@
 {
-  "comment": "Base -mod= list is admin/chernarus_mods.txt. Takistan uses admin/takistan_mods.txt (Chernarus list + @TakistanPlus after @Dabs Framework).",
+  "comment": "Base -mod= list is admin/chernarus_mods.txt with VPP admin tools. Takistan uses admin/takistan_mods.txt (Chernarus list + @TakistanPlus after @Dabs Framework).",
   "mods_file": "chernarus_mods.txt",
   "maps": {
     "chernarus": {

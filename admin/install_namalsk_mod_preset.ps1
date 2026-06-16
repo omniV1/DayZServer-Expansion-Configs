@@ -9,7 +9,7 @@ $required = @(
     'steam:2288336145'  # @Namalsk Survival (server) — required on client for LEHS assets
     'steam:1559212036'  # @CF
     'steam:2545327648'  # @Dabs Framework
-    'steam:1564026768'  # @Community-Online-Tools
+    'steam:1828439124'  # @VPPAdminTools
     'steam:2291785308'  # @DayZ-Expansion-Core
     'steam:2792982069'  # @DayZ-Expansion-AI
     'steam:2572331007'  # @DayZ-Expansion-Bundle

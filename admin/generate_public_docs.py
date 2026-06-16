@@ -15,6 +15,12 @@ MOD_FILES = {
     "sakhal": "chernarus_mods.txt",
     "namalsk": "namalsk_mods.txt",
     "takistan": "takistan_mods.txt",
+    "deerisle": "chernarus_mods.txt",
+    "banov": "chernarus_mods.txt",
+    "esseker": "chernarus_mods.txt",
+    "rostow": "chernarus_mods.txt",
+    "iztek": "chernarus_mods.txt",
+    "alteria": "chernarus_mods.txt",
 }
 
 
@@ -122,7 +128,7 @@ def write_markdown(manifest: dict) -> None:
         "",
         "## Notes",
         "",
-        "- COT (`@Community-Online-Tools`) is the standard admin tool in these presets.",
+        "- VPP (`@VPPAdminTools`) is the standard admin tool in these presets.",
         "- Real `serverDZ*.cfg` files, keys, Workshop folders, logs, and player data are intentionally ignored.",
         "- Namalsk uses its server-side survival mod as `-serverMod`.",
         "- Imported map patrols are generated from seeded COT-style locations and can be refined with real COT exports.",
