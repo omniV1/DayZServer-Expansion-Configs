@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "host": "127.0.0.1",
+  "port": 8765,
+  "allow_remote_bind": false,
+  "snapshot_before_mutation": true,
+  "job_retention": 50,
+  "max_log_lines": 400
+}

@@ -2,6 +2,16 @@
 
 All scripts live under `DayZServer/admin/`. Run PowerShell from the server folder unless noted.
 
+## Local control center
+
+Start the public-friendly local web UI:
+
+```powershell
+python admin\control_center.py --open-browser
+```
+
+It binds to `127.0.0.1` by default, reads `admin/map_launch.json`, and runs only allowlisted actions. Guarded write actions create a local snapshot first; high-risk actions require typed confirmation.
+
 ## Map launchers (shared Chernarus mods)
 
 Chernarus mod list: `admin/chernarus_mods.txt` (edit once - applies to all maps below). VPP (`@VPPAdminTools`) is the standard admin tool.

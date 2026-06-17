@@ -12,6 +12,16 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 - [BALANCE.md](BALANCE.md): gameplay targets for AI, loot, events, vehicles, and quests
 - [CONTRIBUTING.md](CONTRIBUTING.md): safe contribution rules
 
+## Local Control Center
+
+Run a browser-based local dashboard from the server root:
+
+```powershell
+python admin\control_center.py --open-browser
+```
+
+The control center binds to `127.0.0.1` by default and wraps only allowlisted scripts. It can show map status, latest redacted logs, VPP/admin health, LAN checks, config drift, snapshots, smoke tests, and guarded generation/recovery jobs. Risky actions require typed confirmation and create a local config snapshot first.
+
 ## Supported Maps
 
 - Chernarus
@@ -29,6 +39,7 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 ## What This Provides
 
 - Data-driven map launching through `Launch-DayZMap.ps1`
+- Local web control center for map status, diagnostics, snapshots, and guarded script actions
 - Public-safe `serverDZ*.example.cfg` templates
 - VPP (`@VPPAdminTools`) as the standard admin tool
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings

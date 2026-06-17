@@ -46,11 +46,14 @@ Real `serverDZ*.cfg` files are ignored so secrets do not get published.
 Run:
 
 ```powershell
+python admin\control_center.py --open-browser
 python admin\validate_public_repo.py
 powershell -ExecutionPolicy Bypass -File admin\check_map_launch.ps1 -Map all
 python admin\status_all.py
 python admin\validate_imported_maps.py
 ```
+
+The control center is optional, but it is the easiest first stop: it lists maps, missing configs/mods, latest log status, VPP health, launch checks, and guarded maintenance actions.
 
 `check_map_launch.ps1` should report config, mission, and mod folders present for the maps you intend to run.
 

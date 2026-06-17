@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DayZ Server Control Center</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>DayZ Server Control Center</h1>
+      <p id="rootPath">Loading local server root...</p>
+    </div>
+    <div class="top-actions">
+      <button id="refreshButton" type="button">Refresh</button>
+      <button id="openValidationButton" type="button">Run Validation</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <nav class="tabs" aria-label="Views">
+      <button class="tab active" data-tab="dashboard" type="button">Dashboard</button>
+      <button class="tab" data-tab="map" type="button">Map Detail</button>
+      <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
+      <button class="tab" data-tab="generation" type="button">Generation</button>
+      <button class="tab" data-tab="setup" type="button">Setup Helper</button>
+    </nav>
+
+    <section id="dashboard" class="view active">
+      <div class="section-title">
+        <h2>Maps</h2>
+        <span id="processSummary" class="pill">Checking processes...</span>
+      </div>
+      <div id="mapGrid" class="map-grid"></div>
+    </section>
+
+    <section id="map" class="view">
+      <div class="section-title">
+        <h2>Map Detail</h2>
+        <label class="select-label">
+          Map
+          <select id="mapSelect"></select>
+        </label>
+      </div>
+      <div id="mapDetail" class="detail-grid"></div>
+      <div class="action-row">
+        <button data-action="smoke_test_map" data-map-source="selected" type="button">Smoke Test</button>
+        <button data-action="lan_visibility_check" data-map-source="selected" type="button">LAN Check</button>
+        <button data-action="triage_logs" data-map-source="selected" type="button">Triage Logs</button>
+        <button data-action="config_drift" data-map-source="selected" type="button">Config Drift</button>
+        <button data-action="recover_imported_map" data-map-source="selected" type="button" class="danger">Recover Imported</button>
+      </div>
+      <div class="log-panel">
+        <div class="section-title">
+          <h2>Latest Log Tail</h2>
+          <button id="loadLogButton" type="button">Reload Log</button>
+        </div>
+        <pre id="logOutput">Choose a map to load its latest log tail.</pre>
+      </div>
+    </section>
+
+    <section id="maintenance" class="view">
+      <div class="section-title">
+        <h2>Maintenance</h2>
+        <span class="muted">Checks and guarded repair actions</span>
+      </div>
+      <div id="maintenanceActions" class="action-grid"></div>
+    </section>
+
+    <section id="generation" class="view">
+      <div class="section-title">
+        <h2>Generation</h2>
+        <span class="pill warning">Snapshots run before guarded writes</span>
+      </div>
+      <div class="notice">
+        These actions can rewrite generated mission, Expansion, loot, AI, or storage-adjacent configs.
+        Use them when you are ready to restart affected servers.
+      </div>
+      <div id="generationActions" class="action-grid"></div>
+    </section>
+
+    <section id="setup" class="view">
+      <div class="section-title">
+        <h2>Public Setup Helper</h2>
+        <span class="muted">Portable checks for new admins</span>
+      </div>
+      <div id="setupChecklist" class="checklist"></div>
+      <div class="action-row">
+        <button data-action="check_map_launch" data-map-source="all" type="button">Check All Launches</button>
+        <button data-action="check_admin_tooling" data-map-source="all" type="button">Check VPP</button>
+        <button data-action="validate_public_repo" type="button">Validate Repo</button>
+        <button data-action="validate_imported_maps" type="button">Validate Imported Maps</button>
+      </div>
+    </section>
+
+    <aside class="jobs">
+      <div class="section-title">
+        <h2>Jobs</h2>
+        <button id="clearOutputButton" type="button">Clear Output</button>
+      </div>
+      <div id="jobList" class="job-list"></div>
+      <pre id="jobOutput">Run an action to see captured output here.</pre>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
