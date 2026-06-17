@@ -8,6 +8,7 @@ import json
 import mimetypes
 import os
 import re
+import runpy
 import subprocess
 import sys
 import threading
@@ -745,6 +746,8 @@ def powershell_file(script: str, *args: str) -> list[str]:
 
 
 def python_file(script: str, *args: str) -> list[str]:
+    if FROZEN:
+        return [sys.executable, "--server-root", str(ROOT), "--run-admin-script", script, *args]
     return [sys.executable, str(ADMIN / script), *args]
 
 
@@ -1309,12 +1312,49 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--open-browser", action="store_true")
     parser.add_argument("--no-open-browser", action="store_true", help="Do not auto-open a browser when bundled as an EXE.")
     parser.add_argument("--server-root", help="Path to the DayZServer root containing admin\\map_launch.json.")
-    return parser.parse_args()
+    parser.add_argument("--run-admin-script", help=argparse.SUPPRESS)
+    args, script_args = parser.parse_known_args()
+    if script_args and not args.run_admin_script:
+        parser.error(f"unrecognized arguments: {' '.join(script_args)}")
+    args.script_args = script_args
+    return args
+
+
+def run_admin_script(script: str, script_args: list[str], cli_root: str | None) -> int:
+    if not configure_server_root(cli_root):
+        return 2
+    script_name = Path(script).name
+    if script != script_name or not script_name.endswith(".py"):
+        safe_print(f"Refusing unsafe admin script path: {script}")
+        return 2
+    script_path = ADMIN / script_name
+    if not script_path.exists():
+        safe_print(f"Missing admin script: {script_path}")
+        return 2
+
+    os.chdir(ROOT)
+    old_argv = sys.argv
+    sys.argv = [str(script_path), *script_args]
+    try:
+        runpy.run_path(str(script_path), run_name="__main__")
+    except SystemExit as exc:
+        code = exc.code
+        if code is None:
+            return 0
+        if isinstance(code, int):
+            return code
+        safe_print(str(code))
+        return 1
+    finally:
+        sys.argv = old_argv
+    return 0
 
 
 def main() -> int:
     global CONFIG
     args = parse_args()
+    if args.run_admin_script:
+        return run_admin_script(args.run_admin_script, args.script_args, args.server_root)
     if not configure_server_root(args.server_root):
         return 2
     config = load_config()

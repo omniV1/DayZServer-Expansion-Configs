@@ -14,8 +14,10 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.1.0
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.1.1
 ```
+
+Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
 
 The app binds to `127.0.0.1` by default, reads `admin/map_launch.json`, and runs only allowlisted actions. Guarded write actions create a local snapshot first; high-risk actions require typed confirmation. The Balance tab can save active loot presets, AI patrol caps/difficulty, zombie/animal counts, and spawn globals. Use **Apply Loot Now** after changing the loot preset; restart affected servers after AI or zombie changes.
 
