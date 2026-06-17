@@ -111,7 +111,10 @@ VPP admin credentials are private per profile. After adding a new map/profile, s
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\sync_vpp_admin_profiles.ps1 -Map all
 powershell -ExecutionPolicy Bypass -File admin\switch_admin_inputs_to_vpp.ps1 -Map all -IncludeClientProfiles
+powershell -ExecutionPolicy Bypass -File admin\check_admin_tooling.ps1 -Map all -IncludeClientProfiles -CheckDesktop
 ```
+
+`check_admin_tooling.ps1` is the quick VPP sanity check: active mod lists must include `@VPPAdminTools`, running servers must not include COT, private VPP profile files must exist, and server/client inputs should bind VPP to `End` and `Home`.
 
 ---
 

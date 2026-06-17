@@ -91,7 +91,10 @@ VPP admin credentials live in each map's private `profiles*\VPPAdminTools\Permis
 ```powershell
 powershell -ExecutionPolicy Bypass -File admin\sync_vpp_admin_profiles.ps1 -Map all
 powershell -ExecutionPolicy Bypass -File admin\switch_admin_inputs_to_vpp.ps1 -Map all -IncludeClientProfiles
+powershell -ExecutionPolicy Bypass -File admin\check_admin_tooling.ps1 -Map all -IncludeClientProfiles -CheckDesktop
 ```
+
+`check_admin_tooling.ps1` verifies that launch mod lists use VPP, active server processes are not still using COT, VPP SuperAdmin files exist per profile, server/client input presets bind VPP to `End` and `Home`, and generated Desktop launchers still call `Launch-DayZMap.ps1`.
 
 If the script shows A2S is OK but the launcher still cannot retrieve the LAN server list, reset the launcher browser cache:
 
