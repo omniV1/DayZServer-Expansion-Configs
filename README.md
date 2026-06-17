@@ -20,6 +20,8 @@ Run a browser-based local dashboard from the server root:
 python admin\control_center.py --open-browser
 ```
 
+Desktop users can also run `DayZServerControlCenter.exe` from a release zip. On first launch it auto-detects common DayZServer paths or asks for the folder containing `admin\map_launch.json`.
+
 The control center binds to `127.0.0.1` by default and wraps only allowlisted scripts. It can show map status, latest redacted logs, VPP/admin health, LAN checks, config drift, snapshots, smoke tests, guarded generation/recovery jobs, and balance controls for loot presets, AI patrol difficulty/density, zombies, animals, and spawn globals. Risky actions require typed confirmation and guarded edits create a local config snapshot first.
 
 ## Supported Maps

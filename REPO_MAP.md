@@ -27,6 +27,7 @@ The `admin/` folder contains all repeatable automation:
 - `control_center.py`: local browser UI/API for safe script orchestration and guarded balance edits
 - `control_center/`: static UI files for the local control center
 - `control_center_config.json`: public-safe defaults for local UI host, port, and guardrails
+- `build_control_center_exe.ps1`: builds the release zip containing `DayZServerControlCenter.exe`
 - `validate_public_repo.py`: checks for unsafe tracked files and parse errors
 - `check_map_launch.ps1`: verifies launch prerequisites
 - `status_all.py`: compact balance/status report

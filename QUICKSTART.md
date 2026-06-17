@@ -55,6 +55,8 @@ python admin\validate_imported_maps.py
 
 The control center is optional, but it is the easiest first stop: it lists maps, missing configs/mods, latest log status, VPP health, launch checks, guarded maintenance actions, and balance controls for loot, AI, zombies, animals, and spawn globals.
 
+For release builds, download and run `DayZServerControlCenter.exe`; it opens the same local dashboard and asks for your DayZServer folder if needed.
+
 `check_map_launch.ps1` should report config, mission, and mod folders present for the maps you intend to run.
 
 ## 5. Generate Or Refresh Gameplay

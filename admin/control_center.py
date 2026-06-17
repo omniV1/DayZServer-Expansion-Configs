@@ -22,9 +22,23 @@ from typing import Any, Callable
 from urllib.parse import parse_qs, unquote, urlparse
 import xml.etree.ElementTree as ET
 
+FROZEN = bool(getattr(sys, "frozen", False))
+APP_BASE = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+EXE_DIR = Path(sys.executable).resolve().parent if FROZEN else Path(__file__).resolve().parent
+USER_CONFIG_DIR = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "DayZServerControlCenter"
+USER_SETTINGS_PATH = USER_CONFIG_DIR / "settings.json"
+
+
+def resource_path(*parts: str) -> Path:
+    bundled = APP_BASE.joinpath(*parts)
+    if bundled.exists():
+        return bundled
+    return Path(__file__).resolve().parent.joinpath(*parts)
+
+
 ROOT = Path(__file__).resolve().parent.parent
 ADMIN = ROOT / "admin"
-STATIC = ADMIN / "control_center"
+STATIC = resource_path("control_center")
 RUNTIME = ROOT / "local_runtime" / "control_center"
 CONFIG_PATH = ADMIN / "control_center_config.json"
 LAUNCH_PATH = ADMIN / "map_launch.json"
@@ -60,6 +74,142 @@ def read_json(path: Path, default: Any) -> Any:
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def app_log_path() -> Path:
+    return USER_CONFIG_DIR / "control_center.log"
+
+
+def log_message(message: str) -> None:
+    timestamp = dt.datetime.now().isoformat(timespec="seconds")
+    try:
+        USER_CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        with app_log_path().open("a", encoding="utf-8") as handle:
+            handle.write(f"[{timestamp}] {message}\n")
+    except OSError:
+        pass
+
+
+def safe_print(message: str) -> None:
+    log_message(message)
+    if sys.stdout is not None:
+        print(message)
+
+
+def is_server_root(path: Path) -> bool:
+    return (path / "admin" / "map_launch.json").exists() and (path / "Launch-DayZMap.ps1").exists()
+
+
+def set_server_root(path: Path) -> None:
+    global ROOT, ADMIN, RUNTIME, CONFIG_PATH, LAUNCH_PATH, AI_CONFIG_PATH, LOOT_CONFIG_PATH
+    resolved = path.resolve()
+    if not is_server_root(resolved):
+        raise ValueError(f"Not a DayZServer config root: {resolved}")
+    ROOT = resolved
+    ADMIN = ROOT / "admin"
+    RUNTIME = ROOT / "local_runtime" / "control_center"
+    CONFIG_PATH = ADMIN / "control_center_config.json"
+    LAUNCH_PATH = ADMIN / "map_launch.json"
+    AI_CONFIG_PATH = ADMIN / "ai_config.json"
+    LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
+
+
+def read_user_settings() -> dict[str, Any]:
+    return read_json(USER_SETTINGS_PATH, {})
+
+
+def save_user_settings(values: dict[str, Any]) -> None:
+    current = read_user_settings()
+    current.update(values)
+    write_json(USER_SETTINGS_PATH, current)
+
+
+def parent_candidates(path: Path) -> list[Path]:
+    candidates = [path]
+    candidates.extend(path.parents)
+    return candidates
+
+
+def common_server_roots() -> list[Path]:
+    roots = [
+        Path(r"C:\Games\Steam\steamapps\common\DayZServer"),
+        Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) / "Steam" / "steamapps" / "common" / "DayZServer",
+        Path(os.environ.get("ProgramFiles", r"C:\Program Files")) / "Steam" / "steamapps" / "common" / "DayZServer",
+    ]
+    for drive in "DEFG":
+        roots.extend(
+            [
+                Path(f"{drive}:\\SteamLibrary\\steamapps\\common\\DayZServer"),
+                Path(f"{drive}:\\Games\\Steam\\steamapps\\common\\DayZServer"),
+            ]
+        )
+    return roots
+
+
+def detect_server_root(cli_root: str | None) -> Path | None:
+    settings = read_user_settings()
+    candidates: list[Path] = []
+    for value in (
+        cli_root,
+        os.environ.get("DAYZ_SERVER_ROOT"),
+        settings.get("server_root"),
+    ):
+        if value:
+            candidates.append(Path(str(value)).expanduser())
+    candidates.extend(parent_candidates(Path.cwd()))
+    candidates.extend(parent_candidates(EXE_DIR))
+    if not FROZEN:
+        candidates.extend(parent_candidates(Path(__file__).resolve().parent))
+    candidates.extend(common_server_roots())
+
+    seen: set[str] = set()
+    for candidate in candidates:
+        try:
+            resolved = candidate.resolve()
+        except OSError:
+            continue
+        key = str(resolved).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        if is_server_root(resolved):
+            return resolved
+    return None
+
+
+def pick_server_root_dialog() -> Path | None:
+    try:
+        import tkinter as tk
+        from tkinter import filedialog, messagebox
+
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo(
+            "DayZ Server Control Center",
+            "Choose your DayZServer folder. It must contain admin\\map_launch.json and Launch-DayZMap.ps1.",
+        )
+        selected = filedialog.askdirectory(title="Choose DayZServer folder")
+        root.destroy()
+        if selected:
+            path = Path(selected)
+            if is_server_root(path):
+                return path
+            messagebox.showerror("Invalid Folder", "That folder is not a DayZServer config root.")
+    except Exception:
+        return None
+    return None
+
+
+def configure_server_root(cli_root: str | None) -> bool:
+    root = detect_server_root(cli_root)
+    if root is None:
+        root = pick_server_root_dialog()
+    if root is None:
+        safe_print("Could not find DayZServer root. Rerun with --server-root C:\\Path\\To\\DayZServer.")
+        return False
+    set_server_root(root)
+    save_user_settings({"server_root": str(ROOT)})
+    return True
 
 
 def load_config() -> dict[str, Any]:
@@ -914,11 +1064,12 @@ class JobStore:
         self.jobs = {job_id: job for job_id, job in self.jobs.items() if job_id in keep}
 
     def _write_locked(self, job: Job) -> None:
+        RUNTIME.mkdir(parents=True, exist_ok=True)
         write_json(RUNTIME / f"{job.id}.json", job.to_dict())
 
 
-CONFIG = load_config()
-JOBS = JobStore(int(CONFIG.get("job_retention", 50)))
+CONFIG: dict[str, Any] = {}
+JOBS = JobStore(50)
 
 
 def command_display(args: list[str]) -> str:
@@ -1057,7 +1208,7 @@ class Handler(BaseHTTPRequestHandler):
     server_version = "DayZControlCenter/1.0"
 
     def log_message(self, fmt: str, *args: Any) -> None:
-        sys.stderr.write("[%s] %s\n" % (self.log_date_time_string(), fmt % args))
+        log_message("[%s] %s" % (self.log_date_time_string(), fmt % args))
 
     def send_json(self, status: int, data: Any) -> None:
         body = json.dumps(data, indent=2).encode("utf-8")
@@ -1152,40 +1303,54 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def parse_args() -> argparse.Namespace:
-    config = load_config()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--host", default=config.get("host", "127.0.0.1"))
-    parser.add_argument("--port", type=int, default=int(config.get("port", 8765)))
+    parser.add_argument("--host", default=None)
+    parser.add_argument("--port", type=int, default=None)
     parser.add_argument("--open-browser", action="store_true")
+    parser.add_argument("--no-open-browser", action="store_true", help="Do not auto-open a browser when bundled as an EXE.")
+    parser.add_argument("--server-root", help="Path to the DayZServer root containing admin\\map_launch.json.")
     return parser.parse_args()
 
 
 def main() -> int:
+    global CONFIG
     args = parse_args()
+    if not configure_server_root(args.server_root):
+        return 2
     config = load_config()
-    if args.host not in {"127.0.0.1", "localhost"} and not config.get("allow_remote_bind", False):
-        print("Refusing remote bind. Set allow_remote_bind=true in admin/control_center_config.json first.")
+    CONFIG = config
+    JOBS.retention = int(config.get("job_retention", 50))
+    host = args.host or config.get("host", "127.0.0.1")
+    port = args.port or int(config.get("port", 8765))
+    if host not in {"127.0.0.1", "localhost"} and not config.get("allow_remote_bind", False):
+        safe_print("Refusing remote bind. Set allow_remote_bind=true in admin/control_center_config.json first.")
         return 2
     if not LAUNCH_PATH.exists():
-        print(f"Missing {LAUNCH_PATH}")
+        safe_print(f"Missing {LAUNCH_PATH}")
         return 1
     if not STATIC.exists():
-        print(f"Missing {STATIC}")
+        safe_print(f"Missing {STATIC}")
         return 1
-    server = ThreadingHTTPServer((args.host, args.port), Handler)
-    url = f"http://{args.host}:{args.port}/"
-    print(f"DayZ Server Control Center running at {url}")
-    print("Press Ctrl+C to stop.")
-    if args.open_browser:
+    server = ThreadingHTTPServer((host, port), Handler)
+    url = f"http://{host}:{port}/"
+    safe_print(f"DayZ Server Control Center running at {url}")
+    safe_print(f"DayZServer root: {ROOT}")
+    safe_print("Press Ctrl+C to stop.")
+    should_open_browser = args.open_browser or (FROZEN and not args.no_open_browser)
+    if should_open_browser:
         threading.Timer(0.5, lambda: webbrowser.open(url)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nStopping control center.")
+        safe_print("Stopping control center.")
     finally:
         server.server_close()
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as exc:  # noqa: BLE001
+        log_message(f"Fatal startup error: {exc!r}")
+        raise
