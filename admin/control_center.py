@@ -20,6 +20,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import parse_qs, unquote, urlparse
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
 ADMIN = ROOT / "admin"
@@ -28,6 +29,7 @@ RUNTIME = ROOT / "local_runtime" / "control_center"
 CONFIG_PATH = ADMIN / "control_center_config.json"
 LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
+LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
 MAX_OUTPUT_CHARS = 240_000
@@ -294,6 +296,300 @@ def status_payload() -> dict[str, Any]:
     }
 
 
+def mission_for_map(map_name: str) -> str:
+    maps = map_configs()
+    if map_name not in maps:
+        raise ValueError(f"Unknown map: {map_name}")
+    values = read_cfg_public_values(str(maps[map_name].get("config", "")))
+    mission = values.get("template") or ""
+    if not mission:
+        raise ValueError(f"Map has no mission template in config: {map_name}")
+    return mission
+
+
+def mission_dir_for_map(map_name: str) -> Path:
+    mission = mission_for_map(map_name)
+    path = ROOT / "mpmissions" / mission
+    if not path.exists():
+        raise ValueError(f"Mission folder missing for {map_name}: {mission}")
+    return path
+
+
+def clamp_number(value: Any, name: str, min_value: float, max_value: float, integer: bool = False) -> int | float:
+    try:
+        number = int(value) if integer else float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"{name} must be a number.") from exc
+    if number < min_value or number > max_value:
+        raise ValueError(f"{name} must be between {min_value:g} and {max_value:g}.")
+    return number
+
+
+def selected_balance_maps(value: Any) -> list[str]:
+    maps = map_configs()
+    if value in (None, "", "all"):
+        return list(maps)
+    if isinstance(value, str):
+        names = [value.lower()]
+    elif isinstance(value, list):
+        names = [str(item).lower() for item in value]
+    else:
+        raise ValueError("maps must be 'all', one map, or a list of maps.")
+    unknown = [name for name in names if name not in maps]
+    if unknown:
+        raise ValueError(f"Unknown map(s): {', '.join(unknown)}")
+    return names
+
+
+def get_cap(settings: dict[str, Any], category: str) -> int | None:
+    entries = settings.get("LoadBalancingCategories", {}).get(category, [])
+    if not entries:
+        return None
+    value = entries[0].get("MaxPatrols")
+    return int(value) if isinstance(value, int) else None
+
+
+def set_cap(settings: dict[str, Any], category: str, value: int) -> bool:
+    changed = False
+    entries = settings.setdefault("LoadBalancingCategories", {}).setdefault(category, [])
+    if not entries:
+        entries.append({"MinPlayers": 0, "MaxPlayers": 255, "MaxPatrols": value})
+        return True
+    for entry in entries:
+        if entry.get("MaxPatrols") != value:
+            entry["MaxPatrols"] = value
+            changed = True
+    return changed
+
+
+def read_globals(mission_dir: Path) -> dict[str, int]:
+    path = mission_dir / "db" / "globals.xml"
+    values: dict[str, int] = {}
+    if not path.exists():
+        return values
+    root = ET.parse(path).getroot()
+    for var in root.findall("var"):
+        name = var.get("name")
+        value = var.get("value")
+        if name in {"ZombieMaxCount", "AnimalMaxCount", "SpawnInitial", "InitialSpawn", "RespawnLimit", "RespawnTypes"}:
+            try:
+                values[name] = int(value or "0")
+            except ValueError:
+                values[name] = 0
+    return values
+
+
+def write_globals(mission_dir: Path, values: dict[str, int]) -> list[str]:
+    path = mission_dir / "db" / "globals.xml"
+    if not path.exists():
+        raise ValueError(f"Missing globals file: {safe_rel(path)}")
+    tree = ET.parse(path)
+    root = tree.getroot()
+    changed: list[str] = []
+    for var in root.findall("var"):
+        name = var.get("name")
+        if name in values:
+            new_value = str(values[name])
+            if var.get("value") != new_value:
+                var.set("value", new_value)
+                changed.append(name)
+    if changed:
+        ET.indent(tree, space="    ")
+        tree.write(path, encoding="UTF-8", xml_declaration=True)
+    return changed
+
+
+def ai_summary(mission_dir: Path) -> dict[str, Any]:
+    path = mission_dir / "expansion" / "settings" / "AIPatrolSettings.json"
+    if not path.exists():
+        return {"exists": False}
+    data = read_json(path, {})
+    patrols = data.get("Patrols", [])
+    min_values = sorted({p.get("NumberOfAI") for p in patrols if isinstance(p.get("NumberOfAI"), int)})
+    max_values = sorted({p.get("NumberOfAIMax") for p in patrols if isinstance(p.get("NumberOfAIMax"), int)})
+    return {
+        "exists": True,
+        "patrols": len(patrols),
+        "enabled": data.get("Enabled"),
+        "patrolMax": get_cap(data, "Patrol"),
+        "globalMax": get_cap(data, "Global"),
+        "objectPatrolMax": get_cap(data, "ObjectPatrol"),
+        "heliPatrolMax": get_cap(data, "HelicopterWreck"),
+        "accuracyMin": data.get("AccuracyMin"),
+        "accuracyMax": data.get("AccuracyMax"),
+        "damageMultiplier": data.get("DamageMultiplier"),
+        "minAI": min_values[0] if len(min_values) == 1 else None,
+        "maxAI": max_values[0] if len(max_values) == 1 else None,
+        "minAIValues": min_values,
+        "maxAIValues": max_values,
+    }
+
+
+def write_ai_settings(mission_dir: Path, values: dict[str, Any]) -> list[str]:
+    path = mission_dir / "expansion" / "settings" / "AIPatrolSettings.json"
+    if not path.exists():
+        raise ValueError(f"Missing AI patrol settings: {safe_rel(path)}")
+    data = read_json(path, {})
+    changed: list[str] = []
+
+    cap_fields = {
+        "patrolMax": "Patrol",
+        "globalMax": "Global",
+        "objectPatrolMax": "ObjectPatrol",
+        "heliPatrolMax": "HelicopterWreck",
+    }
+    for field, category in cap_fields.items():
+        if field in values:
+            value = int(clamp_number(values[field], field, -1, 200, integer=True))
+            if set_cap(data, category, value):
+                changed.append(field)
+
+    numeric_fields = {
+        "accuracyMin": (0.0, 1.0),
+        "accuracyMax": (0.0, 1.0),
+        "damageMultiplier": (0.1, 5.0),
+    }
+    for field, (low, high) in numeric_fields.items():
+        if field in values:
+            value = clamp_number(values[field], field, low, high)
+            if data.get(field) != value:
+                data[field] = value
+                changed.append(field)
+
+    patrol_numeric_fields = {
+        "minAI": ("NumberOfAI", 0, 20),
+        "maxAI": ("NumberOfAIMax", 0, 20),
+        "accuracyMin": ("AccuracyMin", 0.0, 1.0),
+        "accuracyMax": ("AccuracyMax", 0.0, 1.0),
+        "damageMultiplier": ("DamageMultiplier", 0.1, 5.0),
+    }
+    if "minAI" in values and "maxAI" in values and int(values["minAI"]) > int(values["maxAI"]):
+        raise ValueError("minAI cannot be greater than maxAI.")
+    for patrol in data.get("Patrols", []):
+        for field, spec in patrol_numeric_fields.items():
+            if field not in values:
+                continue
+            target, low, high = spec
+            integer = field in {"minAI", "maxAI"}
+            value = clamp_number(values[field], field, low, high, integer=integer)
+            if patrol.get(target) != value:
+                patrol[target] = value
+                if field not in changed:
+                    changed.append(field)
+        if patrol.get("UnlimitedReload") != 1:
+            patrol["UnlimitedReload"] = 1
+            if "UnlimitedReload" not in changed:
+                changed.append("UnlimitedReload")
+
+    if changed:
+        write_json(path, data)
+    return changed
+
+
+def balance_payload() -> dict[str, Any]:
+    loot = read_json(LOOT_CONFIG_PATH, {})
+    maps = []
+    for map_info in maps_payload():
+        mission_dir = ROOT / "mpmissions" / map_info["mission"] if map_info.get("mission") else None
+        maps.append(
+            {
+                "key": map_info["key"],
+                "title": map_info["title"],
+                "mission": map_info["mission"],
+                "loot": read_globals(mission_dir) if mission_dir and mission_dir.exists() else {},
+                "ai": ai_summary(mission_dir) if mission_dir and mission_dir.exists() else {"exists": False},
+            }
+        )
+    return {
+        "loot": {
+            "activePreset": loot.get("active_preset"),
+            "presets": loot.get("presets", {}),
+        },
+        "maps": maps,
+    }
+
+
+def snapshot_for_api(label: str) -> None:
+    if not CONFIG.get("snapshot_before_mutation", True):
+        return
+    code, output = run_command(python_file("snapshot_configs.py", "--label", label), 240)
+    if code != 0:
+        raise ValueError(f"Snapshot failed before saving balance settings:\n{output}")
+
+
+def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
+    loot_preset: str | None = None
+    if "lootPreset" in payload:
+        loot = read_json(LOOT_CONFIG_PATH, {})
+        loot_preset = str(payload["lootPreset"])
+        if loot_preset not in loot.get("presets", {}):
+            raise ValueError(f"Unknown loot preset: {loot_preset}")
+
+    zombie_maps: list[str] = []
+    zombie_values: dict[str, int] = {}
+    if "zombies" in payload:
+        data = payload["zombies"] or {}
+        zombie_maps = selected_balance_maps(data.get("maps", "all"))
+        allowed = {
+            "ZombieMaxCount": (0, 5000),
+            "AnimalMaxCount": (0, 1000),
+            "SpawnInitial": (0, 10000),
+            "InitialSpawn": (0, 2000),
+            "RespawnLimit": (0, 1000),
+            "RespawnTypes": (0, 500),
+        }
+        for field, (low, high) in allowed.items():
+            if field in data:
+                zombie_values[field] = int(clamp_number(data[field], field, low, high, integer=True))
+
+    ai_maps: list[str] = []
+    ai_values: dict[str, Any] = {}
+    if "ai" in payload:
+        data = payload["ai"] or {}
+        ai_maps = selected_balance_maps(data.get("maps", "all"))
+        ai_values = {key: value for key, value in data.items() if key != "maps" and value not in ("", None)}
+        if "minAI" in ai_values and "maxAI" in ai_values and int(ai_values["minAI"]) > int(ai_values["maxAI"]):
+            raise ValueError("minAI cannot be greater than maxAI.")
+        for field in ("patrolMax", "globalMax", "objectPatrolMax", "heliPatrolMax"):
+            if field in ai_values:
+                clamp_number(ai_values[field], field, -1, 200, integer=True)
+        for field in ("minAI", "maxAI"):
+            if field in ai_values:
+                clamp_number(ai_values[field], field, 0, 20, integer=True)
+        for field in ("accuracyMin", "accuracyMax"):
+            if field in ai_values:
+                clamp_number(ai_values[field], field, 0.0, 1.0)
+        if "damageMultiplier" in ai_values:
+            clamp_number(ai_values["damageMultiplier"], "damageMultiplier", 0.1, 5.0)
+
+    if not any([loot_preset, zombie_values, ai_values]):
+        return {"changed": [], "balance": balance_payload()}
+
+    snapshot_for_api("control-center-balance")
+    changed: list[str] = []
+
+    if loot_preset:
+        loot = read_json(LOOT_CONFIG_PATH, {})
+        if loot.get("active_preset") != loot_preset:
+            loot["active_preset"] = loot_preset
+            write_json(LOOT_CONFIG_PATH, loot)
+            changed.append(f"loot active preset={loot_preset}")
+
+    if zombie_values:
+        for name in zombie_maps:
+            changed_fields = write_globals(mission_dir_for_map(name), zombie_values)
+            if changed_fields:
+                changed.append(f"{name} globals: {', '.join(changed_fields)}")
+
+    if ai_values:
+        for name in ai_maps:
+            changed_fields = write_ai_settings(mission_dir_for_map(name), ai_values)
+            if changed_fields:
+                changed.append(f"{name} AI: {', '.join(changed_fields)}")
+
+    return {"changed": changed, "balance": balance_payload()}
+
+
 def powershell_file(script: str, *args: str) -> list[str]:
     return ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ADMIN / script), *args]
 
@@ -428,6 +724,15 @@ def action_specs() -> dict[str, ActionSpec]:
             "guarded",
             lambda _p, _m: [python_file("snapshot_configs.py", "--label", "control-center")],
             timeout=240,
+        ),
+        "apply_loot_current": ActionSpec(
+            "Apply active loot preset",
+            "generation",
+            "Rebuild and replicate mod_ce, patch globals, and save the current active loot preset.",
+            "guarded",
+            lambda _p, _m: [python_file("apply_loot.py", "all")],
+            timeout=900,
+            snapshot=True,
         ),
         "smoke_test_map": ActionSpec(
             "Smoke test one map",
@@ -775,6 +1080,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, maps_payload())
             elif path == "/api/status":
                 self.send_json(200, status_payload())
+            elif path == "/api/balance":
+                self.send_json(200, balance_payload())
             elif path == "/api/actions":
                 self.send_json(200, actions_payload())
             elif path == "/api/jobs":
@@ -803,7 +1110,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
             parsed = urlparse(self.path)
-            if parsed.path != "/api/actions/run":
+            if parsed.path not in {"/api/actions/run", "/api/balance/save"}:
                 self.send_error_json(404, "Unknown API route.")
                 return
             length = int(self.headers.get("Content-Length", "0") or "0")
@@ -812,8 +1119,11 @@ class Handler(BaseHTTPRequestHandler):
                 return
             raw = self.rfile.read(length).decode("utf-8")
             payload = json.loads(raw or "{}")
-            job = start_action(payload)
-            self.send_json(202, job.to_dict())
+            if parsed.path == "/api/balance/save":
+                self.send_json(200, save_balance(payload))
+            else:
+                job = start_action(payload)
+                self.send_json(202, job.to_dict())
         except ValueError as exc:
             self.send_error_json(400, str(exc))
         except json.JSONDecodeError as exc:

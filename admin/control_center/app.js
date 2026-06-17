@@ -2,6 +2,7 @@ const state = {
   maps: [],
   status: null,
   actions: [],
+  balance: null,
   selectedMap: null,
   selectedJob: null,
   pollTimer: null,
@@ -41,20 +42,23 @@ async function api(path, options = {}) {
 }
 
 async function refreshAll() {
-  const [maps, status, actions, jobs] = await Promise.all([
+  const [maps, status, actions, balance, jobs] = await Promise.all([
     api("/api/maps"),
     api("/api/status"),
     api("/api/actions"),
+    api("/api/balance"),
     api("/api/jobs"),
   ]);
   state.maps = maps;
   state.status = status;
   state.actions = actions;
+  state.balance = balance;
   if (!state.selectedMap && maps.length) state.selectedMap = maps[0].key;
   $("#rootPath").textContent = status.root;
   renderMaps();
   renderMapSelect();
   renderMapDetail();
+  renderBalance();
   renderActions();
   renderSetup();
   renderJobs(jobs);
@@ -95,12 +99,23 @@ function renderMaps() {
 function renderMapSelect() {
   const select = $("#mapSelect");
   select.innerHTML = "";
+  for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
+    target.innerHTML = "";
+    const all = document.createElement("option");
+    all.value = "all";
+    all.textContent = "All maps";
+    target.appendChild(all);
+  }
   for (const map of state.maps) {
     const option = document.createElement("option");
     option.value = map.key;
     option.textContent = map.title;
     if (map.key === state.selectedMap) option.selected = true;
     select.appendChild(option);
+    for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
+      const targetOption = option.cloneNode(true);
+      target.appendChild(targetOption);
+    }
   }
 }
 
@@ -192,6 +207,133 @@ function renderSetup() {
       <p class="muted">Run public repo and imported-map validation before publishing or sharing configs.</p>
     </article>
   `;
+}
+
+function balanceMap(key = state.selectedMap) {
+  return state.balance?.maps?.find((item) => item.key === key);
+}
+
+function setInput(selector, value) {
+  const node = $(selector);
+  if (node) node.value = value ?? "";
+}
+
+function numericValue(selector) {
+  const value = $(selector).value;
+  return value === "" ? undefined : Number(value);
+}
+
+function renderBalance() {
+  if (!state.balance) return;
+  const presetSelect = $("#lootPresetSelect");
+  const currentPreset = state.balance.loot.activePreset;
+  presetSelect.innerHTML = "";
+  for (const [name, preset] of Object.entries(state.balance.loot.presets || {})) {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = `${name} - ${preset.description || ""}`;
+    if (name === currentPreset) option.selected = true;
+    presetSelect.appendChild(option);
+  }
+  renderLootPresetInfo();
+  fillBalanceFromSelectedMap();
+}
+
+function renderLootPresetInfo() {
+  const presetName = $("#lootPresetSelect").value || state.balance?.loot?.activePreset;
+  const preset = state.balance?.loot?.presets?.[presetName] || {};
+  $("#lootPresetDescription").textContent = preset.description || "";
+  const globals = preset.globals || {};
+  $("#lootPresetStats").innerHTML = `
+    <dt>Nominal mult</dt><dd>${escapeText(preset.nominal_mult ?? "?")}</dd>
+    <dt>Min mult</dt><dd>${escapeText(preset.min_mult ?? "?")}</dd>
+    <dt>Zombie max</dt><dd>${escapeText(globals.ZombieMaxCount ?? "?")}</dd>
+    <dt>Spawn initial</dt><dd>${escapeText(globals.SpawnInitial ?? "?")}</dd>
+  `;
+}
+
+function fillBalanceFromSelectedMap() {
+  const item = balanceMap();
+  if (!item) return;
+  $("#zombieTargetSelect").value = state.selectedMap;
+  $("#aiTargetSelect").value = state.selectedMap;
+  setInput("#zombieMaxInput", item.loot.ZombieMaxCount);
+  setInput("#animalMaxInput", item.loot.AnimalMaxCount);
+  setInput("#spawnInitialInput", item.loot.SpawnInitial);
+  setInput("#initialSpawnInput", item.loot.InitialSpawn);
+  setInput("#respawnLimitInput", item.loot.RespawnLimit);
+  setInput("#respawnTypesInput", item.loot.RespawnTypes);
+  setInput("#aiPatrolMaxInput", item.ai.patrolMax);
+  setInput("#aiGlobalMaxInput", item.ai.globalMax);
+  setInput("#aiObjectMaxInput", item.ai.objectPatrolMax);
+  setInput("#aiHeliMaxInput", item.ai.heliPatrolMax);
+  setInput("#aiMinInput", item.ai.minAI);
+  setInput("#aiMaxInput", item.ai.maxAI);
+  setInput("#aiAccuracyMinInput", item.ai.accuracyMin);
+  setInput("#aiAccuracyMaxInput", item.ai.accuracyMax);
+  setInput("#aiDamageInput", item.ai.damageMultiplier);
+  renderBalanceSummary(item);
+}
+
+function renderBalanceSummary(item) {
+  $("#balanceSummary").innerHTML = `
+    <dl class="kv">
+      <dt>Map</dt><dd>${escapeText(item.title)}</dd>
+      <dt>Mission</dt><dd>${escapeText(item.mission)}</dd>
+      <dt>AI patrols</dt><dd>${escapeText(item.ai.patrols ?? "missing")}</dd>
+      <dt>Patrol cap</dt><dd>${escapeText(item.ai.patrolMax ?? "?")}</dd>
+      <dt>Global cap</dt><dd>${escapeText(item.ai.globalMax ?? "?")}</dd>
+      <dt>AI/group</dt><dd>${escapeText(item.ai.minAI ?? "varied")} - ${escapeText(item.ai.maxAI ?? "varied")}</dd>
+      <dt>Accuracy</dt><dd>${escapeText(item.ai.accuracyMin ?? "?")} - ${escapeText(item.ai.accuracyMax ?? "?")}</dd>
+      <dt>Zombies</dt><dd>${escapeText(item.loot.ZombieMaxCount ?? "?")}</dd>
+      <dt>Animals</dt><dd>${escapeText(item.loot.AnimalMaxCount ?? "?")}</dd>
+    </dl>
+  `;
+}
+
+async function saveBalance(payload, label) {
+  const result = await api("/api/balance/save", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  state.balance = result.balance;
+  $("#jobOutput").textContent = `${label} saved.\n\nChanged:\n${result.changed.length ? result.changed.join("\n") : "No file changes needed."}\n\nRestart affected servers for AI/zombie changes. Apply loot separately if you changed loot preset.`;
+  await refreshAll();
+}
+
+async function saveLootPreset() {
+  await saveBalance({ lootPreset: $("#lootPresetSelect").value }, "Loot preset");
+}
+
+async function saveZombies() {
+  const values = {
+    maps: $("#zombieTargetSelect").value,
+    ZombieMaxCount: numericValue("#zombieMaxInput"),
+    AnimalMaxCount: numericValue("#animalMaxInput"),
+    SpawnInitial: numericValue("#spawnInitialInput"),
+    InitialSpawn: numericValue("#initialSpawnInput"),
+    RespawnLimit: numericValue("#respawnLimitInput"),
+    RespawnTypes: numericValue("#respawnTypesInput"),
+  };
+  Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
+  await saveBalance({ zombies: values }, "Zombie/spawn settings");
+}
+
+async function saveAi() {
+  const values = {
+    maps: $("#aiTargetSelect").value,
+    patrolMax: numericValue("#aiPatrolMaxInput"),
+    globalMax: numericValue("#aiGlobalMaxInput"),
+    objectPatrolMax: numericValue("#aiObjectMaxInput"),
+    heliPatrolMax: numericValue("#aiHeliMaxInput"),
+    minAI: numericValue("#aiMinInput"),
+    maxAI: numericValue("#aiMaxInput"),
+    accuracyMin: numericValue("#aiAccuracyMinInput"),
+    accuracyMax: numericValue("#aiAccuracyMaxInput"),
+    damageMultiplier: numericValue("#aiDamageInput"),
+  };
+  Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
+  await saveBalance({ ai: values }, "AI settings");
 }
 
 function renderJobs(jobs) {
@@ -286,6 +428,7 @@ function selectMap(key, switchTab = false) {
   state.selectedMap = key;
   $("#mapSelect").value = key;
   renderMapDetail();
+  fillBalanceFromSelectedMap();
   if (switchTab) activateTab("map");
   loadLog().catch((error) => ($("#logOutput").textContent = error.message));
 }
@@ -300,6 +443,10 @@ function bindEvents() {
   $("#refreshButton").addEventListener("click", () => refreshAll().catch(showError));
   $("#openValidationButton").addEventListener("click", () => runAction("validate_public_repo"));
   $("#mapSelect").addEventListener("change", (event) => selectMap(event.target.value));
+  $("#lootPresetSelect").addEventListener("change", renderLootPresetInfo);
+  $("#saveLootPresetButton").addEventListener("click", () => saveLootPreset().catch(showError));
+  $("#saveZombiesButton").addEventListener("click", () => saveZombies().catch(showError));
+  $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
   $("#loadLogButton").addEventListener("click", () => loadLog().catch(showError));
   $("#clearOutputButton").addEventListener("click", () => ($("#jobOutput").textContent = ""));
   document.body.addEventListener("click", (event) => {

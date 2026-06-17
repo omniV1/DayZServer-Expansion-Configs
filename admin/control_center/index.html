@@ -22,6 +22,7 @@
     <nav class="tabs" aria-label="Views">
       <button class="tab active" data-tab="dashboard" type="button">Dashboard</button>
       <button class="tab" data-tab="map" type="button">Map Detail</button>
+      <button class="tab" data-tab="balance" type="button">Balance</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="generation" type="button">Generation</button>
       <button class="tab" data-tab="setup" type="button">Setup Helper</button>
@@ -57,6 +58,70 @@
           <button id="loadLogButton" type="button">Reload Log</button>
         </div>
         <pre id="logOutput">Choose a map to load its latest log tail.</pre>
+      </div>
+    </section>
+
+    <section id="balance" class="view">
+      <div class="section-title">
+        <h2>Balance Editor</h2>
+        <span class="pill warning">Saves create a snapshot first</span>
+      </div>
+      <div class="balance-grid">
+        <article class="detail-card">
+          <h3>Loot Tables</h3>
+          <label class="field">
+            Active preset
+            <select id="lootPresetSelect"></select>
+          </label>
+          <p id="lootPresetDescription" class="muted"></p>
+          <dl id="lootPresetStats" class="kv"></dl>
+          <div class="action-row">
+            <button id="saveLootPresetButton" type="button">Save Preset</button>
+            <button data-action="apply_loot_current" type="button" class="primary">Apply Loot Now</button>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <h3>Zombies And Spawns</h3>
+          <label class="field">
+            Target
+            <select id="zombieTargetSelect"></select>
+          </label>
+          <div class="form-grid">
+            <label>Zombie max <input id="zombieMaxInput" type="number" min="0" max="5000" step="50"></label>
+            <label>Animal max <input id="animalMaxInput" type="number" min="0" max="1000" step="10"></label>
+            <label>Spawn initial <input id="spawnInitialInput" type="number" min="0" max="10000" step="100"></label>
+            <label>Initial spawn <input id="initialSpawnInput" type="number" min="0" max="2000" step="10"></label>
+            <label>Respawn limit <input id="respawnLimitInput" type="number" min="0" max="1000" step="5"></label>
+            <label>Respawn types <input id="respawnTypesInput" type="number" min="0" max="500" step="1"></label>
+          </div>
+          <button id="saveZombiesButton" type="button">Save Zombie/Spawn Settings</button>
+        </article>
+
+        <article class="detail-card">
+          <h3>AI Patrols</h3>
+          <label class="field">
+            Target
+            <select id="aiTargetSelect"></select>
+          </label>
+          <div class="form-grid">
+            <label>Patrol cap <input id="aiPatrolMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Global cap <input id="aiGlobalMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Object cap <input id="aiObjectMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Heli cap <input id="aiHeliMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Min AI/group <input id="aiMinInput" type="number" min="0" max="20" step="1"></label>
+            <label>Max AI/group <input id="aiMaxInput" type="number" min="0" max="20" step="1"></label>
+            <label>Accuracy min <input id="aiAccuracyMinInput" type="number" min="0" max="1" step="0.01"></label>
+            <label>Accuracy max <input id="aiAccuracyMaxInput" type="number" min="0" max="1" step="0.01"></label>
+            <label>Damage multiplier <input id="aiDamageInput" type="number" min="0.1" max="5" step="0.05"></label>
+          </div>
+          <button id="saveAiButton" type="button">Save AI Settings</button>
+        </article>
+
+        <article class="detail-card">
+          <h3>Current Map Balance</h3>
+          <div id="balanceSummary"></div>
+        </article>
       </div>
     </section>
 

@@ -24,7 +24,7 @@ The `admin/` folder contains all repeatable automation:
 - `map_launch.json`: map ports, profiles, config names, extra mods
 - `map_workshop_catalog.json`: imported map Workshop IDs and mission templates
 - `workshop_manifest.json`: generated public mod manifest data
-- `control_center.py`: local browser UI/API for safe script orchestration
+- `control_center.py`: local browser UI/API for safe script orchestration and guarded balance edits
 - `control_center/`: static UI files for the local control center
 - `control_center_config.json`: public-safe defaults for local UI host, port, and guardrails
 - `validate_public_repo.py`: checks for unsafe tracked files and parse errors

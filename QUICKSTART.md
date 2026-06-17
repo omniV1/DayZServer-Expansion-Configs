@@ -53,7 +53,7 @@ python admin\status_all.py
 python admin\validate_imported_maps.py
 ```
 
-The control center is optional, but it is the easiest first stop: it lists maps, missing configs/mods, latest log status, VPP health, launch checks, and guarded maintenance actions.
+The control center is optional, but it is the easiest first stop: it lists maps, missing configs/mods, latest log status, VPP health, launch checks, guarded maintenance actions, and balance controls for loot, AI, zombies, animals, and spawn globals.
 
 `check_map_launch.ps1` should report config, mission, and mod folders present for the maps you intend to run.
 

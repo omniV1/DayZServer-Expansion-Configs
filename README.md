@@ -20,7 +20,7 @@ Run a browser-based local dashboard from the server root:
 python admin\control_center.py --open-browser
 ```
 
-The control center binds to `127.0.0.1` by default and wraps only allowlisted scripts. It can show map status, latest redacted logs, VPP/admin health, LAN checks, config drift, snapshots, smoke tests, and guarded generation/recovery jobs. Risky actions require typed confirmation and create a local config snapshot first.
+The control center binds to `127.0.0.1` by default and wraps only allowlisted scripts. It can show map status, latest redacted logs, VPP/admin health, LAN checks, config drift, snapshots, smoke tests, guarded generation/recovery jobs, and balance controls for loot presets, AI patrol difficulty/density, zombies, animals, and spawn globals. Risky actions require typed confirmation and guarded edits create a local config snapshot first.
 
 ## Supported Maps
 
@@ -40,6 +40,7 @@ The control center binds to `127.0.0.1` by default and wraps only allowlisted sc
 
 - Data-driven map launching through `Launch-DayZMap.ps1`
 - Local web control center for map status, diagnostics, snapshots, and guarded script actions
+- UI balance editor for active loot presets, AI patrol caps/difficulty, zombies, animals, and spawn globals
 - Public-safe `serverDZ*.example.cfg` templates
 - VPP (`@VPPAdminTools`) as the standard admin tool
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings
