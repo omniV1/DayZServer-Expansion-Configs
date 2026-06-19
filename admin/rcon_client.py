@@ -42,11 +42,14 @@ def send_command(host: str, port: int, password: str, command: str, timeout: flo
     sock.settimeout(timeout)
     try:
         sock.connect((host, port))
-        sock.send(_packet(0x00, password.encode("latin-1", "ignore")))
         try:
+            sock.send(_packet(0x00, password.encode("latin-1", "ignore")))
             login = _strip_header(sock.recv(4096))
-        except socket.timeout as exc:
-            raise RConError("No response from RCon (is the server running with RCon enabled?)") from exc
+        except (socket.timeout, ConnectionResetError, OSError) as exc:
+            raise RConError(
+                "Could not reach RCon on this port. Start or restart the map and allow "
+                "~20-30s after it boots for BattlEye RCon to come up."
+            ) from exc
         if len(login) < 3 or login[0] != 0xFF or login[1] != 0x00:
             raise RConError("Unexpected RCon login response.")
         if login[2] != 0x01:
