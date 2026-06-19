@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.3.0"
+APP_VERSION = "0.4.0"
 RELEASE_CHANNEL = "preview"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -984,7 +984,20 @@ def snapshot_for_api(label: str) -> None:
         raise ValueError(f"Snapshot failed before saving balance settings:\n{output}")
 
 
-def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
+ZOMBIE_FIELD_RANGES: dict[str, tuple[int, int]] = {
+    "ZombieMaxCount": (0, 5000),
+    "AnimalMaxCount": (0, 1000),
+    "SpawnInitial": (0, 10000),
+    "InitialSpawn": (0, 2000),
+    "RespawnLimit": (0, 1000),
+    "RespawnTypes": (0, 500),
+}
+
+
+def validate_balance_payload(
+    payload: dict[str, Any],
+) -> tuple[str | None, list[str], dict[str, int], list[str], dict[str, Any]]:
+    """Validate and clamp a balance save/preview payload without writing anything."""
     loot_preset: str | None = None
     if "lootPreset" in payload:
         loot = read_json(LOOT_CONFIG_PATH, {})
@@ -997,15 +1010,7 @@ def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
     if "zombies" in payload:
         data = payload["zombies"] or {}
         zombie_maps = selected_balance_maps(data.get("maps", "all"))
-        allowed = {
-            "ZombieMaxCount": (0, 5000),
-            "AnimalMaxCount": (0, 1000),
-            "SpawnInitial": (0, 10000),
-            "InitialSpawn": (0, 2000),
-            "RespawnLimit": (0, 1000),
-            "RespawnTypes": (0, 500),
-        }
-        for field, (low, high) in allowed.items():
+        for field, (low, high) in ZOMBIE_FIELD_RANGES.items():
             if field in data:
                 zombie_values[field] = int(clamp_number(data[field], field, low, high, integer=True))
 
@@ -1028,6 +1033,62 @@ def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
                 clamp_number(ai_values[field], field, 0.0, 1.0)
         if "damageMultiplier" in ai_values:
             clamp_number(ai_values["damageMultiplier"], "damageMultiplier", 0.1, 5.0)
+
+    return loot_preset, zombie_maps, zombie_values, ai_maps, ai_values
+
+
+def preview_balance(payload: dict[str, Any]) -> dict[str, Any]:
+    """Compute what a balance save would change, without writing or snapshotting."""
+    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values = validate_balance_payload(payload)
+    files: list[str] = []
+    changes: list[str] = []
+    maps_affected: list[str] = []
+    restart_required = False
+    needs_loot_apply = False
+
+    if loot_preset:
+        loot = read_json(LOOT_CONFIG_PATH, {})
+        if loot.get("active_preset") != loot_preset:
+            files.append(safe_rel(LOOT_CONFIG_PATH))
+            changes.append(f"Loot active preset -> {loot_preset}")
+            needs_loot_apply = True
+
+    if zombie_values:
+        for name in zombie_maps:
+            mission_dir = mission_dir_for_map(name)
+            current = read_globals(mission_dir)
+            diffs = [field for field, value in zombie_values.items() if current.get(field) != value]
+            if diffs:
+                files.append(safe_rel(mission_dir / "db" / "globals.xml"))
+                maps_affected.append(name)
+                changes.append(f"{name} globals: {', '.join(diffs)}")
+                restart_required = True
+
+    if ai_values:
+        ai_fields = sorted(ai_values)
+        for name in ai_maps:
+            path = mission_dir_for_map(name) / "expansion" / "settings" / "AIPatrolSettings.json"
+            if not path.exists():
+                continue
+            files.append(safe_rel(path))
+            maps_affected.append(name)
+            changes.append(f"{name} AI: {', '.join(ai_fields)}")
+            restart_required = True
+
+    return {
+        "changes": changes,
+        "files": sorted(set(files)),
+        "maps": sorted(set(maps_affected)),
+        "restartRequired": restart_required,
+        "needsLootApply": needs_loot_apply,
+        "snapshot": bool(CONFIG.get("snapshot_before_mutation", True)),
+        "snapshotLabel": "control-center-balance",
+        "hasChanges": bool(changes),
+    }
+
+
+def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
+    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values = validate_balance_payload(payload)
 
     if not any([loot_preset, zombie_values, ai_values]):
         return {"changed": [], "balance": balance_payload()}
@@ -1586,7 +1647,12 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
             parsed = urlparse(self.path)
-            if parsed.path not in {"/api/actions/run", "/api/balance/save", "/api/setup/save"}:
+            if parsed.path not in {
+                "/api/actions/run",
+                "/api/balance/save",
+                "/api/balance/preview",
+                "/api/setup/save",
+            }:
                 self.send_error_json(404, "Unknown API route.")
                 return
             length = int(self.headers.get("Content-Length", "0") or "0")
@@ -1597,6 +1663,8 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(raw or "{}")
             if parsed.path == "/api/balance/save":
                 self.send_json(200, save_balance(payload))
+            elif parsed.path == "/api/balance/preview":
+                self.send_json(200, preview_balance(payload))
             elif parsed.path == "/api/setup/save":
                 write_setup_state(payload)
                 self.send_json(200, setup_payload())
