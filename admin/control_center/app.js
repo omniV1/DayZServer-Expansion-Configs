@@ -1,8 +1,10 @@
 const state = {
+  app: null,
   maps: [],
   status: null,
   actions: [],
   balance: null,
+  setup: null,
   selectedMap: null,
   selectedJob: null,
   pollTimer: null,
@@ -123,19 +125,24 @@ async function api(path, options = {}) {
 }
 
 async function refreshAll() {
-  const [maps, status, actions, balance, jobs] = await Promise.all([
+  const [app, maps, status, actions, balance, setup, jobs] = await Promise.all([
+    api("/api/app"),
     api("/api/maps"),
     api("/api/status"),
     api("/api/actions"),
     api("/api/balance"),
+    api("/api/setup"),
     api("/api/jobs"),
   ]);
+  state.app = app;
   state.maps = maps;
   state.status = status;
   state.actions = actions;
   state.balance = balance;
+  state.setup = setup;
   if (!state.selectedMap && maps.length) state.selectedMap = maps[0].key;
   $("#rootPath").textContent = status.root;
+  renderAppInfo();
   renderMaps();
   renderMapSelect();
   renderMapDetail();
@@ -143,6 +150,14 @@ async function refreshAll() {
   renderActions();
   renderSetup();
   renderJobs(jobs);
+}
+
+function renderAppInfo() {
+  if (!state.app) return;
+  const pill = $("#appVersion");
+  if (pill) {
+    pill.textContent = `v${state.app.version}${state.app.channel ? ` ${state.app.channel}` : ""}`;
+  }
 }
 
 function renderMaps() {
@@ -307,32 +322,94 @@ function renderActions() {
   $("#generationActions").innerHTML = generation.map(actionButton).join("");
 }
 
+const SETUP_STATUS_COPY = {
+  ok: { label: "Ready", cls: "pill ok" },
+  warn: { label: "Attention", cls: "pill warning" },
+  todo: { label: "Action needed", cls: "pill bad" },
+  action: { label: "Recommended", cls: "pill" },
+  done: { label: "Done", cls: "pill ok" },
+};
+
+function setupStepNumber(index) {
+  return index + 1;
+}
+
 function renderSetup() {
-  const configMissing = state.maps.filter((map) => !map.configExists);
-  const missionMissing = state.maps.filter((map) => !map.missionExists);
-  const modMissing = state.maps.filter((map) => map.missingMods.length > 0);
-  $("#setupChecklist").innerHTML = `
-    <article class="check-card">
-      <h3>Private Configs</h3>
-      <p class="${configMissing.length ? "pill bad" : "pill ok"}">${configMissing.length ? `${configMissing.length} missing` : "all present"}</p>
-      <p class="card-help">Real serverDZ configs stay private and ignored; examples are safe to publish.</p>
-    </article>
-    <article class="check-card">
-      <h3>Mission Folders</h3>
-      <p class="${missionMissing.length ? "pill bad" : "pill ok"}">${missionMissing.length ? `${missionMissing.length} missing` : "all present"}</p>
-      <p class="card-help">Every launch entry needs its mission directory under mpmissions.</p>
-    </article>
-    <article class="check-card">
-      <h3>Workshop Mods</h3>
-      <p class="${modMissing.length ? "pill bad" : "pill ok"}">${modMissing.length ? `${modMissing.length} maps missing mods` : "all listed mods present"}</p>
-      <p class="card-help">The server must have every folder named in the selected map's mod list.</p>
-    </article>
-    <article class="check-card">
-      <h3>Validation</h3>
-      <p class="muted">Run public repo and imported-map validation before publishing or sharing configs.</p>
-      <p class="card-help">Validation protects people from accidentally sharing logs, storage, profiles, or secrets.</p>
-    </article>
-  `;
+  const setup = state.setup;
+  const wizard = $("#setupWizard");
+  if (!setup || !wizard) return;
+
+  const pill = $("#setupReadyPill");
+  if (pill) {
+    if (setup.ready) {
+      pill.textContent = "Core requirements met";
+      pill.className = "pill ok";
+    } else {
+      pill.textContent = "Needs attention";
+      pill.className = "pill bad";
+    }
+  }
+
+  const nextBanner = $("#setupNext");
+  if (nextBanner) {
+    if (setup.recommendedNext) {
+      const step = setup.steps.find((item) => item.key === setup.recommendedNext);
+      const number = setup.steps.indexOf(step) + 1;
+      nextBanner.innerHTML = `<strong>Next step ${number}:</strong> ${escapeText(step.title)} — ${escapeText(step.detail)}`;
+      nextBanner.classList.remove("ok");
+    } else {
+      nextBanner.innerHTML = "<strong>All set.</strong> Every core requirement is satisfied and the recommended checks are done. You can move to the Dashboard.";
+      nextBanner.classList.add("ok");
+    }
+  }
+
+  wizard.innerHTML = setup.steps
+    .map((step, index) => {
+      const effectiveStatus = step.done && step.status === "action" ? "done" : step.status;
+      const badge = SETUP_STATUS_COPY[effectiveStatus] || SETUP_STATUS_COPY.action;
+      const isNext = step.key === setup.recommendedNext;
+      const items = (step.items || []).filter(Boolean);
+      const itemsHtml = items.length
+        ? `<ul class="wizard-items">${items.map((item) => `<li>${escapeText(item)}</li>`).join("")}</ul>`
+        : "";
+      const fixAction = step.fixAction
+        ? state.actions.find((action) => action.key === step.fixAction)
+        : null;
+      const fixSource = fixAction && fixAction.mapMode !== "none" ? "all" : "";
+      const fixButton = fixAction
+        ? `<button data-action="${escapeText(fixAction.key)}" data-map-source="${fixSource}" type="button" data-tip="${escapeText(fixAction.description)}">${step.status === "action" ? "Run check" : "Fix this"}</button>`
+        : "";
+      const doneToggle =
+        step.status === "action" || step.status === "ok"
+          ? `<button class="ghost" data-setup-step="${escapeText(step.key)}" data-setup-done="${step.done ? "false" : "true"}" type="button" data-tip="Mark this step done on this computer only.">${step.done ? "Mark not done" : "Mark done"}</button>`
+          : "";
+      return `
+        <li class="wizard-step ${effectiveStatus} ${isNext ? "is-next" : ""}">
+          <div class="wizard-head">
+            <span class="step-number">${setupStepNumber(index)}</span>
+            <h3>${escapeText(step.title)}</h3>
+            <span class="${badge.cls}">${badge.label}</span>
+          </div>
+          <p class="wizard-summary">${escapeText(step.summary)}</p>
+          <p class="card-help">${escapeText(step.detail)}</p>
+          ${itemsHtml}
+          <div class="action-row wizard-actions">
+            ${fixButton}
+            ${doneToggle}
+          </div>
+        </li>
+      `;
+    })
+    .join("");
+}
+
+async function saveSetupStep(step, done) {
+  const setup = await api("/api/setup/save", {
+    method: "POST",
+    body: JSON.stringify({ step, done }),
+  });
+  state.setup = setup;
+  renderSetup();
 }
 
 function balanceMap(key = state.selectedMap) {
@@ -609,6 +686,11 @@ function bindEvents() {
     const source = button.dataset.mapSource;
     const map = source === "all" ? "all" : source === "selected" ? state.selectedMap : undefined;
     runAction(button.dataset.action, map).catch(showError);
+  });
+  document.body.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-setup-step]");
+    if (!button) return;
+    saveSetupStep(button.dataset.setupStep, button.dataset.setupDone === "true").catch(showError);
   });
 }
 

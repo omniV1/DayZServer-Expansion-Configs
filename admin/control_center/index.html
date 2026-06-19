@@ -9,7 +9,7 @@
 <body>
   <header class="topbar">
     <div>
-      <h1>DayZ Server Control Center</h1>
+      <h1>DayZ Server Control Center <span id="appVersion" class="version-pill" title="Installed Control Center version"></span></h1>
       <p id="rootPath">Loading local server root...</p>
     </div>
     <div class="top-actions">
@@ -232,14 +232,20 @@
 
     <section id="setup" class="view">
       <div class="section-title">
-        <h2>Public Setup Helper</h2>
-        <span class="muted">Portable checks for new admins</span>
+        <h2>First-Run Setup</h2>
+        <span id="setupReadyPill" class="pill">Checking setup...</span>
       </div>
       <div class="notice small-help">
-        Use this after downloading the repo or moving a server folder. It checks whether private configs,
-        missions, Workshop mods, VPP profiles, and public-safe tracked files are in good shape.
+        Use this after downloading the repo or moving a server folder. It walks each requirement in order,
+        shows exactly what is missing, and points you at the safe action to fix it. Progress is saved on this
+        computer only.
       </div>
-      <div id="setupChecklist" class="checklist"></div>
+      <div id="setupNext" class="notice setup-next">Checking your server folder...</div>
+      <ol id="setupWizard" class="wizard"></ol>
+      <div class="section-title">
+        <h2>Quick Checks</h2>
+        <span class="muted">Read-only, safe anytime</span>
+      </div>
       <div class="action-row">
         <button data-action="check_map_launch" data-map-source="all" type="button" data-tip="Checks configured maps, mods, missions, and ports without starting servers.">Check All Launches</button>
         <button data-action="check_admin_tooling" data-map-source="all" type="button" data-tip="Checks VPP profile, keybind/input files, and desktop launchers.">Check VPP</button>
