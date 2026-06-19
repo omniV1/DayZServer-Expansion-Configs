@@ -13,6 +13,8 @@ const state = {
   report: null,
   reportScope: "all",
   snapshots: null,
+  rcon: null,
+  rconMap: null,
   selectedMap: null,
   selectedJob: null,
   pendingSave: null,
@@ -232,10 +234,12 @@ function renderMapSelect() {
   const eventsSelect = $("#eventsMapSelect");
   const missionSelect = $("#missionMapSelect");
   const reportSelect = $("#reportMapSelect");
+  const rconSelect = $("#rconMapSelect");
   select.innerHTML = "";
   if (troubleshootSelect) troubleshootSelect.innerHTML = "";
   if (eventsSelect) eventsSelect.innerHTML = "";
   if (missionSelect) missionSelect.innerHTML = "";
+  if (rconSelect) rconSelect.innerHTML = "";
   if (reportSelect) {
     reportSelect.innerHTML = "";
     const all = document.createElement("option");
@@ -272,6 +276,11 @@ function renderMapSelect() {
       const reportOption = option.cloneNode(true);
       reportOption.selected = map.key === state.reportScope;
       reportSelect.appendChild(reportOption);
+    }
+    if (rconSelect) {
+      const rconOption = option.cloneNode(true);
+      if (map.key === (state.rconMap || state.selectedMap)) rconOption.selected = true;
+      rconSelect.appendChild(rconOption);
     }
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
@@ -1168,6 +1177,7 @@ function activateTab(name) {
     if (map && state.missionsMap !== map) loadMissions(map).catch(showError);
   }
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
+  if (name === "rcon") loadRconStatus().catch(showError);
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
     startStatusPolling();
@@ -1277,6 +1287,85 @@ async function restoreSnapshot(name) {
   $("#jobOutput").textContent = job.output || `Queued restore of ${name}...`;
   startPolling();
   await refreshJobs();
+}
+
+function rconTargetMap() {
+  return $("#rconMapSelect")?.value || state.rconMap || state.selectedMap;
+}
+
+async function loadRconStatus(mapKey) {
+  const map = mapKey || rconTargetMap();
+  if (!map) return;
+  state.rconMap = map;
+  const data = await api(`/api/rcon/status?map=${encodeURIComponent(map)}`);
+  state.rcon = data;
+  const enabled = data.configured;
+  const running = data.running;
+  const enableBtn = $("#rconEnableButton");
+  if (enableBtn) enableBtn.textContent = enabled ? "Regenerate RCON" : "Enable RCON";
+  $("#rconStatus").innerHTML =
+    `<strong>${escapeText(map)}:</strong> RCON ${enabled ? "enabled" : "not enabled"} on port ${data.port}. ` +
+    `Server ${running ? "running" : "not running"}. ${escapeText(data.note)}`;
+}
+
+async function rconEnable() {
+  const map = rconTargetMap();
+  if (!map) return;
+  const regenerate = state.rcon && state.rcon.configured
+    ? confirm("RCON is already enabled for this map. Generate a NEW password? You must restart the map afterward.")
+    : false;
+  if (state.rcon && state.rcon.configured && !regenerate) return;
+  const data = await api("/api/rcon/enable", {
+    method: "POST",
+    body: JSON.stringify({ map, regenerate }),
+  });
+  $("#rconStatus").innerHTML = `<strong>${escapeText(map)}:</strong> ${escapeText(data.message)}`;
+  await loadRconStatus(map);
+}
+
+async function rconRun(command, extra) {
+  const map = rconTargetMap();
+  if (!map) return null;
+  try {
+    return await api("/api/rcon/run", {
+      method: "POST",
+      body: JSON.stringify({ map, command, ...(extra || {}) }),
+    });
+  } catch (error) {
+    $("#rconStatus").innerHTML = `<strong>RCON error:</strong> ${escapeText(error.message || String(error))}`;
+    return null;
+  }
+}
+
+async function rconPlayers() {
+  const data = await rconRun("players");
+  if (data) $("#rconPlayers").textContent = data.output;
+}
+
+async function rconSay() {
+  const message = $("#rconSayInput").value.trim();
+  if (!message) return;
+  await rconRun("say", { message });
+  $("#rconSayInput").value = "";
+  $("#rconStatus").innerHTML = `<strong>Broadcast sent.</strong>`;
+}
+
+async function rconKickBan(kind) {
+  const id = Number($("#rconPlayerIdInput").value);
+  if (!Number.isInteger(id) || id < 0) {
+    alert("Enter the player number (#) from the players list.");
+    return;
+  }
+  const reason = $("#rconReasonInput").value.trim();
+  if (kind === "ban") {
+    const minutes = Number($("#rconBanMinutesInput").value) || 0;
+    if (!confirm(`Ban player #${id} for ${minutes === 0 ? "permanent" : minutes + " min"}?`)) return;
+    await rconRun("ban", { id, minutes, reason });
+  } else {
+    await rconRun("kick", { id, reason });
+  }
+  $("#rconStatus").innerHTML = `<strong>${kind === "ban" ? "Ban" : "Kick"} sent for player #${id}.</strong>`;
+  await rconPlayers();
 }
 
 const APP_MODES = ["simple", "advanced"];
@@ -1408,6 +1497,12 @@ function bindEvents() {
   $("#copyReportButton").addEventListener("click", () => copyReport().catch(showError));
   $("#downloadReportButton").addEventListener("click", downloadReport);
   $("#reloadSnapshotsButton").addEventListener("click", () => loadSnapshots().catch(showError));
+  $("#rconMapSelect").addEventListener("change", (event) => loadRconStatus(event.target.value).catch(showError));
+  $("#rconEnableButton").addEventListener("click", () => rconEnable().catch(showError));
+  $("#rconPlayersButton").addEventListener("click", () => rconPlayers().catch(showError));
+  $("#rconSayButton").addEventListener("click", () => rconSay().catch(showError));
+  $("#rconKickButton").addEventListener("click", () => rconKickBan("kick").catch(showError));
+  $("#rconBanButton").addEventListener("click", () => rconKickBan("ban").catch(showError));
   document.body.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-restore-snapshot]");
     if (!button) return;

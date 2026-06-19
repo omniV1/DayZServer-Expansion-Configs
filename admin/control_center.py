@@ -9,6 +9,7 @@ import mimetypes
 import os
 import re
 import runpy
+import secrets
 import subprocess
 import sys
 import threading
@@ -47,7 +48,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -68,6 +69,7 @@ FATAL_PATTERNS = [
 REDACTIONS = [
     (re.compile(r"(passwordAdmin\s*=\s*\")[^\"]*(\")", re.I), r"\1<redacted>\2"),
     (re.compile(r"(password\s*=\s*\")[^\"]*(\")", re.I), r"\1<redacted>\2"),
+    (re.compile(r"(RConPassword\s+)\S+", re.I), r"\1<redacted>"),
     (re.compile(r"\b7656\d{13,}\b"), "<steamid>"),
     (re.compile(r"\bgho_[A-Za-z0-9_]+\b"), "<token>"),
 ]
@@ -824,6 +826,158 @@ def validate_snapshot_name(payload: dict[str, Any]) -> Path:
     if not str(target).startswith(str(directory)) or not target.exists():
         raise ValueError(f"Snapshot not found: {name}")
     return target
+
+
+BE_CONFIG_NAME = "BEServer_x64.cfg"
+
+
+def rcon_map(payload_or_name: Any) -> str:
+    name = (payload_or_name.get("map") if isinstance(payload_or_name, dict) else payload_or_name) or ""
+    name = str(name).lower()
+    if name not in map_configs():
+        raise ValueError(f"Unknown map: {name}")
+    return name
+
+
+def map_profile_dir(map_name: str) -> Path:
+    cfg = map_configs()[map_name]
+    return ROOT / (cfg.get("profiles_dir") or f"profiles_{map_name}")
+
+
+def default_rcon_port(map_name: str) -> int:
+    # game/steam/query ports never use gamePort+4, and maps are spaced 100 apart, so this
+    # stays unique per map and lets several servers expose RCon at once.
+    return int(map_configs()[map_name].get("port", 2302) or 2302) + 4
+
+
+def be_config_path(map_name: str) -> Path:
+    # DayZ resolves -BEpath relative to the profile, so BattlEye reads its config from
+    # <profile>/BattlEye/battleye/BEServer_x64.cfg (verified against the active config it writes).
+    return map_profile_dir(map_name) / "BattlEye" / "battleye" / BE_CONFIG_NAME
+
+
+def read_rcon_config(map_name: str) -> dict[str, Any]:
+    folder = be_config_path(map_name).parent
+    # The master BEServer_x64.cfg is what we write; once a server boots, BattlEye consumes
+    # it and keeps the live values in BEServer_x64_active_<hash>.cfg, so check both.
+    candidates: list[Path] = []
+    master = folder / BE_CONFIG_NAME
+    if master.exists():
+        candidates.append(master)
+    candidates.extend(
+        sorted(folder.glob("BEServer_x64_active_*.cfg"), key=lambda p: p.stat().st_mtime, reverse=True)
+    )
+    for path in candidates:
+        text = path.read_text(encoding="utf-8-sig", errors="replace")
+        pass_match = re.search(r"(?im)^\s*RConPassword\s+(\S+)", text)
+        if not pass_match:
+            continue
+        port_match = re.search(r"(?im)^\s*RConPort\s+(\d+)", text)
+        return {
+            "configured": True,
+            "port": int(port_match.group(1)) if port_match else default_rcon_port(map_name),
+            "password": pass_match.group(1),
+        }
+    return {"configured": False, "port": default_rcon_port(map_name), "password": None}
+
+
+def map_server_running(map_name: str) -> bool:
+    ports = netstat_udp_ports()
+    game = int(map_configs()[map_name].get("port", 0) or 0)
+    return game in ports
+
+
+def rcon_status_payload(map_name: str) -> dict[str, Any]:
+    cfg = read_rcon_config(map_name)
+    return {
+        "map": map_name,
+        "configured": cfg["configured"],
+        "port": cfg["port"],
+        "configPath": safe_rel(be_config_path(map_name)),
+        "running": map_server_running(map_name),
+        "commands": ["players", "kick", "ban", "say"],
+        "note": (
+            "Enable RCon, then start or restart this map so BattlEye loads the config. "
+            "RCon takes ~20-30s after the server boots before it answers."
+        ),
+    }
+
+
+def enable_rcon(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name = rcon_map(payload)
+    cfg = read_rcon_config(map_name)
+    try:
+        port = int(payload.get("port") or cfg["port"])
+    except (TypeError, ValueError) as exc:
+        raise ValueError("RCon port must be a number.") from exc
+    if not (1024 <= port <= 65535):
+        raise ValueError("RCon port must be between 1024 and 65535.")
+    regenerate = bool(payload.get("regenerate"))
+    password = cfg["password"] if (cfg["password"] and not regenerate) else secrets.token_hex(12)
+    path = be_config_path(map_name)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        f"RConPassword {password}\nRConPort {port}\nRestrictRCon 0\nMaxPing 350\n",
+        encoding="utf-8",
+    )
+    return {
+        "enabled": True,
+        "map": map_name,
+        "port": port,
+        "regenerated": regenerate or not cfg["password"],
+        "message": (
+            f"RCon enabled for {map_name} on port {port}. Restart this map so BattlEye reloads "
+            "the config. The password is stored only in the ignored profile BattlEye folder."
+        ),
+        "status": rcon_status_payload(map_name),
+    }
+
+
+def rcon_send(port: int, password: str, command: str, timeout: float = 6.0) -> str:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("rcon_client", ADMIN / "rcon_client.py")
+    if spec is None or spec.loader is None:
+        raise ValueError("Missing admin/rcon_client.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    try:
+        return module.send_command("127.0.0.1", port, password, command, timeout)
+    except module.RConError as exc:
+        raise ValueError(str(exc)) from exc
+
+
+def sanitize_rcon_text(value: Any, limit: int = 200) -> str:
+    text = str(value or "").replace("\r", " ").replace("\n", " ").strip()
+    return text[:limit]
+
+
+def run_rcon(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name = rcon_map(payload)
+    cfg = read_rcon_config(map_name)
+    if not cfg["configured"]:
+        raise ValueError("RCon is not enabled for this map yet. Use Enable RCon first.")
+    command = str(payload.get("command") or "").lower()
+    if command == "players":
+        rcon_cmd = "players"
+    elif command == "kick":
+        player = int(clamp_number(payload.get("id"), "id", 0, 1000, integer=True))
+        reason = sanitize_rcon_text(payload.get("reason") or "Kicked by admin")
+        rcon_cmd = f"kick {player} {reason}".strip()
+    elif command == "ban":
+        player = int(clamp_number(payload.get("id"), "id", 0, 1000, integer=True))
+        minutes = int(clamp_number(payload.get("minutes", 0), "minutes", 0, 525600, integer=True))
+        reason = sanitize_rcon_text(payload.get("reason") or "Banned by admin")
+        rcon_cmd = f"ban {player} {minutes} {reason}".strip()
+    elif command == "say":
+        message = sanitize_rcon_text(payload.get("message"))
+        if not message:
+            raise ValueError("A broadcast message is required.")
+        rcon_cmd = f"say -1 {message}"
+    else:
+        raise ValueError(f"Unknown RCon command: {command}")
+    output = rcon_send(int(cfg["port"]), str(cfg["password"]), rcon_cmd)
+    return {"command": command, "output": redact(output) or "(no output)", "status": rcon_status_payload(map_name)}
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2488,6 +2642,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, report_payload(map_name))
             elif path == "/api/snapshots":
                 self.send_json(200, snapshots_payload())
+            elif path == "/api/rcon/status":
+                map_name = str(query.get("map", [""])[0]).lower()
+                self.send_json(200, rcon_status_payload(rcon_map(map_name)))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:
@@ -2513,6 +2670,8 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/missions/update",
                 "/api/missions/remove",
                 "/api/setup/save",
+                "/api/rcon/enable",
+                "/api/rcon/run",
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
@@ -2543,6 +2702,10 @@ class Handler(BaseHTTPRequestHandler):
             elif parsed.path == "/api/setup/save":
                 write_setup_state(payload)
                 self.send_json(200, setup_payload())
+            elif parsed.path == "/api/rcon/enable":
+                self.send_json(200, enable_rcon(payload))
+            elif parsed.path == "/api/rcon/run":
+                self.send_json(200, run_rcon(payload))
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())

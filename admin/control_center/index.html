@@ -49,6 +49,7 @@
       <button class="tab" data-tab="missions" type="button">Missions</button>
       <button class="tab" data-tab="reports" type="button">Reports</button>
       <button class="tab" data-tab="backups" type="button">Backups</button>
+      <button class="tab" data-tab="rcon" type="button">Live Admin</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button" data-advanced>Generation</button>
@@ -377,6 +378,49 @@
       </div>
       <p class="muted recommended-note" data-simple-only>Restoring a snapshot is an Advanced-mode action. Switch to Advanced (top bar) to enable Restore.</p>
       <div id="snapshotList">Loading snapshots...</div>
+    </section>
+
+    <section id="rcon" class="view">
+      <div class="section-title">
+        <h2>Live Admin (RCON)</h2>
+        <label class="select-label">
+          Map
+          <select id="rconMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Connect to a running server's BattlEye RCON to see who's online, broadcast messages, and
+        kick or ban players. <strong>Enable RCON once per map</strong>, then restart that map so
+        BattlEye loads it — RCON starts answering about 20-30 seconds after the server boots. The
+        password is generated and stored only in the map's private BattlEye folder; it is never
+        tracked or shown.
+      </div>
+      <div id="rconStatus" class="notice">Select a map to check RCON status.</div>
+      <div class="action-row events-toolbar">
+        <button id="rconEnableButton" type="button" data-tip="Generate an RCON password/port for this map and write its private BattlEye config. Restart the map afterward.">Enable RCON</button>
+        <button id="rconPlayersButton" class="primary" type="button" data-tip="List players currently connected to this map's server.">Refresh Players</button>
+      </div>
+      <pre id="rconPlayers">Enable RCON, start the map, then refresh players.</pre>
+      <div class="balance-grid">
+        <article class="detail-card">
+          <h3>Broadcast Message</h3>
+          <label class="field">Message to all players<input id="rconSayInput" type="text" maxlength="200" placeholder="Server restarting in 5 minutes"></label>
+          <button id="rconSayButton" type="button" data-tip="Send a server-wide chat message (BattlEye say).">Broadcast</button>
+        </article>
+        <article class="detail-card">
+          <h3>Kick / Ban Player</h3>
+          <p class="muted recommended-note">Use the player number (#) from the players list above.</p>
+          <div class="form-grid">
+            <label>Player #<input id="rconPlayerIdInput" type="number" min="0" max="1000" step="1"></label>
+            <label>Ban minutes (0 = permanent)<input id="rconBanMinutesInput" type="number" min="0" max="525600" step="1" value="0"></label>
+          </div>
+          <label class="field">Reason<input id="rconReasonInput" type="text" maxlength="200" placeholder="Reason shown to the player"></label>
+          <div class="action-row">
+            <button id="rconKickButton" class="danger" type="button" data-tip="Disconnect this player from the server now.">Kick</button>
+            <button id="rconBanButton" class="danger" data-advanced type="button" data-tip="Ban this player for the given minutes (0 = permanent). Advanced mode only.">Ban</button>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="maintenance" class="view">
