@@ -350,8 +350,9 @@ function actionButton(action) {
   const help = ACTION_HELP[action.key] || {};
   const riskHelp = RISK_COPY[action.risk] || action.risk;
   const buttonTip = `${help.when || action.description} ${action.confirm ? `Requires typing ${action.confirm}.` : ""}`.trim();
+  const advanced = action.risk === "high" ? " data-advanced" : "";
   return `
-    <article class="action-card">
+    <article class="action-card"${advanced}>
       <h3>${escapeText(action.label)} <span class="help-tip" tabindex="0" data-tip="${escapeText(riskHelp)}">?</span></h3>
       <p>${escapeText(action.description)}</p>
       <dl class="action-help">
@@ -1193,6 +1194,60 @@ function downloadReport() {
   URL.revokeObjectURL(url);
 }
 
+const APP_MODES = ["simple", "advanced"];
+const APP_MODE_META = {
+  simple: { icon: "\u{1F331}", label: "Simple" },
+  advanced: { icon: "\u{2699}", label: "Advanced" },
+};
+
+function currentAppMode() {
+  const mode = localStorage.getItem("cc-mode");
+  return APP_MODES.includes(mode) ? mode : "simple";
+}
+
+function applyAppMode(mode) {
+  document.body.dataset.mode = mode;
+  const button = $("#modeToggle");
+  if (button) {
+    const meta = APP_MODE_META[mode];
+    const icon = button.querySelector(".theme-icon");
+    const label = button.querySelector(".mode-label");
+    if (icon) icon.textContent = meta.icon;
+    if (label) label.textContent = meta.label;
+    button.title =
+      mode === "simple"
+        ? "Simple mode: high-risk generation and recovery tools are hidden. Click for Advanced."
+        : "Advanced mode: every tool is visible, including high-risk ones. Click for Simple.";
+  }
+  // If Simple mode hides the active tab, fall back to the Dashboard.
+  if (mode === "simple") {
+    const active = document.querySelector(".tab.active");
+    if (active && active.hasAttribute("data-advanced")) activateTab("dashboard");
+  }
+}
+
+function setAppMode(mode) {
+  if (mode === "advanced") {
+    const ok = window.confirm(
+      "Advanced mode reveals high-risk tools that can stop servers, wipe imported storage, " +
+        "or rebuild generated configs. These require typed confirmation before they run.\n\n" +
+        "Enable Advanced mode?"
+    );
+    if (!ok) return;
+  }
+  localStorage.setItem("cc-mode", mode);
+  applyAppMode(mode);
+}
+
+function toggleAppMode() {
+  setAppMode(currentAppMode() === "simple" ? "advanced" : "simple");
+}
+
+function initAppMode() {
+  applyAppMode(currentAppMode());
+  $("#modeToggle")?.addEventListener("click", toggleAppMode);
+}
+
 const THEME_MODES = ["system", "light", "dark"];
 const THEME_META = {
   system: { icon: "\u{1F5A5}", label: "System" },
@@ -1308,6 +1363,7 @@ function showError(error) {
 
 async function init() {
   initTheme();
+  initAppMode();
   bindEvents();
   await refreshAll();
   await loadLog().catch(() => {});
