@@ -147,6 +147,20 @@
       </div>
       <div id="mapAdvice" class="notice small-help"></div>
       <div id="mapDetail" class="detail-grid"></div>
+      <div class="section-title">
+        <h2>Server Controls</h2>
+        <span class="muted">Start, stop, and restart this map</span>
+      </div>
+      <div class="action-row">
+        <button data-action="start_map" data-map-source="selected" class="primary" type="button" data-tip="Launch this map in a new console via Launch-DayZMap.ps1 and leave it running.">Start</button>
+        <button data-action="restart_map" data-map-source="selected" class="danger" data-advanced type="button" data-tip="Stop this map if running, then start it again. Requires typing RESTART.">Restart</button>
+        <button data-action="stop_map" data-map-source="selected" class="danger" data-advanced type="button" data-tip="Stop only this map's DayZServer_x64 process. Requires typing STOP.">Stop</button>
+        <button data-action="repair_firewall" data-map-source="selected" type="button" data-tip="Repair Windows Firewall rules and re-check LAN/A2S visibility for this map.">Repair Firewall</button>
+      </div>
+      <div class="section-title">
+        <h2>Diagnostics</h2>
+        <span class="muted">Read-only checks and recovery</span>
+      </div>
       <div class="action-row">
         <button data-action="smoke_test_map" data-map-source="selected" type="button" data-tip="Starts this map, waits for ready state, queries it, then stops only what it started.">Smoke Test</button>
         <button data-action="lan_visibility_check" data-map-source="selected" type="button" data-tip="Checks ports, A2S query, and launcher visibility clues for the selected map.">LAN Check</button>
