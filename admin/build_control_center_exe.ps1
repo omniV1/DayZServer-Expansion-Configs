@@ -1,6 +1,6 @@
 # Build the DayZ Server Control Center Windows executable with PyInstaller.
 param(
-    [string]$Version = '0.3.0'
+    [string]$Version = '0.4.0'
 )
 
 $ErrorActionPreference = 'Stop'

@@ -7,7 +7,8 @@ This roadmap keeps Control Center work small, versioned, and releasable. Each fe
 - `v0.1.2` - Friendlier current UI: Start Here guide, tooltips, risk explanations, map advice, balance field help, and copyable job output.
 - `v0.2.0` - First-run setup wizard for server root, private configs, missions, mods, VPP, and safe validation.
 - `v0.3.0` - Troubleshooting center organized by symptoms and safe repair paths.
-- `v0.4.0` - Better editors for loot, AI, zombies, animals, vehicles, events, and preview-before-save.
+- `v0.4.0` - Better editors: loot preset explanations, AI difficulty presets and recommended ranges, zombie/animal controls, and preview-before-save (files changed, maps affected, restart required) on every balance write.
+- `v0.4.1` - Vehicle, event, and airdrop controls (heli crashes, police/train events, vehicles, rare airdrops) with the same preview-before-save flow.
 - `v0.5.0` - Mission builder for every map, including rewards, objectives, enemy counts, difficulty, and Expansion quest install/export.
 - `v0.6.0` - Redacted support reports and sharing tools.
 - `v0.7.0` - Polished desktop release details: app version display, release links, and first-launch clarity.
