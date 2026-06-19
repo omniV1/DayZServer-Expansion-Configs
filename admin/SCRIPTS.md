@@ -14,12 +14,14 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.1.2
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.2.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
 
 The app binds to `127.0.0.1` by default, reads `admin/map_launch.json`, and runs only allowlisted actions. Guarded write actions create a local snapshot first; high-risk actions require typed confirmation. The Balance tab can save active loot presets, AI patrol caps/difficulty, zombie/animal counts, and spawn globals. Use **Apply Loot Now** after changing the loot preset; restart affected servers after AI or zombie changes.
+
+The **First-Run Setup** tab walks new admins through each requirement in order (server folder, private configs, missions, Workshop mods, VPP tooling, validation), lists exactly what is missing, and points at the safe fix. Step progress is saved locally under the ignored `local_runtime/control_center/setup_state.json`.
 
 ## Map launchers (shared Chernarus mods)
 
