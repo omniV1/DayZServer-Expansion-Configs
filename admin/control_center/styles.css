@@ -837,6 +837,33 @@ button.ghost:hover {
   justify-self: center;
 }
 
+.check-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  color: var(--text);
+}
+
+.mission-advanced {
+  margin: 8px 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 10px 8px;
+}
+
+.mission-advanced summary {
+  cursor: pointer;
+  padding: 6px 0;
+  color: var(--muted);
+}
+
+.warning-note {
+  border-left: 4px solid var(--warn);
+  background: #f8efd9;
+  color: var(--text);
+}
+
 @media (max-width: 1180px) {
   .layout {
     grid-template-columns: 150px minmax(0, 1fr);

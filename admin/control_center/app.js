@@ -8,6 +8,8 @@ const state = {
   troubleshooting: null,
   events: null,
   eventsMap: null,
+  missions: null,
+  missionsMap: null,
   selectedMap: null,
   selectedJob: null,
   pendingSave: null,
@@ -214,9 +216,11 @@ function renderMapSelect() {
   const select = $("#mapSelect");
   const troubleshootSelect = $("#troubleshootMapSelect");
   const eventsSelect = $("#eventsMapSelect");
+  const missionSelect = $("#missionMapSelect");
   select.innerHTML = "";
   if (troubleshootSelect) troubleshootSelect.innerHTML = "";
   if (eventsSelect) eventsSelect.innerHTML = "";
+  if (missionSelect) missionSelect.innerHTML = "";
   for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
     target.innerHTML = "";
     const all = document.createElement("option");
@@ -235,6 +239,11 @@ function renderMapSelect() {
       const eventsOption = option.cloneNode(true);
       if (map.key === (state.eventsMap || state.selectedMap)) eventsOption.selected = true;
       eventsSelect.appendChild(eventsOption);
+    }
+    if (missionSelect) {
+      const missionOption = option.cloneNode(true);
+      if (map.key === (state.missionsMap || state.selectedMap)) missionOption.selected = true;
+      missionSelect.appendChild(missionOption);
     }
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
@@ -626,6 +635,8 @@ function showPreview(preview, label) {
   if (preview.needsLootApply) notes.push("Loot preset changes also need Apply Loot Now to regenerate loot files.");
   lines.push(`<div class="notice preview-notes">${notes.map((note) => `<p>${escapeText(note)}</p>`).join("")}</div>`);
   $("#previewBody").innerHTML = lines.join("");
+  $("#previewTitle").textContent = "Preview changes before saving";
+  $("#previewConfirmButton").textContent = "Snapshot & Save";
   $("#previewOverlay").classList.remove("hidden");
 }
 
@@ -818,6 +829,131 @@ async function saveEvents() {
   });
 }
 
+const OBJECTIVE_TYPE_LABELS = { 2: "infected clear", 7: "AI clear" };
+
+async function loadMissions(map) {
+  if (!map) return;
+  const data = await api(`/api/missions?map=${encodeURIComponent(map)}`);
+  state.missions = data;
+  state.missionsMap = map;
+  renderMissions();
+}
+
+function renderMissionTypes() {
+  const data = state.missions;
+  const select = $("#missionTypeSelect");
+  if (!data || !select) return;
+  if (!select.options.length) {
+    select.innerHTML = data.types
+      .map((type) => `<option value="${escapeText(type.key)}">${escapeText(type.label)}</option>`)
+      .join("");
+  }
+  updateMissionTypeUi();
+}
+
+function updateMissionTypeUi() {
+  const data = state.missions;
+  if (!data) return;
+  const typeKey = $("#missionTypeSelect").value;
+  const type = data.types.find((item) => item.key === typeKey);
+  $("#missionTypeHelp").textContent = type ? type.help : "";
+  $("#missionAiFields").hidden = !(type && type.needsLocation);
+}
+
+function renderMissions() {
+  const data = state.missions;
+  if (!data) return;
+  renderMissionTypes();
+  $("#missionQuestsDir").textContent = `Installs into: ${data.questsDir} (next ID ${data.nextId})`;
+  const warning = $("#missionBoardWarning");
+  if (!data.boardNpcExists) {
+    warning.hidden = false;
+    warning.textContent =
+      "No contract board NPC found for this map yet. Missions will install but players may not be able to accept them until a quest board exists (run Install Money Quests or add a board).";
+  } else {
+    warning.hidden = true;
+  }
+  const list = $("#missionList");
+  if (!data.missions.length) {
+    list.innerHTML = `<p class="muted">No Control Center missions on ${escapeText(data.map)} yet.</p>`;
+    return;
+  }
+  list.innerHTML = `<dl class="kv">${data.missions
+    .map((mission) => {
+      const reward = (mission.rewards || []).map((r) => `${r.amount} ${r.className}`).join(", ");
+      const type = OBJECTIVE_TYPE_LABELS[mission.objectiveType] || `type ${mission.objectiveType}`;
+      return `<dt>#${mission.id}</dt><dd>${escapeText(mission.title)} - ${escapeText(type)} - ${escapeText(reward)}${mission.repeatable ? " - repeatable" : ""}</dd>`;
+    })
+    .join("")}</dl>`;
+}
+
+function collectMissionForm() {
+  const type = $("#missionTypeSelect").value;
+  const payload = {
+    map: $("#missionMapSelect").value,
+    type,
+    title: $("#missionTitleInput").value.trim(),
+    description: $("#missionDescInput").value.trim(),
+    objectiveText: $("#missionObjectiveInput").value.trim(),
+    payout: Number($("#missionPayoutInput").value || 0),
+    amount: Number($("#missionAmountInput").value || 1),
+    repeatable: $("#missionRepeatableInput").checked,
+  };
+  if (type === "ai_clear") {
+    payload.location = [
+      Number($("#missionLocXInput").value || 0),
+      Number($("#missionLocYInput").value || 0),
+      Number($("#missionLocZInput").value || 0),
+    ];
+    payload.aiName = $("#missionAiNameInput").value.trim();
+  }
+  const itemClass = $("#missionItemClassInput").value.trim();
+  if (itemClass) {
+    payload.itemReward = { className: itemClass, amount: Number($("#missionItemAmountInput").value || 1) };
+  }
+  return payload;
+}
+
+async function previewMission() {
+  const payload = collectMissionForm();
+  if (!payload.title) {
+    $("#jobOutput").textContent = "Mission title is required.";
+    return;
+  }
+  const preview = await api("/api/missions/preview", { method: "POST", body: JSON.stringify(payload) });
+  const lines = [];
+  lines.push(`<p class="preview-label">${escapeText(payload.title)} (${escapeText(payload.map)}, Quest ${preview.questId})</p>`);
+  if (!preview.boardNpcExists) {
+    lines.push(
+      `<div class="notice warning-note">No contract board NPC found for this map. The mission installs but may be unreachable until a quest board exists.</div>`
+    );
+  }
+  lines.push("<h3>Summary</h3>");
+  lines.push(`<ul class="preview-list">${preview.summary.map((item) => `<li>${escapeText(item)}</li>`).join("")}</ul>`);
+  lines.push("<h3>Files that will be created</h3>");
+  lines.push(
+    `<ul class="preview-list">${preview.files
+      .map((file) => `<li>${escapeText(file.path)}${file.exists ? " (exists - blocked)" : ""}</li>`)
+      .join("")}</ul>`
+  );
+  lines.push(
+    `<div class="notice preview-notes"><p>A snapshot is created first (label: ${escapeText(preview.snapshotLabel)}).</p><p>Restart ${escapeText(payload.map)} for the new mission to load.</p></div>`
+  );
+  $("#previewBody").innerHTML = lines.join("");
+  $("#previewTitle").textContent = "Preview mission before creating";
+  $("#previewConfirmButton").textContent = "Create Mission";
+  state.pendingSave = {
+    saveUrl: "/api/missions/install",
+    payload,
+    label: `Mission "${payload.title}"`,
+    onSaved: async (result) => {
+      $("#jobOutput").textContent = `Mission created on ${result.map} (Quest ${result.questId}).\n\nFiles:\n${result.written.join("\n")}\n\nRestart ${result.map} to load it.`;
+      await loadMissions(result.map);
+    },
+  };
+  $("#previewOverlay").classList.remove("hidden");
+}
+
 function renderJobs(jobs) {
   const list = $("#jobList");
   list.innerHTML = "";
@@ -922,6 +1058,10 @@ function activateTab(name) {
     const map = $("#eventsMapSelect")?.value || state.selectedMap;
     if (map && state.eventsMap !== map) loadEvents(map).catch(showError);
   }
+  if (name === "missions") {
+    const map = $("#missionMapSelect")?.value || state.selectedMap;
+    if (map && state.missionsMap !== map) loadMissions(map).catch(showError);
+  }
 }
 
 async function copyOutput() {
@@ -955,6 +1095,9 @@ function bindEvents() {
   $("#reloadEventsButton").addEventListener("click", () => loadEvents($("#eventsMapSelect").value).catch(showError));
   $("#saveEventsButton").addEventListener("click", () => saveEvents().catch(showError));
   $("#eventsMapSelect").addEventListener("change", (event) => loadEvents(event.target.value).catch(showError));
+  $("#missionMapSelect").addEventListener("change", (event) => loadMissions(event.target.value).catch(showError));
+  $("#missionTypeSelect").addEventListener("change", updateMissionTypeUi);
+  $("#previewMissionButton").addEventListener("click", () => previewMission().catch(showError));
   $("#previewOverlay").addEventListener("click", (event) => {
     if (event.target === $("#previewOverlay")) hidePreview();
   });

@@ -26,6 +26,7 @@
       <button class="tab" data-tab="map" type="button">Map Detail</button>
       <button class="tab" data-tab="balance" type="button">Balance</button>
       <button class="tab" data-tab="events" type="button">Events</button>
+      <button class="tab" data-tab="missions" type="button">Missions</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button">Generation</button>
@@ -235,6 +236,69 @@
         <button id="saveEventsButton" class="primary" type="button" data-tip="Preview changed events, then snapshot and save.">Save Events</button>
       </div>
       <div id="eventsEditor" class="events-editor">Select a map to load its world events.</div>
+    </section>
+
+    <section id="missions" class="view">
+      <div class="section-title">
+        <h2>Mission Builder</h2>
+        <label class="select-label">
+          Map
+          <select id="missionMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Create repeatable paid contracts (Hryvnia) for any map without hand-editing quest JSON.
+        Missions install into the map's private profile and use the existing contract board.
+        Preview shows every file before anything is written, snapshots first, and never overwrites.
+        Restart the map after creating a mission.
+      </div>
+      <div id="missionBoardWarning" class="notice warning-note" hidden></div>
+      <div class="balance-grid">
+        <article class="detail-card">
+          <h3>New Mission</h3>
+          <label class="field">
+            Type <span class="help-tip" tabindex="0" data-tip="Infected clear = kill X infected anywhere. AI clear = eliminate a raider group at a location.">?</span>
+            <select id="missionTypeSelect"></select>
+          </label>
+          <p id="missionTypeHelp" class="muted"></p>
+          <label class="field">Title<input id="missionTitleInput" type="text" maxlength="80" placeholder="Thin the Horde"></label>
+          <label class="field">Description<input id="missionDescInput" type="text" maxlength="300" placeholder="Clear infected for trader pay."></label>
+          <label class="field">Objective text (optional)<input id="missionObjectiveInput" type="text" maxlength="200" placeholder="Auto-generated if blank"></label>
+          <div class="form-grid">
+            <label>Payout (Hryvnia) <span class="help-tip" tabindex="0" data-tip="Money paid on completion. 1500-5000 is typical.">?</span><input id="missionPayoutInput" type="number" min="0" max="1000000" step="100" value="2500"></label>
+            <label>Count <span class="help-tip" tabindex="0" data-tip="Infected to kill, or raiders to eliminate.">?</span><input id="missionAmountInput" type="number" min="1" max="500" step="1" value="15"></label>
+          </div>
+          <label class="check-field"><input id="missionRepeatableInput" type="checkbox" checked> Repeatable</label>
+
+          <div id="missionAiFields" hidden>
+            <p class="muted recommended-note">AI clear needs a world position. Copy coordinates from the in-game admin tools or your map notes.</p>
+            <div class="form-grid">
+              <label>Loc X<input id="missionLocXInput" type="number" step="0.1" value="0"></label>
+              <label>Loc Y<input id="missionLocYInput" type="number" step="0.1" value="0"></label>
+              <label>Loc Z<input id="missionLocZInput" type="number" step="0.1" value="0"></label>
+            </div>
+            <label class="field">AI group name<input id="missionAiNameInput" type="text" maxlength="60" placeholder="Roadside Raiders"></label>
+          </div>
+
+          <details class="mission-advanced">
+            <summary>Optional item reward</summary>
+            <div class="form-grid">
+              <label>Item class name<input id="missionItemClassInput" type="text" maxlength="80" placeholder="e.g. Ammo_762x39"></label>
+              <label>Item amount<input id="missionItemAmountInput" type="number" min="1" max="500" step="1" value="1"></label>
+            </div>
+          </details>
+
+          <div class="action-row">
+            <button id="previewMissionButton" class="primary" type="button" data-tip="Preview the exact files, then snapshot and create the mission.">Preview &amp; Create</button>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <h3>Existing Control Center Missions</h3>
+          <p id="missionQuestsDir" class="muted"></p>
+          <div id="missionList">No missions loaded.</div>
+        </article>
+      </div>
     </section>
 
     <section id="maintenance" class="view">
