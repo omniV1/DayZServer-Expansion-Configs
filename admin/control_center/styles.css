@@ -153,6 +153,22 @@ button:disabled {
   gap: 8px;
 }
 
+.release-link {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 10px;
+  text-decoration: none;
+}
+
+.release-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;

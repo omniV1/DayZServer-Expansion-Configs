@@ -24,8 +24,9 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.4.1` - SHIPPED. Vehicle, event, and airdrop controls (db/events.xml) with preview-before-save.
 - `v0.5.0` - SHIPPED. Mission builder for every map: infected/AI clear, payouts, enemies, preview, install.
 - `v0.5.1` - SHIPPED. Mission manager: list, edit payout/active/repeatable, and safely remove generated missions.
-- `v0.6.0` - Redacted support reports and sharing tools.
-- `v0.7.0` - Polished desktop release: version display, release links, first-launch clarity, simple/advanced mode.
+- `v0.6.0` - SHIPPED. Appearance and desktop polish: System/Light/Dark theme toggle, version display, and a latest-release link.
+- `v0.7.0` - Redacted support reports and sharing tools.
+- `v0.7.1` - Simple vs Advanced mode and first-launch clarity (hide high-risk tools by default).
 - `v0.8.0` - Backup and restore center: browse snapshots, restore a snapshot, scheduled snapshot guidance.
 - `v0.9.0` - Server lifecycle controls: guarded start/restart per map, live status polling, port/firewall helpers.
 - `v1.0.0` - Public stable release after docs, screenshots, validation, EXE smoke tests, and a public-safe repo audit.
@@ -82,18 +83,24 @@ Suggested slices:
 - Edit payout/cooldown/enabled and re-preview before save.
 - Safe remove of only Control-Center-generated missions (tagged by stable ID prefix).
 
-## v0.6.0 - Reports And Sharing
+## v0.6.0 - Appearance And Desktop Polish (SHIPPED)
+
+- System/Light/Dark theme toggle in the header, persisted locally and applied before first
+  paint to avoid a flash; follows the OS preference when set to System.
+- App version pill (from `/api/app`) plus a "Latest Release" link to the GitHub releases page.
+- All UI surfaces driven by CSS variables so both themes stay readable.
+
+## v0.7.0 - Reports And Sharing
 
 - Redacted support report for one map or all maps: configs summarized, ports, log summary,
   missing mods/configs/missions, app version. No secrets, player, or storage data.
 - `GET /api/report?map=<map>` plus copy and download (.txt) buttons in the UI.
 - Reuse existing redaction (passwords, Steam IDs, tokens).
 
-## v0.7.0 - Polished Desktop Release
+## v0.7.1 - Simple Vs Advanced Mode
 
-- App version display (done in 0.2.0) plus a "Check for latest release" link to GitHub.
-- Simple vs Advanced mode: Simple hides high-risk generation/recovery tools by default;
-  Advanced reveals them after a warning. Preference saved locally.
+- Simple hides high-risk generation/recovery tools by default; Advanced reveals them after a
+  warning. Preference saved locally.
 - First-launch clarity: clearer root-picker copy and a one-screen "you're ready" state.
 - README/Quickstart EXE usage polish.
 

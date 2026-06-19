@@ -167,6 +167,16 @@ function renderAppInfo() {
   if (pill) {
     pill.textContent = `v${state.app.version}${state.app.channel ? ` ${state.app.channel}` : ""}`;
   }
+  const link = $("#releaseLink");
+  if (link) {
+    const url = state.app.latestReleaseUrl || state.app.releasesUrl;
+    if (url) {
+      link.href = url;
+      link.hidden = false;
+    } else {
+      link.hidden = true;
+    }
+  }
 }
 
 function renderMaps() {

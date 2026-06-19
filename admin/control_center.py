@@ -46,8 +46,11 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.5.1"
+APP_VERSION = "0.6.0"
 RELEASE_CHANNEL = "preview"
+REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
+RELEASES_URL = f"{REPO_URL}/releases"
+LATEST_RELEASE_URL = f"{REPO_URL}/releases/latest"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
 MAX_OUTPUT_CHARS = 240_000
@@ -674,6 +677,9 @@ def app_payload() -> dict[str, Any]:
         "runtimeDir": safe_rel(RUNTIME),
         "userConfigDir": str(USER_CONFIG_DIR),
         "snapshotBeforeMutation": bool(CONFIG.get("snapshot_before_mutation", True)),
+        "repoUrl": REPO_URL,
+        "releasesUrl": RELEASES_URL,
+        "latestReleaseUrl": LATEST_RELEASE_URL,
     }
 
 
