@@ -25,6 +25,7 @@
       <button class="tab" data-tab="dashboard" type="button">Dashboard</button>
       <button class="tab" data-tab="map" type="button">Map Detail</button>
       <button class="tab" data-tab="balance" type="button">Balance</button>
+      <button class="tab" data-tab="events" type="button">Events</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button">Generation</button>
@@ -213,6 +214,27 @@
           <div id="balanceSummary"></div>
         </article>
       </div>
+    </section>
+
+    <section id="events" class="view">
+      <div class="section-title">
+        <h2>World Events</h2>
+        <label class="select-label">
+          Map
+          <select id="eventsMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Tune vehicles, helicopter crashes, airdrops, and static events for one map.
+        <strong>nominal</strong> is the target count, <strong>min/max</strong> bound it, and
+        <strong>lifetime</strong> is how long (seconds) an event persists. Saving previews the exact
+        change first, snapshots, then writes <code>db/events.xml</code>. Restart the map afterward.
+      </div>
+      <div class="action-row events-toolbar">
+        <button id="reloadEventsButton" type="button" data-tip="Reload events for the selected map from db/events.xml.">Reload</button>
+        <button id="saveEventsButton" class="primary" type="button" data-tip="Preview changed events, then snapshot and save.">Save Events</button>
+      </div>
+      <div id="eventsEditor" class="events-editor">Select a map to load its world events.</div>
     </section>
 
     <section id="maintenance" class="view">

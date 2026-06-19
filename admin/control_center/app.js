@@ -6,6 +6,8 @@ const state = {
   balance: null,
   setup: null,
   troubleshooting: null,
+  events: null,
+  eventsMap: null,
   selectedMap: null,
   selectedJob: null,
   pendingSave: null,
@@ -211,8 +213,10 @@ function mapCardHelp(map, status) {
 function renderMapSelect() {
   const select = $("#mapSelect");
   const troubleshootSelect = $("#troubleshootMapSelect");
+  const eventsSelect = $("#eventsMapSelect");
   select.innerHTML = "";
   if (troubleshootSelect) troubleshootSelect.innerHTML = "";
+  if (eventsSelect) eventsSelect.innerHTML = "";
   for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
     target.innerHTML = "";
     const all = document.createElement("option");
@@ -227,6 +231,11 @@ function renderMapSelect() {
     if (map.key === state.selectedMap) option.selected = true;
     select.appendChild(option);
     if (troubleshootSelect) troubleshootSelect.appendChild(option.cloneNode(true));
+    if (eventsSelect) {
+      const eventsOption = option.cloneNode(true);
+      if (map.key === (state.eventsMap || state.selectedMap)) eventsOption.selected = true;
+      eventsSelect.appendChild(eventsOption);
+    }
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
       target.appendChild(targetOption);
@@ -582,18 +591,8 @@ function balanceAdvice(item) {
   return notes.join(" ");
 }
 
-async function saveBalance(payload, label) {
-  const result = await api("/api/balance/save", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  });
-  state.balance = result.balance;
-  $("#jobOutput").textContent = `${label} saved.\n\nChanged:\n${result.changed.length ? result.changed.join("\n") : "No file changes needed."}\n\nRestart affected servers for AI/zombie changes. Apply loot separately if you changed loot preset.`;
-  await refreshAll();
-}
-
-async function previewThenSave(payload, label) {
-  const preview = await api("/api/balance/preview", {
+async function previewThenSave({ previewUrl, saveUrl, payload, label, onSaved }) {
+  const preview = await api(previewUrl, {
     method: "POST",
     body: JSON.stringify(payload),
   });
@@ -601,8 +600,14 @@ async function previewThenSave(payload, label) {
     $("#jobOutput").textContent = `${label}: no changes needed. Current values already match what you entered.`;
     return;
   }
-  state.pendingSave = { payload, label };
+  state.pendingSave = { saveUrl, payload, label, onSaved };
   showPreview(preview, label);
+}
+
+async function onBalanceSaved(result, label) {
+  state.balance = result.balance;
+  $("#jobOutput").textContent = `${label} saved.\n\nChanged:\n${result.changed.length ? result.changed.join("\n") : "No file changes needed."}\n\nRestart affected servers for AI/zombie changes. Apply loot separately if you changed loot preset.`;
+  await refreshAll();
 }
 
 function showPreview(preview, label) {
@@ -634,11 +639,21 @@ async function confirmPreview() {
   if (!pending) return;
   $("#previewOverlay").classList.add("hidden");
   state.pendingSave = null;
-  await saveBalance(pending.payload, pending.label);
+  const result = await api(pending.saveUrl, {
+    method: "POST",
+    body: JSON.stringify(pending.payload),
+  });
+  if (pending.onSaved) await pending.onSaved(result, pending.label);
 }
 
 async function saveLootPreset() {
-  await previewThenSave({ lootPreset: $("#lootPresetSelect").value }, "Loot preset");
+  await previewThenSave({
+    previewUrl: "/api/balance/preview",
+    saveUrl: "/api/balance/save",
+    payload: { lootPreset: $("#lootPresetSelect").value },
+    label: "Loot preset",
+    onSaved: onBalanceSaved,
+  });
 }
 
 async function saveZombies() {
@@ -652,7 +667,13 @@ async function saveZombies() {
     RespawnTypes: numericValue("#respawnTypesInput"),
   };
   Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
-  await previewThenSave({ zombies: values }, "Zombie/spawn settings");
+  await previewThenSave({
+    previewUrl: "/api/balance/preview",
+    saveUrl: "/api/balance/save",
+    payload: { zombies: values },
+    label: "Zombie/spawn settings",
+    onSaved: onBalanceSaved,
+  });
 }
 
 async function saveAi() {
@@ -669,7 +690,13 @@ async function saveAi() {
     damageMultiplier: numericValue("#aiDamageInput"),
   };
   Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
-  await previewThenSave({ ai: values }, "AI settings");
+  await previewThenSave({
+    previewUrl: "/api/balance/preview",
+    saveUrl: "/api/balance/save",
+    payload: { ai: values },
+    label: "AI settings",
+    onSaved: onBalanceSaved,
+  });
 }
 
 const AI_DIFFICULTY_PRESETS = {
@@ -691,6 +718,104 @@ function applyAiPreset(name) {
   setInput("#aiAccuracyMaxInput", preset.accuracyMax);
   setInput("#aiDamageInput", preset.damageMultiplier);
   $("#jobOutput").textContent = `Loaded "${name}" difficulty into the AI fields. Review, then Save AI Settings to preview and apply.`;
+}
+
+const EVENTS_CATEGORY_ORDER = ["vehicles", "heli", "airdrops", "static", "animals", "infected", "loot", "other"];
+const EVENTS_DEFAULT_OPEN = new Set(["vehicles", "heli", "airdrops", "static"]);
+
+async function loadEvents(map) {
+  if (!map) return;
+  const data = await api(`/api/events?map=${encodeURIComponent(map)}`);
+  state.events = data;
+  state.eventsMap = map;
+  renderEvents();
+}
+
+function eventRow(ev) {
+  const num = (field) =>
+    `<input class="event-input" type="number" min="0" data-event-name="${escapeText(ev.name)}" data-event-field="${field}" value="${ev[field] ?? ""}">`;
+  return `
+    <div class="events-row">
+      <span class="event-name">${escapeText(ev.name)}</span>
+      <input type="checkbox" class="event-active" data-event-name="${escapeText(ev.name)}" data-event-field="active" ${ev.active ? "checked" : ""} aria-label="active">
+      ${num("nominal")}${num("min")}${num("max")}${num("lifetime")}
+    </div>
+  `;
+}
+
+function renderEvents() {
+  const editor = $("#eventsEditor");
+  if (!editor) return;
+  const data = state.events;
+  if (!data) {
+    editor.textContent = "Select a map to load its world events.";
+    return;
+  }
+  if (!data.exists || !data.events.length) {
+    editor.innerHTML = `<div class="notice">No db/events.xml found for ${escapeText(data.map)}.</div>`;
+    return;
+  }
+  const labels = data.categoryLabels || {};
+  const byCat = {};
+  for (const ev of data.events) (byCat[ev.category] ||= []).push(ev);
+  const cats = EVENTS_CATEGORY_ORDER.filter((cat) => byCat[cat]);
+  editor.innerHTML = cats
+    .map((cat) => {
+      const open = EVENTS_DEFAULT_OPEN.has(cat) ? "open" : "";
+      const rows = byCat[cat].map(eventRow).join("");
+      return `
+      <details class="events-group" ${open}>
+        <summary>${escapeText(labels[cat] || cat)} <span class="muted">(${byCat[cat].length})</span></summary>
+        <div class="events-table-head">
+          <span>Event</span><span>On</span><span>Nominal</span><span>Min</span><span>Max</span><span>Lifetime</span>
+        </div>
+        ${rows}
+      </details>`;
+    })
+    .join("");
+}
+
+function collectEventChanges() {
+  const originals = {};
+  for (const ev of state.events?.events || []) originals[ev.name] = ev;
+  const changes = {};
+  for (const input of $$("#eventsEditor [data-event-name]")) {
+    const name = input.dataset.eventName;
+    const field = input.dataset.eventField;
+    const orig = originals[name];
+    if (!orig) continue;
+    let value;
+    if (field === "active") {
+      value = input.checked ? 1 : 0;
+    } else {
+      if (input.value === "") continue;
+      value = Number(input.value);
+    }
+    const original = field === "active" ? (orig.active ? 1 : 0) : orig[field];
+    if (value !== original) (changes[name] ||= {})[field] = value;
+  }
+  return changes;
+}
+
+async function saveEvents() {
+  const map = $("#eventsMapSelect").value;
+  if (!map) return;
+  const changes = collectEventChanges();
+  if (!Object.keys(changes).length) {
+    $("#jobOutput").textContent = "No event changes to save.";
+    return;
+  }
+  await previewThenSave({
+    previewUrl: "/api/events/preview",
+    saveUrl: "/api/events/save",
+    payload: { map, events: changes },
+    label: `Events (${map})`,
+    onSaved: async (result) => {
+      state.events = result.events;
+      renderEvents();
+      $("#jobOutput").textContent = `Events saved for ${map}.\n\nChanged:\n${result.changed.join("\n") || "none"}\n\nRestart ${map} for changes to take effect.`;
+    },
+  });
 }
 
 function renderJobs(jobs) {
@@ -793,6 +918,10 @@ function selectMap(key, switchTab = false) {
 function activateTab(name) {
   $$(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tab === name));
   $$(".view").forEach((view) => view.classList.toggle("active", view.id === name));
+  if (name === "events") {
+    const map = $("#eventsMapSelect")?.value || state.selectedMap;
+    if (map && state.eventsMap !== map) loadEvents(map).catch(showError);
+  }
 }
 
 async function copyOutput() {
@@ -823,6 +952,9 @@ function bindEvents() {
   $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
   $("#previewConfirmButton").addEventListener("click", () => confirmPreview().catch(showError));
   $("#previewCancelButton").addEventListener("click", hidePreview);
+  $("#reloadEventsButton").addEventListener("click", () => loadEvents($("#eventsMapSelect").value).catch(showError));
+  $("#saveEventsButton").addEventListener("click", () => saveEvents().catch(showError));
+  $("#eventsMapSelect").addEventListener("change", (event) => loadEvents(event.target.value).catch(showError));
   $("#previewOverlay").addEventListener("click", (event) => {
     if (event.target === $("#previewOverlay")) hidePreview();
   });
