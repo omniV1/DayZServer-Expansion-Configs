@@ -31,6 +31,25 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.9.0` - SHIPPED. Server lifecycle: guarded start/stop/restart per map, live Dashboard polling, firewall repair.
 - `v1.0.0` - SHIPPED. Public stable release: docs pass, public-safe repo audit, EXE smoke tests, channel = stable.
 
+## Operations Series (post-1.0)
+
+Bring the operations side on par with full server managers, one versioned slice at a time.
+
+- `v1.1.0` - SHIPPED. BattlEye RCON live admin: per-map enable, player list, broadcast, kick/ban.
+- `v1.2.0` - Scheduled restarts with in-game warnings (uses RCON `say` + `restart_map`).
+- `v1.3.0` - SteamCMD update for the dedicated server and Workshop mods (needs SteamCMD + Steam login).
+
+## v1.1.0 - BattlEye RCON Live Admin (SHIPPED)
+
+- `admin/rcon_client.py` implements the BattlEye RCon UDP protocol (login, command, multi-packet).
+- Per-map enable writes a generated password + RCon port into the map's private
+  `<profile>/BattlEye/battleye/BEServer_x64.cfg`; the app reads the live values back from the
+  `BEServer_x64_active_*.cfg` BattlEye writes on boot. RCon ports default to game port + 4 (unique per map).
+- New endpoints: `GET /api/rcon/status?map=`, `POST /api/rcon/enable`, `POST /api/rcon/run`
+  (allowlisted `players`/`kick`/`ban`/`say`, structured args, no arbitrary commands).
+- Live Admin tab: status, Enable RCON, player list, broadcast, kick, and ban (Advanced-mode only).
+- The RCON password stays in the ignored profile BattlEye folder and is redacted from all output.
+
 ## v0.4.1 - Vehicle, Event, And Airdrop Controls
 
 Goal: let admins tune world events without hand-editing `db/events.xml`.
