@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DayZ Server Control Center</title>
   <link rel="stylesheet" href="/styles.css">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash of the wrong colors.
+    (function () {
+      try {
+        var mode = localStorage.getItem("cc-theme") || "system";
+        var dark = mode === "dark"
+          || (mode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      } catch (e) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -13,6 +26,9 @@
       <p id="rootPath">Loading local server root...</p>
     </div>
     <div class="top-actions">
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme" data-tip="Switch between System, Light, and Dark appearance. Saved on this computer.">
+        <span class="theme-icon" aria-hidden="true"></span><span class="theme-label">Theme</span>
+      </button>
       <button id="guideButton" type="button" data-tab-target="guide" data-tip="Open the beginner workflow and glossary.">Start Guide</button>
       <button id="refreshButton" type="button" data-tip="Reload map status, jobs, and balance summaries.">Refresh</button>
       <button id="openValidationButton" type="button" data-tip="Run the public repo validation check. This is read-only.">Run Validation</button>

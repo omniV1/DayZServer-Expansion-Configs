@@ -1127,6 +1127,52 @@ async function copyOutput() {
   }, 1200);
 }
 
+const THEME_MODES = ["system", "light", "dark"];
+const THEME_META = {
+  system: { icon: "\u{1F5A5}", label: "System" },
+  light: { icon: "☀", label: "Light" },
+  dark: { icon: "\u{1F319}", label: "Dark" },
+};
+
+function currentThemeMode() {
+  const mode = localStorage.getItem("cc-theme");
+  return THEME_MODES.includes(mode) ? mode : "system";
+}
+
+function prefersDark() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function applyTheme(mode) {
+  const dark = mode === "dark" || (mode === "system" && prefersDark());
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  const button = $("#themeToggle");
+  if (!button) return;
+  const meta = THEME_META[mode];
+  const icon = button.querySelector(".theme-icon");
+  const label = button.querySelector(".theme-label");
+  if (icon) icon.textContent = meta.icon;
+  if (label) label.textContent = meta.label;
+  button.title = `Appearance: ${meta.label}. Click to switch (System → Light → Dark). Saved on this computer.`;
+}
+
+function cycleTheme() {
+  const next = THEME_MODES[(THEME_MODES.indexOf(currentThemeMode()) + 1) % THEME_MODES.length];
+  localStorage.setItem("cc-theme", next);
+  applyTheme(next);
+}
+
+function initTheme() {
+  applyTheme(currentThemeMode());
+  $("#themeToggle")?.addEventListener("click", cycleTheme);
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const onSystemChange = () => {
+    if (currentThemeMode() === "system") applyTheme("system");
+  };
+  if (media.addEventListener) media.addEventListener("change", onSystemChange);
+  else if (media.addListener) media.addListener(onSystemChange);
+}
+
 function bindEvents() {
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => activateTab(tab.dataset.tab)));
   document.body.addEventListener("click", (event) => {
@@ -1189,6 +1235,7 @@ function showError(error) {
 }
 
 async function init() {
+  initTheme();
   bindEvents();
   await refreshAll();
   await loadLog().catch(() => {});
