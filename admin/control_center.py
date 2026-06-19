@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.4.0"
+APP_VERSION = "0.4.1"
 RELEASE_CHANNEL = "preview"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -1118,6 +1118,181 @@ def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
     return {"changed": changed, "balance": balance_payload()}
 
 
+EVENT_FIELDS = ("nominal", "min", "max", "lifetime", "restock")
+EVENT_FIELD_RANGES: dict[str, tuple[int, int]] = {
+    "nominal": (0, 2000),
+    "min": (0, 2000),
+    "max": (0, 2000),
+    "lifetime": (0, 5_000_000),
+    "restock": (0, 5_000_000),
+}
+EVENT_CATEGORY_LABELS = {
+    "vehicles": "Vehicles",
+    "heli": "Helicopter crashes",
+    "airdrops": "Airdrops and crates",
+    "static": "Static events (police, convoy, train)",
+    "animals": "Animals and wildlife",
+    "infected": "Infected spawns",
+    "loot": "Loot and resources",
+    "other": "Other events",
+}
+
+
+def event_category(name: str) -> str:
+    lower = name.lower()
+    if name.startswith("Vehicle"):
+        return "vehicles"
+    if "heli" in lower:
+        return "heli"
+    if "airplane" in lower or "crate" in lower or "airdrop" in lower:
+        return "airdrops"
+    if name.startswith("Static"):
+        return "static"
+    if name.startswith("Animal") or name.startswith("Ambient"):
+        return "animals"
+    if name.startswith("Infected"):
+        return "infected"
+    if name.startswith("Trajectory") or name.startswith("Item") or name == "Loot":
+        return "loot"
+    return "other"
+
+
+def events_file_for_map(map_name: str) -> Path:
+    mission = mission_for_map(map_name)
+    return ROOT / "mpmissions" / mission / "db" / "events.xml"
+
+
+def _event_int(event: ET.Element, field: str) -> int | None:
+    el = event.find(field)
+    if el is None or el.text is None:
+        return None
+    text = el.text.strip()
+    try:
+        return int(text)
+    except ValueError:
+        return None
+
+
+def read_events(map_name: str) -> list[dict[str, Any]]:
+    path = events_file_for_map(map_name)
+    if not path.exists():
+        return []
+    root = ET.parse(path).getroot()
+    out: list[dict[str, Any]] = []
+    for event in root.findall("event"):
+        name = event.get("name") or ""
+        entry: dict[str, Any] = {"name": name, "category": event_category(name)}
+        active = _event_int(event, "active")
+        entry["active"] = 1 if active is None else active
+        for field in EVENT_FIELDS:
+            entry[field] = _event_int(event, field)
+        out.append(entry)
+    return out
+
+
+def events_payload(map_name: str) -> dict[str, Any]:
+    if map_name not in map_configs():
+        raise ValueError(f"Unknown map: {map_name}")
+    events = read_events(map_name)
+    path = events_file_for_map(map_name)
+    return {
+        "map": map_name,
+        "file": safe_rel(path) if path.exists() else None,
+        "exists": path.exists(),
+        "categoryLabels": EVENT_CATEGORY_LABELS,
+        "events": events,
+    }
+
+
+def validate_events_payload(map_name: str, changes: Any) -> dict[str, dict[str, int]]:
+    if map_name not in map_configs():
+        raise ValueError(f"Unknown map: {map_name}")
+    if not isinstance(changes, dict):
+        raise ValueError("events must be an object of event name to fields.")
+    known = {entry["name"] for entry in read_events(map_name)}
+    clean: dict[str, dict[str, int]] = {}
+    for name, fields in changes.items():
+        if name not in known:
+            raise ValueError(f"Unknown event for {map_name}: {name}")
+        if not isinstance(fields, dict):
+            raise ValueError(f"Event {name} fields must be an object.")
+        entry: dict[str, int] = {}
+        for key, value in fields.items():
+            if value in ("", None):
+                continue
+            if key == "active":
+                entry["active"] = int(clamp_number(value, f"{name}.active", 0, 1, integer=True))
+            elif key in EVENT_FIELD_RANGES:
+                low, high = EVENT_FIELD_RANGES[key]
+                entry[key] = int(clamp_number(value, f"{name}.{key}", low, high, integer=True))
+            else:
+                raise ValueError(f"Unknown event field: {key}")
+        if "min" in entry and "max" in entry and entry["max"] != 0 and entry["min"] > entry["max"]:
+            raise ValueError(f"{name}: min cannot be greater than max.")
+        if entry:
+            clean[name] = entry
+    return clean
+
+
+def write_events(map_name: str, changes: Any) -> list[str]:
+    clean = validate_events_payload(map_name, changes)
+    path = events_file_for_map(map_name)
+    if not path.exists():
+        raise ValueError(f"Missing events file: {safe_rel(path)}")
+    tree = ET.parse(path)
+    root = tree.getroot()
+    by_name = {event.get("name"): event for event in root.findall("event")}
+    changed: list[str] = []
+    for name, fields in clean.items():
+        event = by_name.get(name)
+        if event is None:
+            continue
+        for field, value in fields.items():
+            el = event.find(field)
+            if el is None:
+                el = ET.SubElement(event, field)
+            new_value = str(value)
+            if (el.text or "") != new_value:
+                el.text = new_value
+                changed.append(f"{name}.{field}")
+    if changed:
+        ET.indent(tree, space="    ")
+        tree.write(path, encoding="UTF-8", xml_declaration=True)
+    return changed
+
+
+def preview_events(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name = str(payload.get("map") or "")
+    clean = validate_events_payload(map_name, payload.get("events") or {})
+    current = {entry["name"]: entry for entry in read_events(map_name)}
+    changes: list[str] = []
+    for name, fields in clean.items():
+        diffs = [field for field, value in fields.items() if current.get(name, {}).get(field) != value]
+        if diffs:
+            changes.append(f"{name}: {', '.join(diffs)}")
+    file_rel = safe_rel(events_file_for_map(map_name)) if changes else None
+    return {
+        "changes": changes,
+        "files": [file_rel] if file_rel else [],
+        "maps": [map_name] if changes else [],
+        "restartRequired": bool(changes),
+        "needsLootApply": False,
+        "snapshot": bool(CONFIG.get("snapshot_before_mutation", True)),
+        "snapshotLabel": "control-center-events",
+        "hasChanges": bool(changes),
+    }
+
+
+def save_events(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name = str(payload.get("map") or "")
+    preview = preview_events(payload)
+    if not preview["hasChanges"]:
+        return {"changed": [], "events": events_payload(map_name)}
+    snapshot_for_api("control-center-events")
+    changed = write_events(map_name, payload.get("events") or {})
+    return {"changed": changed, "events": events_payload(map_name)}
+
+
 def powershell_file(script: str, *args: str) -> list[str]:
     return ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ADMIN / script), *args]
 
@@ -1615,6 +1790,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, setup_payload())
             elif path == "/api/troubleshooting":
                 self.send_json(200, troubleshooting_payload())
+            elif path == "/api/events":
+                map_name = str(query.get("map", [""])[0]).lower()
+                self.send_json(200, events_payload(map_name))
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
@@ -1651,6 +1829,8 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/actions/run",
                 "/api/balance/save",
                 "/api/balance/preview",
+                "/api/events/preview",
+                "/api/events/save",
                 "/api/setup/save",
             }:
                 self.send_error_json(404, "Unknown API route.")
@@ -1665,6 +1845,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, save_balance(payload))
             elif parsed.path == "/api/balance/preview":
                 self.send_json(200, preview_balance(payload))
+            elif parsed.path == "/api/events/preview":
+                self.send_json(200, preview_events(payload))
+            elif parsed.path == "/api/events/save":
+                self.send_json(200, save_events(payload))
             elif parsed.path == "/api/setup/save":
                 write_setup_state(payload)
                 self.send_json(200, setup_payload())
