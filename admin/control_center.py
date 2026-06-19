@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.5.0"
+APP_VERSION = "0.5.1"
 RELEASE_CHANNEL = "preview"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -1661,6 +1661,107 @@ def install_mission(payload: dict[str, Any]) -> dict[str, Any]:
     return {"map": spec["map"], "questId": quest_id, "written": written, "missions": missions_payload(spec["map"])}
 
 
+def validate_mission_ref(payload: dict[str, Any]) -> tuple[str, int, Path]:
+    map_name = str(payload.get("map") or "").lower()
+    if map_name not in map_configs():
+        raise ValueError(f"Unknown map: {map_name}")
+    try:
+        quest_id = int(payload.get("id"))
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Mission id must be a number.") from exc
+    if not (MISSION_ID_MIN <= quest_id <= MISSION_ID_MAX):
+        raise ValueError("Only Control Center missions (9000-9999) can be managed here.")
+    quest_path = quests_dir_for_map(map_name) / "Quests" / f"Quest_{quest_id}.json"
+    if not quest_path.exists():
+        raise ValueError(f"Mission {quest_id} not found on {map_name}.")
+    return map_name, quest_id, quest_path
+
+
+def mission_update_fields(payload: dict[str, Any]) -> dict[str, int]:
+    fields: dict[str, int] = {}
+    if payload.get("payout") not in ("", None):
+        fields["payout"] = int(clamp_number(payload["payout"], "payout", 0, 1_000_000, integer=True))
+    if "active" in payload:
+        fields["active"] = 1 if bool(payload["active"]) else 0
+    if "repeatable" in payload:
+        fields["repeatable"] = 1 if bool(payload["repeatable"]) else 0
+    return fields
+
+
+def preview_mission_update(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name, _quest_id, quest_path = validate_mission_ref(payload)
+    fields = mission_update_fields(payload)
+    data = read_json(quest_path, {})
+    changes: list[str] = []
+    if "payout" in fields:
+        current = (data.get("Rewards") or [{}])[0].get("Amount")
+        if current != fields["payout"]:
+            changes.append(f"payout {current} -> {fields['payout']}")
+    if "active" in fields and data.get("Active") != fields["active"]:
+        changes.append(f"active -> {fields['active']}")
+    if "repeatable" in fields and data.get("Repeatable") != fields["repeatable"]:
+        changes.append(f"repeatable -> {fields['repeatable']}")
+    return {
+        "changes": changes,
+        "files": [safe_rel(quest_path)] if changes else [],
+        "maps": [map_name] if changes else [],
+        "restartRequired": bool(changes),
+        "needsLootApply": False,
+        "snapshot": bool(CONFIG.get("snapshot_before_mutation", True)),
+        "snapshotLabel": "control-center-mission",
+        "hasChanges": bool(changes),
+    }
+
+
+def update_mission(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name, _quest_id, quest_path = validate_mission_ref(payload)
+    preview = preview_mission_update(payload)
+    if not preview["hasChanges"]:
+        return {"changed": [], "missions": missions_payload(map_name)}
+    fields = mission_update_fields(payload)
+    snapshot_for_api("control-center-mission")
+    data = read_json(quest_path, {})
+    changed: list[str] = []
+    if "payout" in fields and data.get("Rewards"):
+        if data["Rewards"][0].get("Amount") != fields["payout"]:
+            data["Rewards"][0]["Amount"] = fields["payout"]
+            changed.append("payout")
+    if "active" in fields and data.get("Active") != fields["active"]:
+        data["Active"] = fields["active"]
+        changed.append("active")
+    if "repeatable" in fields and data.get("Repeatable") != fields["repeatable"]:
+        data["Repeatable"] = fields["repeatable"]
+        changed.append("repeatable")
+    if changed:
+        quest_path.write_text(json.dumps(data, indent=4) + "\n", encoding="utf-8")
+    return {"changed": changed, "missions": missions_payload(map_name)}
+
+
+def mission_file_paths(map_name: str, quest_id: int) -> list[Path]:
+    quests_dir = quests_dir_for_map(map_name)
+    paths = [quests_dir / "Quests" / f"Quest_{quest_id}.json"]
+    paths.append(quests_dir / "Objectives" / "Target" / f"Objective_TA_{quest_id}.json")
+    paths.append(quests_dir / "Objectives" / "AIPatrol" / f"Objective_AIP_{quest_id}.json")
+    return paths
+
+
+def remove_mission(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name, quest_id, _quest_path = validate_mission_ref(payload)
+    if str(payload.get("confirm") or "") != "REMOVE":
+        raise ValueError("Removing a mission requires confirmation text: REMOVE")
+    quests_root = quests_dir_for_map(map_name).resolve()
+    snapshot_for_api("control-center-mission")
+    removed: list[str] = []
+    for path in mission_file_paths(map_name, quest_id):
+        if not path.exists():
+            continue
+        if not str(path.resolve()).startswith(str(quests_root)):
+            raise ValueError("Refusing to delete a path outside the map Quests folder.")
+        path.unlink()
+        removed.append(safe_rel(path))
+    return {"removed": removed, "missions": missions_payload(map_name)}
+
+
 def powershell_file(script: str, *args: str) -> list[str]:
     return ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ADMIN / script), *args]
 
@@ -2204,6 +2305,9 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/events/save",
                 "/api/missions/preview",
                 "/api/missions/install",
+                "/api/missions/update/preview",
+                "/api/missions/update",
+                "/api/missions/remove",
                 "/api/setup/save",
             }:
                 self.send_error_json(404, "Unknown API route.")
@@ -2226,6 +2330,12 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, preview_mission(payload))
             elif parsed.path == "/api/missions/install":
                 self.send_json(200, install_mission(payload))
+            elif parsed.path == "/api/missions/update/preview":
+                self.send_json(200, preview_mission_update(payload))
+            elif parsed.path == "/api/missions/update":
+                self.send_json(200, update_mission(payload))
+            elif parsed.path == "/api/missions/remove":
+                self.send_json(200, remove_mission(payload))
             elif parsed.path == "/api/setup/save":
                 write_setup_state(payload)
                 self.send_json(200, setup_payload())
