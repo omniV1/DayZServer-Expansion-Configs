@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.4.1"
+APP_VERSION = "0.5.0"
 RELEASE_CHANNEL = "preview"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -1293,6 +1293,374 @@ def save_events(payload: dict[str, Any]) -> dict[str, Any]:
     return {"changed": changed, "events": events_payload(map_name)}
 
 
+# --- Mission builder --------------------------------------------------------
+# Generates Expansion quest contracts into a map's private (git-ignored)
+# <profiles_dir>/ExpansionMod/Quests folder. Control-Center missions use a
+# dedicated ID range so they never collide with hand-authored or money quests.
+
+MISSION_ID_MIN = 9000
+MISSION_ID_MAX = 9999
+MISSION_MONEY = "ExpansionBanknoteHryvnia"
+MISSION_BOARD_NPC_ID = 100
+MISSION_UNITS = [
+    "eAI_SurvivorM_Boris",
+    "eAI_SurvivorM_Cyril",
+    "eAI_SurvivorM_Denis",
+    "eAI_SurvivorM_Elias",
+    "eAI_SurvivorM_Francis",
+    "eAI_SurvivorF_Eva",
+    "eAI_SurvivorF_Frida",
+    "eAI_SurvivorF_Gabi",
+    "eAI_SurvivorF_Helga",
+    "eAI_SurvivorF_Irena",
+]
+MISSION_TYPES = {
+    "infected_clear": {
+        "label": "Infected clear",
+        "help": "Kill a number of infected anywhere on the map.",
+        "objectiveType": 2,
+        "needsLocation": False,
+    },
+    "ai_clear": {
+        "label": "AI clear",
+        "help": "Eliminate a group of hostile AI raiders at a location.",
+        "objectiveType": 7,
+        "needsLocation": True,
+    },
+}
+
+
+def quests_dir_for_map(map_name: str) -> Path:
+    cfg = map_configs().get(map_name)
+    if cfg is None:
+        raise ValueError(f"Unknown map: {map_name}")
+    profile = cfg.get("profiles_dir") or f"profiles_{map_name}"
+    return ROOT / profile / "ExpansionMod" / "Quests"
+
+
+def existing_mission_ids(map_name: str) -> list[int]:
+    quests = quests_dir_for_map(map_name) / "Quests"
+    ids: list[int] = []
+    if quests.exists():
+        for path in quests.glob("Quest_*.json"):
+            match = re.match(r"Quest_(\d+)\.json$", path.name)
+            if match:
+                value = int(match.group(1))
+                if MISSION_ID_MIN <= value <= MISSION_ID_MAX:
+                    ids.append(value)
+    return sorted(ids)
+
+
+def next_mission_id(map_name: str) -> int:
+    ids = existing_mission_ids(map_name)
+    candidate = (max(ids) + 1) if ids else MISSION_ID_MIN
+    if candidate > MISSION_ID_MAX:
+        raise ValueError("Mission ID range is full. Remove some generated missions first.")
+    return candidate
+
+
+def board_npc_exists(map_name: str) -> bool:
+    return (quests_dir_for_map(map_name) / "NPCs" / f"QuestNPC_{MISSION_BOARD_NPC_ID}.json").exists()
+
+
+def mission_reward(amount: int, class_name: str = MISSION_MONEY) -> dict[str, Any]:
+    return {
+        "ClassName": class_name,
+        "Amount": amount,
+        "Attachments": [],
+        "DamagePercent": 0,
+        "HealthPercent": 0,
+        "QuestID": -1,
+        "Chance": 1.0,
+    }
+
+
+def mission_target_objective(objective_id: int, objective_text: str, amount: int) -> dict[str, Any]:
+    return {
+        "ConfigVersion": 28,
+        "ID": objective_id,
+        "ObjectiveType": 2,
+        "ObjectiveText": objective_text,
+        "TimeLimit": -1,
+        "Active": 1,
+        "Position": [0.0, 0.0, 0.0],
+        "MaxDistance": -1.0,
+        "MinDistance": -1.0,
+        "Amount": amount,
+        "ClassNames": [],
+        "CountSelfKill": 0,
+        "AllowedWeapons": [],
+        "ExcludedClassNames": [],
+        "CountAIPlayers": 0,
+        "AllowedTargetFactions": [],
+        "AllowedDamageZones": [],
+    }
+
+
+def mission_ring_waypoints(center: list[float]) -> list[list[float]]:
+    x, y, z = center
+    return [[x, y, z], [x + 90, y, z + 45], [x - 70, y, z + 80], [x - 90, y, z - 40], [x + 60, y, z - 75]]
+
+
+def mission_ai_objective(objective_id: int, name: str, center: list[float], count: int) -> dict[str, Any]:
+    return {
+        "ConfigVersion": 28,
+        "ID": objective_id,
+        "ObjectiveType": 7,
+        "ObjectiveText": f"Eliminate the {count} raiders at {name}",
+        "TimeLimit": -1,
+        "Active": 1,
+        "MaxDistance": -1.0,
+        "MinDistance": -1.0,
+        "AllowedWeapons": [],
+        "AllowedDamageZones": [],
+        "AISpawn": {
+            "Name": name,
+            "Persist": 0,
+            "Faction": "Raiders",
+            "Formation": "RANDOM",
+            "FormationScale": 0.0,
+            "FormationLooseness": 0.0,
+            "Loadout": "PvPLoadout",
+            "Units": MISSION_UNITS,
+            "NumberOfAI": count,
+            "Behaviour": "HALT_OR_LOOP",
+            "LootingBehaviour": "",
+            "Speed": "JOG",
+            "UnderThreatSpeed": "SPRINT",
+            "CanBeLooted": 1,
+            "UnlimitedReload": 1,
+            "SniperProneDistanceThreshold": 300.0,
+            "AccuracyMin": 0.42,
+            "AccuracyMax": 0.68,
+            "ThreatDistanceLimit": 450.0,
+            "NoiseInvestigationDistanceLimit": -1.0,
+            "DamageMultiplier": 1.0,
+            "DamageReceivedMultiplier": 1.0,
+            "CanBeTriggeredByAI": 0,
+            "MinDistRadius": 50.0,
+            "MaxDistRadius": 500.0,
+            "DespawnRadius": 700.0,
+            "MinSpreadRadius": 0.0,
+            "MaxSpreadRadius": 50.0,
+            "Chance": 1.0,
+            "WaypointInterpolation": "",
+            "DespawnTime": 60.0,
+            "RespawnTime": 1.0,
+            "LoadBalancingCategory": "",
+            "UseRandomWaypointAsStartPoint": 1,
+            "Waypoints": mission_ring_waypoints(center),
+        },
+    }
+
+
+def mission_quest_json(
+    quest_id: int,
+    title: str,
+    description: str,
+    objective_text: str,
+    rewards: list[dict[str, Any]],
+    objective_type: int,
+    repeatable: bool,
+) -> dict[str, Any]:
+    return {
+        "ConfigVersion": 22,
+        "ID": quest_id,
+        "Type": 1,
+        "Title": f"[CC] {title}",
+        "Descriptions": [description, objective_text, "Created with the Control Center mission builder."],
+        "ObjectiveText": objective_text,
+        "FollowUpQuest": -1,
+        "Repeatable": 1 if repeatable else 0,
+        "IsDailyQuest": 0,
+        "IsWeeklyQuest": 0,
+        "CancelQuestOnPlayerDeath": 0,
+        "Autocomplete": 0,
+        "IsGroupQuest": 0,
+        "ObjectSetFileName": "",
+        "QuestItems": [],
+        "Rewards": rewards,
+        "NeedToSelectReward": 0,
+        "RandomReward": 0,
+        "RandomRewardAmount": -1,
+        "RewardsForGroupOwnerOnly": 1,
+        "RewardBehavior": 0,
+        "QuestGiverIDs": [MISSION_BOARD_NPC_ID],
+        "QuestTurnInIDs": [MISSION_BOARD_NPC_ID],
+        "IsAchievement": 0,
+        "Objectives": [{"ConfigVersion": 28, "ID": quest_id, "ObjectiveType": objective_type}],
+        "QuestColor": 0,
+        "ReputationReward": 0,
+        "ReputationRequirement": -1,
+        "PreQuestIDs": [],
+        "RequiredFaction": "",
+        "FactionReward": "",
+        "PlayerNeedQuestItems": 1,
+        "DeleteQuestItems": 1,
+        "SequentialObjectives": 1,
+        "FactionReputationRequirements": {},
+        "FactionReputationRewards": {},
+        "SuppressQuestLogOnCompetion": 0,
+        "Active": 1,
+    }
+
+
+def validate_mission_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    map_name = str(payload.get("map") or "").lower()
+    if map_name not in map_configs():
+        raise ValueError(f"Unknown map: {map_name}")
+    mtype = str(payload.get("type") or "")
+    if mtype not in MISSION_TYPES:
+        raise ValueError(f"Unknown mission type: {mtype}")
+    title = str(payload.get("title") or "").strip()
+    if not title:
+        raise ValueError("Title is required.")
+    if len(title) > 80:
+        raise ValueError("Title must be 80 characters or fewer.")
+    description = (str(payload.get("description") or title).strip())[:300]
+    payout = int(clamp_number(payload.get("payout", 0), "payout", 0, 1_000_000, integer=True))
+    amount = int(clamp_number(payload.get("amount", 1), "amount", 1, 500, integer=True))
+    repeatable = bool(payload.get("repeatable", True))
+    objective_text = (str(payload.get("objectiveText") or "").strip())[:200]
+
+    spec: dict[str, Any] = {
+        "map": map_name,
+        "type": mtype,
+        "title": title,
+        "description": description,
+        "payout": payout,
+        "amount": amount,
+        "repeatable": repeatable,
+        "objectiveText": objective_text,
+    }
+
+    if MISSION_TYPES[mtype]["needsLocation"]:
+        location = payload.get("location") or []
+        if not (isinstance(location, list) and len(location) == 3):
+            raise ValueError("This mission type requires a location [x, y, z].")
+        spec["location"] = [float(clamp_number(value, "location", -100000, 100000)) for value in location]
+        spec["aiName"] = (str(payload.get("aiName") or title).strip())[:60]
+
+    item = payload.get("itemReward")
+    if isinstance(item, dict):
+        class_name = str(item.get("className") or "").strip()
+        if class_name:
+            item_amount = int(clamp_number(item.get("amount", 1), "itemReward.amount", 1, 500, integer=True))
+            spec["itemReward"] = {"className": class_name, "amount": item_amount}
+
+    return spec
+
+
+def build_mission_files(spec: dict[str, Any], quest_id: int) -> list[tuple[str, dict[str, Any]]]:
+    label = map_configs()[spec["map"]].get("title", spec["map"])
+    rewards = [mission_reward(spec["payout"])]
+    if spec.get("itemReward"):
+        rewards.append(mission_reward(spec["itemReward"]["amount"], spec["itemReward"]["className"]))
+
+    files: list[tuple[str, dict[str, Any]]] = []
+    if spec["type"] == "infected_clear":
+        objective_text = spec["objectiveText"] or f"Kill {spec['amount']} infected anywhere in {label}"
+        files.append(
+            (f"Objectives/Target/Objective_TA_{quest_id}.json", mission_target_objective(quest_id, objective_text, spec["amount"]))
+        )
+        objective_type = 2
+    else:
+        objective_text = spec["objectiveText"] or f"Eliminate {spec['amount']} raiders at {spec['aiName']}"
+        files.append(
+            (f"Objectives/AIPatrol/Objective_AIP_{quest_id}.json", mission_ai_objective(quest_id, spec["aiName"], spec["location"], spec["amount"]))
+        )
+        objective_type = 7
+
+    files.append(
+        (
+            f"Quests/Quest_{quest_id}.json",
+            mission_quest_json(quest_id, spec["title"], spec["description"], objective_text, rewards, objective_type, spec["repeatable"]),
+        )
+    )
+    return files
+
+
+def missions_payload(map_name: str) -> dict[str, Any]:
+    if map_name not in map_configs():
+        raise ValueError(f"Unknown map: {map_name}")
+    quests = quests_dir_for_map(map_name) / "Quests"
+    missions: list[dict[str, Any]] = []
+    for quest_id in existing_mission_ids(map_name):
+        data = read_json(quests / f"Quest_{quest_id}.json", {})
+        objectives = data.get("Objectives") or [{}]
+        missions.append(
+            {
+                "id": quest_id,
+                "title": data.get("Title", ""),
+                "active": data.get("Active", 1),
+                "repeatable": data.get("Repeatable", 0),
+                "rewards": [
+                    {"className": reward.get("ClassName"), "amount": reward.get("Amount")}
+                    for reward in data.get("Rewards", [])
+                ],
+                "objectiveType": objectives[0].get("ObjectiveType"),
+            }
+        )
+    return {
+        "map": map_name,
+        "questsDir": safe_rel(quests_dir_for_map(map_name)),
+        "boardNpcExists": board_npc_exists(map_name),
+        "moneyClass": MISSION_MONEY,
+        "nextId": next_mission_id(map_name),
+        "types": [
+            {"key": key, "label": value["label"], "help": value["help"], "needsLocation": value["needsLocation"]}
+            for key, value in MISSION_TYPES.items()
+        ],
+        "missions": missions,
+    }
+
+
+def preview_mission(payload: dict[str, Any]) -> dict[str, Any]:
+    spec = validate_mission_payload(payload)
+    quest_id = next_mission_id(spec["map"])
+    files = build_mission_files(spec, quest_id)
+    quests_dir = quests_dir_for_map(spec["map"])
+    file_entries = [{"path": safe_rel(quests_dir / rel), "exists": (quests_dir / rel).exists()} for rel, _ in files]
+    summary = [
+        f"Type: {MISSION_TYPES[spec['type']]['label']}",
+        f"Reward: {spec['payout']} {MISSION_MONEY}",
+    ]
+    if spec.get("itemReward"):
+        summary.append(f"Item reward: {spec['itemReward']['amount']}x {spec['itemReward']['className']}")
+    summary.append("Repeatable" if spec["repeatable"] else "One-time")
+    return {
+        "map": spec["map"],
+        "questId": quest_id,
+        "title": spec["title"],
+        "boardNpcExists": board_npc_exists(spec["map"]),
+        "files": file_entries,
+        "summary": summary,
+        "questJson": files[-1][1],
+        "restartRequired": True,
+        "snapshot": bool(CONFIG.get("snapshot_before_mutation", True)),
+        "snapshotLabel": "control-center-mission",
+        "hasChanges": True,
+    }
+
+
+def install_mission(payload: dict[str, Any]) -> dict[str, Any]:
+    spec = validate_mission_payload(payload)
+    quest_id = next_mission_id(spec["map"])
+    files = build_mission_files(spec, quest_id)
+    quests_dir = quests_dir_for_map(spec["map"])
+    for rel, _ in files:
+        if (quests_dir / rel).exists():
+            raise ValueError(f"Refusing to overwrite existing file: {rel}")
+    snapshot_for_api("control-center-mission")
+    written: list[str] = []
+    for rel, data in files:
+        path = quests_dir / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(data, indent=4) + "\n", encoding="utf-8")
+        written.append(safe_rel(path))
+    return {"map": spec["map"], "questId": quest_id, "written": written, "missions": missions_payload(spec["map"])}
+
+
 def powershell_file(script: str, *args: str) -> list[str]:
     return ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ADMIN / script), *args]
 
@@ -1793,6 +2161,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/events":
                 map_name = str(query.get("map", [""])[0]).lower()
                 self.send_json(200, events_payload(map_name))
+            elif path == "/api/missions":
+                map_name = str(query.get("map", [""])[0]).lower()
+                self.send_json(200, missions_payload(map_name))
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
@@ -1831,6 +2202,8 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/balance/preview",
                 "/api/events/preview",
                 "/api/events/save",
+                "/api/missions/preview",
+                "/api/missions/install",
                 "/api/setup/save",
             }:
                 self.send_error_json(404, "Unknown API route.")
@@ -1849,6 +2222,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, preview_events(payload))
             elif parsed.path == "/api/events/save":
                 self.send_json(200, save_events(payload))
+            elif parsed.path == "/api/missions/preview":
+                self.send_json(200, preview_mission(payload))
+            elif parsed.path == "/api/missions/install":
+                self.send_json(200, install_mission(payload))
             elif parsed.path == "/api/setup/save":
                 write_setup_state(payload)
                 self.send_json(200, setup_payload())
