@@ -73,8 +73,18 @@ COT_MOD_PATTERNS = ["@Community-Online-Tools", "1564026768"]
 
 
 def git_files() -> list[Path]:
-    out = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True)
-    return [Path(line.strip()) for line in out.splitlines() if line.strip()]
+    # -v tags each file: 'S' means skip-worktree (a local-only edit that can never be
+    # committed or published), so it is excluded from the public-safety scan.
+    out = subprocess.check_output(["git", "ls-files", "-v"], cwd=ROOT, text=True)
+    files: list[Path] = []
+    for line in out.splitlines():
+        if not line.strip():
+            continue
+        tag, _, name = line.partition(" ")
+        if tag == "S" or not name.strip():
+            continue
+        files.append(Path(name.strip()))
+    return files
 
 
 def read_text(path: Path) -> str:
