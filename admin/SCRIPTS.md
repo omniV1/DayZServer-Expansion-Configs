@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.4.1
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.5.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
@@ -28,6 +28,8 @@ The **Fix Problems** tab is a symptom-based troubleshooting guide (server will n
 The **Balance** editor previews before it writes: every Save runs a read-only `/api/balance/preview` first and shows the exact files that will change, maps affected, whether a restart is needed, and the snapshot label. AI has Easy/Medium/Hard difficulty presets, and AI/zombie controls show recommended ranges.
 
 The **Events** tab edits a map's `db/events.xml`: vehicles, helicopter crashes, airdrops/crates, and static police/convoy/train events grouped by category, each with an active toggle and nominal/min/max/lifetime fields. Saving uses the same preview-before-save flow and snapshots first.
+
+The **Missions** tab is a mission builder: create repeatable paid contracts (infected clear or AI clear) for any map with a title, payout in Hryvnia, count, and optional item reward. It generates Expansion quest JSON into the map's private `ExpansionMod/Quests` folder using a dedicated 9000-9999 ID range, previews every file first, snapshots, and never overwrites. Restart the map to load new missions.
 
 ## Map launchers (shared Chernarus mods)
 

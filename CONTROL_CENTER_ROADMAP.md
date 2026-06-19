@@ -22,7 +22,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.3.0` - SHIPPED. Troubleshooting center organized by symptoms and safe repair paths.
 - `v0.4.0` - SHIPPED. Better editors: loot preset explanations, AI difficulty presets and recommended ranges, zombie/animal controls, and preview-before-save.
 - `v0.4.1` - SHIPPED. Vehicle, event, and airdrop controls (db/events.xml) with preview-before-save.
-- `v0.5.0` - Mission builder for every map: types, payouts, enemies, preview, install/export.
+- `v0.5.0` - SHIPPED. Mission builder for every map: infected/AI clear, payouts, enemies, preview, install.
 - `v0.5.1` - Mission manager: list, edit, enable/disable, and remove generated missions safely.
 - `v0.6.0` - Redacted support reports and sharing tools.
 - `v0.7.0` - Polished desktop release: version display, release links, first-launch clarity, simple/advanced mode.
