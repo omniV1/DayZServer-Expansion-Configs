@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.6.0"
+APP_VERSION = "0.7.0"
 RELEASE_CHANNEL = "preview"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -681,6 +681,85 @@ def app_payload() -> dict[str, Any]:
         "releasesUrl": RELEASES_URL,
         "latestReleaseUrl": LATEST_RELEASE_URL,
     }
+
+
+def recent_blockers(profile_dir: str, max_lines: int = 800, limit: int = 6) -> list[str]:
+    log = newest_log(ROOT / profile_dir)
+    if not log:
+        return []
+    lines = tail_file(log, max_lines)  # already redacted line-by-line
+    hits = [line for line in lines if any(pattern.search(line) for pattern in FATAL_PATTERNS)]
+    return hits[-limit:]
+
+
+def report_payload(map_filter: str | None) -> dict[str, Any]:
+    maps = map_configs()
+    if map_filter in (None, "", "all"):
+        selected = list(maps)
+        scope = "all"
+    else:
+        name = str(map_filter).lower()
+        if name not in maps:
+            raise ValueError(f"Unknown map: {name}")
+        selected = [name]
+        scope = name
+
+    status = status_payload()
+    status_by_key = {item["key"]: item for item in status["maps"]}
+    maps_info = {item["key"]: item for item in maps_payload()}
+    generated_at = dt.datetime.now().isoformat(timespec="seconds")
+
+    lines: list[str] = [
+        "DayZ Server Control Center - Support Report",
+        f"Generated: {generated_at}",
+        f"App version: {APP_VERSION} ({RELEASE_CHANNEL})",
+        f"Server root: {ROOT}",
+        f"Scope: {scope}",
+        f"DayZ server processes running: {status['processCount']}",
+        "",
+        "This report is public-safe: passwords, Steam IDs, and tokens are redacted, and no",
+        "player, storage, or profile contents are included.",
+        "",
+    ]
+
+    for name in selected:
+        info = maps_info.get(name, {})
+        state = status_by_key.get(name, {})
+        log = state.get("log") or {}
+        lines.append(f"== {info.get('title', name)} ({name}) ==")
+        lines.append(
+            f"  Config: {info.get('config')} "
+            f"[{'present' if info.get('configExists') else 'MISSING'}]"
+        )
+        lines.append(
+            f"  Mission: {info.get('mission') or '(none)'} "
+            f"[{'present' if info.get('missionExists') else 'MISSING'}]"
+        )
+        lines.append(
+            f"  Ports: game {info.get('port')} ({'active' if state.get('gameActive') else 'idle'}), "
+            f"query {info.get('queryPort')} ({'active' if state.get('queryActive') else 'idle'}), "
+            f"steam {info.get('steamPort')} ({'active' if state.get('steamActive') else 'idle'})"
+        )
+        lines.append(f"  Profiles dir: {info.get('profilesDir')}")
+        missing = info.get("missingMods") or []
+        lines.append(f"  Mods: {info.get('modCount')} listed; {len(missing)} missing")
+        for mod in missing:
+            lines.append(f"    - MISSING {mod}")
+        lines.append(f"  Imported map: {'yes' if info.get('isImported') else 'no'}")
+        if log.get("file"):
+            lines.append(f"  Latest log: {log.get('file')} (updated {log.get('updated')})")
+            lines.append(
+                f"    Ready state reached: {'yes' if log.get('ready') else 'no'}; "
+                f"blockers detected: {log.get('blockers')}"
+            )
+            for blocker in recent_blockers(info.get("profilesDir") or f"profiles_{name}"):
+                lines.append(f"      ! {blocker}")
+        else:
+            lines.append("  Latest log: none found")
+        lines.append("")
+
+    text = redact("\n".join(lines).rstrip() + "\n")
+    return {"scope": scope, "generatedAt": generated_at, "maps": selected, "text": text}
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2290,6 +2369,9 @@ class Handler(BaseHTTPRequestHandler):
                 map_name = str(query.get("map", [""])[0]).lower()
                 limit = int(query.get("lines", ["200"])[0])
                 self.send_json(200, logs_payload(map_name, limit))
+            elif path == "/api/report":
+                map_name = str(query.get("map", ["all"])[0]).lower()
+                self.send_json(200, report_payload(map_name))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:

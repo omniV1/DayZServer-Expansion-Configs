@@ -10,6 +10,8 @@ const state = {
   eventsMap: null,
   missions: null,
   missionsMap: null,
+  report: null,
+  reportScope: "all",
   selectedMap: null,
   selectedJob: null,
   pendingSave: null,
@@ -227,10 +229,19 @@ function renderMapSelect() {
   const troubleshootSelect = $("#troubleshootMapSelect");
   const eventsSelect = $("#eventsMapSelect");
   const missionSelect = $("#missionMapSelect");
+  const reportSelect = $("#reportMapSelect");
   select.innerHTML = "";
   if (troubleshootSelect) troubleshootSelect.innerHTML = "";
   if (eventsSelect) eventsSelect.innerHTML = "";
   if (missionSelect) missionSelect.innerHTML = "";
+  if (reportSelect) {
+    reportSelect.innerHTML = "";
+    const all = document.createElement("option");
+    all.value = "all";
+    all.textContent = "All maps";
+    if ((state.reportScope || "all") === "all") all.selected = true;
+    reportSelect.appendChild(all);
+  }
   for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
     target.innerHTML = "";
     const all = document.createElement("option");
@@ -254,6 +265,11 @@ function renderMapSelect() {
       const missionOption = option.cloneNode(true);
       if (map.key === (state.missionsMap || state.selectedMap)) missionOption.selected = true;
       missionSelect.appendChild(missionOption);
+    }
+    if (reportSelect) {
+      const reportOption = option.cloneNode(true);
+      reportOption.selected = map.key === state.reportScope;
+      reportSelect.appendChild(reportOption);
     }
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
@@ -1137,6 +1153,46 @@ async function copyOutput() {
   }, 1200);
 }
 
+async function loadReport(scope) {
+  const target = scope || $("#reportMapSelect")?.value || "all";
+  state.reportScope = target;
+  const output = $("#reportOutput");
+  output.textContent = "Generating report...";
+  $("#copyReportButton").disabled = true;
+  $("#downloadReportButton").disabled = true;
+  const data = await api(`/api/report?map=${encodeURIComponent(target)}`);
+  state.report = data;
+  output.textContent = data.text;
+  $("#copyReportButton").disabled = false;
+  $("#downloadReportButton").disabled = false;
+}
+
+async function copyReport() {
+  if (!state.report || !state.report.text) return;
+  await navigator.clipboard.writeText(state.report.text);
+  const button = $("#copyReportButton");
+  const original = button.textContent;
+  button.textContent = "Copied";
+  setTimeout(() => {
+    button.textContent = original;
+  }, 1200);
+}
+
+function downloadReport() {
+  if (!state.report || !state.report.text) return;
+  const scope = state.report.scope || "all";
+  const stamp = (state.report.generatedAt || "").replace(/[^0-9]/g, "").slice(0, 14) || "latest";
+  const blob = new Blob([state.report.text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `dayz-control-center-report-${scope}-${stamp}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
 const THEME_MODES = ["system", "light", "dark"];
 const THEME_META = {
   system: { icon: "\u{1F5A5}", label: "System" },
@@ -1205,6 +1261,12 @@ function bindEvents() {
   $("#missionMapSelect").addEventListener("change", (event) => loadMissions(event.target.value).catch(showError));
   $("#missionTypeSelect").addEventListener("change", updateMissionTypeUi);
   $("#previewMissionButton").addEventListener("click", () => previewMission().catch(showError));
+  $("#reportMapSelect").addEventListener("change", (event) => {
+    state.reportScope = event.target.value;
+  });
+  $("#generateReportButton").addEventListener("click", () => loadReport().catch(showError));
+  $("#copyReportButton").addEventListener("click", () => copyReport().catch(showError));
+  $("#downloadReportButton").addEventListener("click", downloadReport);
   document.body.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-mission-action]");
     if (!button) return;

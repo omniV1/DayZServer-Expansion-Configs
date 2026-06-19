@@ -44,6 +44,7 @@
       <button class="tab" data-tab="balance" type="button">Balance</button>
       <button class="tab" data-tab="events" type="button">Events</button>
       <button class="tab" data-tab="missions" type="button">Missions</button>
+      <button class="tab" data-tab="reports" type="button">Reports</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button">Generation</button>
@@ -316,6 +317,27 @@
           <div id="missionList">No missions loaded.</div>
         </article>
       </div>
+    </section>
+
+    <section id="reports" class="view">
+      <div class="section-title">
+        <h2>Support Report</h2>
+        <label class="select-label">
+          Scope
+          <select id="reportMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Generate a public-safe summary you can paste into a support thread or Discord. It lists app
+        version, configs, ports, missions, missing mods, and the latest log state for one map or all maps.
+        Passwords, Steam IDs, and tokens are redacted, and no player, storage, or profile contents are included.
+      </div>
+      <div class="action-row events-toolbar">
+        <button id="generateReportButton" class="primary" type="button" data-tip="Build the redacted report for the selected scope.">Generate Report</button>
+        <button id="copyReportButton" type="button" data-tip="Copy the report text to the clipboard." disabled>Copy</button>
+        <button id="downloadReportButton" type="button" data-tip="Save the report as a .txt file." disabled>Download .txt</button>
+      </div>
+      <pre id="reportOutput">Choose a scope and select Generate Report.</pre>
     </section>
 
     <section id="maintenance" class="view">

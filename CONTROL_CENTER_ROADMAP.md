@@ -25,7 +25,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.5.0` - SHIPPED. Mission builder for every map: infected/AI clear, payouts, enemies, preview, install.
 - `v0.5.1` - SHIPPED. Mission manager: list, edit payout/active/repeatable, and safely remove generated missions.
 - `v0.6.0` - SHIPPED. Appearance and desktop polish: System/Light/Dark theme toggle, version display, and a latest-release link.
-- `v0.7.0` - Redacted support reports and sharing tools.
+- `v0.7.0` - SHIPPED. Redacted support reports: public-safe report for one map or all, with copy and download.
 - `v0.7.1` - Simple vs Advanced mode and first-launch clarity (hide high-risk tools by default).
 - `v0.8.0` - Backup and restore center: browse snapshots, restore a snapshot, scheduled snapshot guidance.
 - `v0.9.0` - Server lifecycle controls: guarded start/restart per map, live status polling, port/firewall helpers.
@@ -90,12 +90,13 @@ Suggested slices:
 - App version pill (from `/api/app`) plus a "Latest Release" link to the GitHub releases page.
 - All UI surfaces driven by CSS variables so both themes stay readable.
 
-## v0.7.0 - Reports And Sharing
+## v0.7.0 - Reports And Sharing (SHIPPED)
 
-- Redacted support report for one map or all maps: configs summarized, ports, log summary,
-  missing mods/configs/missions, app version. No secrets, player, or storage data.
-- `GET /api/report?map=<map>` plus copy and download (.txt) buttons in the UI.
-- Reuse existing redaction (passwords, Steam IDs, tokens).
+- Redacted support report for one map or all maps: app version, configs, ports (with active/idle
+  state), missions, missing mods, profiles dir, latest-log summary, and recent blockers.
+  No secrets, player, or storage data.
+- `GET /api/report?map=<map>` plus a Reports tab with Generate, Copy, and Download (.txt).
+- Reuses existing redaction (passwords, Steam IDs, tokens) on the whole report text.
 
 ## v0.7.1 - Simple Vs Advanced Mode
 
