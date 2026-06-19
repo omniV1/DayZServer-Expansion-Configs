@@ -8,6 +8,7 @@ const state = {
   troubleshooting: null,
   selectedMap: null,
   selectedJob: null,
+  pendingSave: null,
   pollTimer: null,
 };
 
@@ -591,8 +592,53 @@ async function saveBalance(payload, label) {
   await refreshAll();
 }
 
+async function previewThenSave(payload, label) {
+  const preview = await api("/api/balance/preview", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  if (!preview.hasChanges) {
+    $("#jobOutput").textContent = `${label}: no changes needed. Current values already match what you entered.`;
+    return;
+  }
+  state.pendingSave = { payload, label };
+  showPreview(preview, label);
+}
+
+function showPreview(preview, label) {
+  const lines = [];
+  lines.push(`<p class="preview-label">${escapeText(label)}</p>`);
+  lines.push("<h3>Files that will change</h3>");
+  lines.push(`<ul class="preview-list">${preview.files.map((file) => `<li>${escapeText(file)}</li>`).join("")}</ul>`);
+  if (preview.maps.length) {
+    lines.push(`<p><strong>Maps affected:</strong> ${preview.maps.map(escapeText).join(", ")}</p>`);
+  }
+  lines.push("<h3>What happens</h3>");
+  lines.push(`<ul class="preview-list">${preview.changes.map((change) => `<li>${escapeText(change)}</li>`).join("")}</ul>`);
+  const notes = [];
+  if (preview.snapshot) notes.push(`A config snapshot is created first (label: ${escapeText(preview.snapshotLabel)}).`);
+  notes.push(preview.restartRequired ? "Restart the affected map(s) for these changes to take effect." : "No server restart required.");
+  if (preview.needsLootApply) notes.push("Loot preset changes also need Apply Loot Now to regenerate loot files.");
+  lines.push(`<div class="notice preview-notes">${notes.map((note) => `<p>${escapeText(note)}</p>`).join("")}</div>`);
+  $("#previewBody").innerHTML = lines.join("");
+  $("#previewOverlay").classList.remove("hidden");
+}
+
+function hidePreview() {
+  $("#previewOverlay").classList.add("hidden");
+  state.pendingSave = null;
+}
+
+async function confirmPreview() {
+  const pending = state.pendingSave;
+  if (!pending) return;
+  $("#previewOverlay").classList.add("hidden");
+  state.pendingSave = null;
+  await saveBalance(pending.payload, pending.label);
+}
+
 async function saveLootPreset() {
-  await saveBalance({ lootPreset: $("#lootPresetSelect").value }, "Loot preset");
+  await previewThenSave({ lootPreset: $("#lootPresetSelect").value }, "Loot preset");
 }
 
 async function saveZombies() {
@@ -606,7 +652,7 @@ async function saveZombies() {
     RespawnTypes: numericValue("#respawnTypesInput"),
   };
   Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
-  await saveBalance({ zombies: values }, "Zombie/spawn settings");
+  await previewThenSave({ zombies: values }, "Zombie/spawn settings");
 }
 
 async function saveAi() {
@@ -623,7 +669,28 @@ async function saveAi() {
     damageMultiplier: numericValue("#aiDamageInput"),
   };
   Object.keys(values).forEach((key) => values[key] === undefined && delete values[key]);
-  await saveBalance({ ai: values }, "AI settings");
+  await previewThenSave({ ai: values }, "AI settings");
+}
+
+const AI_DIFFICULTY_PRESETS = {
+  easy: { patrolMax: 12, globalMax: 24, objectPatrolMax: 6, heliPatrolMax: 4, minAI: 2, maxAI: 3, accuracyMin: 0.25, accuracyMax: 0.45, damageMultiplier: 1.0 },
+  medium: { patrolMax: 24, globalMax: 40, objectPatrolMax: 10, heliPatrolMax: 6, minAI: 2, maxAI: 4, accuracyMin: 0.4, accuracyMax: 0.6, damageMultiplier: 1.1 },
+  hard: { patrolMax: 40, globalMax: 64, objectPatrolMax: 14, heliPatrolMax: 8, minAI: 3, maxAI: 6, accuracyMin: 0.55, accuracyMax: 0.75, damageMultiplier: 1.4 },
+};
+
+function applyAiPreset(name) {
+  const preset = AI_DIFFICULTY_PRESETS[name];
+  if (!preset) return;
+  setInput("#aiPatrolMaxInput", preset.patrolMax);
+  setInput("#aiGlobalMaxInput", preset.globalMax);
+  setInput("#aiObjectMaxInput", preset.objectPatrolMax);
+  setInput("#aiHeliMaxInput", preset.heliPatrolMax);
+  setInput("#aiMinInput", preset.minAI);
+  setInput("#aiMaxInput", preset.maxAI);
+  setInput("#aiAccuracyMinInput", preset.accuracyMin);
+  setInput("#aiAccuracyMaxInput", preset.accuracyMax);
+  setInput("#aiDamageInput", preset.damageMultiplier);
+  $("#jobOutput").textContent = `Loaded "${name}" difficulty into the AI fields. Review, then Save AI Settings to preview and apply.`;
 }
 
 function renderJobs(jobs) {
@@ -754,6 +821,16 @@ function bindEvents() {
   $("#saveLootPresetButton").addEventListener("click", () => saveLootPreset().catch(showError));
   $("#saveZombiesButton").addEventListener("click", () => saveZombies().catch(showError));
   $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
+  $("#previewConfirmButton").addEventListener("click", () => confirmPreview().catch(showError));
+  $("#previewCancelButton").addEventListener("click", hidePreview);
+  $("#previewOverlay").addEventListener("click", (event) => {
+    if (event.target === $("#previewOverlay")) hidePreview();
+  });
+  document.body.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-ai-preset]");
+    if (!button) return;
+    applyAiPreset(button.dataset.aiPreset);
+  });
   $("#loadLogButton").addEventListener("click", () => loadLog().catch(showError));
   $("#copyOutputButton").addEventListener("click", () => copyOutput().catch(showError));
   $("#clearOutputButton").addEventListener("click", () => ($("#jobOutput").textContent = ""));

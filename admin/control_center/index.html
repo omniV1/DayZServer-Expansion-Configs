@@ -177,7 +177,8 @@
             <label>Respawn limit <span class="help-tip" tabindex="0" data-tip="Caps how much can respawn during a cycle. Higher can make the world refill faster.">?</span><input id="respawnLimitInput" type="number" min="0" max="1000" step="5"></label>
             <label>Respawn types <span class="help-tip" tabindex="0" data-tip="How many type classes can be considered for respawn work. Bigger is not always better.">?</span><input id="respawnTypesInput" type="number" min="0" max="500" step="1"></label>
           </div>
-          <button id="saveZombiesButton" type="button" data-tip="Creates a snapshot, saves selected values, then requires restart for the affected map.">Save Zombie/Spawn Settings</button>
+          <p class="muted recommended-note">Recommended: zombie max 500-1500, animal max 80-250. Higher values raise CPU load and placement warnings.</p>
+          <button id="saveZombiesButton" type="button" data-tip="Preview changes, then snapshot and save. Restart the affected map afterward.">Save Zombie/Spawn Settings</button>
         </article>
 
         <article class="detail-card">
@@ -186,6 +187,13 @@
             Target
             <select id="aiTargetSelect"></select>
           </label>
+          <div class="preset-row">
+            <span class="preset-label">Quick difficulty:</span>
+            <button class="ghost" data-ai-preset="easy" type="button" data-tip="Fewer, less accurate AI. Good for PvE-light or new servers.">Easy</button>
+            <button class="ghost" data-ai-preset="medium" type="button" data-tip="Balanced PvE baseline.">Medium</button>
+            <button class="ghost" data-ai-preset="hard" type="button" data-tip="More patrols, sharper aim, higher damage.">Hard</button>
+          </div>
+          <p class="muted recommended-note">Recommended: patrol cap 8-32, AI/group 2-6, accuracy 0.4-0.7, damage 1.0-1.5.</p>
           <div class="form-grid">
             <label>Patrol cap <span class="help-tip" tabindex="0" data-tip="Maximum simultaneous patrol groups for the map. Raise this for more encounters.">?</span><input id="aiPatrolMaxInput" type="number" min="-1" max="200" step="1"></label>
             <label>Global cap <span class="help-tip" tabindex="0" data-tip="Global active AI limit. Keep this in line with server performance.">?</span><input id="aiGlobalMaxInput" type="number" min="-1" max="200" step="1"></label>
@@ -284,6 +292,18 @@
       <pre id="jobOutput">Run an action to see captured output here.</pre>
     </aside>
   </main>
+
+  <div id="previewOverlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <div class="overlay-card">
+      <h2 id="previewTitle">Preview changes before saving</h2>
+      <p class="muted">Nothing is written yet. Review what will change, then confirm to snapshot and save.</p>
+      <div id="previewBody"></div>
+      <div class="action-row">
+        <button id="previewConfirmButton" class="primary" type="button">Snapshot &amp; Save</button>
+        <button id="previewCancelButton" class="ghost" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <script src="/app.js"></script>
 </body>

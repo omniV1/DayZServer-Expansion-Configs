@@ -696,6 +696,84 @@ button.ghost:hover {
   margin-bottom: 2px;
 }
 
+.preset-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 4px;
+}
+
+.preset-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.recommended-note {
+  margin: 4px 0 10px;
+  font-size: 13px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 36, 29, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(31, 36, 29, 0.25);
+  padding: 18px;
+  width: min(560px, 100%);
+  max-height: 86vh;
+  overflow-y: auto;
+}
+
+.overlay-card h2 {
+  margin: 0 0 4px;
+}
+
+.overlay-card h3 {
+  margin: 12px 0 4px;
+  font-size: 14px;
+}
+
+.preview-label {
+  font-weight: 700;
+  color: var(--accent);
+  margin: 6px 0;
+}
+
+.preview-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.preview-list li {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 13px;
+}
+
+.preview-notes {
+  margin-top: 12px;
+}
+
+.preview-notes p {
+  margin: 0 0 4px;
+  color: var(--text);
+}
+
 @media (max-width: 1180px) {
   .layout {
     grid-template-columns: 150px minmax(0, 1fr);
