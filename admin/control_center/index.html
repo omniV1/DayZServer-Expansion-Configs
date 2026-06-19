@@ -26,6 +26,7 @@
       <button class="tab" data-tab="map" type="button">Map Detail</button>
       <button class="tab" data-tab="balance" type="button">Balance</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
+      <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button">Generation</button>
       <button class="tab" data-tab="setup" type="button">Setup Helper</button>
     </nav>
@@ -216,6 +217,22 @@
         Guarded actions may write files or sync profiles and will say so before they run.
       </div>
       <div id="maintenanceActions" class="action-grid"></div>
+    </section>
+
+    <section id="troubleshooting" class="view">
+      <div class="section-title">
+        <h2>Fix Problems</h2>
+        <label class="select-label">
+          Map
+          <select id="troubleshootMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Pick the symptom that matches what you are seeing. Each guide runs safe read-only checks first,
+        guarded repairs next, and high-risk actions last. Map-specific steps use the map selected here.
+        Steps are ordered: start at the top and stop once the problem is solved.
+      </div>
+      <div id="troubleshootingList" class="troubleshooting-list"></div>
     </section>
 
     <section id="generation" class="view">

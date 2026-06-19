@@ -5,6 +5,7 @@ const state = {
   actions: [],
   balance: null,
   setup: null,
+  troubleshooting: null,
   selectedMap: null,
   selectedJob: null,
   pollTimer: null,
@@ -125,13 +126,14 @@ async function api(path, options = {}) {
 }
 
 async function refreshAll() {
-  const [app, maps, status, actions, balance, setup, jobs] = await Promise.all([
+  const [app, maps, status, actions, balance, setup, troubleshooting, jobs] = await Promise.all([
     api("/api/app"),
     api("/api/maps"),
     api("/api/status"),
     api("/api/actions"),
     api("/api/balance"),
     api("/api/setup"),
+    api("/api/troubleshooting"),
     api("/api/jobs"),
   ]);
   state.app = app;
@@ -140,6 +142,7 @@ async function refreshAll() {
   state.actions = actions;
   state.balance = balance;
   state.setup = setup;
+  state.troubleshooting = troubleshooting;
   if (!state.selectedMap && maps.length) state.selectedMap = maps[0].key;
   $("#rootPath").textContent = status.root;
   renderAppInfo();
@@ -149,6 +152,7 @@ async function refreshAll() {
   renderBalance();
   renderActions();
   renderSetup();
+  renderTroubleshooting();
   renderJobs(jobs);
 }
 
@@ -205,7 +209,9 @@ function mapCardHelp(map, status) {
 
 function renderMapSelect() {
   const select = $("#mapSelect");
+  const troubleshootSelect = $("#troubleshootMapSelect");
   select.innerHTML = "";
+  if (troubleshootSelect) troubleshootSelect.innerHTML = "";
   for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
     target.innerHTML = "";
     const all = document.createElement("option");
@@ -219,6 +225,7 @@ function renderMapSelect() {
     option.textContent = map.title;
     if (map.key === state.selectedMap) option.selected = true;
     select.appendChild(option);
+    if (troubleshootSelect) troubleshootSelect.appendChild(option.cloneNode(true));
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
       target.appendChild(targetOption);
@@ -410,6 +417,76 @@ async function saveSetupStep(step, done) {
   });
   state.setup = setup;
   renderSetup();
+}
+
+const TIER_BY_RISK = {
+  read: { label: "Safe check", cls: "pill" },
+  guarded: { label: "Guarded repair", cls: "pill warning" },
+  high: { label: "High risk", cls: "pill bad" },
+};
+
+const TAB_LABELS = {
+  balance: "Balance editor",
+  maintenance: "Maintenance",
+  dashboard: "Dashboard",
+  map: "Map detail",
+  setup: "Setup",
+};
+
+function troubleshootStep(step, index) {
+  const number = index + 1;
+  if (step.kind === "tab") {
+    const label = TAB_LABELS[step.tab] || "Open tab";
+    return `
+      <li class="fix-step">
+        <span class="step-number">${number}</span>
+        <div class="fix-step-body">
+          <div class="fix-step-head"><span class="pill ok">Editor</span></div>
+          <p class="card-help">${escapeText(step.note)}</p>
+          <div class="action-row">
+            <button class="ghost" data-tab-target="${escapeText(step.tab)}" type="button">Go to ${escapeText(label)}</button>
+          </div>
+        </div>
+      </li>
+    `;
+  }
+  const tier = TIER_BY_RISK[step.risk] || TIER_BY_RISK.read;
+  const danger = step.risk === "high" ? " danger" : "";
+  const source = step.mapMode === "none" ? "" : "troubleshoot";
+  const confirmNote = step.confirm ? ` Requires typing ${step.confirm}.` : "";
+  return `
+    <li class="fix-step">
+      <span class="step-number">${number}</span>
+      <div class="fix-step-body">
+        <div class="fix-step-head">
+          <strong>${escapeText(step.label)}</strong>
+          <span class="${tier.cls}">${tier.label}</span>
+        </div>
+        <p class="card-help">${escapeText(step.note)}${escapeText(confirmNote)}</p>
+        <div class="action-row">
+          <button class="${danger}" data-action="${escapeText(step.action)}" data-map-source="${source}" type="button">Run ${escapeText(step.label)}</button>
+        </div>
+      </div>
+    </li>
+  `;
+}
+
+function renderTroubleshooting() {
+  const list = $("#troubleshootingList");
+  if (!list || !state.troubleshooting) return;
+  list.innerHTML = state.troubleshooting.symptoms
+    .map(
+      (symptom) => `
+      <details class="fix-card">
+        <summary>${escapeText(symptom.title)}</summary>
+        <p class="card-help fix-explain">${escapeText(symptom.explanation)}</p>
+        <ol class="fix-steps">
+          ${symptom.steps.map(troubleshootStep).join("")}
+        </ol>
+      </details>
+    `
+    )
+    .join("");
 }
 
 function balanceMap(key = state.selectedMap) {
@@ -684,7 +761,10 @@ function bindEvents() {
     const button = event.target.closest("button[data-action]");
     if (!button) return;
     const source = button.dataset.mapSource;
-    const map = source === "all" ? "all" : source === "selected" ? state.selectedMap : undefined;
+    let map;
+    if (source === "all") map = "all";
+    else if (source === "selected") map = state.selectedMap;
+    else if (source === "troubleshoot") map = $("#troubleshootMapSelect")?.value || state.selectedMap;
     runAction(button.dataset.action, map).catch(showError);
   });
   document.body.addEventListener("click", (event) => {
