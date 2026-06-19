@@ -411,7 +411,13 @@ function renderSetup() {
       nextBanner.innerHTML = `<strong>Next step ${number}:</strong> ${escapeText(step.title)} — ${escapeText(step.detail)}`;
       nextBanner.classList.remove("ok");
     } else {
-      nextBanner.innerHTML = "<strong>All set.</strong> Every core requirement is satisfied and the recommended checks are done. You can move to the Dashboard.";
+      nextBanner.innerHTML = `
+        <strong>✅ You're ready.</strong> Every core requirement is satisfied and your server folder
+        is set up correctly. You can run your maps now.
+        <div class="status-row">
+          <button data-tab-target="dashboard" type="button" data-tip="See all maps, ports, and latest log status.">Open Dashboard</button>
+          <button data-tab-target="map" type="button" class="ghost" data-tip="Validate one map by starting it, checking it, and stopping it.">Smoke Test A Map</button>
+        </div>`;
       nextBanner.classList.add("ok");
     }
   }

@@ -26,7 +26,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.5.1` - SHIPPED. Mission manager: list, edit payout/active/repeatable, and safely remove generated missions.
 - `v0.6.0` - SHIPPED. Appearance and desktop polish: System/Light/Dark theme toggle, version display, and a latest-release link.
 - `v0.7.0` - SHIPPED. Redacted support reports: public-safe report for one map or all, with copy and download.
-- `v0.7.1` - Simple vs Advanced mode and first-launch clarity (hide high-risk tools by default).
+- `v0.7.1` - SHIPPED. Simple vs Advanced mode (hide high-risk tools by default) and first-launch clarity.
 - `v0.8.0` - Backup and restore center: browse snapshots, restore a snapshot, scheduled snapshot guidance.
 - `v0.9.0` - Server lifecycle controls: guarded start/restart per map, live status polling, port/firewall helpers.
 - `v1.0.0` - Public stable release after docs, screenshots, validation, EXE smoke tests, and a public-safe repo audit.
@@ -98,12 +98,12 @@ Suggested slices:
 - `GET /api/report?map=<map>` plus a Reports tab with Generate, Copy, and Download (.txt).
 - Reuses existing redaction (passwords, Steam IDs, tokens) on the whole report text.
 
-## v0.7.1 - Simple Vs Advanced Mode
+## v0.7.1 - Simple Vs Advanced Mode (SHIPPED)
 
-- Simple hides high-risk generation/recovery tools by default; Advanced reveals them after a
-  warning. Preference saved locally.
-- First-launch clarity: clearer root-picker copy and a one-screen "you're ready" state.
-- README/Quickstart EXE usage polish.
+- Simple mode (default) hides high-risk generation/recovery tools (Generation tab, high-risk
+  action cards, Recover Imported); Advanced reveals them after a typed warning. Saved locally.
+- First-launch clarity: clearer root-picker dialog copy and a one-screen "you're ready" Setup
+  state with quick links to the Dashboard and a smoke test.
 
 ## v0.8.0 - Backup And Restore Center
 

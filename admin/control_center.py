@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.7.0"
+APP_VERSION = "0.7.1"
 RELEASE_CHANNEL = "preview"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -192,16 +192,26 @@ def pick_server_root_dialog() -> Path | None:
         root = tk.Tk()
         root.withdraw()
         messagebox.showinfo(
-            "DayZ Server Control Center",
-            "Choose your DayZServer folder. It must contain admin\\map_launch.json and Launch-DayZMap.ps1.",
+            "Welcome to DayZ Server Control Center",
+            "First, point the app at your DayZServer folder.\n\n"
+            "This is the folder that contains DayZServer_x64.exe. It must also include:\n"
+            "  - admin\\map_launch.json\n"
+            "  - Launch-DayZMap.ps1\n\n"
+            "A typical path looks like:\n"
+            "  C:\\Games\\Steam\\steamapps\\common\\DayZServer\n\n"
+            "Click OK, then select that folder. Nothing is changed until you choose an action.",
         )
-        selected = filedialog.askdirectory(title="Choose DayZServer folder")
+        selected = filedialog.askdirectory(title="Select your DayZServer folder")
         root.destroy()
         if selected:
             path = Path(selected)
             if is_server_root(path):
                 return path
-            messagebox.showerror("Invalid Folder", "That folder is not a DayZServer config root.")
+            messagebox.showerror(
+                "That folder is not a DayZServer root",
+                "The selected folder is missing admin\\map_launch.json or Launch-DayZMap.ps1.\n\n"
+                "Pick the folder that contains DayZServer_x64.exe and try again.",
+            )
     except Exception:
         return None
     return None
