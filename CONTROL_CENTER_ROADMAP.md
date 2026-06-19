@@ -21,7 +21,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.2.0` - SHIPPED. First-run setup wizard for server root, private configs, missions, mods, VPP, and safe validation.
 - `v0.3.0` - SHIPPED. Troubleshooting center organized by symptoms and safe repair paths.
 - `v0.4.0` - SHIPPED. Better editors: loot preset explanations, AI difficulty presets and recommended ranges, zombie/animal controls, and preview-before-save.
-- `v0.4.1` - Vehicle, event, and airdrop controls with preview-before-save.
+- `v0.4.1` - SHIPPED. Vehicle, event, and airdrop controls (db/events.xml) with preview-before-save.
 - `v0.5.0` - Mission builder for every map: types, payouts, enemies, preview, install/export.
 - `v0.5.1` - Mission manager: list, edit, enable/disable, and remove generated missions safely.
 - `v0.6.0` - Redacted support reports and sharing tools.
