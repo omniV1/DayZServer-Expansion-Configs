@@ -45,6 +45,35 @@ button:hover {
   color: var(--accent);
 }
 
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]::after {
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  top: calc(100% + 8px);
+  width: min(320px, 80vw);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #20241f;
+  color: #edf2ea;
+  box-shadow: 0 8px 20px rgba(31, 36, 29, 0.18);
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+[data-tip]:hover::after,
+[data-tip]:focus::after,
+[data-tip]:focus-within::after {
+  display: block;
+}
+
 button.primary {
   background: var(--accent);
   color: #fff;
@@ -136,6 +165,10 @@ button:disabled {
   font-size: 16px;
 }
 
+.section-title .action-row {
+  justify-content: flex-end;
+}
+
 .muted {
   color: var(--muted);
 }
@@ -168,7 +201,9 @@ button:disabled {
 
 .map-grid,
 .action-grid,
-.checklist {
+.checklist,
+.guide-grid,
+.help-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 10px;
@@ -177,6 +212,7 @@ button:disabled {
 .map-card,
 .action-card,
 .check-card,
+.guide-card,
 .jobs,
 .log-panel,
 .detail-card,
@@ -190,6 +226,7 @@ button:disabled {
 .map-card,
 .action-card,
 .check-card,
+.guide-card,
 .detail-card,
 .notice {
   padding: 12px;
@@ -206,9 +243,87 @@ button:disabled {
 .map-card h3,
 .action-card h3,
 .detail-card h3,
-.check-card h3 {
+.check-card h3,
+.guide-card h3 {
   margin: 0 0 8px;
   font-size: 15px;
+}
+
+.guide-hero h3 {
+  margin: 0 0 6px;
+}
+
+.guide-hero p,
+.guide-card p,
+.card-help,
+.jobs-help {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.guide-card {
+  position: relative;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guide-card button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--accent-2);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.help-grid {
+  margin-top: 10px;
+}
+
+.compact-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.compact-list li + li {
+  margin-top: 5px;
+}
+
+.small-help {
+  margin-bottom: 12px;
+}
+
+.card-help {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.help-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: help;
+  vertical-align: middle;
 }
 
 .kv {
@@ -261,9 +376,12 @@ button:disabled {
 }
 
 .form-grid label {
-  display: grid;
-  gap: 4px;
+  display: block;
   color: var(--muted);
+}
+
+.form-grid label input {
+  margin-top: 4px;
 }
 
 input {
@@ -305,7 +423,7 @@ select {
 .action-card p {
   margin: 0;
   color: var(--muted);
-  min-height: 38px;
+  line-height: 1.4;
 }
 
 .action-card footer {
@@ -315,12 +433,33 @@ select {
   gap: 8px;
 }
 
+.action-help {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 4px 8px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.action-help dt {
+  color: var(--muted);
+}
+
+.action-help dd {
+  margin: 0;
+}
+
 .jobs {
   padding: 12px;
   min-width: 0;
   align-self: start;
   position: sticky;
   top: 12px;
+}
+
+.jobs-help {
+  margin-bottom: 10px;
+  font-size: 13px;
 }
 
 .job-list {

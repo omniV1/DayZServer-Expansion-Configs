@@ -13,14 +13,16 @@
       <p id="rootPath">Loading local server root...</p>
     </div>
     <div class="top-actions">
-      <button id="refreshButton" type="button">Refresh</button>
-      <button id="openValidationButton" type="button">Run Validation</button>
+      <button id="guideButton" type="button" data-tab-target="guide" data-tip="Open the beginner workflow and glossary.">Start Guide</button>
+      <button id="refreshButton" type="button" data-tip="Reload map status, jobs, and balance summaries.">Refresh</button>
+      <button id="openValidationButton" type="button" data-tip="Run the public repo validation check. This is read-only.">Run Validation</button>
     </div>
   </header>
 
   <main class="layout">
     <nav class="tabs" aria-label="Views">
-      <button class="tab active" data-tab="dashboard" type="button">Dashboard</button>
+      <button class="tab active" data-tab="guide" type="button">Start Here</button>
+      <button class="tab" data-tab="dashboard" type="button">Dashboard</button>
       <button class="tab" data-tab="map" type="button">Map Detail</button>
       <button class="tab" data-tab="balance" type="button">Balance</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
@@ -28,10 +30,84 @@
       <button class="tab" data-tab="setup" type="button">Setup Helper</button>
     </nav>
 
-    <section id="dashboard" class="view active">
+    <section id="guide" class="view active">
+      <div class="section-title">
+        <h2>Start Here</h2>
+        <span class="pill ok">Local-only dashboard</span>
+      </div>
+      <div class="notice guide-hero">
+        <h3>What this app does</h3>
+        <p>
+          This is a safe local control panel for your DayZ server folder. It reads map status,
+          runs known admin scripts, captures output, and creates snapshots before guarded writes.
+          It does not expose a public web server and it does not accept arbitrary shell commands.
+        </p>
+      </div>
+      <div class="guide-grid">
+        <article class="guide-card">
+          <span class="step-number">1</span>
+          <h3>Confirm the install</h3>
+          <p>Use Setup Helper first when a server was freshly cloned, moved, or shared with another admin.</p>
+          <button data-tab-target="setup" type="button">Open Setup Helper</button>
+        </article>
+        <article class="guide-card">
+          <span class="step-number">2</span>
+          <h3>Pick a map</h3>
+          <p>Dashboard cards show configs, missions, ports, mods, and whether the latest log reached ready state.</p>
+          <button data-tab-target="dashboard" type="button">Open Dashboard</button>
+        </article>
+        <article class="guide-card">
+          <span class="step-number">3</span>
+          <h3>Diagnose before changing</h3>
+          <p>Run config drift, latest-log triage, or LAN visibility checks before touching generation tools.</p>
+          <button data-tab-target="maintenance" type="button">Open Maintenance</button>
+        </article>
+        <article class="guide-card">
+          <span class="step-number">4</span>
+          <h3>Tune carefully</h3>
+          <p>Balance saves create snapshots. Loot preset changes still need Apply Loot Now, and most AI/zombie edits need a restart.</p>
+          <button data-tab-target="balance" type="button">Open Balance Editor</button>
+        </article>
+      </div>
+      <div class="help-grid">
+        <article class="detail-card">
+          <h3>Safe Daily Workflow</h3>
+          <ol class="compact-list">
+            <li>Refresh the dashboard.</li>
+            <li>Check the map you want to work on.</li>
+            <li>Run Config Drift or Triage Logs if anything looks off.</li>
+            <li>Create a snapshot before larger changes.</li>
+            <li>Apply changes, restart the affected map, then smoke test.</li>
+          </ol>
+        </article>
+        <article class="detail-card">
+          <h3>Risk Labels</h3>
+          <dl class="kv">
+            <dt>read</dt><dd>Looks only. Safe anytime.</dd>
+            <dt>guarded</dt><dd>Writes files or starts/stops a test process, usually after a snapshot.</dd>
+            <dt>high</dt><dd>Can stop servers, wipe imported storage, or rebuild generated configs. Requires typed confirmation.</dd>
+          </dl>
+        </article>
+        <article class="detail-card">
+          <h3>Terms</h3>
+          <dl class="kv">
+            <dt>RPT</dt><dd>The DayZ server startup/runtime log.</dd>
+            <dt>A2S</dt><dd>Steam query response used by launchers and direct-connect checks.</dd>
+            <dt>Snapshot</dt><dd>A private backup zip of configs before risky work.</dd>
+            <dt>Imported</dt><dd>Community map mission files that prioritize boot stability over generated placements.</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="dashboard" class="view">
       <div class="section-title">
         <h2>Maps</h2>
         <span id="processSummary" class="pill">Checking processes...</span>
+      </div>
+      <div class="notice small-help">
+        Dashboard is read-only. Green pills mean the expected file, port, or latest log status looks healthy.
+        Inactive game/query ports usually just mean that map is not currently running.
       </div>
       <div id="mapGrid" class="map-grid"></div>
     </section>
@@ -44,18 +120,19 @@
           <select id="mapSelect"></select>
         </label>
       </div>
+      <div id="mapAdvice" class="notice small-help"></div>
       <div id="mapDetail" class="detail-grid"></div>
       <div class="action-row">
-        <button data-action="smoke_test_map" data-map-source="selected" type="button">Smoke Test</button>
-        <button data-action="lan_visibility_check" data-map-source="selected" type="button">LAN Check</button>
-        <button data-action="triage_logs" data-map-source="selected" type="button">Triage Logs</button>
-        <button data-action="config_drift" data-map-source="selected" type="button">Config Drift</button>
-        <button data-action="recover_imported_map" data-map-source="selected" type="button" class="danger">Recover Imported</button>
+        <button data-action="smoke_test_map" data-map-source="selected" type="button" data-tip="Starts this map, waits for ready state, queries it, then stops only what it started.">Smoke Test</button>
+        <button data-action="lan_visibility_check" data-map-source="selected" type="button" data-tip="Checks ports, A2S query, and launcher visibility clues for the selected map.">LAN Check</button>
+        <button data-action="triage_logs" data-map-source="selected" type="button" data-tip="Scans recent RPT/script logs and separates blockers from harmless noise.">Triage Logs</button>
+        <button data-action="config_drift" data-map-source="selected" type="button" data-tip="Compares launch config, real configs, examples, and helper scripts for mismatches.">Config Drift</button>
+        <button data-action="recover_imported_map" data-map-source="selected" type="button" class="danger" data-tip="Imported maps only. Sanitizes risky generated files and can wipe imported storage after confirmation.">Recover Imported</button>
       </div>
       <div class="log-panel">
         <div class="section-title">
           <h2>Latest Log Tail</h2>
-          <button id="loadLogButton" type="button">Reload Log</button>
+          <button id="loadLogButton" type="button" data-tip="Reload the latest RPT/script log tail for the selected map.">Reload Log</button>
         </div>
         <pre id="logOutput">Choose a map to load its latest log tail.</pre>
       </div>
@@ -66,9 +143,13 @@
         <h2>Balance Editor</h2>
         <span class="pill warning">Saves create a snapshot first</span>
       </div>
+      <div class="notice small-help">
+        Use this for broad server balance. Save writes config values and creates a snapshot first.
+        Loot preset changes need Apply Loot Now. AI and zombie changes usually need a map restart.
+      </div>
       <div class="balance-grid">
         <article class="detail-card">
-          <h3>Loot Tables</h3>
+          <h3>Loot Tables <span class="help-tip" tabindex="0" data-tip="Preset controls generated loot quantities. It does not instantly respawn every item already in storage.">?</span></h3>
           <label class="field">
             Active preset
             <select id="lootPresetSelect"></select>
@@ -76,46 +157,46 @@
           <p id="lootPresetDescription" class="muted"></p>
           <dl id="lootPresetStats" class="kv"></dl>
           <div class="action-row">
-            <button id="saveLootPresetButton" type="button">Save Preset</button>
-            <button data-action="apply_loot_current" type="button" class="primary">Apply Loot Now</button>
+            <button id="saveLootPresetButton" type="button" data-tip="Stores the selected preset in admin/loot_config.json.">Save Preset</button>
+            <button data-action="apply_loot_current" type="button" class="primary" data-tip="Regenerates and applies loot files using the active preset.">Apply Loot Now</button>
           </div>
         </article>
 
         <article class="detail-card">
-          <h3>Zombies And Spawns</h3>
+          <h3>Zombies And Spawns <span class="help-tip" tabindex="0" data-tip="These values affect central economy spawn pressure. Too high can create performance and placement warnings.">?</span></h3>
           <label class="field">
             Target
             <select id="zombieTargetSelect"></select>
           </label>
           <div class="form-grid">
-            <label>Zombie max <input id="zombieMaxInput" type="number" min="0" max="5000" step="50"></label>
-            <label>Animal max <input id="animalMaxInput" type="number" min="0" max="1000" step="10"></label>
-            <label>Spawn initial <input id="spawnInitialInput" type="number" min="0" max="10000" step="100"></label>
-            <label>Initial spawn <input id="initialSpawnInput" type="number" min="0" max="2000" step="10"></label>
-            <label>Respawn limit <input id="respawnLimitInput" type="number" min="0" max="1000" step="5"></label>
-            <label>Respawn types <input id="respawnTypesInput" type="number" min="0" max="500" step="1"></label>
+            <label>Zombie max <span class="help-tip" tabindex="0" data-tip="Upper target for infected across the mission economy. Higher means more pressure and more server work.">?</span><input id="zombieMaxInput" type="number" min="0" max="5000" step="50"></label>
+            <label>Animal max <span class="help-tip" tabindex="0" data-tip="Upper target for wildlife. Raise gently if you want hunting to feel worthwhile.">?</span><input id="animalMaxInput" type="number" min="0" max="1000" step="10"></label>
+            <label>Spawn initial <span class="help-tip" tabindex="0" data-tip="How many economy entities DayZ tries to seed during startup. Very high values can slow boot.">?</span><input id="spawnInitialInput" type="number" min="0" max="10000" step="100"></label>
+            <label>Initial spawn <span class="help-tip" tabindex="0" data-tip="Initial wave pressure for dynamic spawning. Keep lower on imported maps.">?</span><input id="initialSpawnInput" type="number" min="0" max="2000" step="10"></label>
+            <label>Respawn limit <span class="help-tip" tabindex="0" data-tip="Caps how much can respawn during a cycle. Higher can make the world refill faster.">?</span><input id="respawnLimitInput" type="number" min="0" max="1000" step="5"></label>
+            <label>Respawn types <span class="help-tip" tabindex="0" data-tip="How many type classes can be considered for respawn work. Bigger is not always better.">?</span><input id="respawnTypesInput" type="number" min="0" max="500" step="1"></label>
           </div>
-          <button id="saveZombiesButton" type="button">Save Zombie/Spawn Settings</button>
+          <button id="saveZombiesButton" type="button" data-tip="Creates a snapshot, saves selected values, then requires restart for the affected map.">Save Zombie/Spawn Settings</button>
         </article>
 
         <article class="detail-card">
-          <h3>AI Patrols</h3>
+          <h3>AI Patrols <span class="help-tip" tabindex="0" data-tip="Controls Expansion AI density and difficulty across generated patrol settings.">?</span></h3>
           <label class="field">
             Target
             <select id="aiTargetSelect"></select>
           </label>
           <div class="form-grid">
-            <label>Patrol cap <input id="aiPatrolMaxInput" type="number" min="-1" max="200" step="1"></label>
-            <label>Global cap <input id="aiGlobalMaxInput" type="number" min="-1" max="200" step="1"></label>
-            <label>Object cap <input id="aiObjectMaxInput" type="number" min="-1" max="200" step="1"></label>
-            <label>Heli cap <input id="aiHeliMaxInput" type="number" min="-1" max="200" step="1"></label>
-            <label>Min AI/group <input id="aiMinInput" type="number" min="0" max="20" step="1"></label>
-            <label>Max AI/group <input id="aiMaxInput" type="number" min="0" max="20" step="1"></label>
-            <label>Accuracy min <input id="aiAccuracyMinInput" type="number" min="0" max="1" step="0.01"></label>
-            <label>Accuracy max <input id="aiAccuracyMaxInput" type="number" min="0" max="1" step="0.01"></label>
-            <label>Damage multiplier <input id="aiDamageInput" type="number" min="0.1" max="5" step="0.05"></label>
+            <label>Patrol cap <span class="help-tip" tabindex="0" data-tip="Maximum simultaneous patrol groups for the map. Raise this for more encounters.">?</span><input id="aiPatrolMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Global cap <span class="help-tip" tabindex="0" data-tip="Global active AI limit. Keep this in line with server performance.">?</span><input id="aiGlobalMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Object cap <span class="help-tip" tabindex="0" data-tip="Limit for static/object-based AI spawns such as mission areas.">?</span><input id="aiObjectMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Heli cap <span class="help-tip" tabindex="0" data-tip="Limit for heli-event style AI groups where supported.">?</span><input id="aiHeliMaxInput" type="number" min="-1" max="200" step="1"></label>
+            <label>Min AI/group <span class="help-tip" tabindex="0" data-tip="Smallest squad size. Two keeps encounters manageable.">?</span><input id="aiMinInput" type="number" min="0" max="20" step="1"></label>
+            <label>Max AI/group <span class="help-tip" tabindex="0" data-tip="Largest squad size. Higher values make events louder and more expensive.">?</span><input id="aiMaxInput" type="number" min="0" max="20" step="1"></label>
+            <label>Accuracy min <span class="help-tip" tabindex="0" data-tip="Lower bound for AI aim. 0.4-0.7 is medium difficulty.">?</span><input id="aiAccuracyMinInput" type="number" min="0" max="1" step="0.01"></label>
+            <label>Accuracy max <span class="help-tip" tabindex="0" data-tip="Upper bound for AI aim. Values near 1.0 can feel unfair.">?</span><input id="aiAccuracyMaxInput" type="number" min="0" max="1" step="0.01"></label>
+            <label>Damage multiplier <span class="help-tip" tabindex="0" data-tip="AI damage scaling. 1.0 is normal; above 1.0 is harsher.">?</span><input id="aiDamageInput" type="number" min="0.1" max="5" step="0.05"></label>
           </div>
-          <button id="saveAiButton" type="button">Save AI Settings</button>
+          <button id="saveAiButton" type="button" data-tip="Creates a snapshot and saves AI values. Restart affected maps before judging results.">Save AI Settings</button>
         </article>
 
         <article class="detail-card">
@@ -130,6 +211,10 @@
         <h2>Maintenance</h2>
         <span class="muted">Checks and guarded repair actions</span>
       </div>
+      <div class="notice small-help">
+        Start here when something feels broken. Read-only diagnostics are safe while servers are running.
+        Guarded actions may write files or sync profiles and will say so before they run.
+      </div>
       <div id="maintenanceActions" class="action-grid"></div>
     </section>
 
@@ -140,7 +225,7 @@
       </div>
       <div class="notice">
         These actions can rewrite generated mission, Expansion, loot, AI, or storage-adjacent configs.
-        Use them when you are ready to restart affected servers.
+        Use them when you are ready to restart affected servers. High-risk actions require typed confirmation.
       </div>
       <div id="generationActions" class="action-grid"></div>
     </section>
@@ -150,20 +235,28 @@
         <h2>Public Setup Helper</h2>
         <span class="muted">Portable checks for new admins</span>
       </div>
+      <div class="notice small-help">
+        Use this after downloading the repo or moving a server folder. It checks whether private configs,
+        missions, Workshop mods, VPP profiles, and public-safe tracked files are in good shape.
+      </div>
       <div id="setupChecklist" class="checklist"></div>
       <div class="action-row">
-        <button data-action="check_map_launch" data-map-source="all" type="button">Check All Launches</button>
-        <button data-action="check_admin_tooling" data-map-source="all" type="button">Check VPP</button>
-        <button data-action="validate_public_repo" type="button">Validate Repo</button>
-        <button data-action="validate_imported_maps" type="button">Validate Imported Maps</button>
+        <button data-action="check_map_launch" data-map-source="all" type="button" data-tip="Checks configured maps, mods, missions, and ports without starting servers.">Check All Launches</button>
+        <button data-action="check_admin_tooling" data-map-source="all" type="button" data-tip="Checks VPP profile, keybind/input files, and desktop launchers.">Check VPP</button>
+        <button data-action="validate_public_repo" type="button" data-tip="Ensures tracked files are public-safe and parse cleanly.">Validate Repo</button>
+        <button data-action="validate_imported_maps" type="button" data-tip="Checks imported maps for risky generated Expansion folders and storage-like content.">Validate Imported Maps</button>
       </div>
     </section>
 
     <aside class="jobs">
       <div class="section-title">
         <h2>Jobs</h2>
-        <button id="clearOutputButton" type="button">Clear Output</button>
+        <div class="action-row">
+          <button id="copyOutputButton" type="button" data-tip="Copy the current job output to the clipboard.">Copy</button>
+          <button id="clearOutputButton" type="button" data-tip="Clear the output viewer only. It does not delete job history.">Clear Output</button>
+        </div>
       </div>
+      <p class="muted jobs-help">Every button runs an allowlisted command. Output appears here so you can see exactly what happened.</p>
       <div id="jobList" class="job-list"></div>
       <pre id="jobOutput">Run an action to see captured output here.</pre>
     </aside>

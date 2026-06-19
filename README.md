@@ -7,6 +7,7 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 ## Start Here
 
 - [QUICKSTART.md](QUICKSTART.md): setup and first launch
+- [CONTROL_CENTER_ROADMAP.md](CONTROL_CENTER_ROADMAP.md): versioned Control Center roadmap
 - [MODS.md](MODS.md): generated Workshop/mod manifest
 - [REPO_MAP.md](REPO_MAP.md): where everything lives
 - [BALANCE.md](BALANCE.md): gameplay targets for AI, loot, events, vehicles, and quests

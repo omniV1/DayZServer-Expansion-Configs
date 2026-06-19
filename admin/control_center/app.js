@@ -11,6 +11,87 @@ const state = {
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
+const ACTION_HELP = {
+  status_all: {
+    when: "Use for a quick across-the-board health snapshot.",
+    result: "Shows AI, loot, event, port, and imported-map safety summaries.",
+  },
+  check_map_launch: {
+    when: "Use after adding maps, changing mod folders, or editing launch config.",
+    result: "Confirms configs, missions, mod folders, and expected ports.",
+  },
+  check_admin_tooling: {
+    when: "Use when VPP hotkeys, profiles, or desktop launchers feel wrong.",
+    result: "Checks VPP files, input presets, client profiles, and launch helpers.",
+  },
+  validate_public_repo: {
+    when: "Use before committing, pushing, or sharing the repo.",
+    result: "Confirms tracked files are public-safe and parse cleanly.",
+  },
+  validate_imported_maps: {
+    when: "Use after repairing or importing community maps.",
+    result: "Confirms imported maps are not carrying risky generated content.",
+  },
+  triage_logs: {
+    when: "Use when a map boots strangely or players report a broken server.",
+    result: "Highlights likely blockers and separates common harmless warnings.",
+  },
+  config_drift: {
+    when: "Use when launcher files, ports, or config names seem mismatched.",
+    result: "Compares launch config, real configs, examples, and helpers.",
+  },
+  lan_visibility_check: {
+    when: "Use when direct connect works but the launcher is confusing.",
+    result: "Checks active ports, Steam query, firewall hints, and A2S responses.",
+  },
+  snapshot_configs: {
+    when: "Use before any manual edit or larger generated refresh.",
+    result: "Creates a private backup zip under admin/backups.",
+  },
+  apply_loot_current: {
+    when: "Use after selecting a loot preset or changing loot config.",
+    result: "Regenerates and applies loot files from the active preset.",
+  },
+  smoke_test_map: {
+    when: "Use after changes to prove a map reaches ready state.",
+    result: "Starts one map, waits for readiness, queries it, and stops only what it started.",
+  },
+  sync_vpp_profiles: {
+    when: "Use after switching admin tooling or adding a new map profile.",
+    result: "Copies VPP profile files where each map expects them.",
+  },
+  repair_vpp_inputs: {
+    when: "Use when VPP hotkeys do not respond in-game.",
+    result: "Repairs known VPP input preset locations.",
+  },
+  sync_desktop_launchers: {
+    when: "Use after launch config or map list changes.",
+    result: "Updates desktop start scripts from the shared launch configuration.",
+  },
+  stop_dayz_servers: {
+    when: "Use only when you intentionally want all DayZ server processes stopped.",
+    result: "Stops DayZ server processes after typed confirmation.",
+  },
+  wipe_imported_storage: {
+    when: "Use only when imported-map persistence is broken or poisoned by bad generated content.",
+    result: "Wipes imported-map storage after typed confirmation.",
+  },
+  recover_imported_map: {
+    when: "Use when an imported map is stuck on boot or out-of-bounds generated content keeps returning.",
+    result: "Runs the guarded imported-map cleanup/recovery flow.",
+  },
+  full_generation_refresh: {
+    when: "Use only when you want to rebuild the generated gameplay config set.",
+    result: "Runs the full generation pipeline and validations after typed confirmation.",
+  },
+};
+
+const RISK_COPY = {
+  read: "Read-only. Safe while servers are running.",
+  guarded: "Can write files or start a controlled test. Snapshot is used where appropriate.",
+  high: "Power tool. Requires typed confirmation and may stop servers, wipe storage, or rewrite generated files.",
+};
+
 function escapeText(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -26,7 +107,7 @@ function mapStatus(key) {
 
 function statusPill(label, good, badWhenFalse = false) {
   const cls = good ? "pill ok" : badWhenFalse ? "pill bad" : "pill";
-  return `<span class="${cls}">${label}</span>`;
+  return `<span class="${cls}" title="${escapeText(good ? "Healthy" : badWhenFalse ? "Needs attention" : "Not active or not applicable")}">${label}</span>`;
 }
 
 async function api(path, options = {}) {
@@ -74,6 +155,7 @@ function renderMaps() {
     const card = document.createElement("article");
     card.className = "map-card";
     card.tabIndex = 0;
+    card.title = "Open map detail and latest log tools.";
     card.addEventListener("click", () => selectMap(map.key, true));
     card.innerHTML = `
       <h3>${escapeText(map.title)}</h3>
@@ -91,9 +173,19 @@ function renderMaps() {
         ${statusPill(`${map.missingMods.length} missing mods`, map.missingMods.length === 0, map.missingMods.length > 0)}
         ${status.log?.ready ? statusPill("ready log", true) : statusPill("not ready", false)}
       </div>
+      <p class="card-help">${mapCardHelp(map, status)}</p>
     `;
     grid.appendChild(card);
   }
+}
+
+function mapCardHelp(map, status) {
+  if (!map.configExists) return "Private config is missing. Open Setup Helper before launch.";
+  if (!map.missionExists) return "Mission folder is missing. Fix mission files before smoke testing.";
+  if (map.missingMods.length) return "Some Workshop/mod folders are missing from the server root.";
+  if (status.queryActive) return "Query port is active, so this map is currently discoverable by A2S/direct checks.";
+  if (status.log?.ready) return "Latest log reached ready state. Start the map if you need active ports.";
+  return "Looks configured. Start or smoke test it to confirm runtime health.";
 }
 
 function renderMapSelect() {
@@ -123,6 +215,7 @@ function renderMapDetail() {
   const map = state.maps.find((item) => item.key === state.selectedMap);
   if (!map) return;
   const status = mapStatus(map.key);
+  renderMapAdvice(map, status);
   const missing = map.missingMods.length ? map.missingMods.join(", ") : "none";
   $("#mapDetail").innerHTML = `
     <article class="detail-card">
@@ -164,15 +257,44 @@ function renderMapDetail() {
   `;
 }
 
+function renderMapAdvice(map, status) {
+  const advice = [];
+  if (!map.configExists) advice.push("Private server config is missing. Create or copy the local serverDZ config before launching.");
+  if (!map.missionExists) advice.push("Mission folder is missing. Fix this before running a smoke test.");
+  if (map.missingMods.length) advice.push(`${map.missingMods.length} listed mod folder(s) are missing. Sync Workshop/server mods first.`);
+  if (status.queryActive) advice.push("Query port is active. Direct-connect and A2S checks should work for this running map.");
+  if (!status.queryActive && status.gameActive) advice.push("Game port is active but query is not. Run LAN Check and Triage Logs.");
+  if (!status.gameActive && !status.queryActive) advice.push("This map is not running right now. Smoke Test is the safest launch validation.");
+  if (map.isImported) advice.push("Imported map: avoid heavy generated placements. Use Recover Imported only when boot stability is broken.");
+  if (!advice.length) advice.push("No obvious issues from static checks. Run diagnostics if something feels wrong.");
+  $("#mapAdvice").innerHTML = `<strong>Recommended next step:</strong> ${advice.map(escapeText).join(" ")}`;
+}
+
+function actionScopeCopy(action) {
+  if (action.mapMode === "none") return "No map selection needed.";
+  if (action.mapMode === "one") return "Runs on the selected map only.";
+  if (action.mapMode === "all") return "Can run on all maps or the selected map depending on the button.";
+  if (action.mapMode === "imported") return "Imported maps only, or all imported maps where supported.";
+  return "";
+}
+
 function actionButton(action) {
   const danger = action.risk === "high" ? " danger" : "";
+  const help = ACTION_HELP[action.key] || {};
+  const riskHelp = RISK_COPY[action.risk] || action.risk;
+  const buttonTip = `${help.when || action.description} ${action.confirm ? `Requires typing ${action.confirm}.` : ""}`.trim();
   return `
     <article class="action-card">
-      <h3>${escapeText(action.label)}</h3>
+      <h3>${escapeText(action.label)} <span class="help-tip" tabindex="0" data-tip="${escapeText(riskHelp)}">?</span></h3>
       <p>${escapeText(action.description)}</p>
+      <dl class="action-help">
+        <dt>Use when</dt><dd>${escapeText(help.when || "You need this specific maintenance operation.")}</dd>
+        <dt>Result</dt><dd>${escapeText(help.result || "Output will appear in the Jobs panel.")}</dd>
+        <dt>Scope</dt><dd>${escapeText(actionScopeCopy(action))}</dd>
+      </dl>
       <footer>
-        <span class="pill ${action.risk === "high" ? "bad" : action.risk === "guarded" ? "warning" : ""}">${action.risk}</span>
-        <button class="${danger}" data-action="${action.key}" data-map-source="${action.mapMode === "none" ? "" : "selected"}" type="button">Run</button>
+        <span class="pill ${action.risk === "high" ? "bad" : action.risk === "guarded" ? "warning" : ""}" title="${escapeText(riskHelp)}">${action.risk}</span>
+        <button class="${danger}" data-action="${action.key}" data-map-source="${action.mapMode === "none" ? "" : "selected"}" type="button" data-tip="${escapeText(buttonTip)}">Run</button>
       </footer>
     </article>
   `;
@@ -193,18 +315,22 @@ function renderSetup() {
     <article class="check-card">
       <h3>Private Configs</h3>
       <p class="${configMissing.length ? "pill bad" : "pill ok"}">${configMissing.length ? `${configMissing.length} missing` : "all present"}</p>
+      <p class="card-help">Real serverDZ configs stay private and ignored; examples are safe to publish.</p>
     </article>
     <article class="check-card">
       <h3>Mission Folders</h3>
       <p class="${missionMissing.length ? "pill bad" : "pill ok"}">${missionMissing.length ? `${missionMissing.length} missing` : "all present"}</p>
+      <p class="card-help">Every launch entry needs its mission directory under mpmissions.</p>
     </article>
     <article class="check-card">
       <h3>Workshop Mods</h3>
       <p class="${modMissing.length ? "pill bad" : "pill ok"}">${modMissing.length ? `${modMissing.length} maps missing mods` : "all listed mods present"}</p>
+      <p class="card-help">The server must have every folder named in the selected map's mod list.</p>
     </article>
     <article class="check-card">
       <h3>Validation</h3>
       <p class="muted">Run public repo and imported-map validation before publishing or sharing configs.</p>
+      <p class="card-help">Validation protects people from accidentally sharing logs, storage, profiles, or secrets.</p>
     </article>
   `;
 }
@@ -288,7 +414,17 @@ function renderBalanceSummary(item) {
       <dt>Zombies</dt><dd>${escapeText(item.loot.ZombieMaxCount ?? "?")}</dd>
       <dt>Animals</dt><dd>${escapeText(item.loot.AnimalMaxCount ?? "?")}</dd>
     </dl>
+    <p class="card-help">${balanceAdvice(item)}</p>
   `;
+}
+
+function balanceAdvice(item) {
+  const notes = [];
+  if (Number(item.loot.ZombieMaxCount || 0) > 1500) notes.push("High zombie caps can increase placement warnings and CPU pressure.");
+  if (Number(item.ai.patrolMax || 0) > 32) notes.push("AI patrol cap is above the current medium baseline.");
+  if (Number(item.ai.accuracyMax || 0) > 0.75) notes.push("Accuracy max is leaning hard; expect sharper AI.");
+  if (!notes.length) notes.push("Current values look close to the intended medium PvE-friendly baseline.");
+  return notes.join(" ");
 }
 
 async function saveBalance(payload, label) {
@@ -365,7 +501,7 @@ async function runAction(actionKey, explicitMap) {
   }
   let confirm = "";
   if (action.confirm) {
-    confirm = prompt(`Type ${action.confirm} to run: ${action.label}`) || "";
+    confirm = prompt(`${RISK_COPY[action.risk] || "Confirmation required."}\n\nType ${action.confirm} to run: ${action.label}`) || "";
     if (confirm !== action.confirm) return;
   }
   const job = await api("/api/actions/run", {
@@ -438,16 +574,34 @@ function activateTab(name) {
   $$(".view").forEach((view) => view.classList.toggle("active", view.id === name));
 }
 
+async function copyOutput() {
+  const text = $("#jobOutput").textContent || "";
+  if (!text.trim()) return;
+  await navigator.clipboard.writeText(text);
+  const button = $("#copyOutputButton");
+  const original = button.textContent;
+  button.textContent = "Copied";
+  setTimeout(() => {
+    button.textContent = original;
+  }, 1200);
+}
+
 function bindEvents() {
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => activateTab(tab.dataset.tab)));
+  document.body.addEventListener("click", (event) => {
+    const target = event.target.closest("[data-tab-target]");
+    if (!target) return;
+    activateTab(target.dataset.tabTarget);
+  });
   $("#refreshButton").addEventListener("click", () => refreshAll().catch(showError));
-  $("#openValidationButton").addEventListener("click", () => runAction("validate_public_repo"));
+  $("#openValidationButton").addEventListener("click", () => runAction("validate_public_repo").catch(showError));
   $("#mapSelect").addEventListener("change", (event) => selectMap(event.target.value));
   $("#lootPresetSelect").addEventListener("change", renderLootPresetInfo);
   $("#saveLootPresetButton").addEventListener("click", () => saveLootPreset().catch(showError));
   $("#saveZombiesButton").addEventListener("click", () => saveZombies().catch(showError));
   $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
   $("#loadLogButton").addEventListener("click", () => loadLog().catch(showError));
+  $("#copyOutputButton").addEventListener("click", () => copyOutput().catch(showError));
   $("#clearOutputButton").addEventListener("click", () => ($("#jobOutput").textContent = ""));
   document.body.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-action]");
