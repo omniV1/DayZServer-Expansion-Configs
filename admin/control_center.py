@@ -46,6 +46,9 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
+APP_VERSION = "0.2.0"
+RELEASE_CHANNEL = "preview"
+
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
 MAX_OUTPUT_CHARS = 240_000
 
@@ -660,6 +663,185 @@ def balance_payload() -> dict[str, Any]:
     }
 
 
+def app_payload() -> dict[str, Any]:
+    return {
+        "version": APP_VERSION,
+        "channel": RELEASE_CHANNEL,
+        "root": str(ROOT),
+        "host": CONFIG.get("host", "127.0.0.1"),
+        "port": int(CONFIG.get("port", 8765) or 8765),
+        "frozen": FROZEN,
+        "runtimeDir": safe_rel(RUNTIME),
+        "userConfigDir": str(USER_CONFIG_DIR),
+        "snapshotBeforeMutation": bool(CONFIG.get("snapshot_before_mutation", True)),
+    }
+
+
+def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
+    profile = cfg.get("profiles_dir") or f"profiles_{name}"
+    perms = ROOT / profile / "VPPAdminTools" / "Permissions"
+    return (perms / "credentials.txt").exists() and (perms / "SuperAdmins" / "SuperAdmins.txt").exists()
+
+
+SETUP_STEP_KEYS = (
+    "server_root",
+    "private_configs",
+    "missions",
+    "mods",
+    "vpp",
+    "validation",
+)
+
+
+def setup_state_path() -> Path:
+    return RUNTIME / "setup_state.json"
+
+
+def read_setup_state() -> dict[str, Any]:
+    state = read_json(setup_state_path(), {})
+    if not isinstance(state, dict):
+        return {}
+    return state
+
+
+def write_setup_state(values: dict[str, Any]) -> dict[str, Any]:
+    state = read_setup_state()
+    completed = {str(item) for item in state.get("completedSteps", []) if str(item) in SETUP_STEP_KEYS}
+
+    step = values.get("step")
+    if step is not None:
+        if str(step) not in SETUP_STEP_KEYS:
+            raise ValueError(f"Unknown setup step: {step}")
+        if bool(values.get("done", True)):
+            completed.add(str(step))
+        else:
+            completed.discard(str(step))
+
+    if "dismissIntro" in values:
+        state["dismissIntro"] = bool(values["dismissIntro"])
+
+    state["completedSteps"] = [key for key in SETUP_STEP_KEYS if key in completed]
+    state["updatedAt"] = dt.datetime.now().isoformat(timespec="seconds")
+    write_json(setup_state_path(), state)
+    return state
+
+
+def setup_payload() -> dict[str, Any]:
+    maps = maps_payload()
+    config_cfgs = map_configs()
+    saved = read_setup_state()
+    completed = {str(item) for item in saved.get("completedSteps", [])}
+
+    config_missing = [m["key"] for m in maps if not m["configExists"]]
+    mission_missing = [m["key"] for m in maps if not m["missionExists"]]
+    mod_missing = [m["key"] for m in maps if m["missingMods"]]
+    vpp_missing = [name for name, cfg in config_cfgs.items() if not vpp_profile_ready(name, cfg)]
+    map_count = len(maps)
+
+    def status_for(missing: list[str]) -> str:
+        return "ok" if not missing else "todo"
+
+    steps: list[dict[str, Any]] = [
+        {
+            "key": "server_root",
+            "title": "Server folder confirmed",
+            "status": "ok",
+            "summary": f"Using {ROOT.name}",
+            "detail": (
+                "The app found a valid DayZServer root. It must contain admin\\map_launch.json "
+                "and Launch-DayZMap.ps1. Everything else on this page is checked against this folder."
+            ),
+            "items": [str(ROOT)],
+            "fixAction": None,
+        },
+        {
+            "key": "private_configs",
+            "title": "Private server configs",
+            "status": status_for(config_missing),
+            "summary": "all present" if not config_missing else f"{len(config_missing)} of {map_count} missing",
+            "detail": (
+                "Each map needs its real serverDZ*.cfg next to the server EXE. These stay private and "
+                "git-ignored because they can hold admin passwords and ports. Copy the matching "
+                "serverDZ*.example.cfg and fill in your values for any map listed here."
+            ),
+            "items": config_missing,
+            "fixAction": "config_drift",
+        },
+        {
+            "key": "missions",
+            "title": "Mission folders",
+            "status": status_for(mission_missing),
+            "summary": "all present" if not mission_missing else f"{len(mission_missing)} of {map_count} missing",
+            "detail": (
+                "Every launch entry points at a mission folder under mpmissions. A missing mission "
+                "folder means the map cannot boot. Install or copy the mission files for any map listed here."
+            ),
+            "items": mission_missing,
+            "fixAction": None,
+        },
+        {
+            "key": "mods",
+            "title": "Workshop mods",
+            "status": status_for(mod_missing),
+            "summary": "all listed mods present" if not mod_missing else f"{len(mod_missing)} map(s) missing mods",
+            "detail": (
+                "The server root must contain every @Mod folder named in a map's mod list. Missing mod "
+                "folders cause launcher mismatches and join failures. Copy the Workshop mods for any map listed here."
+            ),
+            "items": mod_missing,
+            "fixAction": None,
+        },
+        {
+            "key": "vpp",
+            "title": "VPP admin tooling",
+            "status": "ok" if not vpp_missing else "warn",
+            "summary": "credentials present" if not vpp_missing else f"{len(vpp_missing)} map(s) missing VPP files",
+            "detail": (
+                "VPP Admin Tools needs credentials.txt and SuperAdmins.txt inside each map profile's "
+                "VPPAdminTools\\Permissions folder. Without them the in-game admin menu will not authorize you. "
+                "Run Sync VPP Profiles after you have created your private source profile."
+            ),
+            "items": vpp_missing,
+            "fixAction": "sync_vpp_profiles",
+        },
+        {
+            "key": "validation",
+            "title": "Run safe validation",
+            "status": "action",
+            "summary": "recommended read-only check",
+            "detail": (
+                "Run the public repo and imported-map validators. They are read-only and confirm your "
+                "tracked files are public-safe and parse cleanly before you share or publish anything."
+            ),
+            "items": [],
+            "fixAction": "validate_public_repo",
+        },
+    ]
+
+    for step in steps:
+        step["done"] = step["key"] in completed
+
+    def needs_attention(step: dict[str, Any]) -> bool:
+        if step["status"] in {"todo", "warn"}:
+            return True
+        if step["status"] == "action" and not step["done"]:
+            return True
+        return False
+
+    next_step = next((step["key"] for step in steps if needs_attention(step)), None)
+    blocking = [step["key"] for step in steps if step["status"] in {"todo", "warn"}]
+
+    return {
+        "version": APP_VERSION,
+        "root": str(ROOT),
+        "ready": not blocking,
+        "recommendedNext": next_step,
+        "dismissIntro": bool(saved.get("dismissIntro", False)),
+        "updatedAt": saved.get("updatedAt"),
+        "steps": steps,
+    }
+
+
 def snapshot_for_api(label: str) -> None:
     if not CONFIG.get("snapshot_before_mutation", True):
         return
@@ -1232,6 +1414,10 @@ class Handler(BaseHTTPRequestHandler):
             query = parse_qs(parsed.query)
             if path == "/api/maps":
                 self.send_json(200, maps_payload())
+            elif path == "/api/app":
+                self.send_json(200, app_payload())
+            elif path == "/api/setup":
+                self.send_json(200, setup_payload())
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
@@ -1264,7 +1450,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
             parsed = urlparse(self.path)
-            if parsed.path not in {"/api/actions/run", "/api/balance/save"}:
+            if parsed.path not in {"/api/actions/run", "/api/balance/save", "/api/setup/save"}:
                 self.send_error_json(404, "Unknown API route.")
                 return
             length = int(self.headers.get("Content-Length", "0") or "0")
@@ -1275,6 +1461,9 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(raw or "{}")
             if parsed.path == "/api/balance/save":
                 self.send_json(200, save_balance(payload))
+            elif parsed.path == "/api/setup/save":
+                write_setup_state(payload)
+                self.send_json(200, setup_payload())
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())
