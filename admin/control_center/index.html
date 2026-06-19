@@ -131,8 +131,10 @@
         <span id="processSummary" class="pill">Checking processes...</span>
       </div>
       <div class="notice small-help">
-        Dashboard is read-only. Green pills mean the expected file, port, or latest log status looks healthy.
-        Inactive game/query ports usually just mean that map is not currently running.
+        Dashboard is read-only and <strong>auto-refreshes every few seconds</strong> while this tab is open,
+        so ports and process counts update live after you start or stop a map. Green pills mean the expected
+        file, port, or latest log status looks healthy. Inactive game/query ports usually just mean that map
+        is not currently running.
       </div>
       <div id="mapGrid" class="map-grid"></div>
     </section>

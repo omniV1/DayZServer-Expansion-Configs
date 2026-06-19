@@ -17,6 +17,7 @@ const state = {
   selectedJob: null,
   pendingSave: null,
   pollTimer: null,
+  statusTimer: null,
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -1119,6 +1120,25 @@ function startPolling() {
   }, 1800);
 }
 
+async function refreshStatus() {
+  const status = await api("/api/status");
+  state.status = status;
+  renderMaps();
+}
+
+function startStatusPolling() {
+  if (state.statusTimer) return;
+  state.statusTimer = setInterval(() => {
+    refreshStatus().catch((error) => console.error(error));
+  }, 6000);
+}
+
+function stopStatusPolling() {
+  if (!state.statusTimer) return;
+  clearInterval(state.statusTimer);
+  state.statusTimer = null;
+}
+
 async function loadLog() {
   const map = state.selectedMap;
   if (!map) return;
@@ -1148,6 +1168,12 @@ function activateTab(name) {
     if (map && state.missionsMap !== map) loadMissions(map).catch(showError);
   }
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
+  if (name === "dashboard") {
+    refreshStatus().catch((error) => console.error(error));
+    startStatusPolling();
+  } else {
+    stopStatusPolling();
+  }
 }
 
 async function copyOutput() {

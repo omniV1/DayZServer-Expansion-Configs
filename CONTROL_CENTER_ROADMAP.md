@@ -28,7 +28,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.7.0` - SHIPPED. Redacted support reports: public-safe report for one map or all, with copy and download.
 - `v0.7.1` - SHIPPED. Simple vs Advanced mode (hide high-risk tools by default) and first-launch clarity.
 - `v0.8.0` - SHIPPED. Backup and restore center: browse snapshots, guarded restore (typed RESTORE, snapshot-first).
-- `v0.9.0` - Server lifecycle controls: guarded start/restart per map, live status polling, port/firewall helpers.
+- `v0.9.0` - SHIPPED. Server lifecycle: guarded start/stop/restart per map, live Dashboard polling, firewall repair.
 - `v1.0.0` - Public stable release after docs, screenshots, validation, EXE smoke tests, and a public-safe repo audit.
 
 ## v0.4.1 - Vehicle, Event, And Airdrop Controls
@@ -113,11 +113,15 @@ Suggested slices:
   action: high-risk, typed `RESTORE` confirmation, and a snapshot of current state first.
 - Snapshot names are validated (no path traversal; must exist under `admin/backups`).
 
-## v0.9.0 - Server Lifecycle Controls
+## v0.9.0 - Server Lifecycle Controls (SHIPPED)
 
-- Guarded start/restart per map using existing launch scripts (no arbitrary commands).
-- Live status polling for game/query ports and ready-log state.
-- Port and firewall helper actions surfaced from existing scripts.
+- `admin/server_lifecycle.ps1` wraps `Launch-DayZMap.ps1` (no arbitrary commands): start spawns a
+  detached console; stop/restart target only the map's `DayZServer_x64` process, matched by its
+  `-port=<gamePort>` command line so a still-booting server (ports not yet bound) is handled too.
+- Allowlisted actions: `start_map` (guarded), `stop_map` (high, `STOP`), `restart_map` (high,
+  `RESTART`), `repair_firewall` (guarded). Stop/Restart appear only in Advanced mode.
+- Map Detail gains a Server Controls row; the Dashboard auto-refreshes `/api/status` every few
+  seconds while open so ports/process counts update live.
 
 ## v1.0.0 - Public Stable
 
