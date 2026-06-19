@@ -864,6 +864,21 @@ button.ghost:hover {
   color: var(--text);
 }
 
+.mission-item {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.mission-item + .mission-item {
+  margin-top: 0;
+}
+
+.mission-head {
+  margin-bottom: 6px;
+}
+
 @media (max-width: 1180px) {
   .layout {
     grid-template-columns: 150px minmax(0, 1fr);

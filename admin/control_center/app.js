@@ -878,13 +878,64 @@ function renderMissions() {
     list.innerHTML = `<p class="muted">No Control Center missions on ${escapeText(data.map)} yet.</p>`;
     return;
   }
-  list.innerHTML = `<dl class="kv">${data.missions
-    .map((mission) => {
-      const reward = (mission.rewards || []).map((r) => `${r.amount} ${r.className}`).join(", ");
-      const type = OBJECTIVE_TYPE_LABELS[mission.objectiveType] || `type ${mission.objectiveType}`;
-      return `<dt>#${mission.id}</dt><dd>${escapeText(mission.title)} - ${escapeText(type)} - ${escapeText(reward)}${mission.repeatable ? " - repeatable" : ""}</dd>`;
-    })
-    .join("")}</dl>`;
+  list.innerHTML = data.missions.map(missionRow).join("");
+}
+
+function missionRow(mission) {
+  const reward = (mission.rewards || [])[0] || {};
+  const type = OBJECTIVE_TYPE_LABELS[mission.objectiveType] || `type ${mission.objectiveType}`;
+  const rewardClass = reward.className ? ` - ${escapeText(reward.className)}` : "";
+  return `
+    <div class="mission-item" data-mission-id="${mission.id}">
+      <div class="mission-head"><strong>#${mission.id} ${escapeText(mission.title)}</strong> <span class="muted">${escapeText(type)}${rewardClass}</span></div>
+      <div class="form-grid">
+        <label>Payout<input class="mission-payout" type="number" min="0" max="1000000" step="100" value="${reward.amount ?? 0}"></label>
+        <label class="check-field"><input class="mission-active" type="checkbox" ${mission.active ? "checked" : ""}> Active</label>
+        <label class="check-field"><input class="mission-repeatable" type="checkbox" ${mission.repeatable ? "checked" : ""}> Repeatable</label>
+      </div>
+      <div class="action-row">
+        <button data-mission-action="save" data-mission-id="${mission.id}" type="button" data-tip="Preview and save payout/active/repeatable changes.">Save Changes</button>
+        <button class="danger" data-mission-action="remove" data-mission-id="${mission.id}" type="button" data-tip="Delete this generated mission after typing REMOVE.">Remove</button>
+      </div>
+    </div>
+  `;
+}
+
+async function saveMissionUpdate(id) {
+  const row = document.querySelector(`.mission-item[data-mission-id="${id}"]`);
+  if (!row) return;
+  const payload = {
+    map: state.missionsMap,
+    id: Number(id),
+    payout: Number(row.querySelector(".mission-payout").value || 0),
+    active: row.querySelector(".mission-active").checked,
+    repeatable: row.querySelector(".mission-repeatable").checked,
+  };
+  await previewThenSave({
+    previewUrl: "/api/missions/update/preview",
+    saveUrl: "/api/missions/update",
+    payload,
+    label: `Mission #${id}`,
+    onSaved: async (result) => {
+      state.missions = result.missions;
+      renderMissions();
+      $("#jobOutput").textContent = `Mission #${id} updated.\nChanged: ${result.changed.join(", ") || "none"}\nRestart ${state.missionsMap} for changes to take effect.`;
+    },
+  });
+}
+
+async function removeMission(id) {
+  const confirmText = prompt(
+    `Type REMOVE to delete mission #${id} on ${state.missionsMap}. A snapshot is created first, but the mission files are deleted.`
+  );
+  if (confirmText !== "REMOVE") return;
+  const result = await api("/api/missions/remove", {
+    method: "POST",
+    body: JSON.stringify({ map: state.missionsMap, id: Number(id), confirm: "REMOVE" }),
+  });
+  state.missions = result.missions;
+  renderMissions();
+  $("#jobOutput").textContent = `Removed mission #${id}.\nDeleted:\n${result.removed.join("\n")}`;
 }
 
 function collectMissionForm() {
@@ -1098,6 +1149,13 @@ function bindEvents() {
   $("#missionMapSelect").addEventListener("change", (event) => loadMissions(event.target.value).catch(showError));
   $("#missionTypeSelect").addEventListener("change", updateMissionTypeUi);
   $("#previewMissionButton").addEventListener("click", () => previewMission().catch(showError));
+  document.body.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-mission-action]");
+    if (!button) return;
+    const id = button.dataset.missionId;
+    if (button.dataset.missionAction === "save") saveMissionUpdate(id).catch(showError);
+    else if (button.dataset.missionAction === "remove") removeMission(id).catch(showError);
+  });
   $("#previewOverlay").addEventListener("click", (event) => {
     if (event.target === $("#previewOverlay")) hidePreview();
   });
