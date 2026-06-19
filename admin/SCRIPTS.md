@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.9.0
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.0.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.

@@ -10,9 +10,7 @@
     "DamageReceivedMultiplier": 1.0,
     "ShoryukenChance": 0.0,
     "ShoryukenDamageMultiplier": 3.0,
-    "Admins": [
-        "0"
-    ],
+    "Admins": [],
     "Vaulting": 1,
     "SniperProneDistanceThreshold": 140.0,
     "AggressionTimeout": 180.0,

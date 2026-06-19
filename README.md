@@ -15,15 +15,26 @@ This repo shares repeatable scripts, example configs, generated economy/AI setti
 
 ## Local Control Center
 
-Run a browser-based local dashboard from the server root:
+A beginner-friendly local web app for running and tuning the whole multi-map setup. Run it from the server root:
 
 ```powershell
 python admin\control_center.py --open-browser
 ```
 
-Desktop users can also run `DayZServerControlCenter.exe` from a release zip. On first launch it auto-detects common DayZServer paths or asks for the folder containing `admin\map_launch.json`.
+Desktop users can run `DayZServerControlCenter.exe` from a release zip — no Python needed. Download the latest from [GitHub Releases](https://github.com/omniV1/DayZServer-Expansion-Configs/releases/latest). On first launch it auto-detects common DayZServer paths or asks for the folder containing `admin\map_launch.json`.
 
-The control center binds to `127.0.0.1` by default and wraps only allowlisted scripts. It can show map status, latest redacted logs, VPP/admin health, LAN checks, config drift, snapshots, smoke tests, guarded generation/recovery jobs, and balance controls for loot presets, AI patrol difficulty/density, zombies, animals, and spawn globals. Risky actions require typed confirmation and guarded edits create a local config snapshot first.
+The control center binds to `127.0.0.1` by default, exposes no arbitrary shell endpoint, and wraps only allowlisted scripts. Features:
+
+- **Start Here / Setup** — first-run wizard, glossary, and a "you're ready" state for fresh installs.
+- **Dashboard** — every map's config/mods/ports/log readiness, with live auto-refresh.
+- **Map Detail** — per-map Server Controls (start/stop/restart), smoke test, LAN check, log triage, config drift.
+- **Balance / Events / Missions** — guided editors for loot, AI, zombies, animals, world events, and a mission builder for repeatable paid contracts. Every save previews first and snapshots.
+- **Fix Problems** — symptom-based troubleshooting with safe checks first, high-risk actions last.
+- **Reports** — public-safe, redacted support report (copy or download).
+- **Backups** — browse snapshots and restore (guarded, typed confirmation, snapshot-first).
+- **Appearance** — System/Light/Dark theme, plus Simple/Advanced mode that hides high-risk tools by default.
+
+Risky actions require typed confirmation, guarded edits create a local config snapshot first, and nothing private (passwords, Steam IDs, logs, storage, profiles) is ever exposed or tracked.
 
 ## Supported Maps
 
@@ -42,8 +53,9 @@ The control center binds to `127.0.0.1` by default and wraps only allowlisted sc
 ## What This Provides
 
 - Data-driven map launching through `Launch-DayZMap.ps1`
-- Local web control center for map status, diagnostics, snapshots, and guarded script actions
-- UI balance editor for active loot presets, AI patrol caps/difficulty, zombies, animals, and spawn globals
+- Local web control center (and packaged Windows EXE) for setup, status, diagnostics, snapshots, server lifecycle, and guarded script actions
+- UI editors for loot presets, AI patrol caps/difficulty, zombies, animals, spawn globals, world events, and a mission builder
+- Guarded per-map start/stop/restart with live Dashboard status, backup/restore, and redacted support reports
 - Public-safe `serverDZ*.example.cfg` templates
 - VPP (`@VPPAdminTools`) as the standard admin tool
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings

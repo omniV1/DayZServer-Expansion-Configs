@@ -1,0 +1,15 @@
+# Public SteamID64 allowlist for validate_public_repo.py
+#
+# By default the validator FAILS if any tracked text file contains a SteamID64
+# (a 17-digit id beginning with 7656...). That prevents accidentally publishing a
+# real admin or player Steam ID.
+#
+# If you intentionally want a specific Steam ID to be public in this repo (for
+# example an admin UID you are comfortable sharing), add it here, one id per line.
+# Lines starting with '#' are comments and blank lines are ignored.
+#
+# Example (replace the X's with a real 17-digit SteamID64 starting 7656...):
+#   76561198XXXXXXXXX
+#
+# Keep personal Steam IDs you do NOT want public out of tracked files entirely;
+# add them only to local, gitignored config instead.

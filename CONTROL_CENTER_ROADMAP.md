@@ -29,7 +29,7 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 - `v0.7.1` - SHIPPED. Simple vs Advanced mode (hide high-risk tools by default) and first-launch clarity.
 - `v0.8.0` - SHIPPED. Backup and restore center: browse snapshots, guarded restore (typed RESTORE, snapshot-first).
 - `v0.9.0` - SHIPPED. Server lifecycle: guarded start/stop/restart per map, live Dashboard polling, firewall repair.
-- `v1.0.0` - Public stable release after docs, screenshots, validation, EXE smoke tests, and a public-safe repo audit.
+- `v1.0.0` - SHIPPED. Public stable release: docs pass, public-safe repo audit, EXE smoke tests, channel = stable.
 
 ## v0.4.1 - Vehicle, Event, And Airdrop Controls
 
@@ -123,11 +123,12 @@ Suggested slices:
 - Map Detail gains a Server Controls row; the Dashboard auto-refreshes `/api/status` every few
   seconds while open so ports/process counts update live.
 
-## v1.0.0 - Public Stable
+## v1.0.0 - Public Stable (SHIPPED)
 
-- Full docs pass, screenshots if available, public-safe repo audit.
-- EXE smoke tests across all endpoints and one guarded action.
-- Tag and release as the first public-friendly stable build.
+- Full docs pass: README Control Center section lists every tab and links to the latest release.
+- Public-safe repo audit: `validate_public_repo.py`, `validate_imported_maps.py`, and `git status` clean.
+- EXE smoke tests across all endpoints plus one guarded action through the bundled EXE.
+- `RELEASE_CHANNEL` flipped from `preview` to `stable`; tagged and released as the first stable build.
 
 ## Required Validation Per Slice
 

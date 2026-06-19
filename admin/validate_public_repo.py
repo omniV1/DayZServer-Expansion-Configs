@@ -49,6 +49,25 @@ SECRET_PATTERNS = [
 SHARD_ID_PATTERN = re.compile(r'shardId\s*=\s*"([^"]+)"', re.I)
 VALID_SHARD_ID = re.compile(r"^[A-Za-z0-9]{4,6}$")
 
+STEAMID_PATTERN = re.compile(r"\b7656\d{13}\b")
+STEAMID_ALLOWLIST_NAME = "public_steamid_allowlist.txt"
+
+
+def load_steamid_allowlist() -> set[str]:
+    path = ROOT / "admin" / STEAMID_ALLOWLIST_NAME
+    if not path.exists():
+        return set()
+    allowed: set[str] = set()
+    for line in path.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+        entry = line.strip()
+        if not entry or entry.startswith("#"):
+            continue
+        allowed.add(entry)
+    return allowed
+
+
+STEAMID_ALLOWLIST = load_steamid_allowlist()
+
 MOD_LIST_NAMES = {"chernarus_mods.txt", "namalsk_mods.txt", "takistan_mods.txt"}
 COT_MOD_PATTERNS = ["@Community-Online-Tools", "1564026768"]
 
@@ -100,6 +119,13 @@ def validate_content(path: Path, errors: list[str]) -> None:
         for pattern in SECRET_PATTERNS:
             if pattern.search(text):
                 errors.append(f"Secret-like content in {path}: {pattern.pattern}")
+    if path.name != STEAMID_ALLOWLIST_NAME:
+        for steamid in sorted(set(STEAMID_PATTERN.findall(text))):
+            if steamid not in STEAMID_ALLOWLIST:
+                errors.append(
+                    f"SteamID64 in {path}: {steamid} "
+                    f"(add it to admin/{STEAMID_ALLOWLIST_NAME} to allow, or remove it)"
+                )
     if path.name in MOD_LIST_NAMES:
         if "@VPPAdminTools" not in text:
             errors.append(f"VPP admin tool missing from mod list: {path}")

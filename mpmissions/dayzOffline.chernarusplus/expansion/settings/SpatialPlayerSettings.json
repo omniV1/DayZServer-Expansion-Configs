@@ -1,21 +1,4 @@
 {
     "Version": 1,
-    "Group": [
-        {
-            "UID": "0",
-            "Player_Birthday": 0
-        },
-        {
-            "UID": "0",
-            "Player_Birthday": 0
-        },
-        {
-            "UID": "0",
-            "Player_Birthday": 0
-        },
-        {
-            "UID": "0",
-            "Player_Birthday": 1697062025
-        }
-    ]
+    "Group": []
 }
