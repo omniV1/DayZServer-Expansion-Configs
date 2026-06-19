@@ -46,7 +46,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.2.0"
+APP_VERSION = "0.3.0"
 RELEASE_CHANNEL = "preview"
 
 CREATE_NO_WINDOW = 0x08000000 if os.name == "nt" else 0
@@ -842,6 +842,140 @@ def setup_payload() -> dict[str, Any]:
     }
 
 
+TROUBLESHOOTING_SYMPTOMS: list[dict[str, Any]] = [
+    {
+        "key": "wont_boot",
+        "title": "Server will not boot",
+        "explanation": (
+            "The map never reaches 'Player connect enabled'. This is usually a config, mission, or mod "
+            "problem, or a fatal error in the latest RPT log. Work from the logs outward and change nothing "
+            "until you know the cause."
+        ),
+        "steps": [
+            {"action": "triage_logs", "note": "Scan the latest RPT/script log for the actual blocker first."},
+            {"action": "config_drift", "note": "Confirm the launch config, real config, and helpers agree."},
+            {"action": "check_map_launch", "note": "Verify mission folder, mod folders, and ports exist."},
+            {"action": "smoke_test_map", "note": "Do a controlled start that stops itself, to watch boot live."},
+            {"action": "recover_imported_map", "note": "Imported maps only: clean risky generated content, then retest."},
+        ],
+    },
+    {
+        "key": "not_in_launcher",
+        "title": "Map does not show in the launcher",
+        "explanation": (
+            "The server runs but does not appear in the DayZ in-game server browser. This is almost always "
+            "the Steam query port not being visible: it is inactive, blocked by Windows Firewall, or mismatched "
+            "between the config and the launch entry."
+        ),
+        "steps": [
+            {"action": "lan_visibility_check", "note": "Check the query port UDP endpoint and A2S response."},
+            {"action": "check_map_launch", "note": "Confirm the steamQueryPort matches between config and launch entry."},
+            {"action": "sync_desktop_launchers", "note": "Regenerate desktop start files if ports were changed."},
+            {
+                "tab": "maintenance",
+                "note": "If the query port is active but still hidden, allow the DayZ server EXE through Windows Firewall.",
+            },
+        ],
+    },
+    {
+        "key": "vpp_not_opening",
+        "title": "VPP admin menu does not open",
+        "explanation": (
+            "Pressing the admin key does nothing in-game. Either the VPP credentials/SuperAdmins files are "
+            "missing from the map profile, or the input binding was lost or overwritten by old COT inputs."
+        ),
+        "steps": [
+            {"action": "check_admin_tooling", "note": "Check VPP files, input presets, and client profiles."},
+            {"action": "sync_vpp_profiles", "note": "Copy your private VPP credentials/SuperAdmins into map profiles."},
+            {"action": "repair_vpp_inputs", "note": "Remove stale COT inputs and rebind VPP to End/Home."},
+        ],
+    },
+    {
+        "key": "loot_warnings",
+        "title": "Loot is causing placement warnings",
+        "explanation": (
+            "The RPT log fills with loot/economy placement warnings, or loot feels wrong. Usually the loot "
+            "preset is too high for the map, or generated loot files drifted from the active preset."
+        ),
+        "steps": [
+            {"action": "triage_logs", "note": "Confirm the warnings are loot/economy placement related."},
+            {"action": "status_all", "note": "Review the active loot preset and per-map economy summary."},
+            {"tab": "balance", "note": "Lower the active loot preset (Low/Medium) for heavy maps in the Balance tab."},
+            {"action": "apply_loot_current", "note": "Regenerate and apply loot files from the active preset."},
+        ],
+    },
+    {
+        "key": "ai_density",
+        "title": "AI is too rare or too aggressive",
+        "explanation": (
+            "Expansion AI encounters feel empty, or too frequent and too lethal. This is tuned by patrol caps "
+            "and difficulty in the AI patrol settings, not by a single switch. Adjust gradually and restart."
+        ),
+        "steps": [
+            {"action": "status_all", "note": "See current AI patrol counts and caps per map."},
+            {"tab": "balance", "note": "Raise/lower patrol caps and AI/group, and adjust accuracy/damage in the Balance tab."},
+            {"action": "smoke_test_map", "note": "Restart the map and smoke test to confirm the new feel."},
+        ],
+    },
+    {
+        "key": "imported_loop",
+        "title": "Imported map loops or hangs on boot",
+        "explanation": (
+            "A community/imported map restarts repeatedly or hangs during boot. This is typically risky generated "
+            "Expansion placements or poisoned imported storage. Recover the map before touching storage, and only "
+            "wipe storage as a last resort."
+        ),
+        "steps": [
+            {"action": "triage_logs", "note": "Find the boot-time blocker before changing anything."},
+            {"action": "validate_imported_maps", "note": "Check the imported map for risky generated content."},
+            {"action": "recover_imported_map", "note": "Run the guarded imported-map cleanup/recovery flow."},
+            {"action": "wipe_imported_storage", "note": "Last resort: wipe imported storage after recovery still fails."},
+        ],
+    },
+]
+
+
+def troubleshooting_payload() -> dict[str, Any]:
+    specs = action_specs()
+    symptoms: list[dict[str, Any]] = []
+    for symptom in TROUBLESHOOTING_SYMPTOMS:
+        steps: list[dict[str, Any]] = []
+        for step in symptom["steps"]:
+            action_key = step.get("action")
+            if action_key is not None:
+                spec = specs.get(action_key)
+                if spec is None:
+                    raise ValueError(f"Troubleshooting references unknown action: {action_key}")
+                steps.append(
+                    {
+                        "kind": "action",
+                        "action": action_key,
+                        "label": spec.label,
+                        "risk": spec.risk,
+                        "mapMode": spec.map_mode,
+                        "confirm": spec.confirm,
+                        "note": step.get("note", ""),
+                    }
+                )
+            else:
+                steps.append(
+                    {
+                        "kind": "tab",
+                        "tab": step.get("tab"),
+                        "note": step.get("note", ""),
+                    }
+                )
+        symptoms.append(
+            {
+                "key": symptom["key"],
+                "title": symptom["title"],
+                "explanation": symptom["explanation"],
+                "steps": steps,
+            }
+        )
+    return {"symptoms": symptoms}
+
+
 def snapshot_for_api(label: str) -> None:
     if not CONFIG.get("snapshot_before_mutation", True):
         return
@@ -1418,6 +1552,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, app_payload())
             elif path == "/api/setup":
                 self.send_json(200, setup_payload())
+            elif path == "/api/troubleshooting":
+                self.send_json(200, troubleshooting_payload())
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
