@@ -15,6 +15,7 @@ import threading
 import time
 import uuid
 import webbrowser
+import zipfile
 from collections import deque
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -46,7 +47,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "0.7.1"
+APP_VERSION = "0.8.0"
 RELEASE_CHANNEL = "preview"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -770,6 +771,59 @@ def report_payload(map_filter: str | None) -> dict[str, Any]:
 
     text = redact("\n".join(lines).rstrip() + "\n")
     return {"scope": scope, "generatedAt": generated_at, "maps": selected, "text": text}
+
+
+def backup_dir() -> Path:
+    return ADMIN / "backups"
+
+
+def parse_snapshot_name(name: str) -> dict[str, Any]:
+    base = name[:-4] if name.lower().endswith(".zip") else name
+    match = re.match(r"^(\d{8})-(\d{6})(?:-(.*))?$", base)
+    if not match:
+        return {"label": base or "config", "created": None}
+    date, clock, label = match.group(1), match.group(2), match.group(3)
+    created = f"{date[0:4]}-{date[4:6]}-{date[6:8]}T{clock[0:2]}:{clock[2:4]}:{clock[4:6]}"
+    return {"label": label or "config", "created": created}
+
+
+def snapshots_payload() -> dict[str, Any]:
+    directory = backup_dir()
+    snapshots: list[dict[str, Any]] = []
+    if directory.exists():
+        for path in sorted(directory.glob("*.zip"), key=lambda p: p.stat().st_mtime, reverse=True):
+            stat = path.stat()
+            meta = parse_snapshot_name(path.name)
+            files: int | None = None
+            try:
+                with zipfile.ZipFile(path) as handle:
+                    files = sum(1 for entry in handle.namelist() if entry != "SNAPSHOT.txt")
+            except (OSError, zipfile.BadZipFile):
+                files = None
+            snapshots.append(
+                {
+                    "name": path.name,
+                    "label": meta["label"],
+                    "created": meta["created"],
+                    "modified": dt.datetime.fromtimestamp(stat.st_mtime).isoformat(timespec="seconds"),
+                    "sizeKb": round(stat.st_size / 1024, 1),
+                    "files": files,
+                }
+            )
+    return {"dir": safe_rel(directory), "count": len(snapshots), "snapshots": snapshots}
+
+
+def validate_snapshot_name(payload: dict[str, Any]) -> Path:
+    name = str(payload.get("snapshot") or "").strip()
+    if not name:
+        raise ValueError("This action requires a snapshot name.")
+    if name != Path(name).name or not name.lower().endswith(".zip"):
+        raise ValueError("Invalid snapshot name.")
+    directory = backup_dir().resolve()
+    target = (directory / name).resolve()
+    if not str(target).startswith(str(directory)) or not target.exists():
+        raise ValueError(f"Snapshot not found: {name}")
+    return target
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2042,6 +2096,18 @@ def action_specs() -> dict[str, ActionSpec]:
             timeout=120,
             snapshot=True,
         ),
+        "restore_snapshot": ActionSpec(
+            "Restore config snapshot",
+            "backup",
+            "Overwrite current public-safe configs with a chosen snapshot. Snapshots current state first.",
+            "high",
+            lambda payload, _m: [
+                python_file("snapshot_configs.py", "--restore", str(validate_snapshot_name(payload)), "--yes")
+            ],
+            timeout=240,
+            snapshot=True,
+            confirm="RESTORE",
+        ),
         "stop_dayz_servers": ActionSpec(
             "Stop DayZ server processes",
             "high-risk",
@@ -2382,6 +2448,8 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/report":
                 map_name = str(query.get("map", ["all"])[0]).lower()
                 self.send_json(200, report_payload(map_name))
+            elif path == "/api/snapshots":
+                self.send_json(200, snapshots_payload())
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:

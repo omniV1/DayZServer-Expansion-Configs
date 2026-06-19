@@ -48,6 +48,7 @@
       <button class="tab" data-tab="events" type="button">Events</button>
       <button class="tab" data-tab="missions" type="button">Missions</button>
       <button class="tab" data-tab="reports" type="button">Reports</button>
+      <button class="tab" data-tab="backups" type="button">Backups</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button" data-advanced>Generation</button>
@@ -341,6 +342,25 @@
         <button id="downloadReportButton" type="button" data-tip="Save the report as a .txt file." disabled>Download .txt</button>
       </div>
       <pre id="reportOutput">Choose a scope and select Generate Report.</pre>
+    </section>
+
+    <section id="backups" class="view">
+      <div class="section-title">
+        <h2>Backups &amp; Restore</h2>
+        <button id="reloadSnapshotsButton" type="button" data-tip="Reload the list of local config snapshots.">Reload</button>
+      </div>
+      <div class="notice small-help">
+        Snapshots are local zip backups of public-safe configs (saved under the ignored
+        <code>admin/backups</code>). One is created automatically before every guarded change, and you
+        can make one anytime. <strong>Tip:</strong> create a snapshot before a scheduled restart or any
+        big edit so you always have a clean point to return to. Restoring overwrites current configs and
+        snapshots the current state first; restart affected maps afterward.
+      </div>
+      <div class="action-row events-toolbar">
+        <button data-action="snapshot_configs" data-map-source="" class="primary" type="button" data-tip="Create a snapshot of current public-safe configs now.">Create Snapshot Now</button>
+      </div>
+      <p class="muted recommended-note" data-simple-only>Restoring a snapshot is an Advanced-mode action. Switch to Advanced (top bar) to enable Restore.</p>
+      <div id="snapshotList">Loading snapshots...</div>
     </section>
 
     <section id="maintenance" class="view">

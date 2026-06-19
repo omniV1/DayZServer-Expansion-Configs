@@ -181,6 +181,10 @@ body[data-mode="simple"] [data-advanced] {
   display: none !important;
 }
 
+body[data-mode="advanced"] [data-simple-only] {
+  display: none !important;
+}
+
 .theme-toggle .theme-icon {
   font-size: 14px;
   line-height: 1;

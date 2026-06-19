@@ -12,6 +12,7 @@ const state = {
   missionsMap: null,
   report: null,
   reportScope: "all",
+  snapshots: null,
   selectedMap: null,
   selectedJob: null,
   pendingSave: null,
@@ -1146,6 +1147,7 @@ function activateTab(name) {
     const map = $("#missionMapSelect")?.value || state.selectedMap;
     if (map && state.missionsMap !== map) loadMissions(map).catch(showError);
   }
+  if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
 }
 
 async function copyOutput() {
@@ -1198,6 +1200,57 @@ function downloadReport() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+}
+
+async function loadSnapshots() {
+  const data = await api("/api/snapshots");
+  state.snapshots = data;
+  renderSnapshots();
+}
+
+function snapshotCard(snapshot) {
+  const when = snapshot.created || snapshot.modified || "";
+  const files = snapshot.files == null ? "?" : snapshot.files;
+  return `
+    <div class="mission-item">
+      <div class="mission-head"><strong>${escapeText(snapshot.label || "config")}</strong> <span class="muted">${escapeText(when)}</span></div>
+      <dl class="kv">
+        <dt>File</dt><dd>${escapeText(snapshot.name)}</dd>
+        <dt>Size</dt><dd>${snapshot.sizeKb} KB</dd>
+        <dt>Files</dt><dd>${files}</dd>
+      </dl>
+      <div class="status-row">
+        <button class="danger" data-advanced data-restore-snapshot="${escapeText(snapshot.name)}" type="button" data-tip="Overwrite current configs with this snapshot. Your current state is snapshotted first. Requires typing RESTORE.">Restore</button>
+      </div>
+    </div>`;
+}
+
+function renderSnapshots() {
+  const container = $("#snapshotList");
+  if (!container) return;
+  const data = state.snapshots;
+  if (!data || !data.snapshots.length) {
+    container.innerHTML = `<p class="muted">No snapshots yet. Use Create Snapshot Now, or one is made automatically before guarded changes.</p>`;
+    return;
+  }
+  container.innerHTML = `<p class="muted">${data.count} snapshot(s) in ${escapeText(data.dir)}. Newest first.</p>${data.snapshots.map(snapshotCard).join("")}`;
+}
+
+async function restoreSnapshot(name) {
+  const confirmText = prompt(
+    `Restore overwrites current configs with this snapshot:\n${name}\n\n` +
+      "Your current state is snapshotted first, and you should restart affected maps afterward.\n\n" +
+      "Type RESTORE to continue:"
+  );
+  if (confirmText !== "RESTORE") return;
+  const job = await api("/api/actions/run", {
+    method: "POST",
+    body: JSON.stringify({ action: "restore_snapshot", snapshot: name, confirm: "RESTORE" }),
+  });
+  state.selectedJob = job.id;
+  $("#jobOutput").textContent = job.output || `Queued restore of ${name}...`;
+  startPolling();
+  await refreshJobs();
 }
 
 const APP_MODES = ["simple", "advanced"];
@@ -1328,6 +1381,12 @@ function bindEvents() {
   $("#generateReportButton").addEventListener("click", () => loadReport().catch(showError));
   $("#copyReportButton").addEventListener("click", () => copyReport().catch(showError));
   $("#downloadReportButton").addEventListener("click", downloadReport);
+  $("#reloadSnapshotsButton").addEventListener("click", () => loadSnapshots().catch(showError));
+  document.body.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-restore-snapshot]");
+    if (!button) return;
+    restoreSnapshot(button.dataset.restoreSnapshot).catch(showError);
+  });
   document.body.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-mission-action]");
     if (!button) return;

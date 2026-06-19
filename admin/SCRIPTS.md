@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.7.1
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 0.8.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
@@ -30,6 +30,8 @@ The **Balance** editor previews before it writes: every Save runs a read-only `/
 The **Events** tab edits a map's `db/events.xml`: vehicles, helicopter crashes, airdrops/crates, and static police/convoy/train events grouped by category, each with an active toggle and nominal/min/max/lifetime fields. Saving uses the same preview-before-save flow and snapshots first.
 
 The **Missions** tab is a mission builder: create repeatable paid contracts (infected clear or AI clear) for any map with a title, payout in Hryvnia, count, and optional item reward. It generates Expansion quest JSON into the map's private `ExpansionMod/Quests` folder using a dedicated 9000-9999 ID range, previews every file first, snapshots, and never overwrites. Restart the map to load new missions. Existing Control Center missions can be edited (payout/active/repeatable, with preview) or removed (typed `REMOVE` confirmation) from the same tab.
+
+The **Backups** tab lists local config snapshots from the ignored `admin/backups` (newest first, with label, timestamp, size, and file count) and can create one on demand. Restoring a snapshot overwrites current public-safe configs and real `serverDZ*.cfg` files; it snapshots the current state first and requires typing `RESTORE`. Restore is a high-risk action, so it only appears in Advanced mode. Restart affected maps after a restore.
 
 ## Map launchers (shared Chernarus mods)
 
