@@ -43,6 +43,8 @@ Risky actions require typed confirmation, guarded edits create a local config sn
 
 ## Screenshots
 
+![Control Center demo](admin/photos/Animation.gif)
+
 ![Control Center home, dark mode](admin/photos/dashboard.png)
 
 | | |
