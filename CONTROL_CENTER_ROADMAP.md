@@ -44,9 +44,20 @@ Bring the operations side on par with full server managers, one versioned slice 
 Go beyond the competition with player intelligence and community integrations, all from local data.
 
 - `v1.4.0` - SHIPPED. Player history + killfeed from `.ADM` logs, with private per-player admin notes.
-- `v1.5.0` - Discord webhooks: server up/down, restart countdowns, killfeed, and admin actions.
-- `v1.6.0` - Crash watchdog: detect a dead/crashed server and auto-relaunch, with alerts.
-- `v1.7.0` - Mod update checker via the Steam Workshop API (flag stale mods; pairs with SteamCMD).
+- `v1.5.0` - SHIPPED. Crash watchdog: per-map keep-alive that auto-relaunches a crashed server, with crash-loop backoff.
+- `v1.6.0` - Mod update checker via the Steam Workshop API (flag stale mods; pairs with SteamCMD).
+- `v1.7.0` - Discord webhooks (optional): server up/down, restart countdowns, killfeed, admin actions.
+
+## v1.5.0 - Crash Watchdog (SHIPPED)
+
+- Per-map keep-alive: a daemon thread (started in `main`) checks every ~30s whether each enabled
+  map's `DayZServer_x64` is running (matched by its `-port=<gamePort>` command line, so a booting
+  server counts) and relaunches it via the `start_map` action after a 2-tick grace period.
+- Crash-loop backoff: a map that restarts 3 times in 10 minutes is paused with a reason until you
+  re-enable it, so a bad config can't hammer the box.
+- State persists to the ignored `local_runtime/control_center/watchdog.json`; endpoints
+  `GET /api/watchdog` and `POST /api/watchdog/set`. A Keep-Alive section on the Restarts tab toggles
+  it per map and shows running/stopped/paused. Verified live: a killed server relaunched in ~60s.
 
 ## v1.4.0 - Player History & Killfeed (SHIPPED)
 

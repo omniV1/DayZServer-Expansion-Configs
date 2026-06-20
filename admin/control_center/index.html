@@ -457,9 +457,20 @@
 
     <section id="schedules" class="view">
       <div class="section-title">
-        <h2>Scheduled Restarts</h2>
-        <button id="reloadSchedulesButton" type="button" data-tip="Reload schedules and next-restart times.">Reload</button>
+        <h2>Keep Servers Up</h2>
+        <button id="reloadSchedulesButton" type="button" data-tip="Reload keep-alive and schedule status.">Reload</button>
       </div>
+
+      <h3>Auto-Restart on Crash (Keep-Alive)</h3>
+      <div class="notice small-help">
+        Turn on keep-alive for a map and the Control Center will <strong>relaunch it automatically if it
+        crashes or stops unexpectedly</strong> (checked about every 30 seconds, after a short grace period).
+        If a map crash-loops (3 restarts in 10 minutes) it pauses so you can fix the cause first. To take a
+        map offline, turn keep-alive off, then stop it. Runs while this app is open.
+      </div>
+      <div id="watchdogList" class="events-editor">Loading keep-alive status...</div>
+
+      <h3>Scheduled Restarts</h3>
       <div class="notice small-help">
         Automatically restart each map on an interval, with in-game countdown warnings sent over RCON
         before each restart (enable RCON for that map first, on the Live Admin tab). Warnings are

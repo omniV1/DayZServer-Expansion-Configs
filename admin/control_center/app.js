@@ -14,6 +14,7 @@ const state = {
   reportScope: "all",
   snapshots: null,
   schedules: null,
+  watchdog: null,
   updates: null,
   players: null,
   killfeed: null,
@@ -1191,7 +1192,10 @@ function activateTab(name) {
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
   if (name === "rcon") loadRconStatus().catch(showError);
   if (name === "players") loadPlayers().catch(showError);
-  if (name === "schedules") loadSchedules().catch(showError);
+  if (name === "schedules") {
+    loadWatchdog().catch(showError);
+    loadSchedules().catch(showError);
+  }
   if (name === "updates") loadUpdatesStatus().catch(showError);
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
@@ -1425,6 +1429,47 @@ async function loadSchedules() {
   const data = await api("/api/schedules");
   state.schedules = data;
   renderSchedules();
+}
+
+async function loadWatchdog() {
+  const data = await api("/api/watchdog");
+  state.watchdog = data;
+  renderWatchdog();
+}
+
+function renderWatchdog() {
+  const container = $("#watchdogList");
+  if (!container || !state.watchdog) return;
+  container.innerHTML = state.watchdog.maps
+    .map((w) => {
+      const status = w.paused
+        ? `<span class="pill bad">paused</span>`
+        : w.running
+          ? `<span class="pill ok">running</span>`
+          : `<span class="pill">stopped</span>`;
+      const detail = w.paused
+        ? `<span class="muted">${escapeText(w.pausedReason || "")}</span>`
+        : w.lastAction
+          ? `<span class="muted">${escapeText(w.lastAction)} ${escapeText(w.lastActionAt || "")}</span>`
+          : "";
+      return `
+        <div class="events-row" style="grid-template-columns: minmax(160px,2fr) 120px 60px minmax(0,3fr);">
+          <span><strong>${escapeText(w.title)}</strong></span>
+          <span>${status}</span>
+          <label class="event-active"><input type="checkbox" data-watchdog-map="${escapeText(w.map)}" ${w.enabled ? "checked" : ""}></label>
+          <span>${detail}</span>
+        </div>`;
+    })
+    .join("");
+}
+
+async function setWatchdog(map, enabled) {
+  const data = await api("/api/watchdog/set", {
+    method: "POST",
+    body: JSON.stringify({ map, enabled }),
+  });
+  state.watchdog = data;
+  renderWatchdog();
 }
 
 function renderSchedules() {
@@ -1695,7 +1740,14 @@ function bindEvents() {
     const button = event.target.closest("button[data-note-save]");
     if (button) savePlayerNote(button.dataset.noteSave).catch(showError);
   });
-  $("#reloadSchedulesButton").addEventListener("click", () => loadSchedules().catch(showError));
+  $("#reloadSchedulesButton").addEventListener("click", () => {
+    loadWatchdog().catch(showError);
+    loadSchedules().catch(showError);
+  });
+  document.body.addEventListener("change", (event) => {
+    const toggle = event.target.closest("input[data-watchdog-map]");
+    if (toggle) setWatchdog(toggle.dataset.watchdogMap, toggle.checked).catch(showError);
+  });
   $("#reloadUpdatesButton").addEventListener("click", () => loadUpdatesStatus().catch(showError));
   $("#saveSteamUsernameButton").addEventListener("click", () => saveSteamUsername().catch(showError));
   document.body.addEventListener("click", (event) => {

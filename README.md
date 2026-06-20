@@ -33,6 +33,7 @@ The control center binds to `127.0.0.1` by default, exposes no arbitrary shell e
 - **Scheduled Restarts** — per-map automatic restarts with in-game RCON countdown warnings.
 - **Updates (SteamCMD)** — install SteamCMD, log in once, and update the server and Workshop mods.
 - **Players & Killfeed** — player history (playtime, K/D, sessions) and a killfeed from the `.ADM` logs, with private admin notes.
+- **Crash Watchdog** — per-map keep-alive that auto-relaunches a server if it crashes, with crash-loop protection.
 - **Fix Problems** — symptom-based troubleshooting with safe checks first, high-risk actions last.
 - **Reports** — public-safe, redacted support report (copy or download).
 - **Backups** — browse snapshots and restore (guarded, typed confirmation, snapshot-first).

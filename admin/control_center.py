@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.4.0"
+APP_VERSION = "1.5.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -390,6 +390,33 @@ def dayz_process_count() -> int:
         return int(proc.stdout.strip() or "0")
     except ValueError:
         return 0
+
+
+def running_server_game_ports() -> set[int]:
+    """Game ports of running DayZServer_x64 processes, read from their -port= command line.
+
+    This sees a server the instant it starts (before UDP ports bind), unlike netstat.
+    """
+    try:
+        proc = subprocess.run(
+            [
+                "powershell",
+                "-NoProfile",
+                "-Command",
+                "Get-CimInstance Win32_Process -Filter \"Name='DayZServer_x64.exe'\" | "
+                "ForEach-Object { $_.CommandLine }",
+            ],
+            cwd=ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            timeout=15,
+            creationflags=CREATE_NO_WINDOW,
+        )
+    except Exception:
+        return set()
+    return {int(match.group(1)) for match in re.finditer(r"-port=(\d+)", proc.stdout or "")}
 
 
 def log_status(profile_dir: str, max_lines: int = 800) -> dict[str, Any]:
@@ -1136,6 +1163,147 @@ class RestartScheduler:
 
 
 SCHEDULER = RestartScheduler()
+
+
+WATCHDOG_TICK_SECONDS = 30
+WATCHDOG_GRACE_TICKS = 2  # confirm down across two ticks before relaunching (covers restart gaps)
+WATCHDOG_MAX_RESTARTS = 3
+WATCHDOG_WINDOW_SECONDS = 600
+
+
+class Watchdog:
+    def __init__(self) -> None:
+        self.lock = threading.Lock()
+        self.enabled: dict[str, bool] = {}
+        self.runtime: dict[str, dict[str, Any]] = {}
+        self.thread: threading.Thread | None = None
+        self.started = False
+
+    def path(self) -> Path:
+        return RUNTIME / "watchdog.json"
+
+    def load(self) -> None:
+        data = read_json(self.path(), {"maps": {}})
+        maps = data.get("maps", {}) if isinstance(data, dict) else {}
+        with self.lock:
+            self.enabled = {name: bool(entry.get("enabled")) for name, entry in maps.items()}
+
+    def _save_locked(self) -> None:
+        write_json(self.path(), {"maps": {name: {"enabled": value} for name, value in self.enabled.items()}})
+
+    def _rt(self, name: str) -> dict[str, Any]:
+        return self.runtime.setdefault(
+            name, {"down": 0, "restarts": [], "paused": False, "pausedReason": None, "lastAction": None, "lastActionAt": None}
+        )
+
+    def payload(self) -> dict[str, Any]:
+        maps = map_configs()
+        ports = running_server_game_ports()
+        now = time.time()
+        with self.lock:
+            items = []
+            for name in maps:
+                rt = self.runtime.get(name, {})
+                game = int(maps[name].get("port", 0) or 0)
+                items.append(
+                    {
+                        "map": name,
+                        "title": maps[name].get("title", name),
+                        "enabled": self.enabled.get(name, False),
+                        "running": game in ports,
+                        "paused": rt.get("paused", False),
+                        "pausedReason": rt.get("pausedReason"),
+                        "recentRestarts": len([t for t in rt.get("restarts", []) if t > now - WATCHDOG_WINDOW_SECONDS]),
+                        "lastAction": rt.get("lastAction"),
+                        "lastActionAt": rt.get("lastActionAt"),
+                    }
+                )
+        return {"maps": items, "now": now, "watchdogRunning": self.started}
+
+    def set_enabled(self, payload: dict[str, Any]) -> dict[str, Any]:
+        name = rcon_map(payload)
+        enabled = bool(payload.get("enabled"))
+        with self.lock:
+            self.enabled[name] = enabled
+            rt = self._rt(name)
+            if enabled:
+                rt["paused"] = False
+                rt["pausedReason"] = None
+                rt["down"] = 0
+            self._save_locked()
+        if enabled:
+            game = int(map_configs()[name].get("port", 0) or 0)
+            if game not in running_server_game_ports():
+                self._relaunch(name, immediate=True)
+        return self.payload()
+
+    def _relaunch(self, name: str, immediate: bool = False) -> None:
+        try:
+            start_action({"action": "start_map", "map": name})
+        except Exception as exc:  # noqa: BLE001 - keep the watchdog alive on a failed start.
+            log_message(f"[watchdog] start {name} failed: {exc}")
+            return
+        with self.lock:
+            rt = self._rt(name)
+            rt["restarts"].append(time.time())
+            rt["down"] = 0
+            rt["lastAction"] = "started (keep-alive on)" if immediate else "relaunched after crash"
+            rt["lastActionAt"] = dt.datetime.now().isoformat(timespec="seconds")
+        log_message(f"[watchdog] {'started' if immediate else 'relaunched'} {name}")
+
+    def tick(self) -> None:
+        with self.lock:
+            enabled_maps = [name for name, value in self.enabled.items() if value]
+        if not enabled_maps:
+            return
+        ports = running_server_game_ports()
+        maps = map_configs()
+        to_relaunch: list[str] = []
+        now = time.time()
+        for name in enabled_maps:
+            if name not in maps:
+                continue
+            game = int(maps[name].get("port", 0) or 0)
+            with self.lock:
+                rt = self._rt(name)
+                if game in ports:
+                    rt["down"] = 0
+                    continue
+                if rt.get("paused"):
+                    continue
+                rt["down"] += 1
+                if rt["down"] < WATCHDOG_GRACE_TICKS:
+                    continue
+                rt["restarts"] = [t for t in rt["restarts"] if t > now - WATCHDOG_WINDOW_SECONDS]
+                if len(rt["restarts"]) >= WATCHDOG_MAX_RESTARTS:
+                    rt["paused"] = True
+                    rt["pausedReason"] = (
+                        f"Paused after {WATCHDOG_MAX_RESTARTS} restarts in "
+                        f"{WATCHDOG_WINDOW_SECONDS // 60} min. Fix the crash, then re-enable keep-alive."
+                    )
+                    log_message(f"[watchdog] {name} crash-looped; paused")
+                    continue
+            to_relaunch.append(name)
+        for name in to_relaunch:
+            self._relaunch(name)
+
+    def _run(self) -> None:
+        while True:
+            try:
+                self.tick()
+            except Exception as exc:  # noqa: BLE001 - never let the watchdog thread die.
+                log_message(f"[watchdog] tick error: {exc}")
+            time.sleep(WATCHDOG_TICK_SECONDS)
+
+    def start(self) -> None:
+        self.load()
+        if self.thread is None:
+            self.thread = threading.Thread(target=self._run, daemon=True)
+            self.thread.start()
+            self.started = True
+
+
+WATCHDOG = Watchdog()
 
 
 DAYZ_SERVER_APPID = "223350"
@@ -3138,6 +3306,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, SCHEDULER.payload())
             elif path == "/api/updates/status":
                 self.send_json(200, updates_status_payload())
+            elif path == "/api/watchdog":
+                self.send_json(200, WATCHDOG.payload())
             elif path == "/api/players":
                 map_name = str(query.get("map", [""])[0]).lower()
                 self.send_json(200, players_payload(map_name))
@@ -3176,6 +3346,7 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/schedules/remove",
                 "/api/updates/settings",
                 "/api/players/note",
+                "/api/watchdog/set",
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
@@ -3218,6 +3389,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, save_updates_settings(payload))
             elif parsed.path == "/api/players/note":
                 self.send_json(200, save_player_note(payload))
+            elif parsed.path == "/api/watchdog/set":
+                self.send_json(200, WATCHDOG.set_enabled(payload))
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())
@@ -3315,6 +3488,7 @@ def main() -> int:
         safe_print(f"Missing {STATIC}")
         return 1
     SCHEDULER.start()
+    WATCHDOG.start()
     server = ThreadingHTTPServer((host, port), Handler)
     url = f"http://{host}:{port}/"
     safe_print(f"DayZ Server Control Center running at {url}")

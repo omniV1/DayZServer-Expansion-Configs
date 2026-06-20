@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.4.0
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.5.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
@@ -37,7 +37,7 @@ The **Players** tab reads the server's `.ADM` admin logs (newest ~25 files per m
 
 The **Updates** tab wraps `admin/steamcmd_update.ps1` for SteamCMD updates. **Install SteamCMD** downloads it into the ignored `local_runtime/steamcmd` and self-updates (no login, captured output). **Open Steam Login**, **Update Server** (app `223350`, with `+force_install_dir` = server root), and **Update Map Mods** (Workshop app `221100`, IDs from `map_workshop_catalog.json`) each open a visible SteamCMD console — interactive login/2FA happens there and SteamCMD caches the session; no Steam password is ever stored or passed. The Steam username is saved locally in the user settings file. Stop servers before updating server files; after a mod update, run Sync Workshop mods to copy them into the root.
 
-The **Restarts** tab schedules automatic per-map restarts with in-game countdown warnings. Each schedule stores an interval (hours) and warning offsets (minutes-before) in the ignored `local_runtime/control_center/schedules.json`. A background thread (started in `main`) ticks every 20s: it sends `say` warnings over RCON at each offset (best-effort; needs RCON enabled for that map) and runs `restart_map` at the interval, then re-arms the next cycle. Schedules only run while the app is open. Decision logic is the pure `schedule_due_actions()` function.
+The **Restarts** tab also hosts the crash **watchdog**: enable keep-alive per map and a daemon thread (started in `main`) checks every ~30s whether the map's `DayZServer_x64` is running (by its `-port=` command line, so booting servers count) and relaunches it via `start_map` after a 2-tick grace. Crash-loop backoff pauses a map after 3 restarts in 10 min. State persists to the ignored `local_runtime/control_center/watchdog.json`; endpoints `GET /api/watchdog`, `POST /api/watchdog/set`. The tab schedules automatic per-map restarts with in-game countdown warnings. Each schedule stores an interval (hours) and warning offsets (minutes-before) in the ignored `local_runtime/control_center/schedules.json`. A background thread (started in `main`) ticks every 20s: it sends `say` warnings over RCON at each offset (best-effort; needs RCON enabled for that map) and runs `restart_map` at the interval, then re-arms the next cycle. Schedules only run while the app is open. Decision logic is the pure `schedule_due_actions()` function.
 
 The **Live Admin** tab is BattlEye RCON moderation (`admin/rcon_client.py`). **Enable RCON** writes a generated password + per-map RCon port into the map's private `<profile>/BattlEye/battleye/BEServer_x64.cfg` (DayZ resolves `-BEpath` under the profile, and BattlEye consumes the master into `BEServer_x64_active_*.cfg` on boot, which the app also reads back). After enabling, restart the map; RCON answers ~20-30s after boot. Then list players, broadcast (`say`), kick, or ban (Advanced-mode only). The RCON password lives only in the ignored profile BattlEye folder and is redacted from all output. RCon ports default to game port + 4, unique per map so several servers can expose RCON at once.
 
