@@ -23,6 +23,8 @@ python admin\control_center.py --open-browser
 
 Desktop users can run `DayZServerControlCenter.exe` from a release zip — no Python needed. Download the latest from [GitHub Releases](https://github.com/omniV1/DayZServer-Expansion-Configs/releases/latest). On first launch it auto-detects common DayZServer paths or asks for the folder containing `admin\map_launch.json`.
 
+> **First run:** Windows SmartScreen may say "Windows protected your PC" because this is a new open-source app — click **More info → Run anyway**. It is local-only (`127.0.0.1`, no public ports), built from the code in this repo, and each release ships a `.sha256` checksum you can verify. See [QUICKSTART.md](QUICKSTART.md#why-windows-may-warn-you-and-why-it-is-safe) for details.
+
 The control center binds to `127.0.0.1` by default, exposes no arbitrary shell endpoint, and wraps only allowlisted scripts. Features:
 
 - **Start Here / Setup** — first-run wizard, glossary, and a "you're ready" state for fresh installs.

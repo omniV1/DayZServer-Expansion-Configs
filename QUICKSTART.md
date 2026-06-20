@@ -57,6 +57,26 @@ The control center is optional, but it is the easiest first stop: it lists maps,
 
 For release builds, download and run `DayZServerControlCenter.exe`; it opens the same local dashboard and asks for your DayZServer folder if needed.
 
+### Why Windows may warn you (and why it is safe)
+
+The desktop release is a new, independent open-source app, so Windows SmartScreen may show **"Windows protected your PC"** the first time you run it. This is the normal warning for any app that has not yet built download reputation — it is **not** a virus alert.
+
+To run it: click **More info**, then **Run anyway**.
+
+Why you can trust it:
+
+- **Open source** — the exe is built from the Python code in this repo (`admin/control_center.py` + `admin/control_center/`). You can read exactly what it does, or run the script directly with `python admin\control_center.py` instead of the exe.
+- **Local only** — it binds to `127.0.0.1`, opens no public ports, and runs only an allowlisted set of admin scripts. Nothing is uploaded; the one optional internet call (the Workshop mod-update check) happens only when you click the button.
+- **Verifiable download** — each release zip ships with a `.sha256` checksum. Confirm your download matches before running:
+
+  ```powershell
+  Get-FileHash .\DayZServerControlCenter-<version>-windows.zip -Algorithm SHA256
+  ```
+
+  Compare the printed hash to the `.sha256` file on the release page.
+
+The warning fades on its own as more people download and run the app. Signed releases may come later.
+
 `check_map_launch.ps1` should report config, mission, and mod folders present for the maps you intend to run.
 
 ## 5. Generate Or Refresh Gameplay

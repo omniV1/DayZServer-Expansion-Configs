@@ -1,6 +1,15 @@
 # Build the DayZ Server Control Center Windows executable with PyInstaller.
+#
+# Optional Authenticode signing: pass -CertThumbprint <thumbprint> to sign the
+# exe with a code-signing certificate already installed in your certificate store
+# (this is how hardware-token / cloud certs like Certum or an EV cert present
+# themselves). Requires signtool.exe from the Windows SDK on PATH. Without a
+# thumbprint the build is unsigned, which is fine for open-source distribution -
+# see the "Why Windows may warn you" notes in README.md / QUICKSTART.md.
 param(
-    [string]$Version = '1.6.1'
+    [string]$Version = '1.6.2',
+    [string]$CertThumbprint = '',
+    [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -41,6 +50,22 @@ if ($LASTEXITCODE -ne 0) {
     throw 'PyInstaller build failed.'
 }
 
+$exePath = Join-Path $OutputDir 'DayZServerControlCenter.exe'
+
+# Optional Authenticode signing (only when a cert thumbprint is supplied).
+if ($CertThumbprint) {
+    $signtool = (Get-Command signtool.exe -ErrorAction SilentlyContinue).Source
+    if (-not $signtool) {
+        throw 'signtool.exe not found on PATH. Install the Windows SDK or omit -CertThumbprint.'
+    }
+    Write-Host "Signing $exePath with certificate $CertThumbprint"
+    & $signtool sign /sha1 $CertThumbprint /fd sha256 /tr $TimestampUrl /td sha256 $exePath
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Code signing failed.'
+    }
+    & $signtool verify /pa $exePath | Out-Null
+}
+
 $readme = @"
 DayZ Server Control Center $Version
 
@@ -62,4 +87,11 @@ if (Test-Path $zip) {
 }
 Compress-Archive -Path (Join-Path $OutputDir '*') -DestinationPath $zip -Force
 
+# Publish a SHA-256 checksum next to the zip so downloaders can verify the file.
+$hash = (Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLower()
+$sha256Path = "$zip.sha256"
+Set-Content -LiteralPath $sha256Path -Value "$hash  DayZServerControlCenter-$Version-windows.zip" -Encoding ASCII
+
 Write-Host "Built $zip"
+Write-Host "SHA-256: $hash"
+Write-Host "Checksum file: $sha256Path"
