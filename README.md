@@ -41,6 +41,38 @@ The control center binds to `127.0.0.1` by default, exposes no arbitrary shell e
 
 Risky actions require typed confirmation, guarded edits create a local config snapshot first, and nothing private (passwords, Steam IDs, logs, storage, profiles) is ever exposed or tracked.
 
+## Screenshots
+
+![Control Center dashboard](docs/screenshots/dashboard.png)
+
+| | |
+|---|---|
+| ![Map detail and server controls](docs/screenshots/map-detail.png) | ![Live Admin RCON](docs/screenshots/rcon.png) |
+| ![Players and killfeed](docs/screenshots/players.png) | ![Workshop mod update check](docs/screenshots/mod-updates.png) |
+
+## Why This Over CFTools, BattleMetrics, or a Host Panel
+
+Most DayZ admin tools are cloud services that read your server from the outside. This runs **on your machine**, drives the server directly, and edits the actual config files — so it can do setup and tuning the cloud tools can't, with no subscription and nothing leaving your PC.
+
+| | This Control Center | CFTools / BattleMetrics | Host web panels |
+|---|---|---|---|
+| Price | Free, open-source (MIT) | Paid tiers / per-server | Tied to a paid host |
+| Runs | Locally (`127.0.0.1`), your data stays home | Cloud SaaS | Host's cloud |
+| Multi-map setup & launch | ✅ Guided, data-driven | ❌ | Partial |
+| Edits loot / AI / events / economy | ✅ Guided editors, preview + snapshot | ❌ Read/moderate only | ❌ |
+| Mission/quest builder | ✅ | ❌ | ❌ |
+| BattlEye RCON moderation | ✅ | ✅ | Usually ✅ |
+| Scheduled restarts + warnings | ✅ | ✅ (paid) | Usually ✅ |
+| SteamCMD server/mod updates | ✅ | ❌ | Usually ✅ |
+| Workshop mod-update checker | ✅ | ❌ | ❌ |
+| Crash watchdog / keep-alive | ✅ | Partial (paid) | Usually ✅ |
+| Player history + killfeed | ✅ From your `.ADM` logs | ✅ (cloud) | Partial |
+| Backups + one-click restore | ✅ Snapshot-first | ❌ | Partial |
+| Beginner-friendly (wizard, tooltips, Simple mode) | ✅ | ❌ | Varies |
+| Your data leaves your PC | ❌ Never | ✅ | ✅ |
+
+The trade-off is honest: cloud tools give you remote access from anywhere and run without your PC on. This gives you **full local control, deep config editing, and zero cost or data sharing** — ideal for self-hosted and home servers.
+
 ## Support This Project
 
 The Control Center is free and open-source (MIT licensed) — use it, fork it, share it. If it saved you time setting up or running your DayZ server, you can support continued development:

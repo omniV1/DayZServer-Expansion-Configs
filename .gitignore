@@ -297,7 +297,12 @@ addons/
 appcache/
 battleye/
 config/
-docs/
+# Ignore the DayZ runtime docs/ contents, but keep our README screenshots folder.
+# (Re-include the dir first, then ignore its contents, then allow screenshots.)
+!docs/
+docs/*
+!docs/screenshots/
+!docs/screenshots/**
 dta/
 keys/
 logs/
