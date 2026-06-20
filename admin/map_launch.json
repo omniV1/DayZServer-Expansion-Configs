@@ -114,6 +114,16 @@
       "cpu": 2,
       "extra_mods": ["@Alteria"],
       "server_mods": []
+    },
+    "winterchernarus": {
+      "title": "Owens DayZ Winter Chernarus Server",
+      "config": "serverDZ_WinterChernarus.cfg",
+      "port": 3402,
+      "steam_query_port": 27027,
+      "profiles_dir": "profiles_winterchernarus",
+      "cpu": 2,
+      "extra_mods": ["@Winter Chernarus V2"],
+      "server_mods": []
     }
   }
 }
