@@ -419,6 +419,44 @@ MAP_CONFIGS: dict[str, MapConfig] = {
         estimate_y=_y_chernarus,
         gear_theme="temperate",
     ),
+    "winterchernarus": MapConfig(
+        key="winterchernarus",
+        mission="RegularWinter.chernarusplus",
+        profile="profiles_winterchernarus",
+        teleports_file="Teleports_chernarusplus.json",
+        cache_file="winterchernarus_locations.json",
+        patrol_prefix="WinterChernarusPatrol",
+        town_types=["City", "Village", "Capital"],
+        roaming_types=["City", "Village", "Capital", "Local", "Hill", "Marine", "Airfield", "Military Base", "Camp"],
+        spatial_types=["Airfield", "Military Base", "City", "Capital"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["City", "Capital"],
+        type_radius={
+            "City": 500.0,
+            "Capital": 650.0,
+            "Village": 350.0,
+            "Airfield": 450.0,
+            "Military Base": 400.0,
+            "Local": 200.0,
+            "Hill": 250.0,
+            "Marine": 200.0,
+            "Camp": 280.0,
+        },
+        type_category={
+            "City": "City",
+            "Capital": "Capital",
+            "Village": "Village",
+            "Airfield": "Local",
+            "Military Base": "Local",
+            "Local": "Local",
+            "Hill": "Local",
+            "Marine": "Local",
+            "Camp": "Local",
+        },
+        patrol_hubs=[],
+        estimate_y=_y_chernarus,
+        gear_theme="winter",
+    ),
     "deerisle": MapConfig(
         key="deerisle",
         mission="empty.deerisle",
@@ -1497,14 +1535,14 @@ def apply_gear_only(cfg: MapConfig) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build Expansion spawn + AI for custom maps")
-    ap.add_argument("maps", nargs="*", help="namalsk enoch sakhal takistan chernarus deerisle banov esseker rostow iztek alteria")
+    ap.add_argument("maps", nargs="*", help="namalsk enoch sakhal takistan chernarus winterchernarus deerisle banov esseker rostow iztek alteria")
     ap.add_argument("--all", action="store_true", help="Build all configured maps")
     ap.add_argument("--imported", action="store_true", help="Build imported Workshop maps only after COT teleports have been exported")
     ap.add_argument("--gear-only", action="store_true", help="Only update StartingClothing/StartingGear")
     ap.add_argument("--ai-only", action="store_true", help="Boost AI on existing patrols (Chernarus); custom maps use full build")
     args = ap.parse_args()
 
-    all_maps = ["namalsk", "enoch", "sakhal", "takistan", "chernarus"]
+    all_maps = ["namalsk", "enoch", "sakhal", "takistan", "chernarus", "winterchernarus"]
     imported_maps = ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"]
     if args.all:
         keys = list(MAP_CONFIGS.keys()) if args.gear_only else all_maps
