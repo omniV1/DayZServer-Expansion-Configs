@@ -45,12 +45,25 @@ Risky actions require typed confirmation, guarded edits create a local config sn
 
 ![Control Center demo](admin/photos/Animation.gif)
 
+**Home — dark mode**
+
 ![Control Center home, dark mode](admin/photos/dashboard.png)
 
-| | |
-|---|---|
-| ![Map detail and server controls](admin/photos/MapDetail.png) | ![Live Admin RCON](admin/photos/rcon.png) |
-| ![Players and killfeed](admin/photos/players.png) | ![Workshop mod update check](admin/photos/mods-updates.png) |
+**Map Detail — per-map server controls and log triage**
+
+![Map detail and server controls](admin/photos/MapDetail.png)
+
+**Live Admin — BattlEye RCON moderation**
+
+![Live Admin RCON](admin/photos/rcon.png)
+
+**Players & Killfeed — from your `.ADM` logs**
+
+![Players and killfeed](admin/photos/players.png)
+
+**Updates — Workshop mod update check**
+
+![Workshop mod update check](admin/photos/mods-updates.png)
 
 ## Why This Over CFTools, BattleMetrics, or a Host Panel
 
