@@ -31,7 +31,7 @@ The control center binds to `127.0.0.1` by default, exposes no arbitrary shell e
 - **Balance / Events / Missions** — guided editors for loot, AI, zombies, animals, world events, and a mission builder for repeatable paid contracts. Every save previews first and snapshots.
 - **Live Admin (RCON)** — BattlEye RCON moderation: per-map enable, live player list, broadcast, kick/ban.
 - **Scheduled Restarts** — per-map automatic restarts with in-game RCON countdown warnings.
-- **Updates (SteamCMD)** — install SteamCMD, log in once, and update the server and Workshop mods.
+- **Updates (SteamCMD)** — install SteamCMD, log in once, and update the server and Workshop mods, plus an on-demand Workshop check that flags which installed mods have a newer version.
 - **Players & Killfeed** — player history (playtime, K/D, sessions) and a killfeed from the `.ADM` logs, with private admin notes.
 - **Crash Watchdog** — per-map keep-alive that auto-relaunches a server if it crashes, with crash-loop protection.
 - **Fix Problems** — symptom-based troubleshooting with safe checks first, high-risk actions last.

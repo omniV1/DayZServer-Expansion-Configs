@@ -45,8 +45,23 @@ Go beyond the competition with player intelligence and community integrations, a
 
 - `v1.4.0` - SHIPPED. Player history + killfeed from `.ADM` logs, with private per-player admin notes.
 - `v1.5.0` - SHIPPED. Crash watchdog: per-map keep-alive that auto-relaunches a crashed server, with crash-loop backoff.
-- `v1.6.0` - Mod update checker via the Steam Workshop API (flag stale mods; pairs with SteamCMD).
+- `v1.6.0` - SHIPPED. Mod update checker via the Steam Workshop API (flag stale mods; pairs with SteamCMD).
 - `v1.7.0` - Discord webhooks (optional): server up/down, restart countdowns, killfeed, admin actions.
+
+## v1.6.0 - Workshop Mod Update Checker (SHIPPED)
+
+- Reads every `@*/meta.cpp` in the server root for its `publishedid` (Workshop id) and `name`, and
+  takes the mod folder's newest mtime as the local "installed" date (meta.cpp's `timestamp` field is a
+  DayZ-internal value, not unix epoch, so it is not used).
+- On demand (an explicit "Check Workshop for Updates" button - this is the only part of the app that
+  reaches the internet) it queries Steam's public, no-key
+  `ISteamRemoteStorage/GetPublishedFileDetails` endpoint via stdlib `urllib`, in chunks of 25 (the API
+  rejects large batches), and flags any mod whose Workshop `time_updated` is newer than the local folder.
+- Mods with `publishedid 0` (local/non-Workshop) are shown as "Local mod" and never queried. Network and
+  parse errors surface as a friendly message instead of failing.
+- Endpoint `GET /api/mods/updates?check=1`; a "Mod Update Check" panel folded into the Updates tab lists
+  each mod with its local date, Workshop date, and an update badge plus a count. Found updates pair with
+  the existing SteamCMD **Update Map Mods** action. Verified live against Steam (54 mods scanned).
 
 ## v1.5.0 - Crash Watchdog (SHIPPED)
 

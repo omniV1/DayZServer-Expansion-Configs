@@ -16,6 +16,7 @@ const state = {
   schedules: null,
   watchdog: null,
   updates: null,
+  modUpdates: null,
   players: null,
   killfeed: null,
   playersMap: null,
@@ -1196,7 +1197,10 @@ function activateTab(name) {
     loadWatchdog().catch(showError);
     loadSchedules().catch(showError);
   }
-  if (name === "updates") loadUpdatesStatus().catch(showError);
+  if (name === "updates") {
+    loadUpdatesStatus().catch(showError);
+    loadModUpdates(false).catch(showError);
+  }
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
     startStatusPolling();
@@ -1404,6 +1408,71 @@ function renderUpdatesStatus() {
     `<strong>SteamCMD:</strong> ${data.steamcmdFound ? `installed (${escapeText(data.steamcmdPath)})` : "not installed"}. ` +
     `<strong>Username:</strong> ${data.usernameSet ? escapeText(data.username) : "not set"}. ` +
     `<strong>Server app:</strong> ${escapeText(data.serverAppId)}, ${data.modCount} map mod(s). ${escapeText(data.note)}`;
+}
+
+async function loadModUpdates(checkRemote) {
+  if (checkRemote) {
+    $("#modUpdatesStatus").textContent = "Contacting the Steam Workshop...";
+    const button = $("#checkModUpdatesButton");
+    if (button) button.disabled = true;
+  }
+  try {
+    const data = await api(`/api/mods/updates${checkRemote ? "?check=1" : ""}`);
+    state.modUpdates = data;
+    renderModUpdates();
+  } finally {
+    const button = $("#checkModUpdatesButton");
+    if (button) button.disabled = false;
+  }
+}
+
+function renderModUpdates() {
+  const data = state.modUpdates;
+  if (!data) return;
+  const status = $("#modUpdatesStatus");
+  if (data.remoteError) {
+    status.className = "notice warning-note";
+    status.textContent = data.remoteError;
+  } else if (data.checked) {
+    status.className = "notice";
+    status.innerHTML =
+      data.updateCount > 0
+        ? `<strong>${data.updateCount}</strong> of ${data.modCount} mod(s) have a newer Workshop version. Run <strong>Update Map Mods</strong> above to download them.`
+        : `All ${data.modCount} installed mod(s) are up to date with the Workshop.`;
+  } else {
+    status.className = "notice";
+    status.innerHTML = `Found <strong>${data.modCount}</strong> installed mod(s). Click the button to check the Workshop.`;
+  }
+  const list = $("#modUpdatesList");
+  if (!data.mods || !data.mods.length) {
+    list.innerHTML = `<p class="muted">No <code>@mod</code> folders with a Workshop id were found in the server root.</p>`;
+    return;
+  }
+  list.innerHTML = data.mods
+    .slice()
+    .sort((a, b) => Number(b.updateAvailable) - Number(a.updateAvailable))
+    .map((mod) => {
+      const badge = !mod.workshop
+        ? `<span class="pill">Local mod</span>`
+        : mod.updateAvailable
+        ? `<span class="pill warning">Update available</span>`
+        : mod.checked
+        ? `<span class="pill ok">Up to date</span>`
+        : "";
+      const remote = mod.checked
+        ? `<dt>Workshop updated</dt><dd>${escapeText(mod.remoteUpdatedText || "unknown")}</dd>`
+        : "";
+      const idText = mod.workshop ? `id ${escapeText(mod.publishedId)}` : "not on Workshop";
+      return `
+        <div class="mission-item">
+          <div class="mission-head"><strong>${escapeText(mod.name)}</strong> ${badge} <span class="muted">${idText}</span></div>
+          <dl class="kv">
+            <dt>Installed (local)</dt><dd>${escapeText(mod.localUpdatedText)}</dd>
+            ${remote}
+          </dl>
+        </div>`;
+    })
+    .join("");
 }
 
 async function saveSteamUsername() {
@@ -1749,6 +1818,7 @@ function bindEvents() {
     if (toggle) setWatchdog(toggle.dataset.watchdogMap, toggle.checked).catch(showError);
   });
   $("#reloadUpdatesButton").addEventListener("click", () => loadUpdatesStatus().catch(showError));
+  $("#checkModUpdatesButton").addEventListener("click", () => loadModUpdates(true).catch(showError));
   $("#saveSteamUsernameButton").addEventListener("click", () => saveSteamUsername().catch(showError));
   document.body.addEventListener("click", (event) => {
     const saveBtn = event.target.closest("button[data-sched-save]");

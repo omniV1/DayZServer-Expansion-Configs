@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.5.0"
+APP_VERSION = "1.6.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -1341,6 +1341,165 @@ def catalog_mod_ids() -> list[str]:
                 if wid and str(wid).isdigit():
                     ids.append(str(wid))
     return sorted(set(ids))
+
+
+META_PUBLISHEDID_RE = re.compile(r"publishedid\s*=\s*(\d+)", re.IGNORECASE)
+META_NAME_RE = re.compile(r'name\s*=\s*"([^"]*)"', re.IGNORECASE)
+WORKSHOP_DETAILS_URL = (
+    "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/"
+)
+
+
+def mod_local_mtime(folder: Path) -> float:
+    """Newest modification time of a mod folder (folder + immediate children).
+
+    meta.cpp's `timestamp` field is a DayZ-internal value, not unix epoch, so the
+    folder mtime is the reliable signal for "when was this mod last updated locally".
+    """
+    newest = 0.0
+    try:
+        newest = folder.stat().st_mtime
+    except OSError:
+        return 0.0
+    try:
+        for child in folder.iterdir():
+            try:
+                newest = max(newest, child.stat().st_mtime)
+            except OSError:
+                continue
+    except OSError:
+        pass
+    return newest
+
+
+def scan_installed_mods() -> list[dict[str, Any]]:
+    """Read every `@*/meta.cpp` in the server root for its Workshop publishedid."""
+    mods: list[dict[str, Any]] = []
+    try:
+        entries = sorted(ROOT.glob("@*"))
+    except OSError:
+        entries = []
+    for folder in entries:
+        if not folder.is_dir():
+            continue
+        meta = folder / "meta.cpp"
+        if not meta.exists():
+            continue
+        try:
+            text = meta.read_text(encoding="utf-8-sig", errors="replace")
+        except OSError:
+            continue
+        id_match = META_PUBLISHEDID_RE.search(text)
+        if not id_match:
+            continue
+        name_match = META_NAME_RE.search(text)
+        published_id = id_match.group(1)
+        name = (name_match.group(1).strip() if name_match else "") or folder.name.lstrip("@")
+        mtime = mod_local_mtime(folder)
+        mods.append(
+            {
+                "folder": folder.name,
+                "name": name,
+                "publishedId": published_id,
+                "localUpdated": mtime,
+                "localUpdatedText": (
+                    dt.datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
+                    if mtime
+                    else "unknown"
+                ),
+            }
+        )
+    mods.sort(key=lambda m: m["name"].lower())
+    return mods
+
+
+def fetch_workshop_details(ids: list[str]) -> dict[str, dict[str, Any]]:
+    """Query Steam's public, no-key Workshop API for each published file id."""
+    import urllib.error
+    import urllib.request
+
+    if not ids:
+        return {}
+    details: dict[str, dict[str, Any]] = {}
+    # Steam's no-key endpoint rejects large batches (54 returns HTTP 400; 30 is fine),
+    # so request in chunks and merge the results.
+    chunk_size = 25
+    for start in range(0, len(ids), chunk_size):
+        chunk = ids[start : start + chunk_size]
+        fields = [("itemcount", str(len(chunk)))]
+        for index, wid in enumerate(chunk):
+            fields.append((f"publishedfileids[{index}]", wid))
+        body = "&".join(f"{key}={value}" for key, value in fields).encode("utf-8")
+        request = urllib.request.Request(
+            WORKSHOP_DETAILS_URL,
+            data=body,
+            headers={
+                "Content-Type": "application/x-www-form-urlencoded",
+                "User-Agent": "DayZServerControlCenter/1.0 (+local admin tool)",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=20) as response:  # noqa: S310 - fixed Steam host
+            data = json.loads(response.read().decode("utf-8"))
+        for item in data.get("response", {}).get("publishedfiledetails", []):
+            if isinstance(item, dict) and item.get("publishedfileid"):
+                details[str(item["publishedfileid"])] = item
+    return details
+
+
+def mods_updates_payload(check_remote: bool = False) -> dict[str, Any]:
+    mods = scan_installed_mods()
+    remote_error: str | None = None
+    details: dict[str, dict[str, Any]] = {}
+    # publishedid 0 means a local/non-Workshop mod; Steam rejects it, so never query it.
+    queryable = sorted({m["publishedId"] for m in mods if m["publishedId"] not in {"0", ""}})
+    if check_remote and queryable:
+        try:
+            details = fetch_workshop_details(queryable)
+        except Exception as exc:  # noqa: BLE001 - network/parse errors are user-facing.
+            remote_error = (
+                "Could not reach the Steam Workshop API. Check your internet "
+                f"connection and try again. ({exc})"
+            )
+    update_count = 0
+    for mod in mods:
+        mod["workshop"] = mod["publishedId"] not in {"0", ""}
+        item = details.get(mod["publishedId"]) if details else None
+        mod["checked"] = bool(item) if check_remote else False
+        if item and item.get("result") == 1:
+            remote_updated = int(item.get("time_updated") or 0)
+            mod["title"] = item.get("title") or mod["name"]
+            mod["remoteUpdated"] = remote_updated
+            mod["remoteUpdatedText"] = (
+                dt.datetime.fromtimestamp(remote_updated).strftime("%Y-%m-%d %H:%M")
+                if remote_updated
+                else "unknown"
+            )
+            mod["fileSize"] = int(item.get("file_size") or 0)
+            mod["updateAvailable"] = bool(
+                remote_updated and mod["localUpdated"] and remote_updated > mod["localUpdated"]
+            )
+            if mod["updateAvailable"]:
+                update_count += 1
+        else:
+            mod["remoteUpdated"] = 0
+            mod["remoteUpdatedText"] = ""
+            mod["updateAvailable"] = False
+            if check_remote and item is not None:
+                mod["title"] = mod["name"]
+    return {
+        "mods": mods,
+        "modCount": len(mods),
+        "checked": check_remote and remote_error is None,
+        "updateCount": update_count,
+        "remoteError": remote_error,
+        "note": (
+            "Compares each installed mod's folder date against the Steam Workshop "
+            "\"last updated\" date. Checking contacts Steam over the internet; the rest "
+            "of the app stays local. After an update shows, use the Updates tab to run "
+            "SteamCMD update-mods."
+        ),
+    }
 
 
 def updates_status_payload() -> dict[str, Any]:
@@ -3306,6 +3465,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, SCHEDULER.payload())
             elif path == "/api/updates/status":
                 self.send_json(200, updates_status_payload())
+            elif path == "/api/mods/updates":
+                check = str(query.get("check", ["0"])[0]).lower() in {"1", "true", "yes"}
+                self.send_json(200, mods_updates_payload(check))
             elif path == "/api/watchdog":
                 self.send_json(200, WATCHDOG.payload())
             elif path == "/api/players":

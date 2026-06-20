@@ -517,6 +517,17 @@
           </div>
         </article>
       </div>
+      <div class="section-title" style="margin-top:1.5rem;">
+        <h2>Mod Update Check</h2>
+        <button id="checkModUpdatesButton" type="button" class="primary" data-tip="Contact the Steam Workshop to compare your installed mods against the latest versions.">Check Workshop for Updates</button>
+      </div>
+      <div class="notice small-help">
+        Compares each installed <code>@mod</code> folder's date against its Steam Workshop "last updated"
+        date. This is the only part of the app that reaches the internet, and only when you click the button.
+        If updates are found, use <strong>Update Map Mods</strong> above (SteamCMD) to download them.
+      </div>
+      <div id="modUpdatesStatus" class="notice">Found <span id="modCountText">your installed mods</span>. Click the button to check the Workshop.</div>
+      <div id="modUpdatesList" class="mod-updates-list"></div>
     </section>
 
     <section id="maintenance" class="view">
