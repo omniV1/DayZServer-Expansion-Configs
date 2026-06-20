@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.3.0"
+APP_VERSION = "1.4.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -1223,6 +1223,201 @@ def require_steam_username() -> str:
     if not STEAM_USERNAME_RE.fullmatch(username):
         raise ValueError("Stored Steam username is invalid; set it again.")
     return username
+
+
+ADM_LINE_RE = re.compile(r"^(?P<h>\d{2}):(?P<m>\d{2}):(?P<s>\d{2})\s*\|\s*(?P<rest>.*)$")
+ADM_GUID = r"[A-Za-z0-9+/=]+"
+ADM_CONNECT_RE = re.compile(rf'Player "(?P<name>.*?)" \(id=(?P<guid>{ADM_GUID})(?: pos=<[^>]*>)?\) is connected')
+ADM_DISCONNECT_RE = re.compile(rf'Player "(?P<name>.*?)" \(id=(?P<guid>{ADM_GUID}) pos=<[^>]*>\) has been disconnected')
+ADM_KILL_RE = re.compile(rf'Player "(?P<victim>.*?)" \(DEAD\) \(id=(?P<vguid>{ADM_GUID}) pos=<[^>]*>\) killed by (?P<rest>.*)$')
+ADM_KILLER_PLAYER_RE = re.compile(rf'Player "(?P<name>.*?)" \(id=(?P<guid>{ADM_GUID})')
+ADM_KILLER_AI_RE = re.compile(r'AI "(?P<name>.*?)"')
+ADM_WEAPON_RE = re.compile(r"with (?P<weapon>.+?) from (?P<dist>[\d.]+) meters")
+ADM_FILE_DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
+ADM_MAX_FILES = 25
+
+
+def adm_file_date(path: Path) -> dt.date:
+    match = ADM_FILE_DATE_RE.search(path.name)
+    if match:
+        try:
+            return dt.date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+        except ValueError:
+            pass
+    return dt.date.fromtimestamp(path.stat().st_mtime)
+
+
+def parse_adm_file(path: Path) -> list[dict[str, Any]]:
+    base_date = adm_file_date(path)
+    events: list[dict[str, Any]] = []
+    last_seconds = -1
+    day_offset = 0
+    try:
+        text = path.read_text(encoding="utf-8-sig", errors="replace")
+    except OSError:
+        return events
+    for line in text.splitlines():
+        line_match = ADM_LINE_RE.match(line.strip())
+        if not line_match:
+            continue
+        seconds = int(line_match["h"]) * 3600 + int(line_match["m"]) * 60 + int(line_match["s"])
+        if seconds < last_seconds:
+            day_offset += 1  # log rolled past midnight
+        last_seconds = seconds
+        when = dt.datetime.combine(base_date, dt.time()) + dt.timedelta(days=day_offset, seconds=seconds)
+        rest = line_match["rest"]
+
+        connect = ADM_CONNECT_RE.search(rest)
+        if connect:
+            events.append({"type": "connect", "dt": when, "name": connect["name"], "guid": connect["guid"]})
+            continue
+        disconnect = ADM_DISCONNECT_RE.search(rest)
+        if disconnect:
+            events.append({"type": "disconnect", "dt": when, "name": disconnect["name"], "guid": disconnect["guid"]})
+            continue
+        kill = ADM_KILL_RE.search(rest)
+        if kill:
+            killer_rest = kill["rest"]
+            weapon_match = ADM_WEAPON_RE.search(killer_rest)
+            player_killer = ADM_KILLER_PLAYER_RE.match(killer_rest)
+            ai_killer = ADM_KILLER_AI_RE.match(killer_rest)
+            if player_killer:
+                killer_type, killer_name, killer_guid = "player", player_killer["name"], player_killer["guid"]
+            elif ai_killer:
+                killer_type, killer_name, killer_guid = "ai", ai_killer["name"], None
+            else:
+                killer_type, killer_name, killer_guid = "other", killer_rest.split(" ")[0].strip(), None
+            events.append(
+                {
+                    "type": "kill",
+                    "dt": when,
+                    "victim": kill["victim"],
+                    "vguid": kill["vguid"],
+                    "killerType": killer_type,
+                    "killerName": killer_name,
+                    "killerGuid": killer_guid,
+                    "weapon": weapon_match["weapon"] if weapon_match else None,
+                    "distance": float(weapon_match["dist"]) if weapon_match else None,
+                }
+            )
+    return events
+
+
+def recent_adm_files(map_name: str, limit: int = ADM_MAX_FILES) -> list[Path]:
+    profile = map_profile_dir(map_name)
+    if not profile.exists():
+        return []
+    files = [p for p in profile.glob("*.ADM") if p.is_file()]
+    files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+    return files[:limit]
+
+
+def collect_adm_events(map_name: str) -> list[dict[str, Any]]:
+    events: list[dict[str, Any]] = []
+    for path in recent_adm_files(map_name):
+        events.extend(parse_adm_file(path))
+    events.sort(key=lambda e: e["dt"])
+    return events
+
+
+def players_payload(map_name: str) -> dict[str, Any]:
+    map_name = rcon_map(map_name)
+    events = collect_adm_events(map_name)
+    notes = read_player_notes()
+    players: dict[str, dict[str, Any]] = {}
+    open_session: dict[str, dt.datetime] = {}
+
+    def ensure(guid: str, name: str) -> dict[str, Any]:
+        entry = players.setdefault(
+            guid,
+            {"guid": guid, "name": name, "firstSeen": None, "lastSeen": None,
+             "sessions": 0, "playtimeMinutes": 0.0, "kills": 0, "deaths": 0},
+        )
+        if name:
+            entry["name"] = name
+        return entry
+
+    for ev in events:
+        if ev["type"] == "connect":
+            entry = ensure(ev["guid"], ev["name"])
+            entry["firstSeen"] = entry["firstSeen"] or ev["dt"]
+            entry["lastSeen"] = ev["dt"]
+            open_session[ev["guid"]] = ev["dt"]
+        elif ev["type"] == "disconnect":
+            entry = ensure(ev["guid"], ev["name"])
+            entry["lastSeen"] = ev["dt"]
+            start = open_session.pop(ev["guid"], None)
+            if start:
+                entry["sessions"] += 1
+                entry["playtimeMinutes"] += max(0.0, (ev["dt"] - start).total_seconds() / 60.0)
+        elif ev["type"] == "kill":
+            victim = ensure(ev["vguid"], ev["victim"])
+            victim["deaths"] += 1
+            victim["lastSeen"] = ev["dt"]
+            if ev["killerType"] == "player" and ev.get("killerGuid"):
+                killer = ensure(ev["killerGuid"], ev["killerName"])
+                killer["kills"] += 1
+                killer["lastSeen"] = ev["dt"]
+
+    result = []
+    for guid, entry in players.items():
+        result.append(
+            {
+                "guid": guid,
+                "name": entry["name"],
+                "firstSeen": entry["firstSeen"].isoformat(timespec="seconds") if entry["firstSeen"] else None,
+                "lastSeen": entry["lastSeen"].isoformat(timespec="seconds") if entry["lastSeen"] else None,
+                "sessions": entry["sessions"],
+                "playtimeMinutes": round(entry["playtimeMinutes"], 1),
+                "kills": entry["kills"],
+                "deaths": entry["deaths"],
+                "note": notes.get(guid, ""),
+            }
+        )
+    result.sort(key=lambda p: p["lastSeen"] or "", reverse=True)
+    return {"map": map_name, "players": result, "filesScanned": len(recent_adm_files(map_name))}
+
+
+def killfeed_payload(map_name: str, limit: int = 60) -> dict[str, Any]:
+    map_name = rcon_map(map_name)
+    kills = [ev for ev in collect_adm_events(map_name) if ev["type"] == "kill"]
+    kills.sort(key=lambda e: e["dt"], reverse=True)
+    feed = []
+    for ev in kills[: max(1, min(limit, 200))]:
+        feed.append(
+            {
+                "at": ev["dt"].isoformat(timespec="seconds"),
+                "victim": ev["victim"],
+                "killer": ev["killerName"],
+                "killerType": ev["killerType"],
+                "weapon": ev["weapon"],
+                "distance": round(ev["distance"], 1) if ev["distance"] is not None else None,
+            }
+        )
+    return {"map": map_name, "kills": feed}
+
+
+def player_notes_path() -> Path:
+    return RUNTIME / "player_notes.json"
+
+
+def read_player_notes() -> dict[str, str]:
+    data = read_json(player_notes_path(), {})
+    return data if isinstance(data, dict) else {}
+
+
+def save_player_note(payload: dict[str, Any]) -> dict[str, Any]:
+    guid = str(payload.get("guid") or "").strip()
+    if not guid or not re.fullmatch(ADM_GUID, guid):
+        raise ValueError("A valid player id is required.")
+    note = str(payload.get("note") or "").replace("\r", " ").replace("\n", " ").strip()[:500]
+    notes = read_player_notes()
+    if note:
+        notes[guid] = note
+    else:
+        notes.pop(guid, None)
+    write_json(player_notes_path(), notes)
+    return {"guid": guid, "note": note}
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2943,6 +3138,13 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, SCHEDULER.payload())
             elif path == "/api/updates/status":
                 self.send_json(200, updates_status_payload())
+            elif path == "/api/players":
+                map_name = str(query.get("map", [""])[0]).lower()
+                self.send_json(200, players_payload(map_name))
+            elif path == "/api/killfeed":
+                map_name = str(query.get("map", [""])[0]).lower()
+                limit = int(query.get("limit", ["60"])[0])
+                self.send_json(200, killfeed_payload(map_name, limit))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:
@@ -2973,6 +3175,7 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/schedules/save",
                 "/api/schedules/remove",
                 "/api/updates/settings",
+                "/api/players/note",
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
@@ -3013,6 +3216,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, SCHEDULER.remove_schedule(payload))
             elif parsed.path == "/api/updates/settings":
                 self.send_json(200, save_updates_settings(payload))
+            elif parsed.path == "/api/players/note":
+                self.send_json(200, save_player_note(payload))
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())

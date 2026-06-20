@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.3.0
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.4.0
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
@@ -32,6 +32,8 @@ The **Events** tab edits a map's `db/events.xml`: vehicles, helicopter crashes, 
 The **Missions** tab is a mission builder: create repeatable paid contracts (infected clear or AI clear) for any map with a title, payout in Hryvnia, count, and optional item reward. It generates Expansion quest JSON into the map's private `ExpansionMod/Quests` folder using a dedicated 9000-9999 ID range, previews every file first, snapshots, and never overwrites. Restart the map to load new missions. Existing Control Center missions can be edited (payout/active/repeatable, with preview) or removed (typed `REMOVE` confirmation) from the same tab.
 
 The **Backups** tab lists local config snapshots from the ignored `admin/backups` (newest first, with label, timestamp, size, and file count) and can create one on demand. Restoring a snapshot overwrites current public-safe configs and real `serverDZ*.cfg` files; it snapshots the current state first and requires typing `RESTORE`. Restore is a high-risk action, so it only appears in Advanced mode. Restart affected maps after a restore.
+
+The **Players** tab reads the server's `.ADM` admin logs (newest ~25 files per map) into a local player history and killfeed: per-player names, BE GUID, last seen, sessions, playtime, and kills/deaths (PvP kills attributed by killer GUID; PvE/other deaths counted). `GET /api/players?map=` and `GET /api/killfeed?map=` build the views; `POST /api/players/note` stores a private per-GUID note in the ignored `local_runtime/control_center/player_notes.json`. Nothing here is tracked or sent anywhere.
 
 The **Updates** tab wraps `admin/steamcmd_update.ps1` for SteamCMD updates. **Install SteamCMD** downloads it into the ignored `local_runtime/steamcmd` and self-updates (no login, captured output). **Open Steam Login**, **Update Server** (app `223350`, with `+force_install_dir` = server root), and **Update Map Mods** (Workshop app `221100`, IDs from `map_workshop_catalog.json`) each open a visible SteamCMD console — interactive login/2FA happens there and SteamCMD caches the session; no Steam password is ever stored or passed. The Steam username is saved locally in the user settings file. Stop servers before updating server files; after a mod update, run Sync Workshop mods to copy them into the root.
 

@@ -50,6 +50,7 @@
       <button class="tab" data-tab="reports" type="button">Reports</button>
       <button class="tab" data-tab="backups" type="button">Backups</button>
       <button class="tab" data-tab="rcon" type="button">Live Admin</button>
+      <button class="tab" data-tab="players" type="button">Players</button>
       <button class="tab" data-tab="schedules" type="button">Restarts</button>
       <button class="tab" data-tab="updates" type="button">Updates</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
@@ -421,6 +422,35 @@
             <button id="rconKickButton" class="danger" type="button" data-tip="Disconnect this player from the server now.">Kick</button>
             <button id="rconBanButton" class="danger" data-advanced type="button" data-tip="Ban this player for the given minutes (0 = permanent). Advanced mode only.">Ban</button>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="players" class="view">
+      <div class="section-title">
+        <h2>Players &amp; Killfeed</h2>
+        <label class="select-label">
+          Map
+          <select id="playersMapSelect"></select>
+        </label>
+      </div>
+      <div class="notice small-help">
+        Built from the server's <code>.ADM</code> admin logs: who has played, total playtime, sessions,
+        kills/deaths, and a killfeed. Add a private <strong>note</strong> on any player (saved locally only).
+        This reads your most recent logs for the selected map — reload after a session to refresh.
+      </div>
+      <div class="action-row events-toolbar">
+        <button id="reloadPlayersButton" type="button" data-tip="Re-scan the latest .ADM logs for this map.">Reload</button>
+        <span id="playersMeta" class="muted"></span>
+      </div>
+      <div class="balance-grid">
+        <article class="detail-card">
+          <h3>Players</h3>
+          <div id="playerList">Select a map to load players.</div>
+        </article>
+        <article class="detail-card">
+          <h3>Killfeed</h3>
+          <div id="killfeedList">Select a map to load the killfeed.</div>
         </article>
       </div>
     </section>

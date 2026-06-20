@@ -15,6 +15,9 @@ const state = {
   snapshots: null,
   schedules: null,
   updates: null,
+  players: null,
+  killfeed: null,
+  playersMap: null,
   rcon: null,
   rconMap: null,
   selectedMap: null,
@@ -237,11 +240,13 @@ function renderMapSelect() {
   const missionSelect = $("#missionMapSelect");
   const reportSelect = $("#reportMapSelect");
   const rconSelect = $("#rconMapSelect");
+  const playersSelect = $("#playersMapSelect");
   select.innerHTML = "";
   if (troubleshootSelect) troubleshootSelect.innerHTML = "";
   if (eventsSelect) eventsSelect.innerHTML = "";
   if (missionSelect) missionSelect.innerHTML = "";
   if (rconSelect) rconSelect.innerHTML = "";
+  if (playersSelect) playersSelect.innerHTML = "";
   if (reportSelect) {
     reportSelect.innerHTML = "";
     const all = document.createElement("option");
@@ -283,6 +288,11 @@ function renderMapSelect() {
       const rconOption = option.cloneNode(true);
       if (map.key === (state.rconMap || state.selectedMap)) rconOption.selected = true;
       rconSelect.appendChild(rconOption);
+    }
+    if (playersSelect) {
+      const playersOption = option.cloneNode(true);
+      if (map.key === (state.playersMap || state.selectedMap)) playersOption.selected = true;
+      playersSelect.appendChild(playersOption);
     }
     for (const target of [$("#zombieTargetSelect"), $("#aiTargetSelect")]) {
       const targetOption = option.cloneNode(true);
@@ -1180,6 +1190,7 @@ function activateTab(name) {
   }
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
   if (name === "rcon") loadRconStatus().catch(showError);
+  if (name === "players") loadPlayers().catch(showError);
   if (name === "schedules") loadSchedules().catch(showError);
   if (name === "updates") loadUpdatesStatus().catch(showError);
   if (name === "dashboard") {
@@ -1291,6 +1302,87 @@ async function restoreSnapshot(name) {
   $("#jobOutput").textContent = job.output || `Queued restore of ${name}...`;
   startPolling();
   await refreshJobs();
+}
+
+function playersTargetMap() {
+  return $("#playersMapSelect")?.value || state.playersMap || state.selectedMap;
+}
+
+function shortGuid(guid) {
+  return guid ? `…${guid.slice(-6)}` : "";
+}
+
+function fmtPlaytime(minutes) {
+  if (!minutes) return "0m";
+  const h = Math.floor(minutes / 60);
+  const m = Math.round(minutes % 60);
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+async function loadPlayers(mapKey) {
+  const map = mapKey || playersTargetMap();
+  if (!map) return;
+  state.playersMap = map;
+  const [players, killfeed] = await Promise.all([
+    api(`/api/players?map=${encodeURIComponent(map)}`),
+    api(`/api/killfeed?map=${encodeURIComponent(map)}`),
+  ]);
+  state.players = players;
+  state.killfeed = killfeed;
+  renderPlayers();
+}
+
+function renderPlayers() {
+  const players = state.players;
+  const killfeed = state.killfeed;
+  if (players) {
+    $("#playersMeta").textContent = `${players.players.length} player(s) across ${players.filesScanned} log file(s)`;
+    $("#playerList").innerHTML = players.players.length
+      ? players.players
+          .map(
+            (p) => `
+        <div class="mission-item">
+          <div class="mission-head"><strong>${escapeText(p.name)}</strong> <span class="muted">${escapeText(shortGuid(p.guid))} · last seen ${escapeText(p.lastSeen || "?")}</span></div>
+          <dl class="kv">
+            <dt>Kills / Deaths</dt><dd>${p.kills} / ${p.deaths}</dd>
+            <dt>Playtime</dt><dd>${escapeText(fmtPlaytime(p.playtimeMinutes))} over ${p.sessions} session(s)</dd>
+          </dl>
+          <label class="field">Note (private)<input type="text" data-note-guid="${escapeText(p.guid)}" maxlength="500" value="${escapeText(p.note || "")}" placeholder="e.g. friendly regular, or watch for cheating"></label>
+          <button data-note-save="${escapeText(p.guid)}" type="button" data-tip="Save this note locally.">Save Note</button>
+        </div>`
+          )
+          .join("")
+      : `<p class="muted">No players found in the recent logs for this map.</p>`;
+  }
+  if (killfeed) {
+    $("#killfeedList").innerHTML = killfeed.kills.length
+      ? killfeed.kills
+          .map((k) => {
+            const dist = k.distance != null ? ` · ${k.distance}m` : "";
+            const weapon = k.weapon ? ` (${escapeText(k.weapon)})` : "";
+            const cls = k.killerType === "player" ? "bad" : k.killerType === "ai" ? "warning" : "";
+            return `<div class="status-row"><span class="pill ${cls}">${escapeText(k.killerType)}</span> <span><strong>${escapeText(k.killer || "?")}</strong> → ${escapeText(k.victim)}${weapon}${dist} <span class="muted">${escapeText(k.at)}</span></span></div>`;
+          })
+          .join("")
+      : `<p class="muted">No kills recorded in the recent logs.</p>`;
+  }
+}
+
+async function savePlayerNote(guid) {
+  const input = $(`[data-note-guid="${guid}"]`);
+  if (!input) return;
+  await api("/api/players/note", {
+    method: "POST",
+    body: JSON.stringify({ guid, note: input.value.trim() }),
+  });
+  const button = $(`[data-note-save="${guid}"]`);
+  if (button) {
+    const original = button.textContent;
+    button.textContent = "Saved";
+    setTimeout(() => {
+      button.textContent = original;
+    }, 1200);
+  }
 }
 
 async function loadUpdatesStatus() {
@@ -1597,6 +1689,12 @@ function bindEvents() {
   $("#rconSayButton").addEventListener("click", () => rconSay().catch(showError));
   $("#rconKickButton").addEventListener("click", () => rconKickBan("kick").catch(showError));
   $("#rconBanButton").addEventListener("click", () => rconKickBan("ban").catch(showError));
+  $("#playersMapSelect").addEventListener("change", (event) => loadPlayers(event.target.value).catch(showError));
+  $("#reloadPlayersButton").addEventListener("click", () => loadPlayers().catch(showError));
+  document.body.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-note-save]");
+    if (button) savePlayerNote(button.dataset.noteSave).catch(showError);
+  });
   $("#reloadSchedulesButton").addEventListener("click", () => loadSchedules().catch(showError));
   $("#reloadUpdatesButton").addEventListener("click", () => loadUpdatesStatus().catch(showError));
   $("#saveSteamUsernameButton").addEventListener("click", () => saveSteamUsername().catch(showError));

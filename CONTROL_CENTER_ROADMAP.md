@@ -39,6 +39,25 @@ Bring the operations side on par with full server managers, one versioned slice 
 - `v1.2.0` - SHIPPED. Scheduled restarts with in-game RCON warnings, per-map interval/offsets, runs while open.
 - `v1.3.0` - SHIPPED. SteamCMD update: install SteamCMD, one-time login, update server + Workshop mods.
 
+## Intelligence & Community Series (post-1.3)
+
+Go beyond the competition with player intelligence and community integrations, all from local data.
+
+- `v1.4.0` - SHIPPED. Player history + killfeed from `.ADM` logs, with private per-player admin notes.
+- `v1.5.0` - Discord webhooks: server up/down, restart countdowns, killfeed, and admin actions.
+- `v1.6.0` - Crash watchdog: detect a dead/crashed server and auto-relaunch, with alerts.
+- `v1.7.0` - Mod update checker via the Steam Workshop API (flag stale mods; pairs with SteamCMD).
+
+## v1.4.0 - Player History & Killfeed (SHIPPED)
+
+- Parses the server's `.ADM` admin logs (connect/disconnect/kill lines, midnight rollover handled,
+  date from the filename) into events, scanning the newest ~25 logs per map.
+- Aggregates per-player history keyed by BattlEye GUID: names, first/last seen, sessions, playtime,
+  kills (PvP attributed by killer GUID) and deaths; plus a killfeed (victim, killer, type, weapon, distance).
+- Private per-player admin notes stored locally in the ignored `player_notes.json`.
+- Endpoints `GET /api/players?map=`, `GET /api/killfeed?map=`, `POST /api/players/note`; a Players tab
+  with a player list (notes inline) and a killfeed panel. All local; nothing tracked or sent anywhere.
+
 ## v1.3.0 - SteamCMD Update (SHIPPED)
 
 - `admin/steamcmd_update.ps1`: `install` downloads SteamCMD into the ignored `local_runtime/steamcmd`
