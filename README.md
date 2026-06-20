@@ -41,6 +41,14 @@ The control center binds to `127.0.0.1` by default, exposes no arbitrary shell e
 
 Risky actions require typed confirmation, guarded edits create a local config snapshot first, and nothing private (passwords, Steam IDs, logs, storage, profiles) is ever exposed or tracked.
 
+## Support This Project
+
+The Control Center is free and open-source (MIT licensed) — use it, fork it, share it. If it saved you time setting up or running your DayZ server, you can support continued development:
+
+☕ **[Support on Ko-fi](https://ko-fi.com/omiv_)** — pay what you want, no pressure.
+
+Stars on the [GitHub repo](https://github.com/omniV1/DayZServer-Expansion-Configs) and bug reports help just as much.
+
 ## Supported Maps
 
 - Chernarus

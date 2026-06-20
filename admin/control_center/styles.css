@@ -169,6 +169,23 @@ button:disabled {
   color: var(--accent);
 }
 
+.kofi-link {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ff5e5b;
+  border-radius: 6px;
+  background: #ff5e5b;
+  color: #fff;
+  padding: 8px 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.kofi-link:hover {
+  background: #ff423f;
+  border-color: #ff423f;
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
