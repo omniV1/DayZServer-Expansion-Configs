@@ -43,12 +43,12 @@ Risky actions require typed confirmation, guarded edits create a local config sn
 
 ## Screenshots
 
-![Control Center dashboard](docs/screenshots/dashboard.png)
+![Control Center home, dark mode](admin/photos/dashboard.png)
 
 | | |
 |---|---|
-| ![Map detail and server controls](docs/screenshots/map-detail.png) | ![Live Admin RCON](docs/screenshots/rcon.png) |
-| ![Players and killfeed](docs/screenshots/players.png) | ![Workshop mod update check](docs/screenshots/mod-updates.png) |
+| ![Map detail and server controls](admin/photos/MapDetail.png) | ![Live Admin RCON](admin/photos/rcon.png) |
+| ![Players and killfeed](admin/photos/players.png) | ![Workshop mod update check](admin/photos/mods-updates.png) |
 
 ## Why This Over CFTools, BattleMetrics, or a Host Panel
 
