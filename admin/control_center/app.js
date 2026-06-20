@@ -14,6 +14,7 @@ const state = {
   reportScope: "all",
   snapshots: null,
   schedules: null,
+  updates: null,
   rcon: null,
   rconMap: null,
   selectedMap: null,
@@ -1180,6 +1181,7 @@ function activateTab(name) {
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
   if (name === "rcon") loadRconStatus().catch(showError);
   if (name === "schedules") loadSchedules().catch(showError);
+  if (name === "updates") loadUpdatesStatus().catch(showError);
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
     startStatusPolling();
@@ -1289,6 +1291,33 @@ async function restoreSnapshot(name) {
   $("#jobOutput").textContent = job.output || `Queued restore of ${name}...`;
   startPolling();
   await refreshJobs();
+}
+
+async function loadUpdatesStatus() {
+  const data = await api("/api/updates/status");
+  state.updates = data;
+  renderUpdatesStatus();
+}
+
+function renderUpdatesStatus() {
+  const data = state.updates;
+  if (!data) return;
+  const input = $("#steamUsernameInput");
+  if (input && document.activeElement !== input) input.value = data.username || "";
+  $("#updatesStatus").innerHTML =
+    `<strong>SteamCMD:</strong> ${data.steamcmdFound ? `installed (${escapeText(data.steamcmdPath)})` : "not installed"}. ` +
+    `<strong>Username:</strong> ${data.usernameSet ? escapeText(data.username) : "not set"}. ` +
+    `<strong>Server app:</strong> ${escapeText(data.serverAppId)}, ${data.modCount} map mod(s). ${escapeText(data.note)}`;
+}
+
+async function saveSteamUsername() {
+  const username = $("#steamUsernameInput").value.trim();
+  const data = await api("/api/updates/settings", {
+    method: "POST",
+    body: JSON.stringify({ username }),
+  });
+  state.updates = data;
+  renderUpdatesStatus();
 }
 
 function countdownText(nextRestart, now) {
@@ -1569,6 +1598,8 @@ function bindEvents() {
   $("#rconKickButton").addEventListener("click", () => rconKickBan("kick").catch(showError));
   $("#rconBanButton").addEventListener("click", () => rconKickBan("ban").catch(showError));
   $("#reloadSchedulesButton").addEventListener("click", () => loadSchedules().catch(showError));
+  $("#reloadUpdatesButton").addEventListener("click", () => loadUpdatesStatus().catch(showError));
+  $("#saveSteamUsernameButton").addEventListener("click", () => saveSteamUsername().catch(showError));
   document.body.addEventListener("click", (event) => {
     const saveBtn = event.target.closest("button[data-sched-save]");
     if (saveBtn) { saveSchedule(saveBtn.dataset.schedSave).catch(showError); return; }

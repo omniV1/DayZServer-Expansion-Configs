@@ -10,6 +10,7 @@ import os
 import re
 import runpy
 import secrets
+import shutil
 import subprocess
 import sys
 import threading
@@ -48,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.2.0"
+APP_VERSION = "1.3.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -1135,6 +1136,93 @@ class RestartScheduler:
 
 
 SCHEDULER = RestartScheduler()
+
+
+DAYZ_SERVER_APPID = "223350"
+DAYZ_WORKSHOP_APPID = "221100"
+STEAM_USERNAME_RE = re.compile(r"^[A-Za-z0-9_@.\-]{1,64}$")
+
+
+def find_steamcmd() -> Path | None:
+    settings = read_user_settings()
+    candidates: list[Path] = []
+    configured = settings.get("steamcmd_path")
+    if configured:
+        candidates.append(Path(str(configured)))
+    candidates.append(ROOT / "local_runtime" / "steamcmd" / "steamcmd.exe")
+    candidates.append(Path(r"C:\steamcmd\steamcmd.exe"))
+    found_on_path = shutil.which("steamcmd")
+    if found_on_path:
+        candidates.append(Path(found_on_path))
+    for candidate in candidates:
+        try:
+            if candidate.exists():
+                return candidate
+        except OSError:
+            continue
+    return None
+
+
+def catalog_mod_ids() -> list[str]:
+    data = read_json(ADMIN / "map_workshop_catalog.json", {})
+    ids: list[str] = []
+    if isinstance(data, dict):
+        for entry in data.values():
+            if isinstance(entry, dict):
+                wid = entry.get("workshop_id")
+                if wid and str(wid).isdigit():
+                    ids.append(str(wid))
+    return sorted(set(ids))
+
+
+def updates_status_payload() -> dict[str, Any]:
+    settings = read_user_settings()
+    steamcmd = find_steamcmd()
+    ids = catalog_mod_ids()
+    return {
+        "steamcmdFound": steamcmd is not None,
+        "steamcmdPath": str(steamcmd) if steamcmd else None,
+        "username": settings.get("steam_username") or "",
+        "usernameSet": bool(settings.get("steam_username")),
+        "serverAppId": DAYZ_SERVER_APPID,
+        "workshopAppId": DAYZ_WORKSHOP_APPID,
+        "modIds": ids,
+        "modCount": len(ids),
+        "note": (
+            "Updates open a SteamCMD console window. Log in once (password + Steam Guard) so "
+            "SteamCMD caches the session; later updates reuse it. No password is stored here."
+        ),
+    }
+
+
+def save_updates_settings(payload: dict[str, Any]) -> dict[str, Any]:
+    values: dict[str, Any] = {}
+    if "username" in payload:
+        username = str(payload.get("username") or "").strip()
+        if username and not STEAM_USERNAME_RE.fullmatch(username):
+            raise ValueError("Invalid Steam username.")
+        values["steam_username"] = username
+    if "steamcmdPath" in payload:
+        values["steamcmd_path"] = str(payload.get("steamcmdPath") or "").strip()
+    if values:
+        save_user_settings(values)
+    return updates_status_payload()
+
+
+def require_steamcmd() -> Path:
+    steamcmd = find_steamcmd()
+    if steamcmd is None:
+        raise ValueError("SteamCMD is not installed yet. Use Install SteamCMD first.")
+    return steamcmd
+
+
+def require_steam_username() -> str:
+    username = str(read_user_settings().get("steam_username") or "").strip()
+    if not username:
+        raise ValueError("Set your Steam username first (Updates tab). No password is stored.")
+    if not STEAM_USERNAME_RE.fullmatch(username):
+        raise ValueError("Stored Steam username is invalid; set it again.")
+    return username
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2457,6 +2545,55 @@ def action_specs() -> dict[str, ActionSpec]:
             map_mode="all",
             timeout=240,
         ),
+        "install_steamcmd": ActionSpec(
+            "Install SteamCMD",
+            "updates",
+            "Download SteamCMD into local_runtime and run its first-time self-update (no login).",
+            "guarded",
+            lambda _p, _m: [powershell_file("steamcmd_update.ps1", "-Action", "install")],
+            timeout=600,
+        ),
+        "steam_login": ActionSpec(
+            "Log in to Steam",
+            "updates",
+            "Open a SteamCMD console to log in once (password + Steam Guard). The session is cached.",
+            "guarded",
+            lambda _p, _m: [
+                powershell_file(
+                    "steamcmd_update.ps1", "-Action", "login",
+                    "-SteamCmd", str(require_steamcmd()), "-Username", require_steam_username(),
+                )
+            ],
+            timeout=60,
+        ),
+        "update_server": ActionSpec(
+            "Update DayZ server",
+            "updates",
+            "Open a SteamCMD console to update and validate the dedicated server (app 223350). Stop servers first.",
+            "guarded",
+            lambda _p, _m: [
+                powershell_file(
+                    "steamcmd_update.ps1", "-Action", "update-server",
+                    "-SteamCmd", str(require_steamcmd()), "-Username", require_steam_username(),
+                    "-ServerDir", str(ROOT),
+                )
+            ],
+            timeout=60,
+        ),
+        "update_mods": ActionSpec(
+            "Update Workshop mods",
+            "updates",
+            "Open a SteamCMD console to download the latest imported-map Workshop mods, then Sync Workshop mods.",
+            "guarded",
+            lambda _p, _m: [
+                powershell_file(
+                    "steamcmd_update.ps1", "-Action", "update-mods",
+                    "-SteamCmd", str(require_steamcmd()), "-Username", require_steam_username(),
+                    "-ModIds", ",".join(catalog_mod_ids()) or "0",
+                )
+            ],
+            timeout=60,
+        ),
         "stop_dayz_servers": ActionSpec(
             "Stop DayZ server processes",
             "high-risk",
@@ -2804,6 +2941,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, rcon_status_payload(rcon_map(map_name)))
             elif path == "/api/schedules":
                 self.send_json(200, SCHEDULER.payload())
+            elif path == "/api/updates/status":
+                self.send_json(200, updates_status_payload())
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:
@@ -2833,6 +2972,7 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/rcon/run",
                 "/api/schedules/save",
                 "/api/schedules/remove",
+                "/api/updates/settings",
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
@@ -2871,6 +3011,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, SCHEDULER.save_schedule(payload))
             elif parsed.path == "/api/schedules/remove":
                 self.send_json(200, SCHEDULER.remove_schedule(payload))
+            elif parsed.path == "/api/updates/settings":
+                self.send_json(200, save_updates_settings(payload))
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())

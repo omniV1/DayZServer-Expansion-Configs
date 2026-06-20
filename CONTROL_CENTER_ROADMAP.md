@@ -37,7 +37,19 @@ Bring the operations side on par with full server managers, one versioned slice 
 
 - `v1.1.0` - SHIPPED. BattlEye RCON live admin: per-map enable, player list, broadcast, kick/ban.
 - `v1.2.0` - SHIPPED. Scheduled restarts with in-game RCON warnings, per-map interval/offsets, runs while open.
-- `v1.3.0` - SteamCMD update for the dedicated server and Workshop mods (needs SteamCMD + Steam login).
+- `v1.3.0` - SHIPPED. SteamCMD update: install SteamCMD, one-time login, update server + Workshop mods.
+
+## v1.3.0 - SteamCMD Update (SHIPPED)
+
+- `admin/steamcmd_update.ps1`: `install` downloads SteamCMD into the ignored `local_runtime/steamcmd`
+  and self-updates (captured); `login`, `update-server` (app 223350), and `update-mods` (Workshop app
+  221100) open a visible SteamCMD console so interactive login/2FA works and the session is cached.
+- No Steam password is ever stored or passed; only the username is saved locally (validated). Mod IDs
+  come from `map_workshop_catalog.json`.
+- Allowlisted actions install_steamcmd / steam_login / update_server / update_mods; endpoints
+  `GET /api/updates/status` and `POST /api/updates/settings`; an Updates tab walks the 3 steps.
+- Completes the operations series: the Control Center now covers config, content, lifecycle, live
+  moderation, scheduled restarts, and updates.
 
 ## v1.2.0 - Scheduled Restarts (SHIPPED)
 

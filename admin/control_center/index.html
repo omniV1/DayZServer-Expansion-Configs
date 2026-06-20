@@ -51,6 +51,7 @@
       <button class="tab" data-tab="backups" type="button">Backups</button>
       <button class="tab" data-tab="rcon" type="button">Live Admin</button>
       <button class="tab" data-tab="schedules" type="button">Restarts</button>
+      <button class="tab" data-tab="updates" type="button">Updates</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button" data-advanced>Generation</button>
@@ -437,6 +438,44 @@
         map; players see the warnings and the world reloads.
       </div>
       <div id="scheduleList" class="events-editor">Loading schedules...</div>
+    </section>
+
+    <section id="updates" class="view">
+      <div class="section-title">
+        <h2>Updates (SteamCMD)</h2>
+        <button id="reloadUpdatesButton" type="button" data-tip="Re-check SteamCMD and saved username.">Reload</button>
+      </div>
+      <div class="notice small-help">
+        Keep the dedicated server and Workshop mods current with SteamCMD. <strong>No password is
+        stored here</strong> — you log in once in a SteamCMD window (password + Steam Guard), and it
+        caches the session for later updates. Updates open their own console window so you can watch
+        progress. <strong>Stop your servers before updating server files.</strong>
+      </div>
+      <div id="updatesStatus" class="notice">Checking SteamCMD...</div>
+      <div class="balance-grid">
+        <article class="detail-card">
+          <h3>1. Install SteamCMD</h3>
+          <p class="muted">Downloads SteamCMD into the ignored <code>local_runtime</code> folder and self-updates. No login needed.</p>
+          <button data-action="install_steamcmd" data-map-source="" type="button" data-tip="Download and set up SteamCMD locally.">Install SteamCMD</button>
+        </article>
+        <article class="detail-card">
+          <h3>2. Steam login</h3>
+          <label class="field">Steam username<input id="steamUsernameInput" type="text" maxlength="64" placeholder="your Steam account name"></label>
+          <p class="muted">Saved locally only. You enter your password and Steam Guard in the SteamCMD window, not here.</p>
+          <div class="action-row">
+            <button id="saveSteamUsernameButton" type="button" data-tip="Save your Steam username on this computer.">Save Username</button>
+            <button data-action="steam_login" data-map-source="" type="button" data-tip="Open a SteamCMD window to log in once (Steam Guard).">Open Steam Login</button>
+          </div>
+        </article>
+        <article class="detail-card">
+          <h3>3. Update</h3>
+          <p class="muted">Each opens a SteamCMD window. Stop servers before updating server files; after a mod update, run Sync Workshop mods.</p>
+          <div class="action-row">
+            <button data-action="update_server" data-map-source="" class="primary" type="button" data-tip="Update and validate the DayZ dedicated server (app 223350).">Update Server</button>
+            <button data-action="update_mods" data-map-source="" type="button" data-tip="Download the latest imported-map Workshop mods.">Update Map Mods</button>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="maintenance" class="view">
