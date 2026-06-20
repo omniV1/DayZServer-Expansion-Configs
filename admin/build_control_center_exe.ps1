@@ -7,7 +7,7 @@
 # thumbprint the build is unsigned, which is fine for open-source distribution -
 # see the "Why Windows may warn you" notes in README.md / QUICKSTART.md.
 param(
-    [string]$Version = '1.6.2',
+    [string]$Version = '1.6.3',
     [string]$CertThumbprint = '',
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )
@@ -33,11 +33,15 @@ if (Test-Path $OutputDir) {
 }
 New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
 
+# One-folder build (--onedir): the exe ships next to its dependencies in a
+# DayZServerControlCenter\ subfolder. This trips antivirus heuristics far less
+# than a packed --onefile exe (which unpacks to a temp dir at runtime) and
+# starts faster.
 $addData = "$ControlCenterUi;control_center"
 python -m PyInstaller `
     --noconfirm `
     --clean `
-    --onefile `
+    --onedir `
     --windowed `
     --name DayZServerControlCenter `
     --distpath $OutputDir `
@@ -50,7 +54,7 @@ if ($LASTEXITCODE -ne 0) {
     throw 'PyInstaller build failed.'
 }
 
-$exePath = Join-Path $OutputDir 'DayZServerControlCenter.exe'
+$exePath = Join-Path $OutputDir 'DayZServerControlCenter\DayZServerControlCenter.exe'
 
 # Optional Authenticode signing (only when a cert thumbprint is supplied).
 if ($CertThumbprint) {
@@ -69,7 +73,9 @@ if ($CertThumbprint) {
 $readme = @"
 DayZ Server Control Center $Version
 
-Run DayZServerControlCenter.exe.
+Open the DayZServerControlCenter folder and run DayZServerControlCenter.exe.
+Keep that folder intact - the exe needs the files next to it. You can make a
+Desktop shortcut to the exe if you like.
 
 On first launch, choose your DayZServer folder if it is not auto-detected.
 The selected folder must contain:

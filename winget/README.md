@@ -31,8 +31,8 @@ asset). The easiest way is [`wingetcreate`](https://github.com/microsoft/winget-
 ```powershell
 winget install Microsoft.WingetCreate
 wingetcreate update omniV1.DayZServerControlCenter `
-  --version 1.6.2 `
-  --urls https://github.com/omniV1/DayZServer-Expansion-Configs/releases/download/v1.6.2/DayZServerControlCenter-1.6.2-windows.zip `
+  --version 1.6.3 `
+  --urls https://github.com/omniV1/DayZServer-Expansion-Configs/releases/download/v1.6.3/DayZServerControlCenter-1.6.3-windows.zip `
   --submit
 ```
 
@@ -55,7 +55,7 @@ opens the PR to `microsoft/winget-pkgs` for you.
    ```
 
 3. Fork [microsoft/winget-pkgs](https://github.com/microsoft/winget-pkgs), copy the three files from
-   `winget/manifests/` to `manifests/o/omniV1/DayZServerControlCenter/1.6.2/` in your fork, and open a
+   `winget/manifests/` to `manifests/o/omniV1/DayZServerControlCenter/1.6.3/` in your fork, and open a
    PR. Automated validation runs on the PR; a maintainer reviews and merges.
 
 ## Notes
