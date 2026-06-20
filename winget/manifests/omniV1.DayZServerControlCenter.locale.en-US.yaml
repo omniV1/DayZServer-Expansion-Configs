@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
+PackageIdentifier: omniV1.DayZServerControlCenter
+PackageVersion: 1.6.2
+PackageLocale: en-US
+Publisher: omniV1
+PublisherUrl: https://github.com/omniV1
+PublisherSupportUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/issues
+PackageName: DayZ Server Control Center
+PackageUrl: https://github.com/omniV1/DayZServer-Expansion-Configs
+License: MIT
+LicenseUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/blob/main/LICENSE
+Copyright: Copyright (c) 2026 omniV1
+ShortDescription: A local, beginner-friendly control center for setting up, running, and tuning a multi-map DayZ Expansion server.
+Description: |-
+  DayZ Server Control Center is a free, open-source, local web app (packaged as a
+  Windows executable) for running and tuning a multi-map DayZ Expansion server. It
+  binds to 127.0.0.1, exposes no public endpoint, and wraps only an allowlisted set
+  of admin scripts. Features include a first-run setup wizard, a status dashboard,
+  per-map start/stop/restart controls, guided editors for loot/AI/events and a
+  mission builder, BattlEye RCON moderation, scheduled restarts, SteamCMD server and
+  Workshop mod updates with an update checker, player history and killfeed from the
+  .ADM logs, a crash watchdog, backups with restore, and redacted support reports.
+Moniker: dayz-server-control-center
+Tags:
+  - dayz
+  - dayz-server
+  - game-server
+  - server-admin
+  - server-management
+  - rcon
+  - gaming
+ReleaseNotesUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/releases/tag/v1.6.2
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

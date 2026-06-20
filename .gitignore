@@ -14,6 +14,10 @@
 !.github/
 !.github/**
 
+# winget package manifests (submitted to microsoft/winget-pkgs)
+!winget/
+!winget/**
+
 # Admin automation and root launch helpers
 !admin/
 !admin/**
