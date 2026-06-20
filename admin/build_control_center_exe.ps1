@@ -7,7 +7,7 @@
 # thumbprint the build is unsigned, which is fine for open-source distribution -
 # see the "Why Windows may warn you" notes in README.md / QUICKSTART.md.
 param(
-    [string]$Version = '1.6.3',
+    [string]$Version = '1.6.4',
     [string]$CertThumbprint = '',
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )

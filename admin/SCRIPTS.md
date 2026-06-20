@@ -14,7 +14,7 @@ Build the Desktop release EXE:
 
 ```powershell
 python -m pip install pyinstaller
-powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.6.3
+powershell -ExecutionPolicy Bypass -File admin\build_control_center_exe.ps1 -Version 1.6.4
 ```
 
 Bundled EXE actions run admin Python scripts through the EXE's hidden script runner, so dashboard buttons should not pass raw `.py` paths to `DayZServerControlCenter.exe`.
@@ -23,7 +23,7 @@ The app binds to `127.0.0.1` by default, reads `admin/map_launch.json`, and runs
 
 The **First-Run Setup** tab walks new admins through each requirement in order (server folder, private configs, missions, Workshop mods, VPP tooling, validation), lists exactly what is missing, and points at the safe fix. Step progress is saved locally under the ignored `local_runtime/control_center/setup_state.json`.
 
-The **Fix Problems** tab is a symptom-based troubleshooting guide (server will not boot, map not in launcher, VPP not opening, loot placement warnings, AI density, imported map boot loop). Each symptom lists ordered steps — safe read-only checks first, guarded repairs next, high-risk actions last — using the same allowlisted actions and confirmations as the rest of the app.
+The **Fix Problems** tab is a symptom-based troubleshooting guide (server will not boot, map not in launcher, VPP not opening, loot placement warnings, AI density, imported map boot loop). Each symptom lists ordered steps — safe read-only checks first, guarded repairs next, high-risk actions last — using the same allowlisted actions and confirmations as the rest of the app. It also runs a live **LAN visibility check** (`GET /api/lan/visibility`): it reads the machine's connected IPv4 adapters and their interface metrics and flags when a VPN/virtual adapter (Tailscale, Hyper-V, WireGuard, etc.) outranks the real LAN NIC — the usual reason a server answers direct A2S queries but never appears in the DayZ launcher LAN tab — with the exact `Set-NetIPInterface` fix to run in an Administrator PowerShell.
 
 The **Balance** editor previews before it writes: every Save runs a read-only `/api/balance/preview` first and shows the exact files that will change, maps affected, whether a restart is needed, and the snapshot label. AI has Easy/Medium/Hard difficulty presets, and AI/zombie controls show recommended ranges.
 

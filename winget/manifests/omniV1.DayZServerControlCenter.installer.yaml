@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.6.0.schema.json
 PackageIdentifier: omniV1.DayZServerControlCenter
-PackageVersion: 1.6.3
+PackageVersion: 1.6.4
 InstallerType: zip
 NestedInstallerType: portable
 NestedInstallerFiles:
@@ -9,7 +9,7 @@ NestedInstallerFiles:
 ReleaseDate: 2026-06-19
 Installers:
   - Architecture: x64
-    InstallerUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/releases/download/v1.6.3/DayZServerControlCenter-1.6.3-windows.zip
-    InstallerSha256: E0233B4076BE39E7B7137D92077AD6D9D9043889AA9284DEB9E118D52B380F77
+    InstallerUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/releases/download/v1.6.4/DayZServerControlCenter-1.6.4-windows.zip
+    InstallerSha256: A419FC1642B935CCC81AC1E2927F676C5A580680F07EDC780C985CE7C6D782F4
 ManifestType: installer
 ManifestVersion: 1.6.0

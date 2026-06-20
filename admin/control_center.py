@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.6.3"
+APP_VERSION = "1.6.4"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -417,6 +417,131 @@ def running_server_game_ports() -> set[int]:
     except Exception:
         return set()
     return {int(match.group(1)) for match in re.finditer(r"-port=(\d+)", proc.stdout or "")}
+
+
+# Adapters that are NOT your real LAN. If one of these outranks the physical NIC
+# (lower interface metric), Steam's LAN server browser broadcasts on it instead of
+# the LAN, so servers answer A2S but never appear in the DayZ launcher LAN tab.
+VIRTUAL_ADAPTER_KEYWORDS = (
+    "tailscale", "vethernet", "hyper-v", "hyper v", "default switch", "wireguard",
+    "wg", "vpn", "zerotier", "hamachi", "wsl", "virtualbox", "vmware", "nordvpn",
+    "proton", "mullvad", "openvpn", "expressvpn", "tunnel", "tun", "tap", "brave",
+    "radmin", "loopback",
+)
+
+
+def is_private_lan_ip(ip: str | None) -> bool:
+    if not ip:
+        return False
+    return (
+        ip.startswith("192.168.")
+        or ip.startswith("10.")
+        or bool(re.match(r"172\.(1[6-9]|2\d|3[01])\.", ip))
+    )
+
+
+def is_virtual_adapter(alias: str | None) -> bool:
+    if not alias:
+        return False
+    low = alias.lower()
+    return any(keyword in low for keyword in VIRTUAL_ADAPTER_KEYWORDS)
+
+
+def network_adapters() -> list[dict[str, Any]]:
+    """Connected IPv4 adapters with alias, interface metric, IP, and default-route flag."""
+    script = (
+        "$def = (Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue)."
+        "InterfaceIndex; "
+        "$addrs = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue; "
+        "$out = foreach ($i in (Get-NetIPInterface -AddressFamily IPv4 -ErrorAction SilentlyContinue "
+        "| Where-Object { $_.ConnectionState -eq 'Connected' })) { "
+        "$ip = ($addrs | Where-Object { $_.InterfaceIndex -eq $i.ifIndex } | "
+        "Select-Object -First 1 -ExpandProperty IPAddress); "
+        "[pscustomobject]@{ alias = $i.InterfaceAlias; metric = [int]$i.InterfaceMetric; "
+        "ip = $ip; defaultRoute = ($def -contains $i.ifIndex) } }; "
+        "@($out) | ConvertTo-Json -Compress -Depth 3"
+    )
+    try:
+        proc = subprocess.run(
+            ["powershell", "-NoProfile", "-Command", script],
+            cwd=ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            timeout=20,
+            creationflags=CREATE_NO_WINDOW,
+        )
+        data = json.loads((proc.stdout or "").strip() or "[]")
+    except Exception:
+        return []
+    if isinstance(data, dict):
+        data = [data]
+    return [a for a in data if isinstance(a, dict)]
+
+
+def lan_visibility_payload() -> dict[str, Any]:
+    """Detect a VPN/virtual adapter outranking the real LAN NIC, which hides servers
+    from the DayZ launcher LAN tab even though they answer A2S fine."""
+    adapters = network_adapters()
+    if not adapters:
+        return {
+            "status": "unknown",
+            "message": "Could not read network adapters on this machine.",
+            "adapters": [],
+            "blockingAdapters": [],
+            "lanAdapter": None,
+        }
+    lan_candidates = [
+        a for a in adapters
+        if is_private_lan_ip(a.get("ip")) and not is_virtual_adapter(a.get("alias"))
+    ]
+    lan_adapter = min(lan_candidates, key=lambda a: a.get("metric", 9999)) if lan_candidates else None
+    blocking: list[dict[str, Any]] = []
+    if lan_adapter is not None:
+        lan_metric = lan_adapter.get("metric", 9999)
+        for a in adapters:
+            if is_virtual_adapter(a.get("alias")) and a.get("metric", 9999) <= lan_metric:
+                blocking.append(a)
+    if lan_adapter is None:
+        message = (
+            "No physical LAN adapter with a private IP was found. If you only use Wi-Fi or a VPN, "
+            "the launcher LAN tab may not work; connect the real network adapter."
+        )
+        status = "unknown"
+    elif blocking:
+        names = ", ".join(f"{a['alias']} (metric {a.get('metric', '?')})" for a in blocking)
+        status = "warning"
+        message = (
+            f"A VPN/virtual adapter outranks your LAN adapter '{lan_adapter['alias']}' "
+            f"(metric {lan_adapter.get('metric', '?')}): {names}. Steam broadcasts LAN discovery on the "
+            "lower-metric adapter, so your servers answer direct queries but never appear in the DayZ "
+            "launcher LAN tab. Make the LAN adapter preferred, or disable the VPN while playing LAN."
+        )
+    else:
+        status = "ok"
+        message = (
+            f"Your LAN adapter '{lan_adapter['alias']}' (metric {lan_adapter.get('metric', '?')}) is "
+            "preferred over any VPN/virtual adapter. The launcher LAN tab should see local servers."
+        )
+    fix = None
+    fix_revert = None
+    if lan_adapter is not None and blocking:
+        fix = f"Set-NetIPInterface -InterfaceAlias '{lan_adapter['alias']}' -InterfaceMetric 1"
+        fix_revert = f"Set-NetIPInterface -InterfaceAlias '{lan_adapter['alias']}' -AutomaticMetric Enabled"
+    return {
+        "status": status,
+        "message": message,
+        "adapters": adapters,
+        "blockingAdapters": blocking,
+        "lanAdapter": lan_adapter,
+        "fix": fix,
+        "fixRevert": fix_revert,
+        "fixNote": (
+            "Run the fix in an Administrator PowerShell, then reset the launcher browser cache "
+            "(admin\\reset_dayz_launcher_browser.ps1 -StopLauncher -OpenLauncher) and re-check the LAN tab."
+        ),
+    }
 
 
 def log_status(profile_dir: str, max_lines: int = 800) -> dict[str, Any]:
@@ -3468,6 +3593,8 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/mods/updates":
                 check = str(query.get("check", ["0"])[0]).lower() in {"1", "true", "yes"}
                 self.send_json(200, mods_updates_payload(check))
+            elif path == "/api/lan/visibility":
+                self.send_json(200, lan_visibility_payload())
             elif path == "/api/watchdog":
                 self.send_json(200, WATCHDOG.payload())
             elif path == "/api/players":

@@ -6,6 +6,7 @@ const state = {
   balance: null,
   setup: null,
   troubleshooting: null,
+  lanVisibility: null,
   events: null,
   eventsMap: null,
   missions: null,
@@ -564,6 +565,46 @@ function renderTroubleshooting() {
     `
     )
     .join("");
+}
+
+async function loadLanVisibility() {
+  const card = $("#lanVisibilityCard");
+  if (card) card.textContent = "Checking network adapters...";
+  const data = await api("/api/lan/visibility");
+  state.lanVisibility = data;
+  renderLanVisibility();
+}
+
+function renderLanVisibility() {
+  const card = $("#lanVisibilityCard");
+  const data = state.lanVisibility;
+  if (!card || !data) return;
+  card.className = data.status === "warning" ? "notice warning-note" : "notice";
+  let html = `<p>${escapeText(data.message)}</p>`;
+  if (data.fix) {
+    html +=
+      `<p><strong>Fix (run in an Administrator PowerShell):</strong></p>` +
+      `<pre class="code-block">${escapeText(data.fix)}</pre>` +
+      `<p class="muted">${escapeText(data.fixNote || "")}</p>` +
+      `<p class="muted">Undo later with: <code>${escapeText(data.fixRevert || "")}</code></p>`;
+  }
+  if (Array.isArray(data.adapters) && data.adapters.length) {
+    html +=
+      `<p class="muted">Adapters (lower metric = preferred):</p>` +
+      data.adapters
+        .slice()
+        .sort((a, b) => (a.metric ?? 9999) - (b.metric ?? 9999))
+        .map((a) => {
+          const tag = data.blockingAdapters?.some((b) => b.alias === a.alias)
+            ? ` <span class="pill warning">blocks LAN</span>`
+            : a.alias === data.lanAdapter?.alias
+            ? ` <span class="pill ok">your LAN</span>`
+            : "";
+          return `<div class="status-row"><span><strong>${escapeText(a.alias)}</strong> metric ${escapeText(String(a.metric ?? "?"))}${a.ip ? ` · ${escapeText(a.ip)}` : ""}${tag}</span></div>`;
+        })
+        .join("");
+  }
+  card.innerHTML = html;
 }
 
 function balanceMap(key = state.selectedMap) {
@@ -1201,6 +1242,7 @@ function activateTab(name) {
     loadUpdatesStatus().catch(showError);
     loadModUpdates(false).catch(showError);
   }
+  if (name === "troubleshooting") loadLanVisibility().catch(showError);
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
     startStatusPolling();
@@ -1819,6 +1861,7 @@ function bindEvents() {
   });
   $("#reloadUpdatesButton").addEventListener("click", () => loadUpdatesStatus().catch(showError));
   $("#checkModUpdatesButton").addEventListener("click", () => loadModUpdates(true).catch(showError));
+  $("#recheckLanButton").addEventListener("click", () => loadLanVisibility().catch(showError));
   $("#saveSteamUsernameButton").addEventListener("click", () => saveSteamUsername().catch(showError));
   document.body.addEventListener("click", (event) => {
     const saveBtn = event.target.closest("button[data-sched-save]");

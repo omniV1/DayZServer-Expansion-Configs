@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
 PackageIdentifier: omniV1.DayZServerControlCenter
-PackageVersion: 1.6.3
+PackageVersion: 1.6.4
 PackageLocale: en-US
 Publisher: omniV1
 PublisherUrl: https://github.com/omniV1
@@ -29,6 +29,6 @@ Tags:
   - server-management
   - rcon
   - gaming
-ReleaseNotesUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/releases/tag/v1.6.3
+ReleaseNotesUrl: https://github.com/omniV1/DayZServer-Expansion-Configs/releases/tag/v1.6.4
 ManifestType: defaultLocale
 ManifestVersion: 1.6.0
