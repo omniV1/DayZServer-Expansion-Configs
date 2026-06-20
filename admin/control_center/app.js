@@ -13,6 +13,7 @@ const state = {
   report: null,
   reportScope: "all",
   snapshots: null,
+  schedules: null,
   rcon: null,
   rconMap: null,
   selectedMap: null,
@@ -1178,6 +1179,7 @@ function activateTab(name) {
   }
   if (name === "backups" && !state.snapshots) loadSnapshots().catch(showError);
   if (name === "rcon") loadRconStatus().catch(showError);
+  if (name === "schedules") loadSchedules().catch(showError);
   if (name === "dashboard") {
     refreshStatus().catch((error) => console.error(error));
     startStatusPolling();
@@ -1287,6 +1289,69 @@ async function restoreSnapshot(name) {
   $("#jobOutput").textContent = job.output || `Queued restore of ${name}...`;
   startPolling();
   await refreshJobs();
+}
+
+function countdownText(nextRestart, now) {
+  if (!nextRestart) return "off";
+  const secs = Math.round(nextRestart - now);
+  if (secs <= 0) return "due now";
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  return h > 0 ? `in ${h}h ${m}m` : `in ${m}m`;
+}
+
+async function loadSchedules() {
+  const data = await api("/api/schedules");
+  state.schedules = data;
+  renderSchedules();
+}
+
+function renderSchedules() {
+  const container = $("#scheduleList");
+  if (!container || !state.schedules) return;
+  const now = state.schedules.now;
+  container.innerHTML = state.schedules.schedules
+    .map((s) => {
+      const next = s.enabled ? countdownText(s.nextRestart, now) : "off";
+      return `
+        <div class="mission-item">
+          <div class="mission-head"><strong>${escapeText(s.title)}</strong> <span class="muted">${escapeText(s.map)} — next restart ${escapeText(next)}</span></div>
+          <div class="form-grid">
+            <label><input type="checkbox" data-sched-enabled="${escapeText(s.map)}" ${s.enabled ? "checked" : ""}> Enabled</label>
+            <label>Every (hours)<input type="number" data-sched-interval="${escapeText(s.map)}" min="0.05" max="24" step="0.5" value="${s.intervalHours}"></label>
+            <label>Warnings (min)<input type="text" data-sched-warnings="${escapeText(s.map)}" value="${escapeText((s.warnings || []).join(","))}"></label>
+          </div>
+          <div class="action-row">
+            <button data-sched-save="${escapeText(s.map)}" type="button" data-tip="Save and (re)start this map's restart timer.">Save</button>
+            <button class="ghost" data-sched-remove="${escapeText(s.map)}" type="button" data-tip="Turn off and clear this schedule.">Clear</button>
+          </div>
+        </div>`;
+    })
+    .join("");
+}
+
+async function saveSchedule(map) {
+  const enabled = $(`[data-sched-enabled="${map}"]`)?.checked || false;
+  const intervalHours = Number($(`[data-sched-interval="${map}"]`)?.value) || 4;
+  const warnings = ($(`[data-sched-warnings="${map}"]`)?.value || "")
+    .split(",")
+    .map((part) => parseInt(part.trim(), 10))
+    .filter((value) => Number.isInteger(value) && value > 0);
+  const data = await api("/api/schedules/save", {
+    method: "POST",
+    body: JSON.stringify({ map, enabled, intervalHours, warnings }),
+  });
+  state.schedules = data;
+  renderSchedules();
+}
+
+async function removeSchedule(map) {
+  const data = await api("/api/schedules/remove", {
+    method: "POST",
+    body: JSON.stringify({ map }),
+  });
+  state.schedules = data;
+  renderSchedules();
 }
 
 function rconTargetMap() {
@@ -1503,6 +1568,13 @@ function bindEvents() {
   $("#rconSayButton").addEventListener("click", () => rconSay().catch(showError));
   $("#rconKickButton").addEventListener("click", () => rconKickBan("kick").catch(showError));
   $("#rconBanButton").addEventListener("click", () => rconKickBan("ban").catch(showError));
+  $("#reloadSchedulesButton").addEventListener("click", () => loadSchedules().catch(showError));
+  document.body.addEventListener("click", (event) => {
+    const saveBtn = event.target.closest("button[data-sched-save]");
+    if (saveBtn) { saveSchedule(saveBtn.dataset.schedSave).catch(showError); return; }
+    const removeBtn = event.target.closest("button[data-sched-remove]");
+    if (removeBtn) removeSchedule(removeBtn.dataset.schedRemove).catch(showError);
+  });
   document.body.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-restore-snapshot]");
     if (!button) return;

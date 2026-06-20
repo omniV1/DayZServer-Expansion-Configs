@@ -48,7 +48,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.2.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -978,6 +978,163 @@ def run_rcon(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError(f"Unknown RCon command: {command}")
     output = rcon_send(int(cfg["port"]), str(cfg["password"]), rcon_cmd)
     return {"command": command, "output": redact(output) or "(no output)", "status": rcon_status_payload(map_name)}
+
+
+SCHEDULE_WARNINGS_MAX = 8
+SCHEDULE_INTERVAL_MIN_HOURS = 0.05  # ~3 minutes, mostly for testing
+SCHEDULE_INTERVAL_MAX_HOURS = 24
+
+
+def schedule_due_actions(schedule: dict[str, Any], now_ts: float) -> list[dict[str, Any]]:
+    """Pure decision: given a schedule and the current time, what should fire now."""
+    if not schedule.get("enabled"):
+        return []
+    next_ts = schedule.get("nextRestart")
+    if not next_ts:
+        return []
+    if now_ts >= next_ts:
+        return [{"type": "restart"}]
+    actions: list[dict[str, Any]] = []
+    warned = set(schedule.get("warnedMinutes", []))
+    for minutes in sorted(schedule.get("warnings", []), reverse=True):
+        warn_ts = next_ts - minutes * 60
+        if now_ts >= warn_ts and minutes not in warned:
+            actions.append({"type": "warn", "minutes": minutes})
+    return actions
+
+
+def normalize_warnings(value: Any, interval_hours: float) -> list[int]:
+    interval_minutes = int(interval_hours * 60)
+    result: list[int] = []
+    for item in value or []:
+        try:
+            minutes = int(item)
+        except (TypeError, ValueError):
+            continue
+        if 1 <= minutes < interval_minutes and minutes not in result:
+            result.append(minutes)
+    return sorted(result, reverse=True)[:SCHEDULE_WARNINGS_MAX]
+
+
+class RestartScheduler:
+    def __init__(self) -> None:
+        self.lock = threading.Lock()
+        self.schedules: dict[str, dict[str, Any]] = {}
+        self.thread: threading.Thread | None = None
+        self.started = False
+
+    def path(self) -> Path:
+        return RUNTIME / "schedules.json"
+
+    def load(self) -> None:
+        data = read_json(self.path(), {"schedules": {}})
+        with self.lock:
+            self.schedules = data.get("schedules", {}) if isinstance(data, dict) else {}
+
+    def _save_locked(self) -> None:
+        write_json(self.path(), {"schedules": self.schedules})
+
+    def payload(self) -> dict[str, Any]:
+        maps = map_configs()
+        with self.lock:
+            items = []
+            for name in maps:
+                sched = self.schedules.get(name, {})
+                items.append(
+                    {
+                        "map": name,
+                        "title": maps[name].get("title", name),
+                        "enabled": bool(sched.get("enabled")),
+                        "intervalHours": sched.get("intervalHours", 4),
+                        "warnings": sched.get("warnings", [30, 15, 5, 1]),
+                        "nextRestart": sched.get("nextRestart"),
+                        "lastRestart": sched.get("lastRestart"),
+                    }
+                )
+        return {"schedules": items, "now": time.time(), "schedulerRunning": self.started}
+
+    def save_schedule(self, payload: dict[str, Any]) -> dict[str, Any]:
+        name = rcon_map(payload)
+        enabled = bool(payload.get("enabled"))
+        interval = clamp_number(
+            payload.get("intervalHours", 4), "intervalHours",
+            SCHEDULE_INTERVAL_MIN_HOURS, SCHEDULE_INTERVAL_MAX_HOURS,
+        )
+        warnings = normalize_warnings(payload.get("warnings", [30, 15, 5, 1]), float(interval))
+        with self.lock:
+            sched = self.schedules.setdefault(name, {})
+            sched["enabled"] = enabled
+            sched["intervalHours"] = float(interval)
+            sched["warnings"] = warnings
+            if enabled:
+                sched["nextRestart"] = time.time() + float(interval) * 3600
+                sched["warnedMinutes"] = []
+            else:
+                sched["nextRestart"] = None
+            self._save_locked()
+        return self.payload()
+
+    def remove_schedule(self, payload: dict[str, Any]) -> dict[str, Any]:
+        name = rcon_map(payload)
+        with self.lock:
+            self.schedules.pop(name, None)
+            self._save_locked()
+        return self.payload()
+
+    def _tick(self) -> None:
+        now_ts = time.time()
+        with self.lock:
+            snapshot = {name: dict(sched) for name, sched in self.schedules.items()}
+        for name, sched in snapshot.items():
+            for action in schedule_due_actions(sched, now_ts):
+                if action["type"] == "warn":
+                    self._warn(name, action["minutes"])
+                elif action["type"] == "restart":
+                    self._restart(name, sched)
+
+    def _warn(self, name: str, minutes: int) -> None:
+        message = f"Server restart in {minutes} minute{'s' if minutes != 1 else ''}."
+        try:
+            run_rcon({"map": name, "command": "say", "message": message})
+        except Exception as exc:  # noqa: BLE001 - warnings are best effort (RCon may be down).
+            log_message(f"[scheduler] warn {name} {minutes}m failed: {exc}")
+        with self.lock:
+            sched = self.schedules.get(name)
+            if sched is not None:
+                sched.setdefault("warnedMinutes", []).append(minutes)
+                self._save_locked()
+
+    def _restart(self, name: str, sched: dict[str, Any]) -> None:
+        try:
+            start_action({"action": "restart_map", "map": name, "confirm": "RESTART"})
+        except Exception as exc:  # noqa: BLE001 - keep the scheduler alive on a failed restart.
+            log_message(f"[scheduler] restart {name} failed: {exc}")
+        interval = float(sched.get("intervalHours", 4))
+        with self.lock:
+            current = self.schedules.get(name)
+            if current is not None:
+                current["lastRestart"] = time.time()
+                current["nextRestart"] = time.time() + interval * 3600
+                current["warnedMinutes"] = []
+                self._save_locked()
+
+    def _run(self) -> None:
+        while True:
+            try:
+                self._tick()
+            except Exception as exc:  # noqa: BLE001 - never let the scheduler thread die.
+                log_message(f"[scheduler] tick error: {exc}")
+            time.sleep(20)
+
+    def start(self) -> None:
+        self.load()
+        if self.thread is None:
+            self.thread = threading.Thread(target=self._run, daemon=True)
+            self.thread.start()
+            self.started = True
+
+
+SCHEDULER = RestartScheduler()
 
 
 def vpp_profile_ready(name: str, cfg: dict[str, Any]) -> bool:
@@ -2645,6 +2802,8 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/rcon/status":
                 map_name = str(query.get("map", [""])[0]).lower()
                 self.send_json(200, rcon_status_payload(rcon_map(map_name)))
+            elif path == "/api/schedules":
+                self.send_json(200, SCHEDULER.payload())
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:
@@ -2672,6 +2831,8 @@ class Handler(BaseHTTPRequestHandler):
                 "/api/setup/save",
                 "/api/rcon/enable",
                 "/api/rcon/run",
+                "/api/schedules/save",
+                "/api/schedules/remove",
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
@@ -2706,6 +2867,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, enable_rcon(payload))
             elif parsed.path == "/api/rcon/run":
                 self.send_json(200, run_rcon(payload))
+            elif parsed.path == "/api/schedules/save":
+                self.send_json(200, SCHEDULER.save_schedule(payload))
+            elif parsed.path == "/api/schedules/remove":
+                self.send_json(200, SCHEDULER.remove_schedule(payload))
             else:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())
@@ -2802,6 +2967,7 @@ def main() -> int:
     if not STATIC.exists():
         safe_print(f"Missing {STATIC}")
         return 1
+    SCHEDULER.start()
     server = ThreadingHTTPServer((host, port), Handler)
     url = f"http://{host}:{port}/"
     safe_print(f"DayZ Server Control Center running at {url}")

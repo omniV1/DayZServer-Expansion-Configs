@@ -50,6 +50,7 @@
       <button class="tab" data-tab="reports" type="button">Reports</button>
       <button class="tab" data-tab="backups" type="button">Backups</button>
       <button class="tab" data-tab="rcon" type="button">Live Admin</button>
+      <button class="tab" data-tab="schedules" type="button">Restarts</button>
       <button class="tab" data-tab="maintenance" type="button">Maintenance</button>
       <button class="tab" data-tab="troubleshooting" type="button">Fix Problems</button>
       <button class="tab" data-tab="generation" type="button" data-advanced>Generation</button>
@@ -421,6 +422,21 @@
           </div>
         </article>
       </div>
+    </section>
+
+    <section id="schedules" class="view">
+      <div class="section-title">
+        <h2>Scheduled Restarts</h2>
+        <button id="reloadSchedulesButton" type="button" data-tip="Reload schedules and next-restart times.">Reload</button>
+      </div>
+      <div class="notice small-help">
+        Automatically restart each map on an interval, with in-game countdown warnings sent over RCON
+        before each restart (enable RCON for that map first, on the Live Admin tab). Warnings are
+        minutes-before, comma-separated (e.g. <strong>30,15,5,1</strong>). <strong>Schedules run while
+        this app is open</strong> — leave it running on the server box. Restarts stop and relaunch the
+        map; players see the warnings and the world reloads.
+      </div>
+      <div id="scheduleList" class="events-editor">Loading schedules...</div>
     </section>
 
     <section id="maintenance" class="view">

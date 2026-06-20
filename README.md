@@ -30,6 +30,7 @@ The control center binds to `127.0.0.1` by default, exposes no arbitrary shell e
 - **Map Detail** — per-map Server Controls (start/stop/restart), smoke test, LAN check, log triage, config drift.
 - **Balance / Events / Missions** — guided editors for loot, AI, zombies, animals, world events, and a mission builder for repeatable paid contracts. Every save previews first and snapshots.
 - **Live Admin (RCON)** — BattlEye RCON moderation: per-map enable, live player list, broadcast, kick/ban.
+- **Scheduled Restarts** — per-map automatic restarts with in-game RCON countdown warnings.
 - **Fix Problems** — symptom-based troubleshooting with safe checks first, high-risk actions last.
 - **Reports** — public-safe, redacted support report (copy or download).
 - **Backups** — browse snapshots and restore (guarded, typed confirmation, snapshot-first).

@@ -36,8 +36,19 @@ server setup and tuning app, shipped incrementally without risky big-bang rewrit
 Bring the operations side on par with full server managers, one versioned slice at a time.
 
 - `v1.1.0` - SHIPPED. BattlEye RCON live admin: per-map enable, player list, broadcast, kick/ban.
-- `v1.2.0` - Scheduled restarts with in-game warnings (uses RCON `say` + `restart_map`).
+- `v1.2.0` - SHIPPED. Scheduled restarts with in-game RCON warnings, per-map interval/offsets, runs while open.
 - `v1.3.0` - SteamCMD update for the dedicated server and Workshop mods (needs SteamCMD + Steam login).
+
+## v1.2.0 - Scheduled Restarts (SHIPPED)
+
+- Per-map restart schedules (interval hours + warning offsets in minutes) saved to the ignored
+  `local_runtime/control_center/schedules.json`, surviving app restarts.
+- A daemon thread (started in `main`) ticks every 20s; `schedule_due_actions()` is a pure function
+  deciding which `say` warnings and the restart should fire. Warnings go over RCON (best-effort);
+  the restart reuses the `restart_map` action, then re-arms the next cycle.
+- New endpoints: `GET /api/schedules`, `POST /api/schedules/save`, `POST /api/schedules/remove`.
+- Restarts tab: per-map enable, interval, warning offsets, and a next-restart countdown.
+- Schedules run only while the app is open (documented in the UI).
 
 ## v1.1.0 - BattlEye RCON Live Admin (SHIPPED)
 
