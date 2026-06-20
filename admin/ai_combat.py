@@ -35,6 +35,7 @@ PROFILE_DIRS = [
     "profiles_rostow",
     "profiles_iztek",
     "profiles_alteria",
+    "profiles_winterchernarus",
 ]
 
 MISSIONS = [
@@ -49,6 +50,7 @@ MISSIONS = [
     "Offline.rostow",
     "empty.Iztek",
     "empty.alteria",
+    "RegularWinter.chernarusplus",
 ]
 
 # Expansion reads AI loadouts from the active -profiles folder, not mpmissions.
@@ -64,6 +66,7 @@ MISSION_PROFILE: dict[str, str] = {
     "Offline.rostow": "profiles_rostow",
     "empty.Iztek": "profiles_iztek",
     "empty.alteria": "profiles_alteria",
+    "RegularWinter.chernarusplus": "profiles_winterchernarus",
 }
 
 

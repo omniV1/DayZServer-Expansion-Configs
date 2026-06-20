@@ -20,6 +20,7 @@ MAPS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+    "winterchernarus": "RegularWinter.chernarusplus",
 }
 
 IMPORTED = {"deerisle", "banov", "esseker", "rostow", "iztek", "alteria"}

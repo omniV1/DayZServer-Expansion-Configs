@@ -33,12 +33,14 @@ ALIASES = {
     "takistan": "takistan",
     "namalsk": "namalsk",
     "regular.namalsk": "namalsk",
+    "winterchernarus": "winterchernarus",
+    "regularwinter.chernarusplus": "winterchernarus",
 }
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("map", nargs="?", help="Map id (chernarus, enoch, sakhal, takistan, namalsk)")
+    ap.add_argument("map", nargs="?", help="Map id (chernarus, enoch, sakhal, takistan, namalsk, winterchernarus)")
     ap.add_argument("--list", action="store_true", help="List available map packs")
     ap.add_argument("--build", action="store_true", help="Regenerate map JSON from build_warzones.py")
     args = ap.parse_args()

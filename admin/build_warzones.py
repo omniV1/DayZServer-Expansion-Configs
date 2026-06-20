@@ -161,6 +161,18 @@ NAMALSK = config_for(
     max_concurrent=2,
 )
 
+WINTER_CHERNARUS = config_for(
+    "winterchernarus",
+    [
+        zone("The Battle Of Berezino", 12001.6, 54.13, 9069.11, 178, 7),
+        zone("The Raid At Vybor", 4541.89, 317.73, 8327.46, 250, 12),
+        zone("Situation at Krasnostav PD", 11066.2, 228.02, 12488.2, 95, 7),
+        zone("Chernogorsk PD Raid", 6632.47, 7.72, 2586.3, 195, 7),
+        zone("Electro Street Fights", 10486.6, 6.14, 2348.88, 250, 7),
+        zone("The Fight For Control - NWAF", 4488.51, 339.14, 9696.89, 310, 10, domination=1, fx=70),
+    ],
+)
+
 MAP_CONFIGS = {
     "chernarus": CHERNARUS,
     "chernarusplus": CHERNARUS,
@@ -170,6 +182,7 @@ MAP_CONFIGS = {
     "takistan": TAKISTAN,
     "namalsk": NAMALSK,
     "regular.namalsk": NAMALSK,
+    "winterchernarus": WINTER_CHERNARUS,
 }
 
 
@@ -181,6 +194,7 @@ def write_all() -> None:
         ("sakhal", SAKHAL),
         ("takistan", TAKISTAN),
         ("namalsk", NAMALSK),
+        ("winterchernarus", WINTER_CHERNARUS),
     ]:
         path = OUT_DIR / f"{key}.json"
         path.write_text(json.dumps(cfg, indent=4) + "\n", encoding="utf-8")

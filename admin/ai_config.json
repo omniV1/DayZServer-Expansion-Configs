@@ -12,7 +12,7 @@
     "dayzOffline.TakistanPlus"
   ],
   "takistan_mission": "dayzOffline.TakistanPlus",
-  "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan"],
+  "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan", "winterchernarus"],
   "imported_expansion_maps": ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"],
   "expansion_build": "python admin/build_map_expansion.py --all",
   "imported_expansion_build": "python admin/build_map_expansion.py --imported",

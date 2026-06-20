@@ -113,6 +113,15 @@ MAPS = {
             ("North Road Raiders", [1914.00, 0.0, 7887.00], 6, 13000),
         ],
     },
+    "winterchernarus": {
+        "profile": "profiles_winterchernarus",
+        "label": "Winter Chernarus",
+        "board": ("Berezino Winter Contract Board", [12001.0, 54.0, 9070.0], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("NWAF Winter Raiders", [4488.0, 339.0, 9697.0], 5, 9000),
+            ("Vybor Military Raiders", [4541.0, 317.0, 8327.0], 6, 13000),
+        ],
+    },
 }
 
 
