@@ -976,7 +976,7 @@ def validate_snapshot_name(payload: dict[str, Any]) -> Path:
         raise ValueError("Invalid snapshot name.")
     directory = backup_dir().resolve()
     target = (directory / name).resolve()
-    if not str(target).startswith(str(directory)) or not target.exists():
+    if target.parent != directory or not target.exists():
         raise ValueError(f"Snapshot not found: {name}")
     return target
 
@@ -1655,7 +1655,10 @@ def save_updates_settings(payload: dict[str, Any]) -> dict[str, Any]:
             raise ValueError("Invalid Steam username.")
         values["steam_username"] = username
     if "steamcmdPath" in payload:
-        values["steamcmd_path"] = str(payload.get("steamcmdPath") or "").strip()
+        raw_path = str(payload.get("steamcmdPath") or "").strip()
+        if raw_path and not Path(raw_path).name.lower().startswith("steamcmd"):
+            raise ValueError("steamcmdPath must point to a steamcmd executable.")
+        values["steamcmd_path"] = raw_path
     if values:
         save_user_settings(values)
     return updates_status_payload()
@@ -2738,7 +2741,7 @@ def validate_mission_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
     item = payload.get("itemReward")
     if isinstance(item, dict):
-        class_name = str(item.get("className") or "").strip()
+        class_name = str(item.get("className") or "").strip()[:128]
         if class_name:
             item_amount = int(clamp_number(item.get("amount", 1), "itemReward.amount", 1, 500, integer=True))
             spec["itemReward"] = {"className": class_name, "amount": item_amount}
@@ -3540,8 +3543,23 @@ class Handler(BaseHTTPRequestHandler):
     def send_error_json(self, status: int, message: str) -> None:
         self.send_json(status, {"error": message})
 
+    def _valid_host(self) -> bool:
+        host = (self.headers.get("Host", "") or "").split(":")[0].lower()
+        return host in {"127.0.0.1", "localhost", ""}
+
+    def _reject_csrf(self) -> bool:
+        """Return True if the request should be rejected as cross-origin."""
+        origin = self.headers.get("Origin", "")
+        if not origin:
+            return False
+        host = self.headers.get("Host", "") or f"127.0.0.1:{CONFIG.get('port', 8765)}"
+        return origin not in {f"http://{host}", f"https://{host}"}
+
     def do_GET(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
+            if not self._valid_host():
+                self.send_error_json(403, "Forbidden.")
+                return
             parsed = urlparse(self.path)
             path = parsed.path
             query = parse_qs(parsed.query)
@@ -3576,7 +3594,10 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_json(200, job.to_dict())
             elif path == "/api/logs":
                 map_name = str(query.get("map", [""])[0]).lower()
-                limit = int(query.get("lines", ["200"])[0])
+                try:
+                    limit = int(query.get("lines", ["200"])[0])
+                except (ValueError, TypeError):
+                    limit = 200
                 self.send_json(200, logs_payload(map_name, limit))
             elif path == "/api/report":
                 map_name = str(query.get("map", ["all"])[0]).lower()
@@ -3602,7 +3623,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, players_payload(map_name))
             elif path == "/api/killfeed":
                 map_name = str(query.get("map", [""])[0]).lower()
-                limit = int(query.get("limit", ["60"])[0])
+                try:
+                    limit = int(query.get("limit", ["60"])[0])
+                except (ValueError, TypeError):
+                    limit = 60
                 self.send_json(200, killfeed_payload(map_name, limit))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
@@ -3616,6 +3640,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
+            if not self._valid_host():
+                self.send_error_json(403, "Forbidden.")
+                return
+            if self._reject_csrf():
+                self.send_error_json(403, "Cross-origin requests are not allowed.")
+                return
             parsed = urlparse(self.path)
             if parsed.path not in {
                 "/api/actions/run",
@@ -3639,7 +3669,10 @@ class Handler(BaseHTTPRequestHandler):
             }:
                 self.send_error_json(404, "Unknown API route.")
                 return
-            length = int(self.headers.get("Content-Length", "0") or "0")
+            try:
+                length = int(self.headers.get("Content-Length", "0") or "0")
+            except (ValueError, TypeError):
+                length = 0
             if length > 20_000:
                 self.send_error_json(413, "Request body too large.")
                 return
@@ -3695,7 +3728,9 @@ class Handler(BaseHTTPRequestHandler):
             request_path = "/index.html"
         rel = unquote(request_path).lstrip("/")
         target = (STATIC / rel).resolve()
-        if not str(target).startswith(str(STATIC.resolve())):
+        try:
+            target.relative_to(STATIC.resolve())
+        except ValueError:
             self.send_error(403)
             return
         if not target.exists() or not target.is_file():
