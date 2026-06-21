@@ -18,8 +18,20 @@ MISSIONS = {
     "deadfall": "dayz.Deadfall",
 }
 
-REPLACE_FROM_MAPGROUPPOS = {"iztek"}
-SIMPLE_SPAWN_HANDLER = {"iztek"}
+REPLACE_FROM_MAPGROUPPOS = {"iztek", "bitterroot"}
+SIMPLE_SPAWN_HANDLER = {"iztek", "bitterroot"}
+# Maps whose <hop> section is empty in the shipped mission — CE validates hop
+# separately as "regular player spawn points" and aborts with NO VALID SPAWNS
+# when it is empty. Fix by mirroring the fresh bubbles into hop.
+MIRROR_FRESH_TO_HOP = {"deadfall"}
+
+# Per-map spatial filter (x_min, x_max, z_min, z_max) for read_mapgroup_positions.
+# Needed to exclude coastal/edge positions where the CE generator can't place spawns.
+MAP_BOUNDS: dict[str, tuple[float, float, float, float]] = {
+    "iztek": (900.0, 7300.0, 3000.0, 7600.0),
+    # Bitterroot is ~12 km × 12 km; keep 2 km inland from each edge.
+    "bitterroot": (2000.0, 10500.0, 2000.0, 10500.0),
+}
 
 MAP_OVERRIDES = {
     "iztek": {
@@ -148,8 +160,12 @@ def tune_file(path: Path, overrides: dict | None = None) -> bool:
     return changed
 
 
-def read_mapgroup_positions(path: Path) -> list[tuple[float, float]]:
+def read_mapgroup_positions(
+    path: Path,
+    bounds: tuple[float, float, float, float] | None = None,
+) -> list[tuple[float, float]]:
     root = ET.parse(path).getroot()
+    x_min, x_max, z_min, z_max = bounds if bounds else (0.0, float("inf"), 0.0, float("inf"))
     positions: list[tuple[float, float]] = []
     for elem in root.iter():
         raw = elem.get("pos")
@@ -163,9 +179,7 @@ def read_mapgroup_positions(path: Path) -> list[tuple[float, float]]:
             z = float(parts[2])
         except ValueError:
             continue
-        # Iztek's old generated spawn bubbles were clustered on a bad edge of
-        # the terrain. Prefer inland map-group positions with broad coverage.
-        if 900.0 <= x <= 7300.0 and 3000.0 <= z <= 7600.0:
+        if x_min <= x <= x_max and z_min <= z <= z_max:
             positions.append((x, z))
     return positions
 
@@ -200,6 +214,38 @@ def replace_fresh_bubbles(path: Path, positions: list[tuple[float, float]]) -> b
     return True
 
 
+def mirror_fresh_to_hop(path: Path) -> bool:
+    """Copy <fresh> generator_posbubbles into <hop> when hop is empty.
+
+    Some community maps ship with an empty <hop> section. DayZ CE validates
+    <hop> separately as 'regular player spawn points' and prints NO VALID SPAWNS
+    (which our smoke test treats as fatal) when it is empty.
+    """
+    tree = ET.parse(path)
+    root = tree.getroot()
+    fresh = root.find("fresh")
+    if fresh is None:
+        return False
+    fresh_bubbles = fresh.find("generator_posbubbles")
+    if fresh_bubbles is None:
+        return False
+    fresh_positions = [(float(p.get("x", "0")), float(p.get("z", "0"))) for p in fresh_bubbles.findall("pos")]
+    if not fresh_positions:
+        return False
+
+    hop = child(root, "hop")
+    hop_bubbles = child(hop, "generator_posbubbles")
+    existing = [p for p in hop_bubbles.findall("pos")]
+    if existing:
+        return False  # already populated, leave it alone
+
+    for x, z in fresh_positions:
+        ET.SubElement(hop_bubbles, "pos", {"x": f"{x:.3f}", "z": f"{z:.3f}"})
+    ET.indent(tree, space="    ")
+    tree.write(path, encoding="utf-8", xml_declaration=True)
+    return True
+
+
 def write_simple_spawn_handler(path: Path, positions: list[tuple[float, float]]) -> bool:
     root = ET.Element("playerspawnpoints")
     generator = ET.SubElement(root, "generator", {"type": "PlayerSpawnHandler"})
@@ -228,7 +274,7 @@ def main() -> int:
             continue
         if key in REPLACE_FROM_MAPGROUPPOS:
             mapgroups = ROOT / "mpmissions" / mission / "mapgrouppos.xml"
-            positions = spread_positions(read_mapgroup_positions(mapgroups))
+            positions = spread_positions(read_mapgroup_positions(mapgroups, MAP_BOUNDS.get(key)))
             if len(positions) < 10:
                 raise ValueError(f"{key}: only found {len(positions)} usable map-group positions")
             if key in SIMPLE_SPAWN_HANDLER:
@@ -241,6 +287,12 @@ def main() -> int:
             if replace_fresh_bubbles(path, positions):
                 changed.append(key)
                 print(f"{key}: replaced player spawn bubbles from mapgrouppos ({len(positions)} points)")
+        if key in MIRROR_FRESH_TO_HOP:
+            if mirror_fresh_to_hop(path):
+                changed.append(key)
+                print(f"{key}: mirrored fresh bubbles into empty hop section")
+            else:
+                print(f"{key}: hop section already populated")
         if tune_file(path, MAP_OVERRIDES.get(key)):
             changed.append(key)
             print(f"{key}: tuned player spawn generator")
