@@ -21,9 +21,11 @@ MAPS = {
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
     "winterchernarus": "RegularWinter.chernarusplus",
+    "bitterroot": "dayzOffline.bitterroot",
+    "deadfall": "dayzOffline.deadfall",
 }
 
-IMPORTED = {"deerisle", "banov", "esseker", "rostow", "iztek", "alteria"}
+IMPORTED = {"deerisle", "banov", "esseker", "rostow", "iztek", "alteria", "bitterroot", "deadfall"}
 
 RISKY_DIRS = [
     "expansion/missions",

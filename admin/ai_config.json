@@ -13,7 +13,7 @@
   ],
   "takistan_mission": "dayzOffline.TakistanPlus",
   "expansion_maps": ["namalsk", "enoch", "sakhal", "takistan", "winterchernarus"],
-  "imported_expansion_maps": ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"],
+  "imported_expansion_maps": ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria", "bitterroot", "deadfall"],
   "expansion_build": "python admin/build_map_expansion.py --all",
   "imported_expansion_build": "python admin/build_map_expansion.py --imported",
   "takistan_note": "Use build_map_expansion.py per map; do not replicate Chernarus spatial coords onto custom maps",

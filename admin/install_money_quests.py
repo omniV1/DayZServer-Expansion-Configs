@@ -122,6 +122,24 @@ MAPS = {
             ("Vybor Military Raiders", [4541.0, 317.0, 8327.0], 6, 13000),
         ],
     },
+    "bitterroot": {
+        "profile": "profiles_bitterroot",
+        "label": "Bitterroot",
+        "board": ("Hamilton Contract Board", [7200.0, 380.0, 8400.0], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("Fort Bitterroot Raiders", [5800.0, 500.0, 7600.0], 5, 9000),
+            ("FEMA Camp Raiders", [6500.0, 450.0, 4800.0], 6, 13000),
+        ],
+    },
+    "deadfall": {
+        "profile": "profiles_deadfall",
+        "label": "Deadfall",
+        "board": ("Deadfall Contract Board", [5500.0, 100.0, 4500.0], [180.0, 0.0, 0.0]),
+        "ai": [
+            ("Mill District Raiders", [5000.0, 80.0, 5800.0], 5, 9000),
+            ("Industrial Zone Raiders", [3500.0, 90.0, 6500.0], 6, 13000),
+        ],
+    },
 }
 
 

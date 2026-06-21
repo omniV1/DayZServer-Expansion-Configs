@@ -1,0 +1,16 @@
+{
+    "Types": [
+        "ALL",
+        "Airfield",
+        "Camp",
+        "Capital",
+        "City",
+        "Hill",
+        "Local",
+        "Marine",
+        "Military Base",
+        "Ruin",
+        "Village"
+    ],
+    "Locations": []
+}

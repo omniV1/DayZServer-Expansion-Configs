@@ -124,6 +124,26 @@
       "cpu": 2,
       "extra_mods": ["@Winter Chernarus V2"],
       "server_mods": []
+    },
+    "bitterroot": {
+      "title": "Owens DayZ Bitterroot Server",
+      "config": "serverDZ_Bitterroot.cfg",
+      "port": 3502,
+      "steam_query_port": 27028,
+      "profiles_dir": "profiles_bitterroot",
+      "cpu": 4,
+      "extra_mods": ["@Bitterroot"],
+      "server_mods": []
+    },
+    "deadfall": {
+      "title": "Owens DayZ Deadfall Server",
+      "config": "serverDZ_Deadfall.cfg",
+      "port": 3602,
+      "steam_query_port": 27029,
+      "profiles_dir": "profiles_deadfall",
+      "cpu": 2,
+      "extra_mods": ["@Deadfall"],
+      "server_mods": []
     }
   }
 }

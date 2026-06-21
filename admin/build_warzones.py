@@ -161,6 +161,29 @@ NAMALSK = config_for(
     max_concurrent=2,
 )
 
+BITTERROOT = config_for(
+    "bitterroot",
+    [
+        zone("Hamilton City Market", 7200.0, 380.0, 8400.0, 220, 10),
+        zone("Stevensville Standoff", 4500.0, 350.0, 6200.0, 180, 8),
+        zone("Bitterroot Ranch Raid", 9800.0, 400.0, 10500.0, 200, 8),
+        zone("FEMA Camp Assault", 6500.0, 450.0, 4800.0, 250, 10),
+        zone("Forest Road Ambush", 3200.0, 500.0, 9000.0, 200, 8),
+        zone("Fort Bitterroot - The Battle", 5800.0, 500.0, 7600.0, 300, 12, domination=1, fx=90),
+    ],
+)
+
+DEADFALL = config_for(
+    "deadfall",
+    [
+        zone("Mill District Clash", 5000.0, 80.0, 5800.0, 180, 8),
+        zone("Deadfall Central", 5500.0, 100.0, 4500.0, 220, 10),
+        zone("Industrial Zone Fight", 3500.0, 90.0, 6500.0, 200, 8),
+        zone("Harbor Front Raid", 7500.0, 60.0, 7200.0, 180, 7),
+        zone("The Funnel - Deadfall Core", 5000.0, 95.0, 6000.0, 280, 12, domination=1, fx=85),
+    ],
+)
+
 WINTER_CHERNARUS = config_for(
     "winterchernarus",
     [
@@ -183,6 +206,8 @@ MAP_CONFIGS = {
     "namalsk": NAMALSK,
     "regular.namalsk": NAMALSK,
     "winterchernarus": WINTER_CHERNARUS,
+    "bitterroot": BITTERROOT,
+    "deadfall": DEADFALL,
 }
 
 
@@ -195,6 +220,8 @@ def write_all() -> None:
         ("takistan", TAKISTAN),
         ("namalsk", NAMALSK),
         ("winterchernarus", WINTER_CHERNARUS),
+        ("bitterroot", BITTERROOT),
+        ("deadfall", DEADFALL),
     ]:
         path = OUT_DIR / f"{key}.json"
         path.write_text(json.dumps(cfg, indent=4) + "\n", encoding="utf-8")

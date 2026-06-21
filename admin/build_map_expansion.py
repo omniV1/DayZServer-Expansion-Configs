@@ -571,6 +571,44 @@ MAP_CONFIGS: dict[str, MapConfig] = {
         max_spawn_regions=8,
         gear_theme="temperate",
     ),
+    "bitterroot": MapConfig(
+        key="bitterroot",
+        mission="dayzOffline.bitterroot",
+        profile="profiles_bitterroot",
+        teleports_file="Teleports_bitterroot.json",
+        cache_file="bitterroot_locations.json",
+        patrol_prefix="BitterrootPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=12,
+        gear_theme="temperate",
+    ),
+    "deadfall": MapConfig(
+        key="deadfall",
+        mission="dayzOffline.deadfall",
+        profile="profiles_deadfall",
+        teleports_file="Teleports_deadfall.json",
+        cache_file="deadfall_locations.json",
+        patrol_prefix="DeadfallPatrol",
+        town_types=["Capital", "City", "Village"],
+        roaming_types=list(GENERIC_TYPE_RADIUS),
+        spatial_types=["Capital", "City", "Airfield", "Military Base", "Camp"],
+        military_patrol_types=["Airfield", "Military Base"],
+        armed_town_types=["Capital", "City"],
+        type_radius=GENERIC_TYPE_RADIUS,
+        type_category=GENERIC_TYPE_CATEGORY,
+        poi_patrol_keywords=GENERIC_POI_KEYWORDS,
+        spawn_from_settlements=True,
+        max_spawn_regions=8,
+        gear_theme="temperate",
+    ),
 }
 
 
@@ -1543,7 +1581,7 @@ def main() -> int:
     args = ap.parse_args()
 
     all_maps = ["namalsk", "enoch", "sakhal", "takistan", "chernarus", "winterchernarus"]
-    imported_maps = ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria"]
+    imported_maps = ["deerisle", "banov", "esseker", "rostow", "iztek", "alteria", "bitterroot", "deadfall"]
     if args.all:
         keys = list(MAP_CONFIGS.keys()) if args.gear_only else all_maps
     elif args.imported:

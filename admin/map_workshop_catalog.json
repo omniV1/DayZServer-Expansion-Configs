@@ -36,5 +36,19 @@
     "server_mod_folder": "@Alteria",
     "mission_template": "empty.alteria",
     "mission_source": "https://github.com/johnmclane666/DayZ-Alteria-Stable"
+  },
+  "bitterroot": {
+    "workshop_id": "2906823750",
+    "server_mod_folder": "@Bitterroot",
+    "mission_template": "dayzOffline.bitterroot",
+    "mission_source": "Scalespeeder Gaming Discord — Workshop page removed; obtain mod files directly from creator",
+    "note": "155km² Montana-inspired terrain. Verify terrain key from @Bitterroot/addons before first boot."
+  },
+  "deadfall": {
+    "workshop_id": "3050117454",
+    "server_mod_folder": "@Deadfall",
+    "mission_template": "dayzOffline.deadfall",
+    "mission_source": "Creator Discord — Workshop page removed; obtain mod files directly from creator",
+    "note": "10x10km CQB funnel design. Verify terrain key from @Deadfall/addons before first boot."
   }
 }

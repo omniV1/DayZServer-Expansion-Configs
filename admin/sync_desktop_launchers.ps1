@@ -23,6 +23,8 @@ $DesktopNames = @{
     iztek            = 'start_iztek.bat'
     alteria          = 'start_alteria.bat'
     winterchernarus  = 'start_WinterChernarus.bat'
+    bitterroot       = 'start_Bitterroot.bat'
+    deadfall         = 'start_Deadfall.bat'
 }
 
 $ScheduledRestart = @{

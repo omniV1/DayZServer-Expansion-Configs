@@ -36,6 +36,8 @@ PROFILE_DIRS = [
     "profiles_iztek",
     "profiles_alteria",
     "profiles_winterchernarus",
+    "profiles_bitterroot",
+    "profiles_deadfall",
 ]
 
 MISSIONS = [
@@ -51,6 +53,8 @@ MISSIONS = [
     "empty.Iztek",
     "empty.alteria",
     "RegularWinter.chernarusplus",
+    "dayzOffline.bitterroot",
+    "dayzOffline.deadfall",
 ]
 
 # Expansion reads AI loadouts from the active -profiles folder, not mpmissions.
@@ -67,6 +71,8 @@ MISSION_PROFILE: dict[str, str] = {
     "empty.Iztek": "profiles_iztek",
     "empty.alteria": "profiles_alteria",
     "RegularWinter.chernarusplus": "profiles_winterchernarus",
+    "dayzOffline.bitterroot": "profiles_bitterroot",
+    "dayzOffline.deadfall": "profiles_deadfall",
 }
 
 

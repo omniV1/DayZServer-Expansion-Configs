@@ -35,6 +35,10 @@ ALIASES = {
     "regular.namalsk": "namalsk",
     "winterchernarus": "winterchernarus",
     "regularwinter.chernarusplus": "winterchernarus",
+    "bitterroot": "bitterroot",
+    "dayzoffline.bitterroot": "bitterroot",
+    "deadfall": "deadfall",
+    "dayzoffline.deadfall": "deadfall",
 }
 
 
