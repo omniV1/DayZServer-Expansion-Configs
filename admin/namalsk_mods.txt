@@ -1,1 +1,1 @@
-@CF;@Dabs Framework;@VPPAdminTools;@DayZ-Expansion-Core;@DayZ-Expansion-AI;@DayZ-Expansion-Bundle;@DayZ-Expansion-Licensed;@DayZ-Expansion-Market
+@CF;@Dabs Framework;@Community-Online-Tools;@DayZ-Expansion-Core;@DayZ-Expansion-AI;@DayZ-Expansion-Bundle;@DayZ-Expansion-Licensed;@DayZ-Expansion-Market

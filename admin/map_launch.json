@@ -1,5 +1,5 @@
 {
-  "comment": "Base -mod= list is admin/chernarus_mods.txt with VPP admin tools. Takistan uses admin/takistan_mods.txt (Chernarus list + @TakistanPlus after @Dabs Framework).",
+  "comment": "Base -mod= list is admin/chernarus_mods.txt with Community-Online-Tools. Takistan uses admin/takistan_mods.txt (Chernarus list + @TakistanPlus after @Dabs Framework).",
   "mods_file": "chernarus_mods.txt",
   "maps": {
     "chernarus": {
@@ -102,7 +102,7 @@
       "steam_query_port": 27025,
       "profiles_dir": "profiles_iztek",
       "cpu": 2,
-      "extra_mods": ["@Iztek"],
+      "extra_mods": ["@Iztek", "@Iztek_Zarge"],
       "server_mods": []
     },
     "alteria": {
