@@ -12,5 +12,12 @@
         "Ruin",
         "Village"
     ],
-    "Locations": []
+    "Locations": [
+        {"Type": "City", "Name": "Hamilton", "Position": [7200.0, 0.0, 8400.0], "Radius": 4.0},
+        {"Type": "City", "Name": "Stevensville", "Position": [4500.0, 0.0, 6200.0], "Radius": 4.0},
+        {"Type": "Village", "Name": "Bitterroot Ranch", "Position": [9800.0, 0.0, 10500.0], "Radius": 4.0},
+        {"Type": "Village", "Name": "Forest Road Settlement", "Position": [3200.0, 0.0, 9000.0], "Radius": 4.0},
+        {"Type": "Military Base", "Name": "Fort Bitterroot", "Position": [5800.0, 0.0, 7600.0], "Radius": 4.0},
+        {"Type": "Camp", "Name": "FEMA Camp", "Position": [6500.0, 0.0, 4800.0], "Radius": 4.0}
+    ]
 }

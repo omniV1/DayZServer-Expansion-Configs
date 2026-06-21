@@ -12,5 +12,11 @@
         "Ruin",
         "Village"
     ],
-    "Locations": []
+    "Locations": [
+        {"Type": "City", "Name": "Deadfall Central", "Position": [5500.0, 0.0, 4500.0], "Radius": 4.0},
+        {"Type": "Village", "Name": "Mill District", "Position": [5000.0, 0.0, 5800.0], "Radius": 4.0},
+        {"Type": "Village", "Name": "Industrial Zone", "Position": [3500.0, 0.0, 6500.0], "Radius": 4.0},
+        {"Type": "Village", "Name": "Harbor Front", "Position": [7500.0, 0.0, 7200.0], "Radius": 4.0},
+        {"Type": "Camp", "Name": "The Funnel", "Position": [5000.0, 0.0, 6000.0], "Radius": 4.0}
+    ]
 }
