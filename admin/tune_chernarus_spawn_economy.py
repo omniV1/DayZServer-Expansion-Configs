@@ -20,6 +20,8 @@ MISSIONS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+    "bitterroot": "empty.Bitterroot",
+    "deadfall": "dayz.Deadfall",
 }
 
 # Higher huntable wildlife without turning Chernarus into a constant wolf/bear fight.

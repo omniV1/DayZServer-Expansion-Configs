@@ -146,7 +146,8 @@
       "profiles_dir": "profiles_iztek",
       "mods_file": "chernarus_mods.txt",
       "extra_mods": [
-        "@Iztek"
+        "@Iztek",
+        "@Iztek_Zarge"
       ],
       "server_mods": []
     },
@@ -164,6 +165,55 @@
         "@Alteria"
       ],
       "server_mods": []
+    },
+    "winterchernarus": {
+      "title": "Owens DayZ Winter Chernarus Server",
+      "config_example": "serverDZ_WinterChernarus.example.cfg",
+      "mission_template": "",
+      "map_mod_folder": "",
+      "workshop_id": "",
+      "port": 3402,
+      "steam_query_port": 27027,
+      "profiles_dir": "profiles_winterchernarus",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Winter Chernarus V2"
+      ],
+      "server_mods": []
+    },
+    "bitterroot": {
+      "title": "Owens DayZ Bitterroot Server",
+      "config_example": "serverDZ_Bitterroot.example.cfg",
+      "mission_template": "empty.Bitterroot",
+      "map_mod_folder": "@Bitterroot",
+      "workshop_id": "2906823750",
+      "port": 3502,
+      "steam_query_port": 27028,
+      "profiles_dir": "profiles_bitterroot",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Bitterroot"
+      ],
+      "server_mods": []
+    },
+    "deadfall": {
+      "title": "Owens DayZ Deadfall Server",
+      "config_example": "serverDZ_Deadfall.example.cfg",
+      "mission_template": "dayz.Deadfall",
+      "map_mod_folder": "@Deadfall",
+      "workshop_id": "3050117454",
+      "port": 3602,
+      "steam_query_port": 27029,
+      "profiles_dir": "profiles_deadfall",
+      "mods_file": "chernarus_mods.txt",
+      "extra_mods": [
+        "@Stargate Teleporters Complete",
+        "@GasMasksOnly",
+        "@Deadfall"
+      ],
+      "server_mods": [
+        "@SpawnerBubaku"
+      ]
     }
   },
   "mods": [
@@ -171,6 +221,23 @@
       "folder": "@Advanced Weapon Scopes",
       "name": "Advanced Weapon Scopes",
       "workshop_id": "2143128974",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@AgricultureCore",
+      "name": "AgricultureCore",
+      "workshop_id": "3690289718",
       "maps": [
         "alteria",
         "banov",
@@ -199,6 +266,22 @@
         "rostow",
         "sakhal",
         "takistan"
+      ]
+    },
+    {
+      "folder": "@AICFireplaceIndoor",
+      "name": "AICFireplaceIndoor",
+      "workshop_id": "2823378230",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal"
       ]
     },
     {
@@ -286,6 +369,31 @@
       ]
     },
     {
+      "folder": "@Bitterroot",
+      "name": "Bitterroot",
+      "workshop_id": "2906823750",
+      "maps": [
+        "bitterroot"
+      ]
+    },
+    {
+      "folder": "@CannabisPlus",
+      "name": "CannabisPlus",
+      "workshop_id": "1932611410",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
       "folder": "@CF",
       "name": "CF",
       "workshop_id": "1559212036",
@@ -332,6 +440,24 @@
         "enoch",
         "esseker",
         "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Community-Online-Tools",
+      "name": "Community-Online-Tools",
+      "workshop_id": "1564026768",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "namalsk",
         "rostow",
         "sakhal",
         "takistan"
@@ -463,6 +589,14 @@
       ]
     },
     {
+      "folder": "@Deadfall",
+      "name": "Deadfall",
+      "workshop_id": "3050117454",
+      "maps": [
+        "deadfall"
+      ]
+    },
+    {
       "folder": "@DeerIsle",
       "name": "DeerIsle",
       "workshop_id": "1602372402",
@@ -513,6 +647,14 @@
       ]
     },
     {
+      "folder": "@GasMasksOnly",
+      "name": "GasMasksOnly",
+      "workshop_id": "2621103156",
+      "maps": [
+        "deadfall"
+      ]
+    },
+    {
       "folder": "@GhillieFix",
       "name": "GhillieFix",
       "workshop_id": "2889783501",
@@ -533,6 +675,23 @@
       "folder": "@GhillieHoodFix",
       "name": "GhillieHoodFix",
       "workshop_id": "2893103893",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@GSC Gameworld Assets (JMC Edition)",
+      "name": "GSC Gameworld Assets (JMC Edition)",
+      "workshop_id": "3154500253",
       "maps": [
         "alteria",
         "banov",
@@ -606,6 +765,14 @@
       ]
     },
     {
+      "folder": "@Iztek_Zarge",
+      "name": "Iztek_Zarge",
+      "workshop_id": "2978914794",
+      "maps": [
+        "iztek"
+      ]
+    },
+    {
       "folder": "@Modular Vest System - Reworked",
       "name": "Modular Vest System - Reworked",
       "workshop_id": "2629595854",
@@ -653,6 +820,40 @@
       "workshop_id": "2288336145",
       "maps": [
         "namalsk"
+      ]
+    },
+    {
+      "folder": "@Pandemic Weapons-Clothing Camo Overlay",
+      "name": "Pandemic Weapons/Clothing Camo Overlay",
+      "workshop_id": "0",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@Pandemic Weapons-Clothing Camo Overlay Server",
+      "name": "Pandemic Weapons/Clothing Camo Overlay Server",
+      "workshop_id": "0",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
       ]
     },
     {
@@ -712,6 +913,56 @@
       "workshop_id": "2344585107",
       "maps": [
         "rostow"
+      ]
+    },
+    {
+      "folder": "@SNAFU Weapons",
+      "name": "SNAFU Weapons",
+      "workshop_id": "2443122116",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
+      "folder": "@SpawnerBubaku",
+      "name": "SpawnerBubaku",
+      "workshop_id": "2482312670",
+      "maps": [
+        "deadfall"
+      ]
+    },
+    {
+      "folder": "@Stargate Teleporters Complete",
+      "name": "Stargate Teleporters Complete",
+      "workshop_id": "2933015619",
+      "maps": [
+        "deadfall"
+      ]
+    },
+    {
+      "folder": "@TacFrogShirts",
+      "name": "TacFrogShirts",
+      "workshop_id": "3238951734",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
       ]
     },
     {
@@ -791,6 +1042,23 @@
       ]
     },
     {
+      "folder": "@Unknown Ghillie Mod",
+      "name": "Unknown Ghillie Mod",
+      "workshop_id": "2074403068",
+      "maps": [
+        "alteria",
+        "banov",
+        "chernarus",
+        "deerisle",
+        "enoch",
+        "esseker",
+        "iztek",
+        "rostow",
+        "sakhal",
+        "takistan"
+      ]
+    },
+    {
       "folder": "@Unlimited Stamina",
       "name": "Unlimited Stamina",
       "workshop_id": "1560819773",
@@ -808,9 +1076,17 @@
       ]
     },
     {
-      "folder": "@VPPAdminTools",
-      "name": "VPPAdminTools",
-      "workshop_id": "1828439124",
+      "folder": "@Winter Chernarus V2",
+      "name": "Winter Chernarus V2",
+      "workshop_id": "2981609048",
+      "maps": [
+        "winterchernarus"
+      ]
+    },
+    {
+      "folder": "@XZone STALKER Mutants",
+      "name": "XZone STALKER Mutants",
+      "workshop_id": "2525642572",
       "maps": [
         "alteria",
         "banov",
@@ -819,7 +1095,6 @@
         "enoch",
         "esseker",
         "iztek",
-        "namalsk",
         "rostow",
         "sakhal",
         "takistan"

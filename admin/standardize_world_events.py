@@ -20,6 +20,8 @@ MISSIONS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+    "bitterroot": "empty.Bitterroot",
+    "deadfall": "dayz.Deadfall",
 }
 
 ENABLED_AIRDROPS = {
@@ -34,6 +36,8 @@ ENABLED_AIRDROPS = {
     "rostow": set(),
     "iztek": set(),
     "alteria": set(),
+    "bitterroot": set(),
+    "deadfall": set(),
 }
 
 MISSION_SETTINGS = {

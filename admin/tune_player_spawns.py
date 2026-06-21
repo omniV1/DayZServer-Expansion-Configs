@@ -14,6 +14,8 @@ MISSIONS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+    "bitterroot": "empty.Bitterroot",
+    "deadfall": "dayz.Deadfall",
 }
 
 REPLACE_FROM_MAPGROUPPOS = {"iztek"}

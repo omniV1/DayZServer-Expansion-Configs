@@ -111,6 +111,9 @@ Stars on the [GitHub repo](https://github.com/omniV1/DayZServer-Expansion-Config
 - Rostow
 - Iztek
 - Alteria
+- Winter Chernarus V2
+- Bitterroot
+- Deadfall
 
 ## What This Provides
 
@@ -119,7 +122,7 @@ Stars on the [GitHub repo](https://github.com/omniV1/DayZServer-Expansion-Config
 - UI editors for loot presets, AI patrol caps/difficulty, zombies, animals, spawn globals, world events, and a mission builder
 - Guarded per-map start/stop/restart with live Dashboard status, backup/restore, and redacted support reports
 - Public-safe `serverDZ*.example.cfg` templates
-- VPP (`@VPPAdminTools`) as the standard admin tool
+- Community-Online-Tools (`@Community-Online-Tools`) as the standard admin tool across all maps
 - Expansion AI loadouts, patrols, spatial zones, and spawn settings
 - Generated first-pass patrol support for imported Workshop maps
 - Higher-loot Central Economy support through generated `mod_ce`
@@ -175,15 +178,7 @@ powershell -ExecutionPolicy Bypass -File admin\check_lan_visibility.ps1 -Map ess
 
 The launcher's LAN auto-discovery appears to scan only the usual Steam query range around `27015-27020`. When a map's configured query port is higher, the launch tools create a temporary LAN-visible config under `local_runtime\lan_query\` and move that single map onto a free scanned query port.
 
-VPP admin credentials live in each map's private `profiles*\VPPAdminTools\Permissions` folder and are not published. After adding a new profile/map, sync the local VPP SuperAdmin/password files from the main `profiles` folder:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File admin\sync_vpp_admin_profiles.ps1 -Map all
-powershell -ExecutionPolicy Bypass -File admin\switch_admin_inputs_to_vpp.ps1 -Map all -IncludeClientProfiles
-powershell -ExecutionPolicy Bypass -File admin\check_admin_tooling.ps1 -Map all -IncludeClientProfiles -CheckDesktop
-```
-
-`check_admin_tooling.ps1` verifies that launch mod lists use VPP, active server processes are not still using COT, VPP SuperAdmin files exist per profile, server/client input presets bind VPP to `End` and `Home`, and generated Desktop launchers still call `Launch-DayZMap.ps1`.
+COT (Community-Online-Tools) is auto-initialized on first boot for each map — no credential sync is required. The `profiles_*/CommunityOnlineTools/` directory is pre-seeded with `Weather.json`, `Webhooks.json`, and a teleport stubs file. Configure admin Steam IDs through the COT in-game menu on first launch.
 
 If the script shows A2S is OK but the launcher still cannot retrieve the LAN server list, reset the launcher browser cache:
 

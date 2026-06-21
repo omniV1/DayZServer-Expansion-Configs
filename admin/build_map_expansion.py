@@ -573,7 +573,7 @@ MAP_CONFIGS: dict[str, MapConfig] = {
     ),
     "bitterroot": MapConfig(
         key="bitterroot",
-        mission="dayzOffline.bitterroot",
+        mission="empty.Bitterroot",
         profile="profiles_bitterroot",
         teleports_file="Teleports_bitterroot.json",
         cache_file="bitterroot_locations.json",
@@ -592,7 +592,7 @@ MAP_CONFIGS: dict[str, MapConfig] = {
     ),
     "deadfall": MapConfig(
         key="deadfall",
-        mission="dayzOffline.deadfall",
+        mission="dayz.Deadfall",
         profile="profiles_deadfall",
         teleports_file="Teleports_deadfall.json",
         cache_file="deadfall_locations.json",

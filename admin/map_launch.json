@@ -142,8 +142,8 @@
       "steam_query_port": 27029,
       "profiles_dir": "profiles_deadfall",
       "cpu": 2,
-      "extra_mods": ["@Deadfall"],
-      "server_mods": []
+      "extra_mods": ["@Stargate Teleporters Complete", "@GasMasksOnly", "@Deadfall"],
+      "server_mods": ["@SpawnerBubaku"]
     }
   }
 }

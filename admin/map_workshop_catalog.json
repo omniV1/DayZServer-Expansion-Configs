@@ -37,18 +37,38 @@
     "mission_template": "empty.alteria",
     "mission_source": "https://github.com/johnmclane666/DayZ-Alteria-Stable"
   },
+  "spawner_bubaku": {
+    "workshop_id": "2482312670",
+    "server_mod_folder": "@SpawnerBubaku",
+    "mission_source": "Steam Workshop ID 2482312670 — subscribed and downloaded",
+    "note": "Server-side only. Used by Deadfall for AI spawning in underground/inaccessible areas. Config at profiles_deadfall/SpawnerBubaku/SpawnerBubakuV2.json."
+  },
+  "gasmasks_only": {
+    "workshop_id": "2621103156",
+    "server_mod_folder": "@GasMasksOnly",
+    "mission_source": "Steam Workshop ID 2621103156 — subscribed and downloaded",
+    "note": "Client+server. Deadfall has a toxic zone passage; this mod makes it traversable without NBC gear grind."
+  },
+  "stargate_teleporters": {
+    "workshop_id": "2933015619",
+    "server_mod_folder": "@Stargate Teleporters Complete",
+    "mission_source": "Steam Workshop ID 2933015619 — subscribed and downloaded",
+    "note": "Required dependency for Deadfall. Portal teleport objects (classnames: land_Stargate_Portal, land_Hidden_Portal, etc). Config JSON created at profiles/CBD_PortalTeleporterSystem.json on first boot."
+  },
   "bitterroot": {
     "workshop_id": "2906823750",
     "server_mod_folder": "@Bitterroot",
-    "mission_template": "dayzOffline.bitterroot",
-    "mission_source": "Scalespeeder Gaming Discord — Workshop page removed; obtain mod files directly from creator",
-    "note": "155km² Montana-inspired terrain. Verify terrain key from @Bitterroot/addons before first boot."
+    "mission_template": "empty.Bitterroot",
+    "mission_source": "https://github.com/Mattty-Ice/Bitterroot-DayZ (bundled mpmissions also in Workshop download at mpmissions/empty.Bitterroot/)",
+    "terrain_template": "Bitterroot",
+    "note": "155km² Montana-inspired terrain. Subscribed on Workshop (ID 2906823750). serverDZ_Bitterroot.cfg needs: template = \"empty.Bitterroot\";"
   },
   "deadfall": {
     "workshop_id": "3050117454",
     "server_mod_folder": "@Deadfall",
-    "mission_template": "dayzOffline.deadfall",
-    "mission_source": "Creator Discord — Workshop page removed; obtain mod files directly from creator",
-    "note": "10x10km CQB funnel design. Verify terrain key from @Deadfall/addons before first boot."
+    "mission_template": "dayz.Deadfall",
+    "mission_source": "Steam Workshop ID 3050117454 — subscribed and downloaded",
+    "terrain_template": "Deadfall",
+    "note": "10x10km CQB funnel design by Raytone. Self-contained — no external mod dependencies. Junction created at @Deadfall. serverDZ_Deadfall.cfg needs: template = Deadfall;"
   }
 }

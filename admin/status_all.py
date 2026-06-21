@@ -21,8 +21,8 @@ MAPS = {
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
     "winterchernarus": "RegularWinter.chernarusplus",
-    "bitterroot": "dayzOffline.bitterroot",
-    "deadfall": "dayzOffline.deadfall",
+    "bitterroot": "empty.Bitterroot",
+    "deadfall": "dayz.Deadfall",
 }
 
 IMPORTED = {"deerisle", "banov", "esseker", "rostow", "iztek", "alteria", "bitterroot", "deadfall"}

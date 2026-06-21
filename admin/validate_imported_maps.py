@@ -17,6 +17,8 @@ MISSIONS = {
     "rostow": "Offline.rostow",
     "iztek": "empty.Iztek",
     "alteria": "empty.alteria",
+    "bitterroot": "empty.Bitterroot",
+    "deadfall": "dayz.Deadfall",
 }
 
 PROFILES = {
@@ -26,6 +28,8 @@ PROFILES = {
     "rostow": "profiles_rostow",
     "iztek": "profiles_iztek",
     "alteria": "profiles_alteria",
+    "bitterroot": "profiles_bitterroot",
+    "deadfall": "profiles_deadfall",
 }
 
 RISKY_DIRS = [
