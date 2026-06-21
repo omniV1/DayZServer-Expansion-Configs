@@ -40,7 +40,48 @@ MAP_OVERRIDES = {
             "min_steepness": "-90",
             "max_steepness": "90",
         },
-    }
+    },
+    # Bitterroot ships with max_dist_static=2 which requires spawns to be within
+    # 2m of a static object — almost impossible for its rural bubble positions.
+    "bitterroot": {
+        "spawn_params": {
+            "min_dist_infected": "20.0",
+            "max_dist_infected": "150.0",
+            "min_dist_player": "25.0",
+            "max_dist_player": "300.0",
+            "min_dist_static": "0.0",
+            "max_dist_static": "300.0",
+        },
+        "generator_params": {
+            "grid_density": "6",
+            "grid_width": "300.0",
+            "grid_height": "300.0",
+            "min_dist_static": "0.0",
+            "max_dist_static": "300.0",
+            "min_steepness": "-45",
+            "max_steepness": "45",
+        },
+    },
+    # Deadfall: same default issue, relax static-object constraint.
+    "deadfall": {
+        "spawn_params": {
+            "min_dist_infected": "20.0",
+            "max_dist_infected": "150.0",
+            "min_dist_player": "25.0",
+            "max_dist_player": "300.0",
+            "min_dist_static": "0.0",
+            "max_dist_static": "300.0",
+        },
+        "generator_params": {
+            "grid_density": "6",
+            "grid_width": "300.0",
+            "grid_height": "300.0",
+            "min_dist_static": "0.0",
+            "max_dist_static": "300.0",
+            "min_steepness": "-45",
+            "max_steepness": "45",
+        },
+    },
 }
 
 
