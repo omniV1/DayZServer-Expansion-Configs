@@ -250,5 +250,37 @@ class ActionRegistryTests(unittest.TestCase):
             self.assertIn(spec.map_mode, valid, f"{key} has bad map_mode {spec.map_mode}")
 
 
+class ReadJsonResilienceTests(unittest.TestCase):
+    """A corrupt/half-written config must degrade to default, never crash startup."""
+
+    def setUp(self) -> None:
+        import tempfile
+
+        self._dir = tempfile.mkdtemp(prefix="cc-readjson-")
+
+    def tearDown(self) -> None:
+        import shutil
+
+        shutil.rmtree(self._dir, ignore_errors=True)
+
+    def test_missing_returns_default(self) -> None:
+        self.assertEqual(cc.read_json(Path(self._dir) / "nope.json", {"d": 1}), {"d": 1})
+
+    def test_valid_json_parsed(self) -> None:
+        p = Path(self._dir) / "ok.json"
+        p.write_text('{"a": 2}', encoding="utf-8")
+        self.assertEqual(cc.read_json(p, {}), {"a": 2})
+
+    def test_corrupt_json_returns_default(self) -> None:
+        p = Path(self._dir) / "bad.json"
+        p.write_text('{"a": 2', encoding="utf-8")  # truncated / half-written
+        self.assertEqual(cc.read_json(p, {"fallback": True}), {"fallback": True})
+
+    def test_garbage_returns_default(self) -> None:
+        p = Path(self._dir) / "junk.json"
+        p.write_text("not json at all \x00\xff", encoding="latin-1")
+        self.assertEqual(cc.read_json(p, []), [])
+
+
 if __name__ == "__main__":
     unittest.main()

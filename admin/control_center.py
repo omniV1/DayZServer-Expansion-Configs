@@ -79,7 +79,13 @@ REDACTIONS = [
 def read_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError) as exc:
+        # A corrupt or half-written config must degrade to its default rather than
+        # crash startup (schedules/watchdog/map_launch are read before serve_forever).
+        log_message(f"Ignoring unreadable JSON {path}: {exc}")
+        return default
 
 
 def write_json(path: Path, data: Any) -> None:
