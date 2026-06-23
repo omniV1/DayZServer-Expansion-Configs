@@ -78,13 +78,96 @@ function Show-Status {
     return $pids
 }
 
+function Get-PythonExe {
+    foreach ($name in @('python', 'py')) {
+        $cmd = Get-Command $name -ErrorAction SilentlyContinue
+        if ($cmd) { return $cmd.Source }
+    }
+    return $null
+}
+
+function Get-RconConfig {
+    # Read the map's BattlEye RCon port/password the same way the control center
+    # does: the master BEServer_x64.cfg plus any newer active variants BattlEye
+    # rewrites once a server boots. Returns $null when RCon is not configured.
+    $profileDir = if ($MapCfg.profiles_dir) { [string]$MapCfg.profiles_dir } else { "profiles_$Map" }
+    $beFolder = Join-Path $ServerRoot (Join-Path $profileDir 'BattlEye\battleye')
+    if (-not (Test-Path $beFolder)) { return $null }
+
+    $candidates = @()
+    $master = Join-Path $beFolder 'BEServer_x64.cfg'
+    if (Test-Path $master) { $candidates += $master }
+    $candidates += Get-ChildItem -Path $beFolder -Filter 'BEServer_x64_active_*.cfg' -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending | ForEach-Object { $_.FullName }
+
+    foreach ($cfg in $candidates) {
+        $text = Get-Content $cfg -Raw -ErrorAction SilentlyContinue
+        if (-not $text) { continue }
+        $passMatch = [regex]::Match($text, '(?im)^\s*RConPassword\s+(\S+)')
+        if (-not $passMatch.Success) { continue }
+        $portMatch = [regex]::Match($text, '(?im)^\s*RConPort\s+(\d+)')
+        $port = if ($portMatch.Success) { [int]$portMatch.Groups[1].Value } else { $GamePort + 4 }
+        return @{ Port = $port; Password = $passMatch.Groups[1].Value }
+    }
+    return $null
+}
+
+function Invoke-GracefulShutdown {
+    param([int]$TimeoutSeconds = 30)
+
+    $rcon = Get-RconConfig
+    if (-not $rcon) {
+        Write-Host "RCon is not configured for $Map; cannot stop cleanly. Enable RCon in the control center so future stops flush persistence instead of force-killing."
+        return $false
+    }
+    $client = Join-Path $PSScriptRoot 'rcon_client.py'
+    if (-not (Test-Path $client)) { return $false }
+    $python = Get-PythonExe
+    if (-not $python) {
+        Write-Host "Python was not found on PATH; cannot send RCon #shutdown."
+        return $false
+    }
+
+    Write-Host "Sending RCon #shutdown to $Map (port $($rcon.Port)) so it can flush persistence ..."
+    & $python $client --host 127.0.0.1 --port $rcon.Port --password $rcon.Password --command '#shutdown' --timeout 6 | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "RCon #shutdown could not be delivered; will fall back to force-stop."
+        return $false
+    }
+
+    # A clean shutdown writes the final CE save, so wait for the process to exit
+    # on its own rather than killing it mid-write.
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        Start-Sleep -Seconds 2
+        if ((Get-MapServerPids).Count -eq 0) {
+            Write-Host "$Map shut down cleanly."
+            return $true
+        }
+    }
+    Write-Host "$Map did not exit within $TimeoutSeconds s after #shutdown."
+    return $false
+}
+
 function Stop-MapServer {
     $pids = Get-MapServerPids
     if ($pids.Count -eq 0) {
         Write-Host "No DayZServer_x64 process is bound to $Map ports ($([string]::Join(', ', $Ports)))."
         return $true
     }
-    Write-Host "Stopping DayZServer_x64 PID(s) for ${Map}: $([string]::Join(', ', $pids))"
+    # Prefer a clean RCon #shutdown: force-killing the process while its periodic
+    # [IdleMode] save is mid-write is the classic cause of "Serious stream damage"
+    # in storage_*/data/dynamic_*.bin. Force-stop is only the last resort.
+    if (Invoke-GracefulShutdown) {
+        Write-Host "Stopped $Map."
+        return $true
+    }
+    $pids = Get-MapServerPids
+    if ($pids.Count -eq 0) {
+        Write-Host "Stopped $Map."
+        return $true
+    }
+    Write-Host "Force-stopping DayZServer_x64 PID(s) for ${Map}: $([string]::Join(', ', $pids))"
     foreach ($procId in $pids) {
         Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue
     }
