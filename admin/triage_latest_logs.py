@@ -27,6 +27,11 @@ WARNING_PATTERNS = [
     ("generic", re.compile(r"\bwarning\b|!!!", re.I)),
 ]
 
+# Storage corruption is logged during CE load at boot (top of the RPT), so it is
+# scanned from the head separately from the tail-based fatal/warning scan.
+STREAM_DAMAGE_RE = re.compile(r"Serious stream damage detected", re.I)
+ITEMS_FAILED_RE = re.compile(r"\b(\d+)\s+items loaded\.\s*\((\d+)\s+failed\)", re.I)
+
 
 @dataclass
 class Finding:
@@ -62,6 +67,21 @@ def tail_lines(path: Path, limit: int) -> list[str]:
     return text.splitlines()[-limit:]
 
 
+def storage_damage(path: Path, head: int = 8000) -> tuple[int, int]:
+    """(stream-damage events, items failed to load) from the boot CE load."""
+    damage = failed = 0
+    with path.open("r", encoding="utf-8-sig", errors="replace") as handle:
+        for index, line in enumerate(handle):
+            if index >= head:
+                break
+            if STREAM_DAMAGE_RE.search(line):
+                damage += 1
+            match = ITEMS_FAILED_RE.search(line)
+            if match:
+                failed += int(match.group(2))
+    return damage, failed
+
+
 def collect_findings(lines: list[str], patterns: list[tuple[str, re.Pattern[str]]], max_per_label: int) -> list[Finding]:
     counts: dict[str, int] = {}
     findings: list[Finding] = []
@@ -95,6 +115,12 @@ def summarize_map(map_name: str, config: dict, tail: int, max_per_label: int) ->
     elif warnings:
         labels = ", ".join(sorted({finding.label for finding in warnings}))
         print(f"  warnings: {labels}")
+    damage, failed = storage_damage(log)
+    if damage or failed:
+        print(
+            f"  storage: {damage} stream-damage events, {failed} items failed to load "
+            f"(back up storage; restore last-good if this keeps climbing)"
+        )
     if not fatals and not connect_ready:
         print("  hint: no recent 'Player connect enabled' line in scanned tail")
     return 1 if fatals else 0

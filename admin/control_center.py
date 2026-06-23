@@ -75,11 +75,24 @@ REDACTIONS = [
     (re.compile(r"\bgho_[A-Za-z0-9_]+\b"), "<token>"),
 ]
 
+# Storage-corruption signatures the engine prints while loading storage_*/data
+# on boot: a per-record "stream damage" line, and a per-file "N items loaded.
+# (M failed)" summary. Used to surface persistence health, not as a fatal blocker
+# (the server still boots and auto-restores from rolling .bin backups).
+STREAM_DAMAGE_RE = re.compile(r"Serious stream damage detected", re.I)
+ITEMS_FAILED_RE = re.compile(r"\b(\d+)\s+items loaded\.\s*\((\d+)\s+failed\)", re.I)
+
 
 def read_json(path: Path, default: Any) -> Any:
     if not path.exists():
         return default
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError) as exc:
+        # A corrupt or half-written config must degrade to its default rather than
+        # crash startup (schedules/watchdog/map_launch are read before serve_forever).
+        log_message(f"Ignoring unreadable JSON {path}: {exc}")
+        return default
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -262,6 +275,27 @@ def imported_maps() -> set[str]:
     return {str(value) for value in values}
 
 
+def require_map(name: Any) -> str:
+    """Lowercase a map name and confirm it is a configured map, else ValueError."""
+    name = str(name or "").lower()
+    if name not in map_configs():
+        raise ValueError(f"Unknown map: {name}")
+    return name
+
+
+def query_map(query: dict[str, list[str]]) -> str:
+    """First ?map= value, lowercased (empty string when absent)."""
+    return str(query.get("map", [""])[0]).lower()
+
+
+def query_int(query: dict[str, list[str]], key: str, default: int) -> int:
+    """Parse a single integer query param, falling back to default on junk."""
+    try:
+        return int(query.get(key, [str(default)])[0])
+    except (ValueError, TypeError):
+        return default
+
+
 def redact(text: str) -> str:
     out = text
     for pattern, replacement in REDACTIONS:
@@ -275,6 +309,37 @@ def tail_file(path: Path, limit: int) -> list[str]:
         for line in handle:
             lines.append(redact(line.rstrip("\r\n")))
     return list(lines)
+
+
+def head_file(path: Path, limit: int) -> list[str]:
+    """First `limit` lines (redacted). Storage load is logged at boot, near the
+    top of each per-launch RPT, so this is what storage-health scanning reads."""
+    lines: list[str] = []
+    with path.open("r", encoding="utf-8-sig", errors="replace") as handle:
+        for line in handle:
+            lines.append(redact(line.rstrip("\r\n")))
+            if len(lines) >= limit:
+                break
+    return lines
+
+
+def parse_storage_health(lines: list[str]) -> dict[str, int]:
+    """Count storage-corruption signals in CE load output (pure)."""
+    damage_events = 0
+    items_loaded = 0
+    items_failed = 0
+    for line in lines:
+        if STREAM_DAMAGE_RE.search(line):
+            damage_events += 1
+        match = ITEMS_FAILED_RE.search(line)
+        if match:
+            items_loaded += int(match.group(1))
+            items_failed += int(match.group(2))
+    return {
+        "damageEvents": damage_events,
+        "itemsLoaded": items_loaded,
+        "itemsFailed": items_failed,
+    }
 
 
 def newest_log(profile_dir: Path) -> Path | None:
@@ -638,6 +703,56 @@ def mission_dir_for_map(map_name: str) -> Path:
     return path
 
 
+def storage_dirs_for_map(map_name: str) -> list[Path]:
+    """The map's storage_* persistence folders (best effort, empty on any miss)."""
+    try:
+        base = mission_dir_for_map(map_name)
+    except ValueError:
+        return []
+    return sorted(path for path in base.glob("storage_*") if path.is_dir())
+
+
+def storage_backup_root() -> Path:
+    return ROOT / "local_backups" / "storage"
+
+
+def list_storage_backups(map_name: str) -> list[dict[str, Any]]:
+    folder = storage_backup_root() / map_name
+    if not folder.exists():
+        return []
+    items: list[dict[str, Any]] = []
+    for zip_path in sorted(folder.glob("*.zip"), key=lambda p: p.stat().st_mtime, reverse=True):
+        stat = zip_path.stat()
+        items.append(
+            {
+                "name": zip_path.name,
+                "sizeBytes": stat.st_size,
+                "createdAt": dt.datetime.fromtimestamp(stat.st_mtime).isoformat(timespec="seconds"),
+            }
+        )
+    return items
+
+
+def storage_health_payload(map_name: str) -> dict[str, Any]:
+    map_name = require_map(map_name)
+    profile = map_configs()[map_name].get("profiles_dir") or f"profiles_{map_name}"
+    log = newest_log(ROOT / profile)
+    health: dict[str, Any] = {
+        "map": map_name,
+        "file": None,
+        "damageEvents": 0,
+        "itemsLoaded": 0,
+        "itemsFailed": 0,
+        "checkedAt": dt.datetime.now().isoformat(timespec="seconds"),
+    }
+    if log:
+        health.update(parse_storage_health(head_file(log, 8000)))
+        health["file"] = safe_rel(log)
+    health["storageDirs"] = [safe_rel(path) for path in storage_dirs_for_map(map_name)]
+    health["backups"] = list_storage_backups(map_name)
+    return health
+
+
 def clamp_number(value: Any, name: str, min_value: float, max_value: float, integer: bool = False) -> int | float:
     try:
         number = int(value) if integer else float(value)
@@ -985,11 +1100,8 @@ BE_CONFIG_NAME = "BEServer_x64.cfg"
 
 
 def rcon_map(payload_or_name: Any) -> str:
-    name = (payload_or_name.get("map") if isinstance(payload_or_name, dict) else payload_or_name) or ""
-    name = str(name).lower()
-    if name not in map_configs():
-        raise ValueError(f"Unknown map: {name}")
-    return name
+    name = payload_or_name.get("map") if isinstance(payload_or_name, dict) else payload_or_name
+    return require_map(name)
 
 
 def map_profile_dir(map_name: str) -> Path:
@@ -2389,8 +2501,7 @@ def read_events(map_name: str) -> list[dict[str, Any]]:
 
 
 def events_payload(map_name: str) -> dict[str, Any]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     events = read_events(map_name)
     path = events_file_for_map(map_name)
     return {
@@ -2403,8 +2514,7 @@ def events_payload(map_name: str) -> dict[str, Any]:
 
 
 def validate_events_payload(map_name: str, changes: Any) -> dict[str, dict[str, int]]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     if not isinstance(changes, dict):
         raise ValueError("events must be an object of event name to fields.")
     known = {entry["name"] for entry in read_events(map_name)}
@@ -2704,9 +2814,7 @@ def mission_quest_json(
 
 
 def validate_mission_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    map_name = str(payload.get("map") or "").lower()
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(payload.get("map"))
     mtype = str(payload.get("type") or "")
     if mtype not in MISSION_TYPES:
         raise ValueError(f"Unknown mission type: {mtype}")
@@ -2779,8 +2887,7 @@ def build_mission_files(spec: dict[str, Any], quest_id: int) -> list[tuple[str, 
 
 
 def missions_payload(map_name: str) -> dict[str, Any]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     quests = quests_dir_for_map(map_name) / "Quests"
     missions: list[dict[str, Any]] = []
     for quest_id in existing_mission_ids(map_name):
@@ -2860,9 +2967,7 @@ def install_mission(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate_mission_ref(payload: dict[str, Any]) -> tuple[str, int, Path]:
-    map_name = str(payload.get("map") or "").lower()
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(payload.get("map"))
     try:
         quest_id = int(payload.get("id"))
     except (TypeError, ValueError) as exc:
@@ -3015,7 +3120,7 @@ def imported_or_all(payload: dict[str, Any], maps: dict[str, Any]) -> str:
     return value
 
 
-def action_specs() -> dict[str, ActionSpec]:
+def _build_action_specs() -> dict[str, ActionSpec]:
     return {
         "status_all": ActionSpec(
             "Status all maps",
@@ -3096,6 +3201,18 @@ def action_specs() -> dict[str, ActionSpec]:
             "guarded",
             lambda _p, _m: [python_file("snapshot_configs.py", "--label", "control-center")],
             timeout=240,
+        ),
+        "backup_storage": ActionSpec(
+            "Back up map storage",
+            "backup",
+            "Zip the selected map's CE persistence (storage_*) to local_backups with rotation. Back up while the map is stopped for a consistent restore point.",
+            "guarded",
+            lambda _p, m: [
+                python_file("backup_storage.py", "--map", m) if m and m != "all"
+                else python_file("backup_storage.py", "--all")
+            ],
+            map_mode="all",
+            timeout=600,
         ),
         "apply_loot_current": ActionSpec(
             "Apply active loot preset",
@@ -3313,6 +3430,18 @@ def action_specs() -> dict[str, ActionSpec]:
     }
 
 
+_ACTION_SPECS: dict[str, ActionSpec] | None = None
+
+
+def action_specs() -> dict[str, ActionSpec]:
+    # The registry is static (builders are closures evaluated lazily), so build
+    # it once instead of reconstructing every spec + lambda on each request.
+    global _ACTION_SPECS
+    if _ACTION_SPECS is None:
+        _ACTION_SPECS = _build_action_specs()
+    return _ACTION_SPECS
+
+
 @dataclass
 class Job:
     id: str
@@ -3392,6 +3521,31 @@ class JobStore:
 CONFIG: dict[str, Any] = {}
 JOBS = JobStore(50)
 
+# Actions that start/stop a server process. Two of these for the SAME map must
+# never run concurrently (UI + scheduler + watchdog all reach start_action),
+# or a start can race a stop / a map can be double-launched.
+LIFECYCLE_ACTIONS = {"start_map", "stop_map", "restart_map", "smoke_test_map", "recover_imported_map"}
+_INFLIGHT_LOCK = threading.Lock()
+_INFLIGHT_MAPS: set[str] = set()
+
+
+def _reserve_lifecycle(action: str, selected_map: str | None) -> None:
+    if action not in LIFECYCLE_ACTIONS or not selected_map:
+        return
+    with _INFLIGHT_LOCK:
+        if selected_map in _INFLIGHT_MAPS:
+            raise ValueError(
+                f"A lifecycle action is already running for {selected_map}. Wait for it to finish."
+            )
+        _INFLIGHT_MAPS.add(selected_map)
+
+
+def _release_lifecycle(action: str, selected_map: str | None) -> None:
+    if action not in LIFECYCLE_ACTIONS or not selected_map:
+        return
+    with _INFLIGHT_LOCK:
+        _INFLIGHT_MAPS.discard(selected_map)
+
 
 def command_display(args: list[str]) -> str:
     display = []
@@ -3445,22 +3599,29 @@ def start_action(payload: dict[str, Any]) -> Job:
     if spec.confirm and confirm != spec.confirm:
         raise ValueError(f"Action requires confirmation text: {spec.confirm}")
     selected_map = selected_map_for(spec, payload)
-    commands = spec.builder(payload, selected_map)
-    if not commands:
-        raise ValueError("Action has no commands.")
+    _reserve_lifecycle(action, selected_map)
+    try:
+        commands = spec.builder(payload, selected_map)
+        if not commands:
+            raise ValueError("Action has no commands.")
 
-    job = Job(
-        id=uuid.uuid4().hex[:12],
-        action=action,
-        label=spec.label,
-        map=selected_map,
-        risk=spec.risk,
-        commands=[command_display(command) for command in commands],
-    )
-    JOBS.add(job)
-    thread = threading.Thread(target=run_job, args=(job, spec, commands), daemon=True)
-    thread.start()
-    return job
+        job = Job(
+            id=uuid.uuid4().hex[:12],
+            action=action,
+            label=spec.label,
+            map=selected_map,
+            risk=spec.risk,
+            commands=[command_display(command) for command in commands],
+        )
+        JOBS.add(job)
+        thread = threading.Thread(target=run_job, args=(job, spec, commands), daemon=True)
+        thread.start()
+        return job
+    except Exception:
+        # Nothing is running yet (we never reached thread.start, or it raised
+        # before), so release the reservation here; run_job owns it afterwards.
+        _release_lifecycle(action, selected_map)
+        raise
 
 
 def run_job(job: Job, spec: ActionSpec, commands: list[list[str]]) -> None:
@@ -3494,6 +3655,7 @@ def run_job(job: Job, spec: ActionSpec, commands: list[list[str]]) -> None:
     finally:
         job.ended_at = dt.datetime.now().isoformat(timespec="seconds")
         JOBS.update(job)
+        _release_lifecycle(job.action, job.map)
 
 
 def actions_payload() -> list[dict[str, Any]]:
@@ -3525,6 +3687,38 @@ def logs_payload(map_name: str, limit: int) -> dict[str, Any]:
     return {"map": map_name, "file": safe_rel(log), "lines": tail_file(log, max_lines)}
 
 
+def _post_setup_save(payload: dict[str, Any]) -> dict[str, Any]:
+    write_setup_state(payload)
+    return setup_payload()
+
+
+# Single source of truth for POST routes: path -> handler(payload) -> JSON body
+# (always answered 200). "/api/actions/run" is handled separately because it
+# returns 202 with the job dict. Keeping one table removes the prior drift risk
+# where the allow-set and the if/elif dispatch could fall out of sync.
+POST_HANDLERS: dict[str, Callable[[dict[str, Any]], Any]] = {
+    "/api/balance/save": save_balance,
+    "/api/balance/preview": preview_balance,
+    "/api/events/preview": preview_events,
+    "/api/events/save": save_events,
+    "/api/missions/preview": preview_mission,
+    "/api/missions/install": install_mission,
+    "/api/missions/update/preview": preview_mission_update,
+    "/api/missions/update": update_mission,
+    "/api/missions/remove": remove_mission,
+    "/api/setup/save": _post_setup_save,
+    "/api/rcon/enable": enable_rcon,
+    "/api/rcon/run": run_rcon,
+    "/api/schedules/save": SCHEDULER.save_schedule,
+    "/api/schedules/remove": SCHEDULER.remove_schedule,
+    "/api/updates/settings": save_updates_settings,
+    "/api/players/note": save_player_note,
+    "/api/watchdog/set": WATCHDOG.set_enabled,
+}
+
+ACTIONS_RUN_PATH = "/api/actions/run"
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "DayZControlCenter/1.0"
 
@@ -3541,7 +3735,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def send_error_json(self, status: int, message: str) -> None:
-        self.send_json(status, {"error": message})
+        # Run every client-facing error through redact() so a raw exception
+        # (e.g. a 500 carrying an absolute path or secret) can't leak details.
+        self.send_json(status, {"error": redact(str(message))})
 
     def _valid_host(self) -> bool:
         host = (self.headers.get("Host", "") or "").split(":")[0].lower()
@@ -3572,11 +3768,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/troubleshooting":
                 self.send_json(200, troubleshooting_payload())
             elif path == "/api/events":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, events_payload(map_name))
+                self.send_json(200, events_payload(query_map(query)))
             elif path == "/api/missions":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, missions_payload(map_name))
+                self.send_json(200, missions_payload(query_map(query)))
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
@@ -3593,20 +3787,14 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.send_json(200, job.to_dict())
             elif path == "/api/logs":
-                map_name = str(query.get("map", [""])[0]).lower()
-                try:
-                    limit = int(query.get("lines", ["200"])[0])
-                except (ValueError, TypeError):
-                    limit = 200
-                self.send_json(200, logs_payload(map_name, limit))
+                self.send_json(200, logs_payload(query_map(query), query_int(query, "lines", 200)))
             elif path == "/api/report":
                 map_name = str(query.get("map", ["all"])[0]).lower()
                 self.send_json(200, report_payload(map_name))
             elif path == "/api/snapshots":
                 self.send_json(200, snapshots_payload())
             elif path == "/api/rcon/status":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, rcon_status_payload(rcon_map(map_name)))
+                self.send_json(200, rcon_status_payload(rcon_map(query_map(query))))
             elif path == "/api/schedules":
                 self.send_json(200, SCHEDULER.payload())
             elif path == "/api/updates/status":
@@ -3618,16 +3806,12 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, lan_visibility_payload())
             elif path == "/api/watchdog":
                 self.send_json(200, WATCHDOG.payload())
+            elif path == "/api/storage/health":
+                self.send_json(200, storage_health_payload(query_map(query)))
             elif path == "/api/players":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, players_payload(map_name))
+                self.send_json(200, players_payload(query_map(query)))
             elif path == "/api/killfeed":
-                map_name = str(query.get("map", [""])[0]).lower()
-                try:
-                    limit = int(query.get("limit", ["60"])[0])
-                except (ValueError, TypeError):
-                    limit = 60
-                self.send_json(200, killfeed_payload(map_name, limit))
+                self.send_json(200, killfeed_payload(query_map(query), query_int(query, "limit", 60)))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:
@@ -3636,7 +3820,7 @@ class Handler(BaseHTTPRequestHandler):
             if self.path.startswith("/api/"):
                 self.send_error_json(500, str(exc))
             else:
-                self.send_error(500, str(exc))
+                self.send_error(500, redact(str(exc)))
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:
@@ -3646,27 +3830,8 @@ class Handler(BaseHTTPRequestHandler):
             if self._reject_csrf():
                 self.send_error_json(403, "Cross-origin requests are not allowed.")
                 return
-            parsed = urlparse(self.path)
-            if parsed.path not in {
-                "/api/actions/run",
-                "/api/balance/save",
-                "/api/balance/preview",
-                "/api/events/preview",
-                "/api/events/save",
-                "/api/missions/preview",
-                "/api/missions/install",
-                "/api/missions/update/preview",
-                "/api/missions/update",
-                "/api/missions/remove",
-                "/api/setup/save",
-                "/api/rcon/enable",
-                "/api/rcon/run",
-                "/api/schedules/save",
-                "/api/schedules/remove",
-                "/api/updates/settings",
-                "/api/players/note",
-                "/api/watchdog/set",
-            }:
+            path = urlparse(self.path).path
+            if path != ACTIONS_RUN_PATH and path not in POST_HANDLERS:
                 self.send_error_json(404, "Unknown API route.")
                 return
             try:
@@ -3678,48 +3843,17 @@ class Handler(BaseHTTPRequestHandler):
                 return
             raw = self.rfile.read(length).decode("utf-8")
             payload = json.loads(raw or "{}")
-            if parsed.path == "/api/balance/save":
-                self.send_json(200, save_balance(payload))
-            elif parsed.path == "/api/balance/preview":
-                self.send_json(200, preview_balance(payload))
-            elif parsed.path == "/api/events/preview":
-                self.send_json(200, preview_events(payload))
-            elif parsed.path == "/api/events/save":
-                self.send_json(200, save_events(payload))
-            elif parsed.path == "/api/missions/preview":
-                self.send_json(200, preview_mission(payload))
-            elif parsed.path == "/api/missions/install":
-                self.send_json(200, install_mission(payload))
-            elif parsed.path == "/api/missions/update/preview":
-                self.send_json(200, preview_mission_update(payload))
-            elif parsed.path == "/api/missions/update":
-                self.send_json(200, update_mission(payload))
-            elif parsed.path == "/api/missions/remove":
-                self.send_json(200, remove_mission(payload))
-            elif parsed.path == "/api/setup/save":
-                write_setup_state(payload)
-                self.send_json(200, setup_payload())
-            elif parsed.path == "/api/rcon/enable":
-                self.send_json(200, enable_rcon(payload))
-            elif parsed.path == "/api/rcon/run":
-                self.send_json(200, run_rcon(payload))
-            elif parsed.path == "/api/schedules/save":
-                self.send_json(200, SCHEDULER.save_schedule(payload))
-            elif parsed.path == "/api/schedules/remove":
-                self.send_json(200, SCHEDULER.remove_schedule(payload))
-            elif parsed.path == "/api/updates/settings":
-                self.send_json(200, save_updates_settings(payload))
-            elif parsed.path == "/api/players/note":
-                self.send_json(200, save_player_note(payload))
-            elif parsed.path == "/api/watchdog/set":
-                self.send_json(200, WATCHDOG.set_enabled(payload))
-            else:
+            if path == ACTIONS_RUN_PATH:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())
+            else:
+                self.send_json(200, POST_HANDLERS[path](payload))
+        except json.JSONDecodeError as exc:
+            # Must precede ValueError: JSONDecodeError subclasses ValueError, so
+            # the order matters or this branch is dead and loses its prefix.
+            self.send_error_json(400, f"Invalid JSON: {exc}")
         except ValueError as exc:
             self.send_error_json(400, str(exc))
-        except json.JSONDecodeError as exc:
-            self.send_error_json(400, f"Invalid JSON: {exc}")
         except Exception as exc:  # noqa: BLE001
             self.send_error_json(500, str(exc))
 
