@@ -3398,6 +3398,31 @@ class JobStore:
 CONFIG: dict[str, Any] = {}
 JOBS = JobStore(50)
 
+# Actions that start/stop a server process. Two of these for the SAME map must
+# never run concurrently (UI + scheduler + watchdog all reach start_action),
+# or a start can race a stop / a map can be double-launched.
+LIFECYCLE_ACTIONS = {"start_map", "stop_map", "restart_map", "smoke_test_map", "recover_imported_map"}
+_INFLIGHT_LOCK = threading.Lock()
+_INFLIGHT_MAPS: set[str] = set()
+
+
+def _reserve_lifecycle(action: str, selected_map: str | None) -> None:
+    if action not in LIFECYCLE_ACTIONS or not selected_map:
+        return
+    with _INFLIGHT_LOCK:
+        if selected_map in _INFLIGHT_MAPS:
+            raise ValueError(
+                f"A lifecycle action is already running for {selected_map}. Wait for it to finish."
+            )
+        _INFLIGHT_MAPS.add(selected_map)
+
+
+def _release_lifecycle(action: str, selected_map: str | None) -> None:
+    if action not in LIFECYCLE_ACTIONS or not selected_map:
+        return
+    with _INFLIGHT_LOCK:
+        _INFLIGHT_MAPS.discard(selected_map)
+
 
 def command_display(args: list[str]) -> str:
     display = []
@@ -3451,22 +3476,29 @@ def start_action(payload: dict[str, Any]) -> Job:
     if spec.confirm and confirm != spec.confirm:
         raise ValueError(f"Action requires confirmation text: {spec.confirm}")
     selected_map = selected_map_for(spec, payload)
-    commands = spec.builder(payload, selected_map)
-    if not commands:
-        raise ValueError("Action has no commands.")
+    _reserve_lifecycle(action, selected_map)
+    try:
+        commands = spec.builder(payload, selected_map)
+        if not commands:
+            raise ValueError("Action has no commands.")
 
-    job = Job(
-        id=uuid.uuid4().hex[:12],
-        action=action,
-        label=spec.label,
-        map=selected_map,
-        risk=spec.risk,
-        commands=[command_display(command) for command in commands],
-    )
-    JOBS.add(job)
-    thread = threading.Thread(target=run_job, args=(job, spec, commands), daemon=True)
-    thread.start()
-    return job
+        job = Job(
+            id=uuid.uuid4().hex[:12],
+            action=action,
+            label=spec.label,
+            map=selected_map,
+            risk=spec.risk,
+            commands=[command_display(command) for command in commands],
+        )
+        JOBS.add(job)
+        thread = threading.Thread(target=run_job, args=(job, spec, commands), daemon=True)
+        thread.start()
+        return job
+    except Exception:
+        # Nothing is running yet (we never reached thread.start, or it raised
+        # before), so release the reservation here; run_job owns it afterwards.
+        _release_lifecycle(action, selected_map)
+        raise
 
 
 def run_job(job: Job, spec: ActionSpec, commands: list[list[str]]) -> None:
@@ -3500,6 +3532,7 @@ def run_job(job: Job, spec: ActionSpec, commands: list[list[str]]) -> None:
     finally:
         job.ended_at = dt.datetime.now().isoformat(timespec="seconds")
         JOBS.update(job)
+        _release_lifecycle(job.action, job.map)
 
 
 def actions_payload() -> list[dict[str, Any]]:

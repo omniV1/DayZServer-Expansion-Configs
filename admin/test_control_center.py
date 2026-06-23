@@ -282,6 +282,42 @@ class ReadJsonResilienceTests(unittest.TestCase):
         self.assertEqual(cc.read_json(p, []), [])
 
 
+class LifecycleConcurrencyTests(unittest.TestCase):
+    """Two lifecycle actions for the same map must never run at once."""
+
+    def setUp(self) -> None:
+        self._orig_map_configs = cc.map_configs
+        cc.map_configs = lambda: {"chernarus": {"title": "Chernarus", "port": 2302}}  # type: ignore[assignment]
+        cc._INFLIGHT_MAPS.clear()
+
+    def tearDown(self) -> None:
+        cc.map_configs = self._orig_map_configs  # type: ignore[assignment]
+        cc._INFLIGHT_MAPS.clear()
+
+    def test_reserve_then_double_reserve_raises(self) -> None:
+        cc._reserve_lifecycle("start_map", "chernarus")
+        with self.assertRaises(ValueError):
+            cc._reserve_lifecycle("restart_map", "chernarus")
+
+    def test_release_frees_the_map(self) -> None:
+        cc._reserve_lifecycle("start_map", "chernarus")
+        cc._release_lifecycle("start_map", "chernarus")
+        cc._reserve_lifecycle("restart_map", "chernarus")  # should not raise
+        self.assertIn("chernarus", cc._INFLIGHT_MAPS)
+
+    def test_non_lifecycle_action_is_not_reserved(self) -> None:
+        cc._reserve_lifecycle("status_all", None)
+        cc._reserve_lifecycle("apply_loot_current", None)
+        self.assertEqual(cc._INFLIGHT_MAPS, set())
+
+    def test_start_action_refuses_busy_map(self) -> None:
+        # Pre-reserve so start_action hits the guard and raises *before* it ever
+        # builds a command or spawns a thread.
+        cc._INFLIGHT_MAPS.add("chernarus")
+        with self.assertRaises(ValueError):
+            cc.start_action({"action": "start_map", "map": "chernarus"})
+
+
 class SendErrorJsonRedactionTests(unittest.TestCase):
     """Client-facing errors must not leak secrets even when an exception carries them."""
 
