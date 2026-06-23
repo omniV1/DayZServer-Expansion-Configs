@@ -3547,7 +3547,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def send_error_json(self, status: int, message: str) -> None:
-        self.send_json(status, {"error": message})
+        # Run every client-facing error through redact() so a raw exception
+        # (e.g. a 500 carrying an absolute path or secret) can't leak details.
+        self.send_json(status, {"error": redact(str(message))})
 
     def _valid_host(self) -> bool:
         host = (self.headers.get("Host", "") or "").split(":")[0].lower()
@@ -3642,7 +3644,7 @@ class Handler(BaseHTTPRequestHandler):
             if self.path.startswith("/api/"):
                 self.send_error_json(500, str(exc))
             else:
-                self.send_error(500, str(exc))
+                self.send_error(500, redact(str(exc)))
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler API.
         try:

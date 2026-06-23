@@ -282,5 +282,27 @@ class ReadJsonResilienceTests(unittest.TestCase):
         self.assertEqual(cc.read_json(p, []), [])
 
 
+class SendErrorJsonRedactionTests(unittest.TestCase):
+    """Client-facing errors must not leak secrets even when an exception carries them."""
+
+    def _handler(self):
+        handler = cc.Handler.__new__(cc.Handler)  # skip socket setup
+        captured: dict = {}
+        handler.send_json = lambda status, data: captured.update(status=status, data=data)  # type: ignore[method-assign]
+        return handler, captured
+
+    def test_redacts_rcon_password_in_error(self) -> None:
+        handler, captured = self._handler()
+        handler.send_error_json(500, "boom RConPassword s3cr3t while reading")
+        self.assertEqual(captured["status"], 500)
+        self.assertIn("<redacted>", captured["data"]["error"])
+        self.assertNotIn("s3cr3t", captured["data"]["error"])
+
+    def test_plain_message_passes_through(self) -> None:
+        handler, captured = self._handler()
+        handler.send_error_json(404, "Job not found.")
+        self.assertEqual(captured["data"]["error"], "Job not found.")
+
+
 if __name__ == "__main__":
     unittest.main()
