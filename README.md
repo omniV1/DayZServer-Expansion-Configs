@@ -59,6 +59,8 @@ Risky actions require typed confirmation, guarded edits create a local config sn
 
 ![Live Admin RCON](admin/photos/rcon.png)
 
+> **Change your RCON password.** Enabling RCON writes a randomly generated password to `<profile>\BattlEye\battleye\BEServer_x64.cfg`. The default works fine, but BattlEye echoes the password into the server `.RPT` log on every boot — so set your own `RConPassword` and treat `.RPT` files as sensitive (don't share them publicly). RCON listens on `127.0.0.1` only.
+
 **Players & Killfeed — from your `.ADM` logs**
 
 ![Players and killfeed](admin/photos/players.png)
