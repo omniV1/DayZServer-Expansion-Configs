@@ -3202,6 +3202,18 @@ def _build_action_specs() -> dict[str, ActionSpec]:
             lambda _p, _m: [python_file("snapshot_configs.py", "--label", "control-center")],
             timeout=240,
         ),
+        "backup_storage": ActionSpec(
+            "Back up map storage",
+            "backup",
+            "Zip the selected map's CE persistence (storage_*) to local_backups with rotation. Back up while the map is stopped for a consistent restore point.",
+            "guarded",
+            lambda _p, m: [
+                python_file("backup_storage.py", "--map", m) if m and m != "all"
+                else python_file("backup_storage.py", "--all")
+            ],
+            map_mode="all",
+            timeout=600,
+        ),
         "apply_loot_current": ActionSpec(
             "Apply active loot preset",
             "generation",

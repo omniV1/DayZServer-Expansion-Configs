@@ -282,6 +282,57 @@ class ReadJsonResilienceTests(unittest.TestCase):
         self.assertEqual(cc.read_json(p, []), [])
 
 
+class BackupStorageTests(unittest.TestCase):
+    """backup_storage.py: retention pruning and mission resolution."""
+
+    def setUp(self) -> None:
+        import tempfile
+
+        import backup_storage as bs
+
+        self.bs = bs
+        self._dir = Path(tempfile.mkdtemp(prefix="cc-backup-"))
+
+    def tearDown(self) -> None:
+        import shutil
+
+        shutil.rmtree(self._dir, ignore_errors=True)
+
+    def test_prune_keeps_newest_n(self) -> None:
+        import os, time
+
+        folder = self._dir / "chernarus"
+        folder.mkdir()
+        for i in range(5):
+            f = folder / f"chernarus_{i}.zip"
+            f.write_text("x")
+            os.utime(f, (time.time() + i, time.time() + i))  # i=4 newest
+        removed = self.bs.prune(folder, retention=2)
+        remaining = sorted(p.name for p in folder.glob("*.zip"))
+        self.assertEqual(len(remaining), 2)
+        self.assertEqual(remaining, ["chernarus_3.zip", "chernarus_4.zip"])
+        self.assertEqual(len(removed), 3)
+
+    def test_prune_retention_floor_is_one(self) -> None:
+        folder = self._dir / "m"
+        folder.mkdir()
+        (folder / "a.zip").write_text("x")
+        self.bs.prune(folder, retention=0)  # clamped to 1, keeps the newest
+        self.assertEqual(len(list(folder.glob("*.zip"))), 1)
+
+    def test_mission_for_reads_template(self) -> None:
+        orig_root = self.bs.ROOT
+        try:
+            self.bs.ROOT = self._dir
+            cfg = self._dir / "serverDZ.cfg"
+            cfg.write_text('hostname = "x";\ntemplate = "dayzOffline.chernarusplus";\n', encoding="utf-8")
+            self.assertEqual(self.bs.mission_for("serverDZ.cfg"), "dayzOffline.chernarusplus")
+            self.assertEqual(self.bs.mission_for("missing.cfg"), "")
+            self.assertEqual(self.bs.mission_for(""), "")
+        finally:
+            self.bs.ROOT = orig_root
+
+
 class ParseStorageHealthTests(unittest.TestCase):
     """Stream-damage / failed-item detection over CE load output."""
 
