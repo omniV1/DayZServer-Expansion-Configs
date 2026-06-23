@@ -3256,6 +3256,22 @@ def _build_action_specs() -> dict[str, ActionSpec]:
             map_mode="all",
             timeout=600,
         ),
+        "restore_storage": ActionSpec(
+            "Restore map storage",
+            "backup",
+            "Overwrite the map's live CE persistence with a storage backup (rolls back player progress). Archives the current state first. Stop the map before running.",
+            "high",
+            lambda p, m: [
+                python_file(
+                    "restore_storage.py", "--map", m or "",
+                    *(["--backup", str(p["backup"])] if p.get("backup") else []),
+                    "--yes",
+                )
+            ],
+            map_mode="one",
+            timeout=600,
+            confirm="RESTORE",
+        ),
         "apply_loot_current": ActionSpec(
             "Apply active loot preset",
             "generation",

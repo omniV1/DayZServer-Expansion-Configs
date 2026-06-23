@@ -333,6 +333,53 @@ class BackupStorageTests(unittest.TestCase):
             self.bs.ROOT = orig_root
 
 
+class RestoreStorageTests(unittest.TestCase):
+    """restore_storage.py: backup selection and name-traversal guard."""
+
+    def setUp(self) -> None:
+        import tempfile
+
+        import restore_storage as rs
+
+        self.rs = rs
+        self._orig_root = rs.BACKUP_ROOT
+        self._dir = Path(tempfile.mkdtemp(prefix="cc-restore-"))
+        rs.BACKUP_ROOT = self._dir
+
+    def tearDown(self) -> None:
+        import shutil
+
+        self.rs.BACKUP_ROOT = self._orig_root
+        shutil.rmtree(self._dir, ignore_errors=True)
+
+    def _make(self, name: str, when: float) -> None:
+        import os
+
+        folder = self._dir / "chernarus"
+        folder.mkdir(exist_ok=True)
+        f = folder / name
+        f.write_text("x")
+        os.utime(f, (when, when))
+
+    def test_picks_newest_by_default(self) -> None:
+        self._make("chernarus_1.zip", 1000)
+        self._make("chernarus_2.zip", 2000)
+        self.assertEqual(self.rs.pick_backup("chernarus", None).name, "chernarus_2.zip")
+
+    def test_picks_named_backup(self) -> None:
+        self._make("chernarus_1.zip", 1000)
+        self._make("chernarus_2.zip", 2000)
+        self.assertEqual(self.rs.pick_backup("chernarus", "chernarus_1.zip").name, "chernarus_1.zip")
+
+    def test_rejects_path_traversal_name(self) -> None:
+        self._make("chernarus_1.zip", 1000)
+        self.assertIsNone(self.rs.pick_backup("chernarus", "../escape.zip"))
+        self.assertIsNone(self.rs.pick_backup("chernarus", "notazip.txt"))
+
+    def test_none_when_no_backups(self) -> None:
+        self.assertIsNone(self.rs.pick_backup("chernarus", None))
+
+
 class ParseStorageHealthTests(unittest.TestCase):
     """Stream-damage / failed-item detection over CE load output."""
 
