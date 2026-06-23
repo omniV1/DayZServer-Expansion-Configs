@@ -355,6 +355,31 @@ class LifecycleConcurrencyTests(unittest.TestCase):
             cc.start_action({"action": "start_map", "map": "chernarus"})
 
 
+class PostRouteTableTests(unittest.TestCase):
+    """The POST route table is now the single source of truth -- lock its shape."""
+
+    def test_all_handlers_callable(self) -> None:
+        for path, handler in cc.POST_HANDLERS.items():
+            self.assertTrue(callable(handler), f"{path} handler is not callable")
+
+    def test_actions_run_is_special_cased_not_in_table(self) -> None:
+        # /api/actions/run returns 202 and is dispatched separately; it must not
+        # be in the 200-returning table or it would be double-handled.
+        self.assertNotIn(cc.ACTIONS_RUN_PATH, cc.POST_HANDLERS)
+
+    def test_expected_routes_present(self) -> None:
+        for path in (
+            "/api/balance/save",
+            "/api/missions/install",
+            "/api/missions/remove",
+            "/api/setup/save",
+            "/api/rcon/run",
+            "/api/schedules/save",
+            "/api/watchdog/set",
+        ):
+            self.assertIn(path, cc.POST_HANDLERS)
+
+
 class SendErrorJsonRedactionTests(unittest.TestCase):
     """Client-facing errors must not leak secrets even when an exception carries them."""
 

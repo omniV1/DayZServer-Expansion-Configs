@@ -3575,6 +3575,38 @@ def logs_payload(map_name: str, limit: int) -> dict[str, Any]:
     return {"map": map_name, "file": safe_rel(log), "lines": tail_file(log, max_lines)}
 
 
+def _post_setup_save(payload: dict[str, Any]) -> dict[str, Any]:
+    write_setup_state(payload)
+    return setup_payload()
+
+
+# Single source of truth for POST routes: path -> handler(payload) -> JSON body
+# (always answered 200). "/api/actions/run" is handled separately because it
+# returns 202 with the job dict. Keeping one table removes the prior drift risk
+# where the allow-set and the if/elif dispatch could fall out of sync.
+POST_HANDLERS: dict[str, Callable[[dict[str, Any]], Any]] = {
+    "/api/balance/save": save_balance,
+    "/api/balance/preview": preview_balance,
+    "/api/events/preview": preview_events,
+    "/api/events/save": save_events,
+    "/api/missions/preview": preview_mission,
+    "/api/missions/install": install_mission,
+    "/api/missions/update/preview": preview_mission_update,
+    "/api/missions/update": update_mission,
+    "/api/missions/remove": remove_mission,
+    "/api/setup/save": _post_setup_save,
+    "/api/rcon/enable": enable_rcon,
+    "/api/rcon/run": run_rcon,
+    "/api/schedules/save": SCHEDULER.save_schedule,
+    "/api/schedules/remove": SCHEDULER.remove_schedule,
+    "/api/updates/settings": save_updates_settings,
+    "/api/players/note": save_player_note,
+    "/api/watchdog/set": WATCHDOG.set_enabled,
+}
+
+ACTIONS_RUN_PATH = "/api/actions/run"
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "DayZControlCenter/1.0"
 
@@ -3684,27 +3716,8 @@ class Handler(BaseHTTPRequestHandler):
             if self._reject_csrf():
                 self.send_error_json(403, "Cross-origin requests are not allowed.")
                 return
-            parsed = urlparse(self.path)
-            if parsed.path not in {
-                "/api/actions/run",
-                "/api/balance/save",
-                "/api/balance/preview",
-                "/api/events/preview",
-                "/api/events/save",
-                "/api/missions/preview",
-                "/api/missions/install",
-                "/api/missions/update/preview",
-                "/api/missions/update",
-                "/api/missions/remove",
-                "/api/setup/save",
-                "/api/rcon/enable",
-                "/api/rcon/run",
-                "/api/schedules/save",
-                "/api/schedules/remove",
-                "/api/updates/settings",
-                "/api/players/note",
-                "/api/watchdog/set",
-            }:
+            path = urlparse(self.path).path
+            if path != ACTIONS_RUN_PATH and path not in POST_HANDLERS:
                 self.send_error_json(404, "Unknown API route.")
                 return
             try:
@@ -3716,44 +3729,11 @@ class Handler(BaseHTTPRequestHandler):
                 return
             raw = self.rfile.read(length).decode("utf-8")
             payload = json.loads(raw or "{}")
-            if parsed.path == "/api/balance/save":
-                self.send_json(200, save_balance(payload))
-            elif parsed.path == "/api/balance/preview":
-                self.send_json(200, preview_balance(payload))
-            elif parsed.path == "/api/events/preview":
-                self.send_json(200, preview_events(payload))
-            elif parsed.path == "/api/events/save":
-                self.send_json(200, save_events(payload))
-            elif parsed.path == "/api/missions/preview":
-                self.send_json(200, preview_mission(payload))
-            elif parsed.path == "/api/missions/install":
-                self.send_json(200, install_mission(payload))
-            elif parsed.path == "/api/missions/update/preview":
-                self.send_json(200, preview_mission_update(payload))
-            elif parsed.path == "/api/missions/update":
-                self.send_json(200, update_mission(payload))
-            elif parsed.path == "/api/missions/remove":
-                self.send_json(200, remove_mission(payload))
-            elif parsed.path == "/api/setup/save":
-                write_setup_state(payload)
-                self.send_json(200, setup_payload())
-            elif parsed.path == "/api/rcon/enable":
-                self.send_json(200, enable_rcon(payload))
-            elif parsed.path == "/api/rcon/run":
-                self.send_json(200, run_rcon(payload))
-            elif parsed.path == "/api/schedules/save":
-                self.send_json(200, SCHEDULER.save_schedule(payload))
-            elif parsed.path == "/api/schedules/remove":
-                self.send_json(200, SCHEDULER.remove_schedule(payload))
-            elif parsed.path == "/api/updates/settings":
-                self.send_json(200, save_updates_settings(payload))
-            elif parsed.path == "/api/players/note":
-                self.send_json(200, save_player_note(payload))
-            elif parsed.path == "/api/watchdog/set":
-                self.send_json(200, WATCHDOG.set_enabled(payload))
-            else:
+            if path == ACTIONS_RUN_PATH:
                 job = start_action(payload)
                 self.send_json(202, job.to_dict())
+            else:
+                self.send_json(200, POST_HANDLERS[path](payload))
         except ValueError as exc:
             self.send_error_json(400, str(exc))
         except json.JSONDecodeError as exc:
