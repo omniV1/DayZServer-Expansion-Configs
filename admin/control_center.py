@@ -3032,7 +3032,7 @@ def imported_or_all(payload: dict[str, Any], maps: dict[str, Any]) -> str:
     return value
 
 
-def action_specs() -> dict[str, ActionSpec]:
+def _build_action_specs() -> dict[str, ActionSpec]:
     return {
         "status_all": ActionSpec(
             "Status all maps",
@@ -3328,6 +3328,18 @@ def action_specs() -> dict[str, ActionSpec]:
             confirm="REFRESH",
         ),
     }
+
+
+_ACTION_SPECS: dict[str, ActionSpec] | None = None
+
+
+def action_specs() -> dict[str, ActionSpec]:
+    # The registry is static (builders are closures evaluated lazily), so build
+    # it once instead of reconstructing every spec + lambda on each request.
+    global _ACTION_SPECS
+    if _ACTION_SPECS is None:
+        _ACTION_SPECS = _build_action_specs()
+    return _ACTION_SPECS
 
 
 @dataclass
