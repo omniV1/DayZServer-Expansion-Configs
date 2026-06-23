@@ -3746,10 +3746,12 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(202, job.to_dict())
             else:
                 self.send_json(200, POST_HANDLERS[path](payload))
+        except json.JSONDecodeError as exc:
+            # Must precede ValueError: JSONDecodeError subclasses ValueError, so
+            # the order matters or this branch is dead and loses its prefix.
+            self.send_error_json(400, f"Invalid JSON: {exc}")
         except ValueError as exc:
             self.send_error_json(400, str(exc))
-        except json.JSONDecodeError as exc:
-            self.send_error_json(400, f"Invalid JSON: {exc}")
         except Exception as exc:  # noqa: BLE001
             self.send_error_json(500, str(exc))
 
