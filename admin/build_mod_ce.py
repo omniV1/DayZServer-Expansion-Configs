@@ -19,6 +19,10 @@ _cfg = loot_settings.load_config()
 _src = _cfg["source_mission"]
 MISSION = SERVER / "mpmissions" / _src
 MOD_CE = MISSION / "mod_ce"
+# Tech's Weapon Mod conflicts with @SNAFU Weapons (we keep SNAFU) and is not in
+# any map's mod list, so its CE entries would only spam "Type does not exist" on
+# every boot. Keep TWM out of mod_ce until/unless the mod is actually loaded.
+INCLUDE_TWM = False
 TWM_TYPES = SERVER / "@Techs Weapon Mod" / "Extras" / "TWM-TYPES.xml"
 TWM_SPAWN = SERVER / "@Techs Weapon Mod" / "Extras" / "TWM-SpawnCFG.xml"
 AWS_TYPES = SERVER / "@Advanced Weapon Scopes" / "XMLs" / "types.xml"
@@ -246,6 +250,8 @@ def twm_source_type_names() -> set[str]:
 
 
 def build_twm_types():
+    if not INCLUDE_TWM:
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<types>\n</types>\n'
     tree = ET.parse(TWM_TYPES)
     available = twm_source_type_names()
     names_set = {n for n in (TWM_GUN_NAMES + TWM_MAG_NAMES) if n in available}
@@ -312,6 +318,8 @@ def build_aws_optics():
 
 
 def build_twm_spawnable():
+    if not INCLUDE_TWM:
+        return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<spawnabletypes>\n</spawnabletypes>\n'
     raw = TWM_SPAWN.read_text(encoding="utf-8", errors="ignore")
     available = twm_source_type_names()
     chunks = []
