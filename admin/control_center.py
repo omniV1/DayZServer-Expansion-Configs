@@ -268,6 +268,27 @@ def imported_maps() -> set[str]:
     return {str(value) for value in values}
 
 
+def require_map(name: Any) -> str:
+    """Lowercase a map name and confirm it is a configured map, else ValueError."""
+    name = str(name or "").lower()
+    if name not in map_configs():
+        raise ValueError(f"Unknown map: {name}")
+    return name
+
+
+def query_map(query: dict[str, list[str]]) -> str:
+    """First ?map= value, lowercased (empty string when absent)."""
+    return str(query.get("map", [""])[0]).lower()
+
+
+def query_int(query: dict[str, list[str]], key: str, default: int) -> int:
+    """Parse a single integer query param, falling back to default on junk."""
+    try:
+        return int(query.get(key, [str(default)])[0])
+    except (ValueError, TypeError):
+        return default
+
+
 def redact(text: str) -> str:
     out = text
     for pattern, replacement in REDACTIONS:
@@ -991,11 +1012,8 @@ BE_CONFIG_NAME = "BEServer_x64.cfg"
 
 
 def rcon_map(payload_or_name: Any) -> str:
-    name = (payload_or_name.get("map") if isinstance(payload_or_name, dict) else payload_or_name) or ""
-    name = str(name).lower()
-    if name not in map_configs():
-        raise ValueError(f"Unknown map: {name}")
-    return name
+    name = payload_or_name.get("map") if isinstance(payload_or_name, dict) else payload_or_name
+    return require_map(name)
 
 
 def map_profile_dir(map_name: str) -> Path:
@@ -2395,8 +2413,7 @@ def read_events(map_name: str) -> list[dict[str, Any]]:
 
 
 def events_payload(map_name: str) -> dict[str, Any]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     events = read_events(map_name)
     path = events_file_for_map(map_name)
     return {
@@ -2409,8 +2426,7 @@ def events_payload(map_name: str) -> dict[str, Any]:
 
 
 def validate_events_payload(map_name: str, changes: Any) -> dict[str, dict[str, int]]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     if not isinstance(changes, dict):
         raise ValueError("events must be an object of event name to fields.")
     known = {entry["name"] for entry in read_events(map_name)}
@@ -2710,9 +2726,7 @@ def mission_quest_json(
 
 
 def validate_mission_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    map_name = str(payload.get("map") or "").lower()
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(payload.get("map"))
     mtype = str(payload.get("type") or "")
     if mtype not in MISSION_TYPES:
         raise ValueError(f"Unknown mission type: {mtype}")
@@ -2785,8 +2799,7 @@ def build_mission_files(spec: dict[str, Any], quest_id: int) -> list[tuple[str, 
 
 
 def missions_payload(map_name: str) -> dict[str, Any]:
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(map_name)
     quests = quests_dir_for_map(map_name) / "Quests"
     missions: list[dict[str, Any]] = []
     for quest_id in existing_mission_ids(map_name):
@@ -2866,9 +2879,7 @@ def install_mission(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def validate_mission_ref(payload: dict[str, Any]) -> tuple[str, int, Path]:
-    map_name = str(payload.get("map") or "").lower()
-    if map_name not in map_configs():
-        raise ValueError(f"Unknown map: {map_name}")
+    map_name = require_map(payload.get("map"))
     try:
         quest_id = int(payload.get("id"))
     except (TypeError, ValueError) as exc:
@@ -3613,11 +3624,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/troubleshooting":
                 self.send_json(200, troubleshooting_payload())
             elif path == "/api/events":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, events_payload(map_name))
+                self.send_json(200, events_payload(query_map(query)))
             elif path == "/api/missions":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, missions_payload(map_name))
+                self.send_json(200, missions_payload(query_map(query)))
             elif path == "/api/status":
                 self.send_json(200, status_payload())
             elif path == "/api/balance":
@@ -3634,20 +3643,14 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self.send_json(200, job.to_dict())
             elif path == "/api/logs":
-                map_name = str(query.get("map", [""])[0]).lower()
-                try:
-                    limit = int(query.get("lines", ["200"])[0])
-                except (ValueError, TypeError):
-                    limit = 200
-                self.send_json(200, logs_payload(map_name, limit))
+                self.send_json(200, logs_payload(query_map(query), query_int(query, "lines", 200)))
             elif path == "/api/report":
                 map_name = str(query.get("map", ["all"])[0]).lower()
                 self.send_json(200, report_payload(map_name))
             elif path == "/api/snapshots":
                 self.send_json(200, snapshots_payload())
             elif path == "/api/rcon/status":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, rcon_status_payload(rcon_map(map_name)))
+                self.send_json(200, rcon_status_payload(rcon_map(query_map(query))))
             elif path == "/api/schedules":
                 self.send_json(200, SCHEDULER.payload())
             elif path == "/api/updates/status":
@@ -3660,15 +3663,9 @@ class Handler(BaseHTTPRequestHandler):
             elif path == "/api/watchdog":
                 self.send_json(200, WATCHDOG.payload())
             elif path == "/api/players":
-                map_name = str(query.get("map", [""])[0]).lower()
-                self.send_json(200, players_payload(map_name))
+                self.send_json(200, players_payload(query_map(query)))
             elif path == "/api/killfeed":
-                map_name = str(query.get("map", [""])[0]).lower()
-                try:
-                    limit = int(query.get("limit", ["60"])[0])
-                except (ValueError, TypeError):
-                    limit = 60
-                self.send_json(200, killfeed_payload(map_name, limit))
+                self.send_json(200, killfeed_payload(query_map(query), query_int(query, "limit", 60)))
             elif path.startswith("/api/"):
                 self.send_error_json(404, "Unknown API route.")
             else:

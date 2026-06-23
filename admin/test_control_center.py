@@ -282,6 +282,43 @@ class ReadJsonResilienceTests(unittest.TestCase):
         self.assertEqual(cc.read_json(p, []), [])
 
 
+class QueryHelperTests(unittest.TestCase):
+    def test_query_map_lowercases(self) -> None:
+        self.assertEqual(cc.query_map({"map": ["CherNarus"]}), "chernarus")
+
+    def test_query_map_absent_is_empty(self) -> None:
+        self.assertEqual(cc.query_map({}), "")
+
+    def test_query_int_parses(self) -> None:
+        self.assertEqual(cc.query_int({"lines": ["50"]}, "lines", 200), 50)
+
+    def test_query_int_default_on_missing(self) -> None:
+        self.assertEqual(cc.query_int({}, "lines", 200), 200)
+
+    def test_query_int_default_on_junk(self) -> None:
+        self.assertEqual(cc.query_int({"lines": ["abc"]}, "lines", 200), 200)
+
+
+class RequireMapTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._orig = cc.map_configs
+        cc.map_configs = lambda: {"chernarus": {}}  # type: ignore[assignment]
+
+    def tearDown(self) -> None:
+        cc.map_configs = self._orig  # type: ignore[assignment]
+
+    def test_lowercases_and_returns(self) -> None:
+        self.assertEqual(cc.require_map("CHERNARUS"), "chernarus")
+
+    def test_unknown_raises(self) -> None:
+        with self.assertRaises(ValueError):
+            cc.require_map("atlantis")
+
+    def test_none_raises(self) -> None:
+        with self.assertRaises(ValueError):
+            cc.require_map(None)
+
+
 class LifecycleConcurrencyTests(unittest.TestCase):
     """Two lifecycle actions for the same map must never run at once."""
 
