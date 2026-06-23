@@ -255,6 +255,7 @@ def load_config() -> dict[str, Any]:
         "snapshot_before_mutation": True,
         "job_retention": 50,
         "max_log_lines": 400,
+        "preflight_on_start": True,
     }
     data = read_json(CONFIG_PATH, {})
     defaults.update(data)
@@ -422,6 +423,27 @@ def collect_mods_for_map(name: str, cfg: dict[str, Any]) -> list[str]:
             seen.add(item)
             ordered.append(item)
     return ordered
+
+
+def preflight_blockers(map_name: str) -> list[str]:
+    """Config-level reasons a map would fail/crash on boot (missing config,
+    mission folder, or mod folders). Empty list means clear to start."""
+    cfg = map_configs().get(map_name) or {}
+    problems: list[str] = []
+    config = str(cfg.get("config") or "")
+    if not config or not (ROOT / config).exists():
+        problems.append(f"server config missing: {config or '(unset)'}")
+    else:
+        mission = read_cfg_public_values(config).get("template") or ""
+        if not mission:
+            problems.append("no mission template in server config")
+        elif not (ROOT / "mpmissions" / mission).exists():
+            problems.append(f"mission folder missing: mpmissions/{mission}")
+    missing = [mod for mod in collect_mods_for_map(map_name, cfg) if not (ROOT / mod).exists()]
+    if missing:
+        shown = ", ".join(missing[:5]) + (" ..." if len(missing) > 5 else "")
+        problems.append(f"{len(missing)} missing mod folder(s): {shown}")
+    return problems
 
 
 def netstat_udp_ports() -> dict[int, set[int]]:
@@ -3657,6 +3679,13 @@ def start_action(payload: dict[str, Any]) -> Job:
     if spec.confirm and confirm != spec.confirm:
         raise ValueError(f"Action requires confirmation text: {spec.confirm}")
     selected_map = selected_map_for(spec, payload)
+    if action == "start_map" and selected_map and CONFIG.get("preflight_on_start", True):
+        blockers = preflight_blockers(selected_map)
+        if blockers:
+            raise ValueError(
+                f"Pre-flight blocked start of {selected_map}: " + "; ".join(blockers)
+                + ". Fix these, or set preflight_on_start=false in admin/control_center_config.json."
+            )
     _reserve_lifecycle(action, selected_map)
     try:
         commands = spec.builder(payload, selected_map)

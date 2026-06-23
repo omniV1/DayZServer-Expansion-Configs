@@ -420,6 +420,24 @@ class ParseStorageHealthTests(unittest.TestCase):
         self.assertEqual(h["itemsFailed"], 8)
 
 
+class PreflightBlockersTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._orig = cc.map_configs
+
+    def tearDown(self) -> None:
+        cc.map_configs = self._orig  # type: ignore[assignment]
+
+    def test_missing_config_is_blocker(self) -> None:
+        cc.map_configs = lambda: {"testmap": {"config": "definitely_missing_xyz.cfg"}}  # type: ignore[assignment]
+        problems = cc.preflight_blockers("testmap")
+        self.assertTrue(any("config missing" in p for p in problems))
+
+    def test_unset_config_is_blocker(self) -> None:
+        cc.map_configs = lambda: {"testmap": {}}  # type: ignore[assignment]
+        problems = cc.preflight_blockers("testmap")
+        self.assertTrue(any("config missing" in p for p in problems))
+
+
 class FindFatalLineTests(unittest.TestCase):
     """Crash-cause extraction for the watchdog."""
 
