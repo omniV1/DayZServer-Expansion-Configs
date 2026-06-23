@@ -75,6 +75,13 @@ REDACTIONS = [
     (re.compile(r"\bgho_[A-Za-z0-9_]+\b"), "<token>"),
 ]
 
+# Storage-corruption signatures the engine prints while loading storage_*/data
+# on boot: a per-record "stream damage" line, and a per-file "N items loaded.
+# (M failed)" summary. Used to surface persistence health, not as a fatal blocker
+# (the server still boots and auto-restores from rolling .bin backups).
+STREAM_DAMAGE_RE = re.compile(r"Serious stream damage detected", re.I)
+ITEMS_FAILED_RE = re.compile(r"\b(\d+)\s+items loaded\.\s*\((\d+)\s+failed\)", re.I)
+
 
 def read_json(path: Path, default: Any) -> Any:
     if not path.exists():
@@ -302,6 +309,37 @@ def tail_file(path: Path, limit: int) -> list[str]:
         for line in handle:
             lines.append(redact(line.rstrip("\r\n")))
     return list(lines)
+
+
+def head_file(path: Path, limit: int) -> list[str]:
+    """First `limit` lines (redacted). Storage load is logged at boot, near the
+    top of each per-launch RPT, so this is what storage-health scanning reads."""
+    lines: list[str] = []
+    with path.open("r", encoding="utf-8-sig", errors="replace") as handle:
+        for line in handle:
+            lines.append(redact(line.rstrip("\r\n")))
+            if len(lines) >= limit:
+                break
+    return lines
+
+
+def parse_storage_health(lines: list[str]) -> dict[str, int]:
+    """Count storage-corruption signals in CE load output (pure)."""
+    damage_events = 0
+    items_loaded = 0
+    items_failed = 0
+    for line in lines:
+        if STREAM_DAMAGE_RE.search(line):
+            damage_events += 1
+        match = ITEMS_FAILED_RE.search(line)
+        if match:
+            items_loaded += int(match.group(1))
+            items_failed += int(match.group(2))
+    return {
+        "damageEvents": damage_events,
+        "itemsLoaded": items_loaded,
+        "itemsFailed": items_failed,
+    }
 
 
 def newest_log(profile_dir: Path) -> Path | None:
@@ -663,6 +701,56 @@ def mission_dir_for_map(map_name: str) -> Path:
     if not path.exists():
         raise ValueError(f"Mission folder missing for {map_name}: {mission}")
     return path
+
+
+def storage_dirs_for_map(map_name: str) -> list[Path]:
+    """The map's storage_* persistence folders (best effort, empty on any miss)."""
+    try:
+        base = mission_dir_for_map(map_name)
+    except ValueError:
+        return []
+    return sorted(path for path in base.glob("storage_*") if path.is_dir())
+
+
+def storage_backup_root() -> Path:
+    return ROOT / "local_backups" / "storage"
+
+
+def list_storage_backups(map_name: str) -> list[dict[str, Any]]:
+    folder = storage_backup_root() / map_name
+    if not folder.exists():
+        return []
+    items: list[dict[str, Any]] = []
+    for zip_path in sorted(folder.glob("*.zip"), key=lambda p: p.stat().st_mtime, reverse=True):
+        stat = zip_path.stat()
+        items.append(
+            {
+                "name": zip_path.name,
+                "sizeBytes": stat.st_size,
+                "createdAt": dt.datetime.fromtimestamp(stat.st_mtime).isoformat(timespec="seconds"),
+            }
+        )
+    return items
+
+
+def storage_health_payload(map_name: str) -> dict[str, Any]:
+    map_name = require_map(map_name)
+    profile = map_configs()[map_name].get("profiles_dir") or f"profiles_{map_name}"
+    log = newest_log(ROOT / profile)
+    health: dict[str, Any] = {
+        "map": map_name,
+        "file": None,
+        "damageEvents": 0,
+        "itemsLoaded": 0,
+        "itemsFailed": 0,
+        "checkedAt": dt.datetime.now().isoformat(timespec="seconds"),
+    }
+    if log:
+        health.update(parse_storage_health(head_file(log, 8000)))
+        health["file"] = safe_rel(log)
+    health["storageDirs"] = [safe_rel(path) for path in storage_dirs_for_map(map_name)]
+    health["backups"] = list_storage_backups(map_name)
+    return health
 
 
 def clamp_number(value: Any, name: str, min_value: float, max_value: float, integer: bool = False) -> int | float:
@@ -3706,6 +3794,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(200, lan_visibility_payload())
             elif path == "/api/watchdog":
                 self.send_json(200, WATCHDOG.payload())
+            elif path == "/api/storage/health":
+                self.send_json(200, storage_health_payload(query_map(query)))
             elif path == "/api/players":
                 self.send_json(200, players_payload(query_map(query)))
             elif path == "/api/killfeed":

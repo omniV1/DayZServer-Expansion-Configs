@@ -282,6 +282,46 @@ class ReadJsonResilienceTests(unittest.TestCase):
         self.assertEqual(cc.read_json(p, []), [])
 
 
+class ParseStorageHealthTests(unittest.TestCase):
+    """Stream-damage / failed-item detection over CE load output."""
+
+    def test_clean_log_is_zero(self) -> None:
+        lines = [
+            "[CE][Storage] Restoring file dynamic_000.bin 1853 items.",
+            "  373 items loaded. (0 failed)",
+        ]
+        h = cc.parse_storage_health(lines)
+        self.assertEqual(h, {"damageEvents": 0, "itemsLoaded": 373, "itemsFailed": 0})
+
+    def test_counts_damage_events(self) -> None:
+        lines = [
+            "!!! Serious stream damage detected during load, file offset: 45b3a",
+            "!!! Serious stream damage detected during load, file offset: 54202",
+            "normal line",
+        ]
+        self.assertEqual(cc.parse_storage_health(lines)["damageEvents"], 2)
+
+    def test_sums_failed_across_files(self) -> None:
+        lines = [
+            "  5666 items loaded. (4 failed)",
+            "  4352 items loaded. (4 failed)",
+            "  5012 items loaded. (1 failed)",
+        ]
+        h = cc.parse_storage_health(lines)
+        self.assertEqual(h["itemsFailed"], 9)
+        self.assertEqual(h["itemsLoaded"], 5666 + 4352 + 5012)
+
+    def test_real_log_excerpt(self) -> None:
+        excerpt = """10:26:08 !!! Serious stream damage detected during load, file offset: 45b3a
+10:26:09 !!! Serious stream damage detected during load, file offset: 1fbd3
+10:26:13   5666 items loaded. (4 failed)
+10:26:18   4352 items loaded. (4 failed)
+10:26:42   373 items loaded. (0 failed)""".splitlines()
+        h = cc.parse_storage_health(excerpt)
+        self.assertEqual(h["damageEvents"], 2)
+        self.assertEqual(h["itemsFailed"], 8)
+
+
 class QueryHelperTests(unittest.TestCase):
     def test_query_map_lowercases(self) -> None:
         self.assertEqual(cc.query_map({"map": ["CherNarus"]}), "chernarus")
