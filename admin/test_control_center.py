@@ -373,6 +373,29 @@ class ParseStorageHealthTests(unittest.TestCase):
         self.assertEqual(h["itemsFailed"], 8)
 
 
+class FindFatalLineTests(unittest.TestCase):
+    """Crash-cause extraction for the watchdog."""
+
+    def test_none_when_clean(self) -> None:
+        self.assertIsNone(cc.find_fatal_line(["10:00 normal", "10:01 [CE] loaded"]))
+
+    def test_finds_crash(self) -> None:
+        line = cc.find_fatal_line(["start", "ENGINE  (F): Crashed: bad alloc", "after"])
+        self.assertIn("Crashed", line)
+
+    def test_returns_most_recent_match(self) -> None:
+        lines = [
+            "SCRIPT ERROR first one",
+            "noise",
+            "NO VALID SPAWNS no valid regular player spawn points",
+        ]
+        # reversed scan -> the spawns line (last) wins
+        self.assertIn("NO VALID SPAWNS", cc.find_fatal_line(lines))
+
+    def test_detects_missing_pbo(self) -> None:
+        self.assertIsNotNone(cc.find_fatal_line(["cannot open file foo.pbo not found"]))
+
+
 class QueryHelperTests(unittest.TestCase):
     def test_query_map_lowercases(self) -> None:
         self.assertEqual(cc.query_map({"map": ["CherNarus"]}), "chernarus")

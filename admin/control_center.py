@@ -342,6 +342,25 @@ def parse_storage_health(lines: list[str]) -> dict[str, int]:
     }
 
 
+def find_fatal_line(lines: list[str]) -> str | None:
+    """Most recent line matching a fatal pattern (the likely crash cause), or None."""
+    for line in reversed(lines):
+        if any(pattern.search(line) for pattern in FATAL_PATTERNS):
+            return line.strip()
+    return None
+
+
+def crash_reason_for(map_name: str) -> str | None:
+    """Best-effort crash cause from the map's newest log tail (redacted, capped)."""
+    cfg = map_configs().get(map_name) or {}
+    profile = cfg.get("profiles_dir") or f"profiles_{map_name}"
+    log = newest_log(ROOT / profile)
+    if not log:
+        return None
+    reason = find_fatal_line(tail_file(log, 400))
+    return reason[:300] if reason else None
+
+
 def newest_log(profile_dir: Path) -> Path | None:
     if not profile_dir.exists():
         return None
@@ -1430,7 +1449,16 @@ class Watchdog:
 
     def _rt(self, name: str) -> dict[str, Any]:
         return self.runtime.setdefault(
-            name, {"down": 0, "restarts": [], "paused": False, "pausedReason": None, "lastAction": None, "lastActionAt": None}
+            name,
+            {
+                "down": 0,
+                "restarts": [],
+                "paused": False,
+                "pausedReason": None,
+                "lastAction": None,
+                "lastActionAt": None,
+                "lastCrashReason": None,
+            },
         )
 
     def payload(self) -> dict[str, Any]:
@@ -1453,6 +1481,7 @@ class Watchdog:
                         "recentRestarts": len([t for t in rt.get("restarts", []) if t > now - WATCHDOG_WINDOW_SECONDS]),
                         "lastAction": rt.get("lastAction"),
                         "lastActionAt": rt.get("lastActionAt"),
+                        "lastCrashReason": rt.get("lastCrashReason"),
                     }
                 )
         return {"maps": items, "now": now, "watchdogRunning": self.started}
@@ -1475,6 +1504,17 @@ class Watchdog:
         return self.payload()
 
     def _relaunch(self, name: str, immediate: bool = False) -> None:
+        crash_reason: str | None = None
+        if not immediate:
+            # Crash relaunch: record the likely cause and take a forensic/restore
+            # backup of the (post-crash) storage before we touch the server again.
+            crash_reason = crash_reason_for(name)
+            if crash_reason:
+                log_message(f"[watchdog] {name} crash reason: {crash_reason}")
+            try:
+                run_command(python_file("backup_storage.py", "--map", name), 600)
+            except Exception as exc:  # noqa: BLE001 - backup is best effort.
+                log_message(f"[watchdog] storage backup for {name} failed: {exc}")
         try:
             start_action({"action": "start_map", "map": name})
         except Exception as exc:  # noqa: BLE001 - keep the watchdog alive on a failed start.
@@ -1486,6 +1526,8 @@ class Watchdog:
             rt["down"] = 0
             rt["lastAction"] = "started (keep-alive on)" if immediate else "relaunched after crash"
             rt["lastActionAt"] = dt.datetime.now().isoformat(timespec="seconds")
+            if not immediate:
+                rt["lastCrashReason"] = crash_reason
         log_message(f"[watchdog] {'started' if immediate else 'relaunched'} {name}")
 
     def tick(self) -> None:
