@@ -255,6 +255,7 @@ def load_config() -> dict[str, Any]:
         "snapshot_before_mutation": True,
         "job_retention": 50,
         "max_log_lines": 400,
+        "preflight_on_start": True,
     }
     data = read_json(CONFIG_PATH, {})
     defaults.update(data)
@@ -342,6 +343,25 @@ def parse_storage_health(lines: list[str]) -> dict[str, int]:
     }
 
 
+def find_fatal_line(lines: list[str]) -> str | None:
+    """Most recent line matching a fatal pattern (the likely crash cause), or None."""
+    for line in reversed(lines):
+        if any(pattern.search(line) for pattern in FATAL_PATTERNS):
+            return line.strip()
+    return None
+
+
+def crash_reason_for(map_name: str) -> str | None:
+    """Best-effort crash cause from the map's newest log tail (redacted, capped)."""
+    cfg = map_configs().get(map_name) or {}
+    profile = cfg.get("profiles_dir") or f"profiles_{map_name}"
+    log = newest_log(ROOT / profile)
+    if not log:
+        return None
+    reason = find_fatal_line(tail_file(log, 400))
+    return reason[:300] if reason else None
+
+
 def newest_log(profile_dir: Path) -> Path | None:
     if not profile_dir.exists():
         return None
@@ -403,6 +423,27 @@ def collect_mods_for_map(name: str, cfg: dict[str, Any]) -> list[str]:
             seen.add(item)
             ordered.append(item)
     return ordered
+
+
+def preflight_blockers(map_name: str) -> list[str]:
+    """Config-level reasons a map would fail/crash on boot (missing config,
+    mission folder, or mod folders). Empty list means clear to start."""
+    cfg = map_configs().get(map_name) or {}
+    problems: list[str] = []
+    config = str(cfg.get("config") or "")
+    if not config or not (ROOT / config).exists():
+        problems.append(f"server config missing: {config or '(unset)'}")
+    else:
+        mission = read_cfg_public_values(config).get("template") or ""
+        if not mission:
+            problems.append("no mission template in server config")
+        elif not (ROOT / "mpmissions" / mission).exists():
+            problems.append(f"mission folder missing: mpmissions/{mission}")
+    missing = [mod for mod in collect_mods_for_map(map_name, cfg) if not (ROOT / mod).exists()]
+    if missing:
+        shown = ", ".join(missing[:5]) + (" ..." if len(missing) > 5 else "")
+        problems.append(f"{len(missing)} missing mod folder(s): {shown}")
+    return problems
 
 
 def netstat_udp_ports() -> dict[int, set[int]]:
@@ -1430,7 +1471,16 @@ class Watchdog:
 
     def _rt(self, name: str) -> dict[str, Any]:
         return self.runtime.setdefault(
-            name, {"down": 0, "restarts": [], "paused": False, "pausedReason": None, "lastAction": None, "lastActionAt": None}
+            name,
+            {
+                "down": 0,
+                "restarts": [],
+                "paused": False,
+                "pausedReason": None,
+                "lastAction": None,
+                "lastActionAt": None,
+                "lastCrashReason": None,
+            },
         )
 
     def payload(self) -> dict[str, Any]:
@@ -1453,6 +1503,7 @@ class Watchdog:
                         "recentRestarts": len([t for t in rt.get("restarts", []) if t > now - WATCHDOG_WINDOW_SECONDS]),
                         "lastAction": rt.get("lastAction"),
                         "lastActionAt": rt.get("lastActionAt"),
+                        "lastCrashReason": rt.get("lastCrashReason"),
                     }
                 )
         return {"maps": items, "now": now, "watchdogRunning": self.started}
@@ -1475,6 +1526,17 @@ class Watchdog:
         return self.payload()
 
     def _relaunch(self, name: str, immediate: bool = False) -> None:
+        crash_reason: str | None = None
+        if not immediate:
+            # Crash relaunch: record the likely cause and take a forensic/restore
+            # backup of the (post-crash) storage before we touch the server again.
+            crash_reason = crash_reason_for(name)
+            if crash_reason:
+                log_message(f"[watchdog] {name} crash reason: {crash_reason}")
+            try:
+                run_command(python_file("backup_storage.py", "--map", name), 600)
+            except Exception as exc:  # noqa: BLE001 - backup is best effort.
+                log_message(f"[watchdog] storage backup for {name} failed: {exc}")
         try:
             start_action({"action": "start_map", "map": name})
         except Exception as exc:  # noqa: BLE001 - keep the watchdog alive on a failed start.
@@ -1486,6 +1548,8 @@ class Watchdog:
             rt["down"] = 0
             rt["lastAction"] = "started (keep-alive on)" if immediate else "relaunched after crash"
             rt["lastActionAt"] = dt.datetime.now().isoformat(timespec="seconds")
+            if not immediate:
+                rt["lastCrashReason"] = crash_reason
         log_message(f"[watchdog] {'started' if immediate else 'relaunched'} {name}")
 
     def tick(self) -> None:
@@ -3214,6 +3278,22 @@ def _build_action_specs() -> dict[str, ActionSpec]:
             map_mode="all",
             timeout=600,
         ),
+        "restore_storage": ActionSpec(
+            "Restore map storage",
+            "backup",
+            "Overwrite the map's live CE persistence with a storage backup (rolls back player progress). Archives the current state first. Stop the map before running.",
+            "high",
+            lambda p, m: [
+                python_file(
+                    "restore_storage.py", "--map", m or "",
+                    *(["--backup", str(p["backup"])] if p.get("backup") else []),
+                    "--yes",
+                )
+            ],
+            map_mode="one",
+            timeout=600,
+            confirm="RESTORE",
+        ),
         "apply_loot_current": ActionSpec(
             "Apply active loot preset",
             "generation",
@@ -3599,6 +3679,13 @@ def start_action(payload: dict[str, Any]) -> Job:
     if spec.confirm and confirm != spec.confirm:
         raise ValueError(f"Action requires confirmation text: {spec.confirm}")
     selected_map = selected_map_for(spec, payload)
+    if action == "start_map" and selected_map and CONFIG.get("preflight_on_start", True):
+        blockers = preflight_blockers(selected_map)
+        if blockers:
+            raise ValueError(
+                f"Pre-flight blocked start of {selected_map}: " + "; ".join(blockers)
+                + ". Fix these, or set preflight_on_start=false in admin/control_center_config.json."
+            )
     _reserve_lifecycle(action, selected_map)
     try:
         commands = spec.builder(payload, selected_map)
