@@ -206,6 +206,25 @@ function Start-MapServer {
     return $true
 }
 
+function Invoke-StorageBackup {
+    # Best effort, run in the stopped window of a restart: the server has just
+    # flushed a clean save and is not writing, so this is a consistent, known-good
+    # restore point. Never throws -- a backup hiccup must not block the relaunch.
+    try {
+        $python = Get-PythonExe
+        $script = Join-Path $PSScriptRoot 'backup_storage.py'
+        if (-not $python -or -not (Test-Path $script)) {
+            Write-Host "Skipping storage backup (python or backup_storage.py not found)."
+            return
+        }
+        Write-Host "Backing up $Map storage before relaunch ..."
+        & $python $script --map $Map | Write-Host
+    }
+    catch {
+        Write-Host "Storage backup skipped: $($_.Exception.Message)"
+    }
+}
+
 switch ($Action) {
     'status' { Show-Status | Out-Null }
     'stop' { Stop-MapServer | Out-Null }
@@ -214,6 +233,7 @@ switch ($Action) {
         Write-Host "Restarting $Map ..."
         Stop-MapServer | Out-Null
         Start-Sleep -Seconds 2
+        Invoke-StorageBackup
         Start-MapServer | Out-Null
     }
 }
