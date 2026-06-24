@@ -16,7 +16,7 @@
       "title": "Owens DayZ Livonia Server",
       "config": "serverDZEnoch.cfg",
       "port": 2402,
-      "steam_query_port": 27017,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_enoch",
       "cpu": 2,
       "extra_mods": [],
@@ -26,10 +26,11 @@
       "title": "Owens DayZ Sakhal Server",
       "config": "serverDZSakhal.cfg",
       "port": 2602,
-      "steam_query_port": 27019,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_sakhal",
       "cpu": 4,
       "extra_mods": [
+        "@Cl0ud's Winter Gear",
         "@Zens ExpansionAI Audio"
       ],
       "server_mods": []
@@ -38,7 +39,7 @@
       "title": "Owens DayZ Namalsk Server",
       "config": "serverDZ_Namalsk.cfg",
       "port": 2502,
-      "steam_query_port": 27018,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_namalsk",
       "cpu": 2,
       "mods_file": "namalsk_mods.txt",
@@ -55,18 +56,20 @@
       "title": "Owens DayZ Takistan Server",
       "config": "serverDZ_Takistan.cfg",
       "port": 2702,
-      "steam_query_port": 27020,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_takistan",
       "cpu": 2,
-      "mods_file": "takistan_mods.txt",
-      "extra_mods": [],
+      "mods_file": null,
+      "extra_mods": [
+        "@TakistanPlus"
+      ],
       "server_mods": []
     },
     "deerisle": {
       "title": "Owens DayZ Deer Isle Server",
       "config": "serverDZ_DeerIsle.cfg",
       "port": 2802,
-      "steam_query_port": 27021,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_deerisle",
       "cpu": 2,
       "extra_mods": [
@@ -78,7 +81,7 @@
       "title": "Owens DayZ Banov Server",
       "config": "serverDZ_Banov.cfg",
       "port": 2902,
-      "steam_query_port": 27022,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_banov",
       "cpu": 2,
       "extra_mods": [
@@ -90,7 +93,7 @@
       "title": "Owens DayZ Esseker Server",
       "config": "serverDZ_Esseker.cfg",
       "port": 3002,
-      "steam_query_port": 27023,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_esseker",
       "cpu": 2,
       "extra_mods": [
@@ -102,7 +105,7 @@
       "title": "Owens DayZ Rostow Server",
       "config": "serverDZ_Rostow.cfg",
       "port": 3102,
-      "steam_query_port": 27024,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_rostow",
       "cpu": 2,
       "extra_mods": [
@@ -114,7 +117,7 @@
       "title": "Owens DayZ Iztek Server",
       "config": "serverDZ_Iztek.cfg",
       "port": 3202,
-      "steam_query_port": 27025,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_iztek",
       "cpu": 2,
       "extra_mods": [
@@ -127,7 +130,7 @@
       "title": "Owens DayZ Alteria Server",
       "config": "serverDZ_Alteria.cfg",
       "port": 3302,
-      "steam_query_port": 27026,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_alteria",
       "cpu": 2,
       "extra_mods": [
@@ -139,10 +142,11 @@
       "title": "Owens DayZ Winter Chernarus Server",
       "config": "serverDZ_WinterChernarus.cfg",
       "port": 3402,
-      "steam_query_port": 27027,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_winterchernarus",
       "cpu": 2,
       "extra_mods": [
+        "@Cl0ud's Winter Gear",
         "@Winter Chernarus V2"
       ],
       "server_mods": []
@@ -151,7 +155,7 @@
       "title": "Owens DayZ Bitterroot Server",
       "config": "serverDZ_Bitterroot.cfg",
       "port": 3502,
-      "steam_query_port": 27028,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_bitterroot",
       "cpu": 4,
       "extra_mods": [
@@ -163,17 +167,14 @@
       "title": "Owens DayZ Deadfall Server",
       "config": "serverDZ_Deadfall.cfg",
       "port": 3602,
-      "steam_query_port": 27029,
+      "steam_query_port": 27016,
       "profiles_dir": "profiles_deadfall",
       "cpu": 2,
       "extra_mods": [
         "@Stargate Teleporters Complete",
-        "@GasMasksOnly",
         "@Deadfall"
       ],
-      "server_mods": [
-        "@SpawnerBubaku"
-      ]
+      "server_mods": []
     }
   }
 }
