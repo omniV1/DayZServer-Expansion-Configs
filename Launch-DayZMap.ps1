@@ -165,7 +165,11 @@ function New-DayZArgumentList {
     $list.Add("-adminlog")
     $list.Add("-netlog")
     $list.Add("-freezecheck")
-    $list.Add("-filePatching")
+    # -filePatching loads loose/unpacked files over PBOs and relaxes mod
+    # verification -- a dev-only flag that causes clients to be kicked with
+    # "client has a PBO which is not part of the server" even when files match.
+    # Off by default; opt in per map with "file_patching": true for mod dev.
+    if ($MapCfg.file_patching) { $list.Add("-filePatching") }
     # Do not use -ip=127.0.0.1: that binds loopback only and hides the server from the LAN tab.
     if ($MapCfg.bind_ip) {
         $list.Add("-ip=$($MapCfg.bind_ip)")
