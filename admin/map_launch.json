@@ -10,7 +10,9 @@
       "profiles_dir": "profiles",
       "cpu": 2,
       "extra_mods": [],
-      "server_mods": []
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "enoch": {
       "title": "Owens DayZ Livonia Server",
@@ -20,7 +22,9 @@
       "profiles_dir": "profiles_enoch",
       "cpu": 2,
       "extra_mods": [],
-      "server_mods": []
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "sakhal": {
       "title": "Owens DayZ Sakhal Server",
@@ -29,8 +33,12 @@
       "steam_query_port": 27019,
       "profiles_dir": "profiles_sakhal",
       "cpu": 4,
-      "extra_mods": ["@Zens ExpansionAI Audio"],
-      "server_mods": []
+      "extra_mods": [
+        "@Zens ExpansionAI Audio"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "namalsk": {
       "title": "Owens DayZ Namalsk Server",
@@ -40,9 +48,14 @@
       "profiles_dir": "profiles_namalsk",
       "cpu": 2,
       "mods_file": "namalsk_mods.txt",
-      "prepend_mods": ["@Namalsk Island", "@Namalsk Survival (server)"],
+      "prepend_mods": [
+        "@Namalsk Island",
+        "@Namalsk Survival (server)"
+      ],
       "extra_mods": [],
-      "server_mods": ["@Namalsk Survival (server)"]
+      "server_mods": [
+        "@Namalsk Survival (server)"
+      ]
     },
     "takistan": {
       "title": "Owens DayZ Takistan Server",
@@ -53,7 +66,9 @@
       "cpu": 2,
       "mods_file": "takistan_mods.txt",
       "extra_mods": [],
-      "server_mods": []
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "deerisle": {
       "title": "Owens DayZ Deer Isle Server",
@@ -62,8 +77,12 @@
       "steam_query_port": 27021,
       "profiles_dir": "profiles_deerisle",
       "cpu": 2,
-      "extra_mods": ["@DeerIsle"],
-      "server_mods": []
+      "extra_mods": [
+        "@DeerIsle"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "banov": {
       "title": "Owens DayZ Banov Server",
@@ -72,8 +91,12 @@
       "steam_query_port": 27022,
       "profiles_dir": "profiles_banov",
       "cpu": 2,
-      "extra_mods": ["@Banov"],
-      "server_mods": []
+      "extra_mods": [
+        "@Banov"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "esseker": {
       "title": "Owens DayZ Esseker Server",
@@ -82,8 +105,12 @@
       "steam_query_port": 27023,
       "profiles_dir": "profiles_esseker",
       "cpu": 2,
-      "extra_mods": ["@Esseker"],
-      "server_mods": []
+      "extra_mods": [
+        "@Esseker"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "rostow": {
       "title": "Owens DayZ Rostow Server",
@@ -92,8 +119,12 @@
       "steam_query_port": 27024,
       "profiles_dir": "profiles_rostow",
       "cpu": 2,
-      "extra_mods": ["@Rostowmap"],
-      "server_mods": []
+      "extra_mods": [
+        "@Rostowmap"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "iztek": {
       "title": "Owens DayZ Iztek Server",
@@ -102,8 +133,13 @@
       "steam_query_port": 27025,
       "profiles_dir": "profiles_iztek",
       "cpu": 2,
-      "extra_mods": ["@Iztek", "@Iztek_Zarge"],
-      "server_mods": []
+      "extra_mods": [
+        "@Iztek",
+        "@Iztek_Zarge"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "alteria": {
       "title": "Owens DayZ Alteria Server",
@@ -112,8 +148,12 @@
       "steam_query_port": 27026,
       "profiles_dir": "profiles_alteria",
       "cpu": 2,
-      "extra_mods": ["@Alteria"],
-      "server_mods": []
+      "extra_mods": [
+        "@Alteria"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "winterchernarus": {
       "title": "Owens DayZ Winter Chernarus Server",
@@ -122,8 +162,12 @@
       "steam_query_port": 27027,
       "profiles_dir": "profiles_winterchernarus",
       "cpu": 2,
-      "extra_mods": ["@Winter Chernarus V2"],
-      "server_mods": []
+      "extra_mods": [
+        "@Winter Chernarus V2"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "bitterroot": {
       "title": "Owens DayZ Bitterroot Server",
@@ -132,8 +176,12 @@
       "steam_query_port": 27028,
       "profiles_dir": "profiles_bitterroot",
       "cpu": 4,
-      "extra_mods": ["@Bitterroot"],
-      "server_mods": []
+      "extra_mods": [
+        "@Bitterroot"
+      ],
+      "server_mods": [
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     },
     "deadfall": {
       "title": "Owens DayZ Deadfall Server",
@@ -142,8 +190,15 @@
       "steam_query_port": 27029,
       "profiles_dir": "profiles_deadfall",
       "cpu": 2,
-      "extra_mods": ["@Stargate Teleporters Complete", "@GasMasksOnly", "@Deadfall"],
-      "server_mods": ["@SpawnerBubaku"]
+      "extra_mods": [
+        "@Stargate Teleporters Complete",
+        "@GasMasksOnly",
+        "@Deadfall"
+      ],
+      "server_mods": [
+        "@SpawnerBubaku",
+        "@Pandemic Weapons-Clothing Camo Overlay Server"
+      ]
     }
   }
 }

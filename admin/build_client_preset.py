@@ -26,15 +26,29 @@ import control_center as cc
 
 ROOT = cc.ROOT
 
+# Some Workshop mods ship meta.cpp with publishedid = 0 (the author left it
+# blank), so the real id can't be read from disk. Map those to their known
+# Workshop ids here. Genuinely local/server-only mods are left out so they're
+# correctly skipped from client presets.
+ID_OVERRIDES = {
+    "@Pandemic Weapons-Clothing Camo Overlay": "2008244263",
+}
+
 
 def published_id(mod_folder: str) -> str | None:
-    """Read publishedid from @mod/meta.cpp (the Steam Workshop id)."""
+    """Steam Workshop id for a mod: an override, else meta.cpp publishedid."""
+    if mod_folder in ID_OVERRIDES:
+        return ID_OVERRIDES[mod_folder]
     meta = ROOT / mod_folder / "meta.cpp"
     if not meta.exists():
         return None
     text = meta.read_text(encoding="utf-8-sig", errors="replace")
     match = re.search(r"publishedid\s*=\s*(\d+)", text)
-    return match.group(1) if match else None
+    if not match or match.group(1) == "0":
+        # publishedid 0 = a local/server-only mod, not a Workshop item; clients
+        # can't import it by id, so it must not appear in a client preset.
+        return None
+    return match.group(1)
 
 
 def display_name(mod_folder: str) -> str:
