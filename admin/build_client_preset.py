@@ -30,9 +30,7 @@ ROOT = cc.ROOT
 # blank), so the real id can't be read from disk. Map those to their known
 # Workshop ids here. Genuinely local/server-only mods are left out so they're
 # correctly skipped from client presets.
-ID_OVERRIDES = {
-    "@Pandemic Weapons-Clothing Camo Overlay": "2008244263",
-}
+ID_OVERRIDES: dict[str, str] = {}
 
 
 def published_id(mod_folder: str) -> str | None:
