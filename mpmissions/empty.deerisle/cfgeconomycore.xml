@@ -32,4 +32,12 @@
         <default name="save_types_startup" value="true" />
         <default name="randomloot_deloot_perevent" value="3" />
     </defaults>
+
+	<ce folder="mod_ce">
+		<file name="loot_boost_types.xml" type="types" />
+		<file name="mod_weapons_types.xml" type="types" />
+		<file name="mod_weapons_spawnabletypes.xml" type="spawnabletypes" />
+		<file name="mod_optics_types.xml" type="types" />
+	</ce>
+
 </economycore>

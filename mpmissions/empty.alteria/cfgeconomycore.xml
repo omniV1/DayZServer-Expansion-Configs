@@ -33,4 +33,12 @@
     <ce folder="jmc_ce">
         <file name="types_jmc.xml" type="types" />
     </ce>
+
+	<ce folder="mod_ce">
+		<file name="loot_boost_types.xml" type="types" />
+		<file name="mod_weapons_types.xml" type="types" />
+		<file name="mod_weapons_spawnabletypes.xml" type="spawnabletypes" />
+		<file name="mod_optics_types.xml" type="types" />
+	</ce>
+
 </economycore>

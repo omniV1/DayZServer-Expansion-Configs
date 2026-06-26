@@ -18,9 +18,9 @@
     <var name="LootDamageMin" type="1" value="0.0" />
     <var name="LootProxyPlacement" type="0" value="1" />
     <var name="LootSpawnAvoidance" type="0" value="100" />
-    <var name="RespawnAttempt" type="0" value="5" />
-    <var name="RespawnLimit" type="0" value="70" />
-    <var name="RespawnTypes" type="0" value="28" />
+    <var name="RespawnAttempt" type="0" value="2" />
+    <var name="RespawnLimit" type="0" value="25" />
+    <var name="RespawnTypes" type="0" value="14" />
     <var name="RestartSpawn" type="0" value="0" />
     <var name="SpawnInitial" type="0" value="1400" />
     <var name="TimeHopping" type="0" value="60" />

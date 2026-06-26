@@ -140,7 +140,12 @@ BOOST_ITEMS = [
     "ReflexOptic", "ACOGOptic", "HuntingOptic",
 ]
 
-BULK_CATEGORIES = {"weapons", "clothes", "containers", "food", "tools", "medical", "explosives"}
+# Vanilla clothing/containers are the dominant CE clog: multiplying their
+# nominals floods every building with jackets/pants/bags the LootRespawner then
+# can't place ("hard to place" / "search overtime" / "exceeded max tests" spam).
+# Keep them at vanilla density and only bulk-boost the gear players actually hunt
+# (weapons/ammo/medical/food/tools/explosives) so finds stay reliable, not clogged.
+BULK_CATEGORIES = {"weapons", "food", "tools", "medical", "explosives"}
 BULK_NOMINAL_MIN = 1
 
 
