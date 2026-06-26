@@ -2,7 +2,11 @@
   "active_preset": "light",
   "source_mission": "dayzOffline.chernarusplus",
   "vanilla_loot_maps": [
-    "dayz.Deadfall"
+    "dayz.Deadfall",
+    "dayzOffline.banov",
+    "dayzOffline.Esseker",
+    "empty.Iztek",
+    "Offline.rostow"
   ],
   "replicate_missions": [
     "dayzOffline.enoch",

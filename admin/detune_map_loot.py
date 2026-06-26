@@ -4,11 +4,12 @@
 Some small/custom maps have too few (or buggy) loot points to absorb the
 mod_ce loot boost without LootRespawner "search overtime" / "hard to place"
 spam (Deadfall is the known case). For each mission listed in
-loot_config.json -> "vanilla_loot_maps", this removes the mod_ce and
-expansion_ce <ce> registrations from its cfgeconomycore.xml so it falls back
-to the map's own vanilla nominals. The mod_ce/expansion_ce folders are left on
-disk (just unregistered), so re-enabling is a matter of re-running the
-loot/vehicle pipelines after dropping the map from vanilla_loot_maps.
+loot_config.json -> "vanilla_loot_maps", this removes the mod_ce loot-boost
+<ce> registration from its cfgeconomycore.xml so it falls back to the map's own
+vanilla nominals. expansion_ce is intentionally KEPT so the map retains
+Expansion vehicles + items. The mod_ce folder is left on disk (just
+unregistered); re-enabling is a matter of dropping the map from
+vanilla_loot_maps and re-running apply_loot.
 
 Usage:
   python admin/detune_map_loot.py            # apply all vanilla_loot_maps
@@ -40,13 +41,16 @@ def detune(mission: str) -> str:
     text = eco.read_text(encoding="utf-8")
     original = text
     removed = []
-    for folder in ("mod_ce", "expansion_ce"):
+    # Remove ONLY the mod_ce loot boost (the oversaturation source). Keep
+    # expansion_ce so the map retains Expansion vehicles + items (their own
+    # modest nominals don't cause the LootRespawner overtime).
+    for folder in ("mod_ce",):
         new = re.sub(CE_BLOCK.format(name=folder), "", text, count=1, flags=re.DOTALL)
         if new != text:
             removed.append(folder)
             text = new
     if text == original:
-        return f"noop {mission}: already vanilla (no mod_ce/expansion_ce registered)"
+        return f"noop {mission}: already de-tuned (no mod_ce boost registered)"
     ET.fromstring(text)  # validate before writing
     eco.write_text(text, encoding="utf-8", newline="\n")
     return f"OK   {mission}: de-registered {', '.join(removed)} -> vanilla loot"
