@@ -308,4 +308,35 @@
   <event name="VehicleSedan02"></event>
   <event name="VehicleHatchback02"></event>
   <event name="VehicleOffroadHatchback"></event>
+	<!-- Expansion vehicle spawns (borrowed from Alteria StaticPoliceCar coords) -->
+	<event name="VehicleLandRover">
+		<pos x="3812.797" z="4628.74" a="-1"/>
+		<pos x="5274.313" z="5048.059" a="-1"/>
+		<pos x="6799.031" z="3767.572" a="-1"/>
+		<pos x="6819.547" z="3485.353" a="-1"/>
+		<pos x="3415.984" z="6300.654" a="-1"/>
+		<pos x="3223.922" z="6305.131" a="-1"/>
+		<pos x="6887.516" z="6097.985" a="-1"/>
+		<pos x="6022.984" z="5511.662" a="-1"/>
+	</event>
+	<event name="VehicleBus">
+		<pos x="2079.328" z="3007.503" a="-1"/>
+		<pos x="1729.5" z="4586.157" a="-1"/>
+		<pos x="2893.156" z="3663.022" a="-1"/>
+		<pos x="1809.516" z="4152.744" a="-1"/>
+		<pos x="1878.75" z="1622.492" a="-1"/>
+	</event>
+	<event name="VehicleTractor">
+		<pos x="1631.703" z="594.7275" a="-1"/>
+		<pos x="1628.375" z="3071.915" a="-1"/>
+		<pos x="2793.578" z="4228.986" a="-1"/>
+		<pos x="1321.703" z="2890.328" a="-1"/>
+		<pos x="1761" z="627.274" a="-1"/>
+	</event>
+	<event name="VehicleUh1hHelicopter">
+		<pos x="2696.984" z="4320.815" a="-1"/>
+		<pos x="2715.266" z="2489.698" a="-1"/>
+		<pos x="3164.016" z="2233.149" a="-1"/>
+		<pos x="2541.422" z="2567.503" a="-1"/>
+	</event>
 </eventposdef>
