@@ -1,13 +1,13 @@
 {
     "m_Version": 23,
     "VehicleSync": 0,
-    "VehicleRequireKeyToStart": 1,
-    "VehicleRequireAllDoors": 1,
+    "VehicleRequireKeyToStart": 0,
+    "VehicleRequireAllDoors": 0,
     "VehicleLockedAllowInventoryAccess": 0,
     "VehicleLockedAllowInventoryAccessWithoutDoors": 1,
     "MasterKeyPairingMode": 2,
     "MasterKeyUses": 2,
-    "CanPickLock": 0,
+    "CanPickLock": 1,
     "PickLockTools": [
         "Lockpick"
     ],
