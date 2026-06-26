@@ -34,6 +34,10 @@
         <file name="types_jmc.xml" type="types" />
     </ce>
 
+	<ce folder="expansion_ce">
+		<file name="expansion_types.xml" type="types" />
+		<file name="expansion_spawnabletypes.xml" type="spawnabletypes" />
+	</ce>
 	<ce folder="mod_ce">
 		<file name="loot_boost_types.xml" type="types" />
 		<file name="mod_weapons_types.xml" type="types" />

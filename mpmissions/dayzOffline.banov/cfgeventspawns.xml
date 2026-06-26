@@ -683,4 +683,47 @@
     <event name="AnimalWolf" />
     <event name="AnimalWildBoar" />
 	<event name="AnimalBear"/>
+	<!-- Expansion vehicle spawns (borrowed from vanilla car/boat coords) -->
+	<event name="VehicleLandRover">
+		<pos x="14861.9" y="486.15" z="11965.6" a="-144.986"/>
+		<pos x="5931.04" y="206.404" z="1188.45" a="81.419"/>
+		<pos x="9052.63" y="464.986" z="13625" a="154.283"/>
+		<pos x="3649.44" y="215.81" z="418.539" a="-3.3677"/>
+		<pos x="13066.6" y="304.244" z="468.417" a="-120.915"/>
+		<pos x="6253.56" y="220.741" z="2176.75" a="-46.077"/>
+	</event>
+	<event name="VehicleBus">
+		<pos x="5513.54" y="197.056" z="2947.48" a="-120.915"/>
+		<pos x="6890.48" y="221.48" z="3688.84" a="-59.091"/>
+		<pos x="5609.46" y="278.3" z="14409.8" a="43.9109"/>
+		<pos x="1018.96" y="237.846" z="10796.8" a="-153.051"/>
+	</event>
+	<event name="VehicleTractor">
+		<pos x="11663.8" y="244.58" z="4187.6" a="92.3586"/>
+		<pos x="14907.3" y="578.54" z="11071.6" a="100.979"/>
+		<pos x="2036.11" y="215.637" z="2212.14" a="46.938"/>
+		<pos x="44753.21" y="249.974" z="13332.4" a="87.5771"/>
+	</event>
+	<event name="VehicleUh1hHelicopter">
+		<pos x="12884.4" y="327.22" z="11089.4" a="166.701"/>
+		<pos x="12607.7" y="324.966" z="11010.8" a="21.0491"/>
+		<pos x="158.11" y="216.25" z="7931.42" a="-31.2422"/>
+	</event>
+	<event name="VehicleMerlinHelicopter">
+		<pos x="4782.08" y="189.874" z="533.366" a="-120.915"/>
+	</event>
+	<event name="VehicleGyroHelicopter">
+		<pos x="6521.78" y="431.52" z="10955.2" a="147.038"/>
+	</event>
+	<event name="VehicleZodiacBoat">
+		<pos x="12538.2" z="10920.3"/>
+		<pos x="12527.5" z="10882.8"/>
+		<pos x="12400.6" z="9689.07"/>
+		<pos x="12129.1" z="7177.16"/>
+	</event>
+	<event name="VehicleUtilityBoat">
+		<pos x="11821.3" z="6189.41"/>
+		<pos x="11849.1" z="5367.49"/>
+		<pos x="11855.6" z="4574.46"/>
+	</event>
 </eventposdef>
