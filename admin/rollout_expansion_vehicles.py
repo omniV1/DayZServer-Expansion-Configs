@@ -121,7 +121,12 @@ def register_economycore(eco: Path, with_events: bool) -> bool:
 
 
 def main() -> int:
+    import loot_settings
+    vanilla = set(loot_settings.vanilla_loot_maps())
     for name in TARGETS:
+        if name in vanilla:
+            print(f"SKIP {name}: vanilla_loot_maps (no expansion_ce)")
+            continue
         m = MISSIONS / name
         if not m.exists():
             print(f"SKIP {name}: mission missing")

@@ -38,3 +38,11 @@ def source_mission() -> Path:
 
 def replicate_missions() -> list[str]:
     return load_config()["replicate_missions"]
+
+
+def vanilla_loot_maps() -> list[str]:
+    """Missions kept at vanilla loot density (no mod_ce boost / expansion_ce).
+
+    Used for sparse maps whose loot points can't absorb the boost without
+    LootRespawner search-overtime (e.g. Deadfall)."""
+    return load_config().get("vanilla_loot_maps", [])

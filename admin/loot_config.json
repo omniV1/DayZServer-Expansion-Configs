@@ -1,6 +1,9 @@
 {
   "active_preset": "light",
   "source_mission": "dayzOffline.chernarusplus",
+  "vanilla_loot_maps": [
+    "dayz.Deadfall"
+  ],
   "replicate_missions": [
     "dayzOffline.enoch",
     "dayzOffline.sakhal",

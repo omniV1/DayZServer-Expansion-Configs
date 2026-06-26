@@ -101,7 +101,11 @@ def replicate_mod_ce() -> list[str]:
     if not source.exists():
         raise FileNotFoundError(f"Missing {source} — run build first.")
     lines_out = []
+    vanilla = set(loot_settings.vanilla_loot_maps())
     for name in loot_settings.replicate_missions():
+        if name in vanilla:
+            lines_out.append(f"  SKIP {name}: vanilla_loot_maps (no boost)")
+            continue
         m = MISSIONS_ROOT / name
         dest = m / "mod_ce"
         if dest.exists():
