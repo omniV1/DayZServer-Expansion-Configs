@@ -665,5 +665,35 @@ class VehicleRouteTests(unittest.TestCase):
         self.assertIn("/api/vehicles/save", cc.POST_HANDLERS)
 
 
+class BackupConfigTests(unittest.TestCase):
+    """backup_config.py captures disk-only config and never PBOs/storage."""
+
+    def setUp(self) -> None:
+        import backup_config as bc
+
+        self.bc = bc
+        self._rels = [p.relative_to(bc.ROOT).as_posix() for p in bc.collect_files()]
+
+    def test_includes_mission_and_admin_config(self) -> None:
+        self.assertTrue(any(r.startswith("mpmissions/") and r.endswith(".xml") for r in self._rels))
+        self.assertTrue(any(r.endswith("admin/loot_config.json") for r in self._rels))
+
+    def test_excludes_pbo_storage_and_bin(self) -> None:
+        for r in self._rels:
+            self.assertFalse(r.endswith(".pbo"), r)
+            self.assertFalse(r.endswith(".bin"), r)
+            self.assertFalse("/storage_" in r, r)
+            self.assertFalse(r.startswith("@"), r)
+
+    def test_safe_member_rejects_traversal(self) -> None:
+        self.assertFalse(self.bc._safe_member("../evil"))
+        self.assertFalse(self.bc._safe_member("/abs/path"))
+        self.assertFalse(self.bc._safe_member("@mod/x"))
+        self.assertTrue(self.bc._safe_member("mpmissions/x/cfgeconomycore.xml"))
+
+    def test_action_registered(self) -> None:
+        self.assertIn("backup_config", cc.action_specs())
+
+
 if __name__ == "__main__":
     unittest.main()

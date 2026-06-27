@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.9.0"
+APP_VERSION = "1.9.1"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -3355,6 +3355,14 @@ def _build_action_specs() -> dict[str, ActionSpec]:
             "guarded",
             lambda _p, _m: [python_file("snapshot_configs.py", "--label", "control-center")],
             timeout=240,
+        ),
+        "backup_config": ActionSpec(
+            "Back up server config",
+            "backup",
+            "Zip the disk-only/gitignored config (stock-mission CE, mod_ce, expansion_ce, mapgroupproto, profile settings, permissions, signing keys, server cfgs) to local_backups with rotation. Protects hand-tuning from a DayZ/Steam update or Workshop re-download. Does not back up mod PBOs or player storage.",
+            "guarded",
+            lambda _p, _m: [python_file("backup_config.py", "--label", "control-center")],
+            timeout=300,
         ),
         "backup_storage": ActionSpec(
             "Back up map storage",
