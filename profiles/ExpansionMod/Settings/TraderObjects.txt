@@ -3,34 +3,34 @@
 // Boat trader (6) vehicle spawn is on land -- move into water for afloat boats.
 
 <TraderMarker> 			0
-<TraderMarkerPosition>	11880.676758, 140.010452, 12451.006836
+<TraderMarkerPosition>	7761.400000, 5.160000, 2909.880000
 <TraderMarkerSafezone>	80
 
 <TraderMarker> 			1
-<TraderMarkerPosition>	11883.676758, 140.010452, 12451.006836
+<TraderMarkerPosition>	7763.400000, 5.160000, 2909.880000
 <TraderMarkerSafezone>	80
 
 <TraderMarker> 			2
-<TraderMarkerPosition>	11886.676758, 140.010452, 12451.006836
+<TraderMarkerPosition>	7765.400000, 5.160000, 2909.880000
 <TraderMarkerSafezone>	80
 
 <TraderMarker> 			3
-<TraderMarkerPosition>	11880.676758, 140.010452, 12455.006836
+<TraderMarkerPosition>	7761.400000, 5.160000, 2911.880000
 <TraderMarkerSafezone>	80
 
 <TraderMarker> 			4
-<TraderMarkerPosition>	11883.676758, 140.010452, 12455.006836
+<TraderMarkerPosition>	7763.400000, 5.160000, 2911.880000
 <TraderMarkerSafezone>	30
 
 <TraderMarker> 			5
-<TraderMarkerPosition>	11874.676758, 140.010452, 12451.006836
+<TraderMarkerPosition>	7765.400000, 5.160000, 2911.880000
 <TraderMarkerSafezone>	30
-<VehicleSpawn>			11867.676758, 140.010452, 12451.006836
+<VehicleSpawn>			7752.400000, 5.160000, 2909.880000
 <VehicleSpawnOri>		0, 0, 0
 
 <TraderMarker> 			6
-<TraderMarkerPosition>	11874.676758, 140.010452, 12457.006836
+<TraderMarkerPosition>	7761.400000, 5.160000, 2913.880000
 <TraderMarkerSafezone>	30
-<VehicleSpawn>			11864.676758, 140.010452, 12463.006836
+<VehicleSpawn>			7752.400000, 5.160000, 2915.880000
 <VehicleSpawnOri>		0, 0, 0
 

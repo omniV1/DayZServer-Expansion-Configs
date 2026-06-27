@@ -46,17 +46,28 @@ TARGETS: dict[str, tuple[str, str]] = {
     "empty.Bitterroot": ("profiles_bitterroot", "Bitterroot"),
     "dayz.Deadfall": ("profiles_deadfall", "Deadfall"),
 }
-# Chernarus-terrain maps: use the existing Krasnostav Airstrip trader spot (x, z).
-KRASNO_MAPS = {"dayzOffline.chernarusplus", "RegularWinter.chernarusplus"}
-KRASNO_XZ = (11882.0, 12466.0)
+# Community-validated trader anchors (marker-0 X,Y,Z from scalespeeder's per-map
+# Dr Jones TraderObjects files -- same author as our TraderConfig "124", so the
+# heights are correct and tested on real flat trader spots). Winter Chernarus
+# shares Chernarus terrain.
+PUBLISHED_ANCHORS: dict[str, tuple[float, float, float]] = {
+    "dayzOffline.chernarusplus": (7761.40, 5.16, 2909.88),       # Chernogorsk coast
+    "RegularWinter.chernarusplus": (7761.40, 5.16, 2909.88),
+    "dayzOffline.enoch": (8707.17, 289.09, 8071.56),             # SE of Zapadlisko
+    "regular.namalsk": (6331.55, 20.70, 9485.34),                # Namalsk airfield
+    "empty.deerisle": (5833.62, 74.08, 3806.36),                 # Deer Isle airfield
+    "dayzOffline.banov": (4872.03, 201.70, 4761.95),             # Alica airfield
+}
 # Sakhal already has a hand-placed trader village -> marker only, no NPC change.
 SAKHAL = ("dayzOffline.sakhal", (7229.0, 4.0, 7076.0))
 
 # 7 markers (IDs 0-6): (id, (dx,dz) offset, safezone, optional vehicle-spawn (dx,dz)).
+# Tight NPC cluster (all within ~5 m) so the whole hub sits on one flat pad and
+# does not drift onto a slope (which is what buries/floats NPCs on unknown maps).
 MARKERS = [
-    (0, (0.0, 0.0), 80, None), (1, (3.0, 0.0), 80, None), (2, (6.0, 0.0), 80, None),
-    (3, (0.0, 4.0), 80, None), (4, (3.0, 4.0), 30, None),
-    (5, (-6.0, 0.0), 30, (-13.0, 0.0)), (6, (-6.0, 6.0), 30, (-16.0, 12.0)),
+    (0, (0.0, 0.0), 80, None), (1, (2.0, 0.0), 80, None), (2, (4.0, 0.0), 80, None),
+    (3, (0.0, 2.0), 80, None), (4, (2.0, 2.0), 30, None),
+    (5, (4.0, 2.0), 30, (-9.0, 0.0)), (6, (0.0, 4.0), 30, (-9.0, 6.0)),
 ]
 POS_RE = re.compile(r'pos="([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)"')
 SPAWN_RE = re.compile(r'<pos\b[^>]*\bx="([-\d.]+)"[^>]*\bz="([-\d.]+)"')
@@ -81,19 +92,19 @@ def nearest_building(blds, x, z):
 
 
 def trader_location(mission_name: str, mission: Path) -> tuple[float, float, float] | None:
-    """(x, y, z) for the hub; y from the nearest building = real terrain height."""
+    """(x, y, z) for the hub. Prefer a community-validated anchor (correct
+    height); otherwise fall back to the building nearest a spawn."""
+    if mission_name in PUBLISHED_ANCHORS:
+        return PUBLISHED_ANCHORS[mission_name]
     blds = buildings(mission)
     if not blds:
         return None
-    if mission_name in KRASNO_MAPS:
-        x, z = KRASNO_XZ
+    spawns = spawn_points(mission)
+    if spawns:
+        x, z = spawns[0][0], spawns[0][1]
     else:
-        spawns = spawn_points(mission)
-        if spawns:
-            x, z = spawns[0][0], spawns[0][1]
-        else:
-            x = sum(b[0] for b in blds) / len(blds)
-            z = sum(b[2] for b in blds) / len(blds)
+        x = sum(b[0] for b in blds) / len(blds)
+        z = sum(b[2] for b in blds) / len(blds)
     bx, by, bz = nearest_building(blds, x, z)
     return (bx, by, bz)
 
