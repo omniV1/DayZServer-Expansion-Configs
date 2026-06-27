@@ -222,6 +222,19 @@
         </article>
 
         <article class="detail-card">
+          <h3>Trader Market <span class="help-tip" tabindex="0" data-tip="Drops an Expansion Market hub (vendors + safezone marker) for the selected map at the X/Y/Z you enter. Stand where you want the market centre in-game, read your position, and type it here.">?</span></h3>
+          <p class="muted small-help">Places an Expansion Market on the <strong id="traderMapName">selected map</strong>. Stand where you want the centre in-game, read your position (X Y Z), type it below. Restart that map afterward.</p>
+          <p id="traderCurrent" class="muted"></p>
+          <div class="form-grid">
+            <label>X<input id="traderX" type="number" step="0.01"></label>
+            <label>Y (height)<input id="traderY" type="number" step="0.01"></label>
+            <label>Z<input id="traderZ" type="number" step="0.01"></label>
+          </div>
+          <button id="placeTraderButton" type="button" class="primary" data-tip="Writes the traderzone + vendor NPCs + map marker and enables the market for the selected map.">Place market here</button>
+          <p id="traderResult" class="muted"></p>
+        </article>
+
+        <article class="detail-card">
           <h3>Zombies And Spawns <span class="help-tip" tabindex="0" data-tip="These values affect central economy spawn pressure. Too high can create performance and placement warnings.">?</span></h3>
           <label class="field">
             Target

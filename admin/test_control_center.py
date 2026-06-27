@@ -665,6 +665,26 @@ class VehicleRouteTests(unittest.TestCase):
         self.assertIn("/api/vehicles/save", cc.POST_HANDLERS)
 
 
+class TraderPlacementTests(unittest.TestCase):
+    """Expansion Market trader placement endpoint + validation."""
+
+    def test_route_registered(self) -> None:
+        self.assertIn("/api/traders/place", cc.POST_HANDLERS)
+
+    def test_payload_shape(self) -> None:
+        p = cc.traders_payload()
+        self.assertIsInstance(p.get("maps"), list)
+        self.assertIn("templateReady", p)
+
+    def test_unknown_map_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            cc.place_trader({"map": "notamap", "x": 100, "y": 5, "z": 100})
+
+    def test_out_of_range_coords_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            cc.place_trader({"map": "chernarus", "x": 999999, "y": 5, "z": 100})
+
+
 class BackupConfigTests(unittest.TestCase):
     """backup_config.py captures disk-only config and never PBOs/storage."""
 

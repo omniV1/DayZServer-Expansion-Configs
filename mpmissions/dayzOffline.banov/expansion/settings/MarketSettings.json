@@ -1,6 +1,6 @@
 {
     "m_Version": 17,
-    "MarketSystemEnabled": 0,
+    "MarketSystemEnabled": 1,
     "NetworkCategories": [],
     "CurrencyIcon": "",
     "ATMSystemEnabled": 0,

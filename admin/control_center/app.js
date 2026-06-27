@@ -677,6 +677,7 @@ function fillBalanceFromSelectedMap() {
   const vanillaName = $("#vanillaLootMapName");
   if (vanillaName) vanillaName.textContent = item.title || "selected map";
   renderBalanceSummary(item);
+  renderTraders();
 }
 
 function renderBalanceSummary(item) {
@@ -810,6 +811,47 @@ async function saveVehicles() {
   renderVehicleToggles();
   const changed = result.changed.length ? result.changed.join("\n") : "No changes needed.";
   $("#jobOutput").textContent = `Vehicle settings saved.\n\nChanged:\n${changed}\n\nRestart affected map servers to take effect.`;
+}
+
+function traderState(key = state.selectedMap) {
+  return state.balance?.traders?.maps?.find((m) => m.key === key);
+}
+
+function renderTraders() {
+  const name = balanceMap()?.title || "selected map";
+  const nameEl = $("#traderMapName");
+  if (nameEl) nameEl.textContent = name;
+  const item = traderState();
+  const cur = $("#traderCurrent");
+  if (cur) {
+    if (item?.placed && item.position) {
+      cur.textContent = `Current: Expansion market ${item.marketEnabled ? "ON" : "OFF (will enable on place)"} at ${item.position.map((n) => Math.round(n)).join(", ")}.`;
+    } else {
+      cur.textContent = "No Expansion market placed on this map yet.";
+    }
+  }
+  if (item?.position) {
+    setInput("#traderX", item.position[0]);
+    setInput("#traderY", item.position[1]);
+    setInput("#traderZ", item.position[2]);
+  }
+}
+
+async function placeTrader() {
+  const x = numericValue("#traderX");
+  const y = numericValue("#traderY");
+  const z = numericValue("#traderZ");
+  if (x === undefined || y === undefined || z === undefined) {
+    $("#traderResult").textContent = "Enter X, Y and Z (stand at the spot in-game and read your position).";
+    return;
+  }
+  const result = await api("/api/traders/place", {
+    method: "POST",
+    body: JSON.stringify({ map: state.selectedMap, x, y, z }),
+  });
+  if (state.balance) state.balance.traders = result.traders;
+  renderTraders();
+  $("#traderResult").textContent = `Placed ${result.npcs} vendors on ${result.placed} at ${result.position.map((n) => Math.round(n)).join(", ")}. Restart that map, then open the in-game map and head to the Trader icon.`;
 }
 
 async function saveZombies() {
@@ -1869,6 +1911,7 @@ function bindEvents() {
   $("#lootPresetSelect").addEventListener("change", renderLootPresetInfo);
   $("#saveLootPresetButton").addEventListener("click", () => saveLootPreset().catch(showError));
   $("#saveVehiclesButton").addEventListener("click", () => saveVehicles().catch(showError));
+  $("#placeTraderButton").addEventListener("click", () => placeTrader().catch(showError));
   $("#saveZombiesButton").addEventListener("click", () => saveZombies().catch(showError));
   $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
   $("#previewConfirmButton").addEventListener("click", () => confirmPreview().catch(showError));

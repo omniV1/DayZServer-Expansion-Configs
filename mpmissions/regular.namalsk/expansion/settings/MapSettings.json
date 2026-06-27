@@ -21,13 +21,13 @@
             "m_UID": "ServerMarker_Trader_Hub",
             "m_Visibility": 6,
             "m_Is3D": 1,
-            "m_Text": "Trader - Namalsk",
+            "m_Text": "Trader",
             "m_IconName": "Trader",
             "m_Color": -13710223,
             "m_Position": [
-                6331.6,
+                6324.1,
                 20.7,
-                9485.3
+                9485.2
             ],
             "m_Locked": 0,
             "m_Persist": 1

@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.9.1"
+APP_VERSION = "1.10.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -1032,6 +1032,103 @@ def save_vehicle_settings(payload: dict[str, Any]) -> dict[str, Any]:
     return {"changed": changed, "vehicles": vehicle_settings_payload()}
 
 
+# Expansion Market trader templates (Chernarus' working Green Mountain general
+# trader). Placing a trader = a traderzone JSON (position/radius/stock) + a
+# traders .map (vendor NPCs), with the market enabled. Prices come from the
+# shared profile market files, so only these per-mission files are needed.
+TRADER_SRC = ROOT / "mpmissions" / "dayzOffline.chernarusplus" / "expansion"
+TRADER_SRC_ZONE = TRADER_SRC / "traderzones" / "GreenMountain.json"
+TRADER_SRC_NPCS = TRADER_SRC / "traders" / "GreenMountain_Traders.map"
+TRADER_SRC_REF = (3728.27001953125, 403.0, 6003.60009765625)  # Green Mountain zone center
+
+
+def trader_state(mission_dir: Path) -> dict[str, Any]:
+    zone = mission_dir / "expansion" / "traderzones" / "GreenMountain.json"
+    ms = mission_dir / "expansion" / "settings" / "MarketSettings.json"
+    placed, position, enabled = False, None, False
+    if zone.exists():
+        try:
+            position = read_json(zone, {}).get("Position")
+            placed = position is not None
+        except Exception:  # noqa: BLE001 - a corrupt zone just reads as "not placed"
+            pass
+    if ms.exists():
+        try:
+            enabled = read_json(ms, {}).get("MarketSystemEnabled") == 1
+        except Exception:  # noqa: BLE001
+            pass
+    return {"placed": placed, "marketEnabled": enabled, "position": position}
+
+
+def traders_payload() -> dict[str, Any]:
+    maps = []
+    for mi in maps_payload():
+        mission_dir = ROOT / "mpmissions" / mi["mission"] if mi.get("mission") else None
+        state = trader_state(mission_dir) if mission_dir and mission_dir.exists() else {"placed": False, "marketEnabled": False, "position": None}
+        maps.append({"key": mi["key"], "title": mi["title"], **state})
+    return {"maps": maps, "templateReady": TRADER_SRC_ZONE.exists() and TRADER_SRC_NPCS.exists()}
+
+
+def place_trader(payload: dict[str, Any]) -> dict[str, Any]:
+    """Drop an Expansion Market hub (zone + vendor NPCs + map marker) at X/Y/Z."""
+    map_name = require_map(payload.get("map"))
+    x = float(clamp_number(payload.get("x"), "x", -1000.0, 20000.0))
+    y = float(clamp_number(payload.get("y"), "y", -500.0, 2000.0))
+    z = float(clamp_number(payload.get("z"), "z", -1000.0, 20000.0))
+    if not (TRADER_SRC_ZONE.exists() and TRADER_SRC_NPCS.exists()):
+        raise ValueError("Chernarus Green Mountain trader template is missing; cannot place a trader.")
+    mission_dir = mission_dir_for_map(map_name)
+    if not mission_dir.exists():
+        raise ValueError(f"Mission folder for {map_name} not found.")
+
+    snapshot_for_api("control-center-trader")
+
+    # 1. enable the market
+    ms = mission_dir / "expansion" / "settings" / "MarketSettings.json"
+    if ms.exists():
+        data = read_json(ms, {})
+        if data.get("MarketSystemEnabled") != 1:
+            data["MarketSystemEnabled"] = 1
+            write_json(ms, data)
+
+    # 2. traderzone JSON at the requested centre
+    zone = read_json(TRADER_SRC_ZONE, {})
+    zone["Position"] = [round(x, 3), round(y, 3), round(z, 3)]
+    zone_dir = mission_dir / "expansion" / "traderzones"
+    zone_dir.mkdir(parents=True, exist_ok=True)
+    write_json(zone_dir / "GreenMountain.json", zone)
+
+    # 3. vendor NPCs: keep the camp's X/Z layout, flatten Y to the given surface
+    rx, _ry, rz = TRADER_SRC_REF
+    out_lines = []
+    for line in TRADER_SRC_NPCS.read_text(encoding="utf-8").splitlines():
+        parts = line.split("|")
+        if len(parts) < 3:
+            continue
+        px, _py, pz = (float(v) for v in parts[1].split())
+        parts[1] = f"{x + (px - rx):.6f} {y:.6f} {z + (pz - rz):.6f}"
+        out_lines.append("|".join(parts))
+    npc_dir = mission_dir / "expansion" / "traders"
+    npc_dir.mkdir(parents=True, exist_ok=True)
+    (npc_dir / "GreenMountain_Traders.map").write_text("\n".join(out_lines) + "\n", encoding="utf-8")
+
+    # 4. align the map marker
+    map_settings = mission_dir / "expansion" / "settings" / "MapSettings.json"
+    if map_settings.exists():
+        data = read_json(map_settings, {})
+        markers = [m for m in (data.get("ServerMarkers") or []) if m.get("m_IconName") != "Trader"]
+        markers.append({
+            "m_UID": "ServerMarker_Trader_Hub", "m_Visibility": 6, "m_Is3D": 1,
+            "m_Text": "Trader", "m_IconName": "Trader", "m_Color": -13710223,
+            "m_Position": [round(x, 1), round(y, 1), round(z, 1)], "m_Locked": 0, "m_Persist": 1,
+        })
+        data["ServerMarkers"] = markers
+        data["EnableServerMarkers"] = 1
+        write_json(map_settings, data)
+
+    return {"placed": map_name, "npcs": len(out_lines), "position": [x, y, z], "traders": traders_payload()}
+
+
 def balance_payload() -> dict[str, Any]:
     loot = read_json(LOOT_CONFIG_PATH, {})
     maps = []
@@ -1053,6 +1150,7 @@ def balance_payload() -> dict[str, Any]:
             "vanillaMaps": loot.get("vanilla_loot_maps", []),
         },
         "vehicles": vehicle_settings_payload(),
+        "traders": traders_payload(),
         "maps": maps,
     }
 
@@ -3898,6 +3996,7 @@ POST_HANDLERS: dict[str, Callable[[dict[str, Any]], Any]] = {
     "/api/rcon/enable": enable_rcon,
     "/api/rcon/run": run_rcon,
     "/api/vehicles/save": save_vehicle_settings,
+    "/api/traders/place": place_trader,
     "/api/schedules/save": SCHEDULER.save_schedule,
     "/api/schedules/remove": SCHEDULER.remove_schedule,
     "/api/updates/settings": save_updates_settings,

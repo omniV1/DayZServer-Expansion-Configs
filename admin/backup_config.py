@@ -35,7 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 BACKUP_ROOT = ROOT / "local_backups" / "config"
 SIZE_CAP = 30 * 1024 * 1024  # never pull a PBO/bin into a "config" backup
 
-CONFIG_SUFFIXES = {".xml", ".json", ".c", ".txt", ".cfg"}
+CONFIG_SUFFIXES = {".xml", ".json", ".c", ".txt", ".cfg", ".map"}
 # directories pruned wherever they appear (huge / re-downloadable / regenerated)
 PRUNE_DIR_EXACT = {"battleye", "BattlEye", ".git"}
 
