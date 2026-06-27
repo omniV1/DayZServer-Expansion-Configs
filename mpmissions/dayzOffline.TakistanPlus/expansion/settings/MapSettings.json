@@ -18,36 +18,6 @@
     "ShowDistanceOnServerMarkers": 1,
     "ServerMarkers": [
         {
-            "m_UID": "ServerMarker_Trader_Krasno",
-            "m_Visibility": 6,
-            "m_Is3D": 1,
-            "m_Text": "Traders - Krasnostav Airstrip",
-            "m_IconName": "Trader",
-            "m_Color": -13710223,
-            "m_Position": [
-                11882.0,
-                176.2412109375,
-                12466.0
-            ],
-            "m_Locked": 0,
-            "m_Persist": 1
-        },
-        {
-            "m_UID": "ServerMarker_Trader_Kamenka",
-            "m_Visibility": 6,
-            "m_Is3D": 1,
-            "m_Text": "Traders - Kamenka",
-            "m_IconName": "Trader",
-            "m_Color": -13710223,
-            "m_Position": [
-                1101.0,
-                387.0172119140625,
-                2382.0
-            ],
-            "m_Locked": 0,
-            "m_Persist": 1
-        },
-        {
             "m_UID": "ServerMarker_Boats_Kamenka",
             "m_Visibility": 6,
             "m_Is3D": 1,
@@ -71,7 +41,7 @@
             "m_Color": -13710223,
             "m_Position": [
                 4973.0,
-                600.4710083007813,
+                600.4710083007812,
                 2436.0
             ],
             "m_Locked": 0,
@@ -93,16 +63,16 @@
             "m_Persist": 1
         },
         {
-            "m_UID": "ServerMarker_Trader_Green_Montain",
+            "m_UID": "ServerMarker_Trader_Hub",
             "m_Visibility": 6,
             "m_Is3D": 1,
-            "m_Text": "Trader - Green Montain",
+            "m_Text": "Trader - Takistan",
             "m_IconName": "Trader",
             "m_Color": -13710223,
             "m_Position": [
-                3698.0,
-                405.0,
-                5988.0
+                532.7,
+                247.1,
+                2648.8
             ],
             "m_Locked": 0,
             "m_Persist": 1

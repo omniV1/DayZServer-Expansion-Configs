@@ -18,46 +18,16 @@
     "ShowDistanceOnServerMarkers": 1,
     "ServerMarkers": [
         {
-            "m_UID": "ServerMarker_Trader_Airfield",
+            "m_UID": "ServerMarker_Trader_Hub",
             "m_Visibility": 6,
             "m_Is3D": 1,
-            "m_Text": "Airsrip - Aircraft Trader",
+            "m_Text": "Trader - Namalsk",
             "m_IconName": "Trader",
             "m_Color": -13710223,
             "m_Position": [
-                6305.0,
-                26.0,
-                9521.0
-            ],
-            "m_Locked": 0,
-            "m_Persist": 1
-        },
-        {
-            "m_UID": "ServerMarker_Trader_Jalovisko",
-            "m_Visibility": 6,
-            "m_Is3D": 1,
-            "m_Text": "Traders - Jalovisko Camp",
-            "m_IconName": "Trader",
-            "m_Color": -13710223,
-            "m_Position": [
-                8583.669921875,
-                29.0,
-                10515.0
-            ],
-            "m_Locked": 0,
-            "m_Persist": 1
-        },
-        {
-            "m_UID": "ServerMarker_Trader_TaraHarbor",
-            "m_Visibility": 6,
-            "m_Is3D": 1,
-            "m_Text": "Tara Harbor - Boats Trader",
-            "m_IconName": "Trader",
-            "m_Color": -13710223,
-            "m_Position": [
-                8043.4501953125,
-                10.0,
-                7593.4501953125
+                6102.4,
+                2.0,
+                11882.0
             ],
             "m_Locked": 0,
             "m_Persist": 1
