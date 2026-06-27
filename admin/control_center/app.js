@@ -851,7 +851,8 @@ async function placeTrader() {
   });
   if (state.balance) state.balance.traders = result.traders;
   renderTraders();
-  $("#traderResult").textContent = `Placed ${result.npcs} vendors on ${result.placed} at ${result.position.map((n) => Math.round(n)).join(", ")}. Restart that map, then open the in-game map and head to the Trader icon.`;
+  const board = result.boardPosition ? ` + bounty board at ${result.boardPosition.map((n) => Math.round(n)).join(", ")}` : "";
+  $("#traderResult").textContent = `Placed ${result.npcs} vendors${board} on ${result.placed} at ${result.position.map((n) => Math.round(n)).join(", ")}. Restart that map, then open the in-game map and head to the Trader icon.`;
 }
 
 async function saveZombies() {

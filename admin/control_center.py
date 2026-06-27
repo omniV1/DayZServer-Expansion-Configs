@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.10.0"
+APP_VERSION = "1.10.1"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -1126,7 +1126,44 @@ def place_trader(payload: dict[str, Any]) -> dict[str, Any]:
         data["EnableServerMarkers"] = 1
         write_json(map_settings, data)
 
-    return {"placed": map_name, "npcs": len(out_lines), "position": [x, y, z], "traders": traders_payload()}
+    board_pos = place_bounty_board(map_name, x, y, z)
+
+    return {"placed": map_name, "npcs": len(out_lines), "position": [x, y, z], "boardPosition": board_pos, "traders": traders_payload()}
+
+
+QUEST_BOARD_ID = 100
+QUEST_BOARD_TEMPLATE = ROOT / "profiles" / "ExpansionMod" / "Quests" / "NPCs" / f"QuestNPC_{QUEST_BOARD_ID}.json"
+QUEST_BOARD_DEFAULTS = {
+    "ConfigVersion": 6, "Orientation": [0.0, 0.0, 0.0], "Waypoints": [], "NPCEmoteID": 46,
+    "NPCEmoteIsStatic": 0, "NPCLoadoutFile": "", "NPCInteractionEmoteID": 1, "NPCQuestCancelEmoteID": 60,
+    "NPCQuestStartEmoteID": 58, "NPCQuestCompleteEmoteID": 39, "NPCFaction": "InvincibleObservers", "NPCType": 1,
+    "DefaultNPCText": "Paid work is posted here. Finish the job, come back, and collect your reward.",
+}
+
+
+def place_bounty_board(map_name: str, x: float, y: float, z: float) -> list[float]:
+    """(Re)position the Expansion Quest contract board for a map next to the
+    trader hub, on the surface. Most maps' bounty quests already give/turn-in at
+    this board (ID 100); they were just buried at the wrong height."""
+    qdir = quests_dir_for_map(map_name)
+    npc_dir = qdir / "NPCs"
+    npc_dir.mkdir(parents=True, exist_ok=True)
+    board_path = npc_dir / f"QuestNPC_{QUEST_BOARD_ID}.json"
+    board = read_json(board_path, {}) if board_path.exists() else read_json(QUEST_BOARD_TEMPLATE, {})
+    if not isinstance(board, dict) or not board:
+        board = dict(QUEST_BOARD_DEFAULTS)
+    for key, value in QUEST_BOARD_DEFAULTS.items():
+        board.setdefault(key, value)
+    pos = [round(x + 3.0, 2), round(y, 2), round(z - 10.0, 2)]  # a few metres off the vendors
+    board.update({
+        "ID": QUEST_BOARD_ID,
+        "ClassName": "ExpansionQuestBoardLarge",
+        "Position": pos,
+        "NPCName": f"{map_configs().get(map_name, {}).get('title', map_name)} Contract Board",
+        "Active": 1,
+    })
+    write_json(board_path, board)
+    return pos
 
 
 def balance_payload() -> dict[str, Any]:

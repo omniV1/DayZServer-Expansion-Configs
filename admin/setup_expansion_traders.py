@@ -50,6 +50,32 @@ KEY_TO_MISSION = {
     "takistan": "dayzOffline.TakistanPlus", "banov": "dayzOffline.banov",
     "enoch": "dayzOffline.enoch", "winterchernarus": "RegularWinter.chernarusplus",
 }
+# Quest contract board (ExpansionQuestBoardLarge, ID 100) lives in the profile,
+# not the mission. Reposition it next to the market so it's reachable + auto-marked.
+MISSION_PROFILE = {
+    "empty.deerisle": "profiles_deerisle", "regular.namalsk": "profiles_namalsk", "empty.Iztek": "profiles_iztek",
+    "empty.alteria": "profiles_alteria", "dayz.Deadfall": "profiles_deadfall", "empty.Bitterroot": "profiles_bitterroot",
+    "dayzOffline.TakistanPlus": "profiles_takistan", "dayzOffline.banov": "profiles_banov",
+    "dayzOffline.enoch": "profiles_enoch", "RegularWinter.chernarusplus": "profiles_winterchernarus",
+}
+BOARD_TEMPLATE = ROOT / "profiles" / "ExpansionMod" / "Quests" / "NPCs" / "QuestNPC_100.json"
+
+
+def place_board(mission_name: str, x: float, y: float, z: float) -> list | None:
+    prof = MISSION_PROFILE.get(mission_name)
+    if not prof:
+        return None
+    npc_dir = ROOT / prof / "ExpansionMod" / "Quests" / "NPCs"
+    npc_dir.mkdir(parents=True, exist_ok=True)
+    bp = npc_dir / "QuestNPC_100.json"
+    src = bp if bp.exists() else (BOARD_TEMPLATE if BOARD_TEMPLATE.exists() else None)
+    board = json.loads(src.read_text(encoding="utf-8-sig")) if src else {}
+    board.setdefault("ConfigVersion", 6)
+    board.setdefault("Orientation", [0.0, 0.0, 0.0])
+    board.update({"ID": 100, "ClassName": "ExpansionQuestBoardLarge",
+                  "Position": [round(x + 3, 2), round(y, 2), round(z - 10, 2)], "Active": 1})
+    bp.write_text(json.dumps(board, indent=1), encoding="utf-8")
+    return board["Position"]
 
 
 def build_zone(mission: Path, x: float, y: float, z: float) -> None:
@@ -114,7 +140,8 @@ def apply_map(mission_name: str) -> str:
     build_zone(mission, x, y, z)
     n = build_npcs(mission, x, y, z)
     align_marker(mission, x, y, z)
-    return f"OK   {mission_name}: Expansion market enabled, {n} vendor NPCs + zone @ ({x:.0f},{y:.1f},{z:.0f}), marker aligned"
+    board = place_board(mission_name, x, y, z)
+    return f"OK   {mission_name}: market + {n} vendors @ ({x:.0f},{y:.1f},{z:.0f}), marker aligned, bounty board {'@ '+str([round(v,0) for v in board]) if board else 'skipped'}"
 
 
 def main() -> int:
