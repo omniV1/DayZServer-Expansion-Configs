@@ -581,5 +581,89 @@ class SendErrorJsonRedactionTests(unittest.TestCase):
         self.assertEqual(captured["data"]["error"], "Job not found.")
 
 
+class VehicleSettingsTests(unittest.TestCase):
+    """vehicle_settings_payload / save_vehicle_settings across profile dirs."""
+
+    def setUp(self) -> None:
+        import tempfile
+
+        self._dir = Path(tempfile.mkdtemp(prefix="cc-veh-"))
+        self._orig_root = cc.ROOT
+        cc.ROOT = self._dir
+        for name in ("profiles", "profiles_banov"):
+            d = self._dir / name / "ExpansionMod" / "Settings"
+            d.mkdir(parents=True)
+            (d / "VehicleSettings.json").write_text(
+                '{\n  "VehicleRequireKeyToStart": 1,\n'
+                '  "VehicleRequireAllDoors": 1,\n  "CanPickLock": 0\n}\n',
+                encoding="utf-8",
+            )
+
+    def tearDown(self) -> None:
+        import shutil
+
+        cc.ROOT = self._orig_root
+        shutil.rmtree(self._dir, ignore_errors=True)
+
+    def test_payload_maps_json_to_user_toggles(self) -> None:
+        payload = cc.vehicle_settings_payload()
+        self.assertEqual(
+            payload["toggles"],
+            {"keylessStart": False, "doorsOptional": False, "lockpickAllowed": False},
+        )
+        self.assertEqual(payload["profileCount"], 2)
+        self.assertTrue(payload["available"])
+
+    def test_save_flips_every_profile_and_stays_valid_json(self) -> None:
+        import json
+
+        result = cc.save_vehicle_settings(
+            {"keylessStart": True, "doorsOptional": True, "lockpickAllowed": True}
+        )
+        self.assertTrue(result["changed"])
+        for name in ("profiles", "profiles_banov"):
+            data = json.loads(
+                (self._dir / name / "ExpansionMod" / "Settings" / "VehicleSettings.json").read_text()
+            )
+            self.assertEqual(data["VehicleRequireKeyToStart"], 0)
+            self.assertEqual(data["VehicleRequireAllDoors"], 0)
+            self.assertEqual(data["CanPickLock"], 1)
+        self.assertEqual(
+            cc.vehicle_settings_payload()["toggles"],
+            {"keylessStart": True, "doorsOptional": True, "lockpickAllowed": True},
+        )
+
+    def test_save_without_profiles_raises(self) -> None:
+        import shutil
+
+        shutil.rmtree(self._dir / "profiles")
+        shutil.rmtree(self._dir / "profiles_banov")
+        with self.assertRaises(ValueError):
+            cc.save_vehicle_settings({"keylessStart": True})
+
+
+class VanillaLootValidateTests(unittest.TestCase):
+    """validate_balance_payload handling of the vanilla_loot_maps list."""
+
+    def test_unknown_mission_rejected(self) -> None:
+        with self.assertRaises(ValueError):
+            cc.validate_balance_payload({"vanillaMaps": ["does.not.exist"]})
+
+    def test_absent_vanillamaps_is_none(self) -> None:
+        self.assertIsNone(cc.validate_balance_payload({})[5])
+
+    def test_valid_mission_accepted_and_deduped(self) -> None:
+        missions = [m["mission"] for m in cc.maps_payload() if m.get("mission")]
+        if not missions:
+            self.skipTest("no missions configured")
+        result = cc.validate_balance_payload({"vanillaMaps": [missions[0], missions[0]]})
+        self.assertEqual(result[5], [missions[0]])
+
+
+class VehicleRouteTests(unittest.TestCase):
+    def test_vehicles_save_route_registered(self) -> None:
+        self.assertIn("/api/vehicles/save", cc.POST_HANDLERS)
+
+
 if __name__ == "__main__":
     unittest.main()

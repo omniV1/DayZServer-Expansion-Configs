@@ -635,6 +635,7 @@ function renderBalance() {
   }
   renderLootPresetInfo();
   fillBalanceFromSelectedMap();
+  renderVehicleToggles();
 }
 
 function renderLootPresetInfo() {
@@ -670,6 +671,11 @@ function fillBalanceFromSelectedMap() {
   setInput("#aiAccuracyMinInput", item.ai.accuracyMin);
   setInput("#aiAccuracyMaxInput", item.ai.accuracyMax);
   setInput("#aiDamageInput", item.ai.damageMultiplier);
+  const vanillaMaps = state.balance?.loot?.vanillaMaps || [];
+  const vanillaToggle = $("#vanillaLootToggle");
+  if (vanillaToggle) vanillaToggle.checked = !!item.mission && vanillaMaps.includes(item.mission);
+  const vanillaName = $("#vanillaLootMapName");
+  if (vanillaName) vanillaName.textContent = item.title || "selected map";
   renderBalanceSummary(item);
 }
 
@@ -756,14 +762,54 @@ async function confirmPreview() {
   if (pending.onSaved) await pending.onSaved(result, pending.label);
 }
 
+function desiredVanillaMaps() {
+  const current = new Set(state.balance?.loot?.vanillaMaps || []);
+  const mission = balanceMap()?.mission;
+  if (mission) {
+    if ($("#vanillaLootToggle")?.checked) current.add(mission);
+    else current.delete(mission);
+  }
+  return Array.from(current);
+}
+
 async function saveLootPreset() {
   await previewThenSave({
     previewUrl: "/api/balance/preview",
     saveUrl: "/api/balance/save",
-    payload: { lootPreset: $("#lootPresetSelect").value },
-    label: "Loot preset",
+    payload: { lootPreset: $("#lootPresetSelect").value, vanillaMaps: desiredVanillaMaps() },
+    label: "Loot settings",
     onSaved: onBalanceSaved,
   });
+}
+
+function renderVehicleToggles() {
+  const vehicles = state.balance?.vehicles || {};
+  const toggles = vehicles.toggles || {};
+  const set = (sel, val) => { const el = $(sel); if (el) el.checked = val === true; };
+  set("#vehKeyless", toggles.keylessStart);
+  set("#vehDoors", toggles.doorsOptional);
+  set("#vehLockpick", toggles.lockpickAllowed);
+  const status = $("#vehicleStatus");
+  if (status) {
+    status.textContent = vehicles.available
+      ? `Applies to ${vehicles.profileCount} map profile(s). Restart a map to take effect.`
+      : "No VehicleSettings.json found (Expansion not installed?).";
+  }
+}
+
+async function saveVehicles() {
+  const result = await api("/api/vehicles/save", {
+    method: "POST",
+    body: JSON.stringify({
+      keylessStart: $("#vehKeyless").checked,
+      doorsOptional: $("#vehDoors").checked,
+      lockpickAllowed: $("#vehLockpick").checked,
+    }),
+  });
+  if (state.balance) state.balance.vehicles = result.vehicles;
+  renderVehicleToggles();
+  const changed = result.changed.length ? result.changed.join("\n") : "No changes needed.";
+  $("#jobOutput").textContent = `Vehicle settings saved.\n\nChanged:\n${changed}\n\nRestart affected map servers to take effect.`;
 }
 
 async function saveZombies() {
@@ -1822,6 +1868,7 @@ function bindEvents() {
   $("#mapSelect").addEventListener("change", (event) => selectMap(event.target.value));
   $("#lootPresetSelect").addEventListener("change", renderLootPresetInfo);
   $("#saveLootPresetButton").addEventListener("click", () => saveLootPreset().catch(showError));
+  $("#saveVehiclesButton").addEventListener("click", () => saveVehicles().catch(showError));
   $("#saveZombiesButton").addEventListener("click", () => saveZombies().catch(showError));
   $("#saveAiButton").addEventListener("click", () => saveAi().catch(showError));
   $("#previewConfirmButton").addEventListener("click", () => confirmPreview().catch(showError));

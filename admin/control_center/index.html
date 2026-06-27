@@ -202,10 +202,23 @@
           </label>
           <p id="lootPresetDescription" class="muted"></p>
           <dl id="lootPresetStats" class="kv"></dl>
+          <label class="field" data-tip="De-tune the selected map to vanilla loot density (drops the boost, keeps vehicles). Use for small/imported maps whose loot points oversaturate and spam LootRespawner overtime.">
+            <span><input id="vanillaLootToggle" type="checkbox"> Vanilla loot for <span id="vanillaLootMapName">selected map</span> (de-tune)</span>
+          </label>
           <div class="action-row">
-            <button id="saveLootPresetButton" type="button" data-tip="Stores the selected preset in admin/loot_config.json.">Save Preset</button>
-            <button data-action="apply_loot_current" type="button" class="primary" data-tip="Regenerates and applies loot files using the active preset.">Apply Loot Now</button>
+            <button id="saveLootPresetButton" type="button" data-tip="Stores the preset and per-map vanilla-loot choices in admin/loot_config.json.">Save Preset</button>
+            <button data-action="apply_loot_current" type="button" class="primary" data-tip="Regenerates and applies loot files using the active preset, then de-tunes vanilla-loot maps.">Apply Loot Now</button>
           </div>
+        </article>
+
+        <article class="detail-card">
+          <h3>Expansion Vehicles <span class="help-tip" tabindex="0" data-tip="Usability of found vehicles. Applies to every map. After changing, restart the affected map(s).">?</span></h3>
+          <p class="muted small-help">Makes wild vehicles drivable. Applies to all maps.</p>
+          <label class="field"><span><input id="vehKeyless" type="checkbox"> Keyless start (no key needed to drive)</span></label>
+          <label class="field"><span><input id="vehDoors" type="checkbox"> Drive with missing doors</span></label>
+          <label class="field"><span><input id="vehLockpick" type="checkbox"> Allow lockpicking locked vehicles</span></label>
+          <button id="saveVehiclesButton" type="button" data-tip="Writes VehicleSettings.json across every map profile.">Save Vehicle Settings</button>
+          <p id="vehicleStatus" class="muted"></p>
         </article>
 
         <article class="detail-card">

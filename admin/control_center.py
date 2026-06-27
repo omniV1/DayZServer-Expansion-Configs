@@ -49,7 +49,7 @@ LAUNCH_PATH = ADMIN / "map_launch.json"
 AI_CONFIG_PATH = ADMIN / "ai_config.json"
 LOOT_CONFIG_PATH = ADMIN / "loot_config.json"
 
-APP_VERSION = "1.8.0"
+APP_VERSION = "1.9.0"
 RELEASE_CHANNEL = "stable"
 REPO_URL = "https://github.com/omniV1/DayZServer-Expansion-Configs"
 RELEASES_URL = f"{REPO_URL}/releases"
@@ -965,6 +965,73 @@ def write_ai_settings(mission_dir: Path, values: dict[str, Any]) -> list[str]:
     return changed
 
 
+VEHICLE_SETTINGS_REL = Path("ExpansionMod") / "Settings" / "VehicleSettings.json"
+# user-facing toggle -> (json key, value when toggle ON, value when toggle OFF)
+VEHICLE_TOGGLES: dict[str, tuple[str, int, int]] = {
+    "keylessStart": ("VehicleRequireKeyToStart", 0, 1),
+    "doorsOptional": ("VehicleRequireAllDoors", 0, 1),
+    "lockpickAllowed": ("CanPickLock", 1, 0),
+}
+
+
+def vehicle_settings_files() -> list[Path]:
+    """Every profiles*/ExpansionMod/Settings/VehicleSettings.json on disk."""
+    out: list[Path] = []
+    for d in sorted(ROOT.glob("profiles*")):
+        if not d.is_dir():
+            continue
+        p = d / VEHICLE_SETTINGS_REL
+        if p.exists():
+            out.append(p)
+    return out
+
+
+def _vehicle_flag(text: str, json_key: str) -> int | None:
+    match = re.search(rf'"{re.escape(json_key)}"\s*:\s*(\d+)', text)
+    return int(match.group(1)) if match else None
+
+
+def vehicle_settings_payload() -> dict[str, Any]:
+    """Current Expansion vehicle usability toggles, read from the canonical profile."""
+    files = vehicle_settings_files()
+    canonical = ROOT / "profiles" / VEHICLE_SETTINGS_REL
+    source = canonical if canonical.exists() else (files[0] if files else None)
+    toggles: dict[str, bool | None] = {}
+    if source:
+        text = source.read_text(encoding="utf-8", errors="replace")
+        for name, (json_key, on_val, _off_val) in VEHICLE_TOGGLES.items():
+            value = _vehicle_flag(text, json_key)
+            toggles[name] = (value == on_val) if value is not None else None
+    return {"toggles": toggles, "profileCount": len(files), "available": bool(files)}
+
+
+def save_vehicle_settings(payload: dict[str, Any]) -> dict[str, Any]:
+    """Write the requested vehicle toggles to every profile's VehicleSettings.json."""
+    files = vehicle_settings_files()
+    if not files:
+        raise ValueError("No VehicleSettings.json found under any profiles* directory.")
+    targets: dict[str, int] = {}
+    for name, (json_key, on_val, off_val) in VEHICLE_TOGGLES.items():
+        if name in payload:
+            targets[json_key] = on_val if bool(payload[name]) else off_val
+    if not targets:
+        return {"changed": [], "vehicles": vehicle_settings_payload()}
+
+    changed_files = 0
+    for path in files:
+        text = path.read_text(encoding="utf-8", errors="replace")
+        original = text
+        for json_key, value in targets.items():
+            text = re.subn(rf'("{re.escape(json_key)}"\s*:\s*)\d+', rf"\g<1>{value}", text, count=1)[0]
+        if text != original:
+            json.loads(text)  # never write invalid JSON
+            path.write_text(text, encoding="utf-8")
+            changed_files += 1
+    summary = ", ".join(f"{key}={val}" for key, val in sorted(targets.items()))
+    changed = [f"{changed_files} profile(s): {summary}"] if changed_files else []
+    return {"changed": changed, "vehicles": vehicle_settings_payload()}
+
+
 def balance_payload() -> dict[str, Any]:
     loot = read_json(LOOT_CONFIG_PATH, {})
     maps = []
@@ -983,7 +1050,9 @@ def balance_payload() -> dict[str, Any]:
         "loot": {
             "activePreset": loot.get("active_preset"),
             "presets": loot.get("presets", {}),
+            "vanillaMaps": loot.get("vanilla_loot_maps", []),
         },
+        "vehicles": vehicle_settings_payload(),
         "maps": maps,
     }
 
@@ -2370,7 +2439,7 @@ ZOMBIE_FIELD_RANGES: dict[str, tuple[int, int]] = {
 
 def validate_balance_payload(
     payload: dict[str, Any],
-) -> tuple[str | None, list[str], dict[str, int], list[str], dict[str, Any]]:
+) -> tuple[str | None, list[str], dict[str, int], list[str], dict[str, Any], list[str] | None]:
     """Validate and clamp a balance save/preview payload without writing anything."""
     loot_preset: str | None = None
     if "lootPreset" in payload:
@@ -2378,6 +2447,17 @@ def validate_balance_payload(
         loot_preset = str(payload["lootPreset"])
         if loot_preset not in loot.get("presets", {}):
             raise ValueError(f"Unknown loot preset: {loot_preset}")
+
+    vanilla_maps: list[str] | None = None
+    if "vanillaMaps" in payload:
+        valid_missions = {m["mission"] for m in maps_payload() if m.get("mission")}
+        vanilla_maps = []
+        for mission in payload.get("vanillaMaps") or []:
+            mission = str(mission)
+            if mission not in valid_missions:
+                raise ValueError(f"Unknown mission for vanilla loot: {mission}")
+            if mission not in vanilla_maps:
+                vanilla_maps.append(mission)
 
     zombie_maps: list[str] = []
     zombie_values: dict[str, int] = {}
@@ -2408,12 +2488,12 @@ def validate_balance_payload(
         if "damageMultiplier" in ai_values:
             clamp_number(ai_values["damageMultiplier"], "damageMultiplier", 0.1, 5.0)
 
-    return loot_preset, zombie_maps, zombie_values, ai_maps, ai_values
+    return loot_preset, zombie_maps, zombie_values, ai_maps, ai_values, vanilla_maps
 
 
 def preview_balance(payload: dict[str, Any]) -> dict[str, Any]:
     """Compute what a balance save would change, without writing or snapshotting."""
-    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values = validate_balance_payload(payload)
+    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values, vanilla_maps = validate_balance_payload(payload)
     files: list[str] = []
     changes: list[str] = []
     maps_affected: list[str] = []
@@ -2425,6 +2505,13 @@ def preview_balance(payload: dict[str, Any]) -> dict[str, Any]:
         if loot.get("active_preset") != loot_preset:
             files.append(safe_rel(LOOT_CONFIG_PATH))
             changes.append(f"Loot active preset -> {loot_preset}")
+            needs_loot_apply = True
+
+    if vanilla_maps is not None:
+        loot = read_json(LOOT_CONFIG_PATH, {})
+        if sorted(loot.get("vanilla_loot_maps", [])) != sorted(vanilla_maps):
+            files.append(safe_rel(LOOT_CONFIG_PATH))
+            changes.append(f"Vanilla-loot maps -> {', '.join(vanilla_maps) or '(none)'}")
             needs_loot_apply = True
 
     if zombie_values:
@@ -2462,20 +2549,23 @@ def preview_balance(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def save_balance(payload: dict[str, Any]) -> dict[str, Any]:
-    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values = validate_balance_payload(payload)
+    loot_preset, zombie_maps, zombie_values, ai_maps, ai_values, vanilla_maps = validate_balance_payload(payload)
 
-    if not any([loot_preset, zombie_values, ai_values]):
+    if not any([loot_preset, zombie_values, ai_values, vanilla_maps is not None]):
         return {"changed": [], "balance": balance_payload()}
 
     snapshot_for_api("control-center-balance")
     changed: list[str] = []
 
-    if loot_preset:
+    if loot_preset or vanilla_maps is not None:
         loot = read_json(LOOT_CONFIG_PATH, {})
-        if loot.get("active_preset") != loot_preset:
+        if loot_preset and loot.get("active_preset") != loot_preset:
             loot["active_preset"] = loot_preset
-            write_json(LOOT_CONFIG_PATH, loot)
             changed.append(f"loot active preset={loot_preset}")
+        if vanilla_maps is not None and sorted(loot.get("vanilla_loot_maps", [])) != sorted(vanilla_maps):
+            loot["vanilla_loot_maps"] = vanilla_maps
+            changed.append(f"vanilla-loot maps={', '.join(vanilla_maps) or '(none)'}")
+        write_json(LOOT_CONFIG_PATH, loot)
 
     if zombie_values:
         for name in zombie_maps:
@@ -3297,9 +3387,12 @@ def _build_action_specs() -> dict[str, ActionSpec]:
         "apply_loot_current": ActionSpec(
             "Apply active loot preset",
             "generation",
-            "Rebuild and replicate mod_ce, patch globals, and save the current active loot preset.",
+            "Rebuild and replicate mod_ce, patch globals, save the active preset, then de-tune any vanilla-loot maps.",
             "guarded",
-            lambda _p, _m: [python_file("apply_loot.py", "all")],
+            lambda _p, _m: [
+                python_file("apply_loot.py", "all"),
+                python_file("detune_map_loot.py"),
+            ],
             timeout=900,
             snapshot=True,
         ),
@@ -3796,6 +3889,7 @@ POST_HANDLERS: dict[str, Callable[[dict[str, Any]], Any]] = {
     "/api/setup/save": _post_setup_save,
     "/api/rcon/enable": enable_rcon,
     "/api/rcon/run": run_rcon,
+    "/api/vehicles/save": save_vehicle_settings,
     "/api/schedules/save": SCHEDULER.save_schedule,
     "/api/schedules/remove": SCHEDULER.remove_schedule,
     "/api/updates/settings": save_updates_settings,
